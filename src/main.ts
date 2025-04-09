@@ -4,14 +4,16 @@ import os from 'os';
 import path from 'path';
 import {
   BeatmodsAllMod,
+  BeatmodsGameVersion,
   BeatmodsMod,
   getMod,
   getModsForVersion,
   getVersions
 } from './beatmods.js';
-import { getManifest } from './manifest.js';
+import { getManifest, Manifest } from './manifest.js';
 import decompress from 'decompress';
 import { satisfies } from 'semver';
+import { groupBy } from './groupBy.js';
 
 /**
  * The main function for the action.
@@ -24,8 +26,30 @@ export const run = async () => {
     const gameVersions = await getVersions();
 
     const modMap = JSON.parse(core.getInput('mods'));
-    const beatmodsModsById: BeatmodsModsById = {};
+
+    interface BeatmodsModsById {
+      [key: number]: Promise<BeatmodsMod>;
+    }
+
+    interface BeatmodsModsByVersion {
+      [key: string]: Promise<BeatmodsAllMod[]>;
+    }
+
+    let beatmodsModsById: BeatmodsModsById = {};
     const beatmodsModsByVersion: BeatmodsModsByVersion = {};
+
+    interface ModsToUpload {
+      [key: number]: ModToUpload[];
+    }
+
+    interface ModToUpload {
+      order: number;
+      file: fs.Dirent;
+      manifest: Manifest;
+      gameVersion: BeatmodsGameVersion;
+    }
+
+    const modsToUpload: ModsToUpload = {};
 
     const files = await fs.promises.readdir('local_action/artifacts', {
       withFileTypes: true
@@ -93,7 +117,7 @@ export const run = async () => {
           core.warning(
             `Version "${manifest.id}@${manifest.version}" already exists on Beatmods, skipping...`
           );
-          return;
+          //return;
         }
 
         const gameVersion = gameVersions.find(
@@ -106,89 +130,153 @@ export const run = async () => {
           return;
         }
 
-        const version = gameVersion.version;
-        let remoteMods;
-        if (version in beatmodsModsByVersion) {
-          remoteMods = await beatmodsModsByVersion[version];
-        } else {
-          const modPromise = getModsForVersion(version);
-          beatmodsModsByVersion[version] = modPromise;
-          remoteMods = await modPromise;
+        if (!(gameVersion.id in modsToUpload)) {
+          modsToUpload[gameVersion.id] = [];
         }
 
-        const dependencies: number[] = [];
-        for (const depend in manifest.dependsOn) {
-          const dependRange = manifest.dependsOn[depend];
-
-          // if we know the mod's id, use that instead
-          if (depend in modMap) {
-            const id = modMap[depend];
-            let beatmodDepend;
-            if (id in beatmodsModsById) {
-              beatmodDepend = await beatmodsModsById[id];
-            } else {
-              const modPromise = getMod(id);
-              beatmodsModsById[id] = modPromise;
-              beatmodDepend = await modPromise;
-              core.debug(`Found "${depend}" on BeatMods`);
-            }
-
-            if (!beatmodDepend) {
-              core.warning(
-                `Unable to resolve dependency "${depend}" for "${fileName}", skipping...`
-              );
-              return;
-            }
-
-            const dependVersion = beatmodDepend.versions.find(
-              (n) =>
-                n.supportedGameVersions.some((m) => m.id == gameVersion.id) &&
-                satisfies(n.modVersion, dependRange)
-            );
-
-            if (!dependVersion) {
-              core.warning(
-                `No valid version found for "${depend}" for "${fileName}", skipping...`
-              );
-              return;
-            }
-
-            dependencies.push(dependVersion.id);
-          } else {
-            const result = remoteMods.find(
-              (remote) => remote.mod.name == depend
-            );
-            if (!result) {
-              core.warning(
-                // I really hate this...
-                // Would prefer being able to just say which mod instead of the individual mod version
-                // Obviously not a problem for most people... but extremely frustrating for me
-                `Unable to resolve dependency "${depend}" for "${fileName}", skipping...`
-              );
-              return;
-            }
-
-            if (!satisfies(result.latest.modVersion, dependRange)) {
-              core.warning(
-                `Invalid semver for "${depend}" for "${fileName}", skipping...`
-              );
-              return;
-            }
-
-            dependencies.push(result.latest.id);
-          }
-        }
-
-        const json = {
-          modVersion: manifest.version,
-          platform: 'universalpc',
-          dependencies: dependencies,
-          supportedGameVersionIds: [gameVersion.id]
-        };
-
-        core.debug(`Uploading ${fileName}: ${JSON.stringify(json)}`);
+        modsToUpload[gameVersion.id].push({
+          order: 0,
+          file: file,
+          manifest: manifest,
+          gameVersion: gameVersion
+        });
       })
     );
+
+    for (const gameVersionId in modsToUpload) {
+      const mods = modsToUpload[gameVersionId];
+      for (let changed = true; changed; ) {
+        changed = false;
+
+        mods.forEach((mod) => {
+          const orders = Object.keys(mod.manifest.dependsOn)
+            .map((depend) => {
+              const dependMod = mods.find((n) => n.manifest.id == depend);
+              if (dependMod) {
+                return dependMod.order + 1;
+              }
+            })
+            .filter((n) => n != null);
+
+          let newOrder;
+          if (!orders || orders.length == 0) {
+            newOrder = 0;
+          } else {
+            newOrder = Math.max(...orders);
+          }
+
+          if (mod.order != newOrder) {
+            mod.order = newOrder;
+            changed = true;
+          }
+        });
+      }
+
+      const modGroups = Array.from(
+        groupBy(
+          mods.sort((a, b) => a.order - b.order),
+          (n) => n.order
+        )
+      );
+
+      for (const group of modGroups) {
+        await Promise.all(
+          group[1].map(async (mod) => {
+            const manifest = mod.manifest;
+            const fileName = mod.file.name;
+            const gameVersion = mod.gameVersion;
+
+            const dependencies: number[] = [];
+            for (const depend in manifest.dependsOn) {
+              const dependRange = manifest.dependsOn[depend];
+
+              // if we know the mod's id, use that instead
+              if (depend in modMap) {
+                const id = modMap[depend];
+                let beatmodDepend;
+                if (id in beatmodsModsById) {
+                  beatmodDepend = await beatmodsModsById[id];
+                } else {
+                  const modPromise = getMod(id);
+                  beatmodsModsById[id] = modPromise;
+                  beatmodDepend = await modPromise;
+                  core.debug(`Found "${depend}" on BeatMods`);
+                }
+
+                if (!beatmodDepend) {
+                  core.warning(
+                    `Unable to resolve dependency "${depend}" for "${fileName}", skipping...`
+                  );
+                  return;
+                }
+
+                const dependVersion = beatmodDepend.versions.find(
+                  (n) =>
+                    n.supportedGameVersions.some(
+                      (m) => m.id == gameVersion.id
+                    ) && satisfies(n.modVersion, dependRange)
+                );
+
+                if (!dependVersion) {
+                  core.warning(
+                    `No valid version found for "${depend}" for "${fileName}", skipping...`
+                  );
+                  return;
+                }
+
+                dependencies.push(dependVersion.id);
+              } else {
+                let version = gameVersion.version;
+
+                let remoteMods;
+                if (version in beatmodsModsByVersion) {
+                  remoteMods = await beatmodsModsByVersion[version];
+                } else {
+                  core.debug(`Getting Beatmods mods for ${version}`);
+                  const modPromise = getModsForVersion(version);
+                  beatmodsModsByVersion[version] = modPromise;
+                  remoteMods = await modPromise;
+                }
+
+                const result = remoteMods.find(
+                  (remote) => remote.mod.name == depend
+                );
+                if (!result) {
+                  core.warning(
+                    // I really hate this...
+                    // Would prefer being able to just say which mod instead of the individual mod version
+                    // Obviously not a problem for most people... but extremely frustrating for me
+                    `Unable to resolve dependency "${depend}" for "${fileName}", skipping...`
+                  );
+                  return;
+                }
+
+                if (!satisfies(result.latest.modVersion, dependRange)) {
+                  core.warning(
+                    `Invalid semver for "${depend}" for "${fileName}", skipping...`
+                  );
+                  return;
+                }
+
+                dependencies.push(result.latest.id);
+              }
+            }
+
+            const json = {
+              modVersion: manifest.version,
+              platform: 'universalpc',
+              dependencies: dependencies,
+              supportedGameVersionIds: [gameVersionId]
+            };
+
+            core.debug(`Uploading "${fileName}": ${JSON.stringify(json)}`);
+          })
+        );
+
+        // Clear cache so we can re-fetch new depends
+        beatmodsModsById = {};
+      }
+    }
   } catch (error) {
     // Fail the workflow run if an error occurs
     if (error instanceof Error) core.setFailed(error.message);
@@ -205,11 +293,3 @@ export const run = async () => {
     }
   }
 };
-
-interface BeatmodsModsById {
-  [key: number]: Promise<BeatmodsMod>;
-}
-
-interface BeatmodsModsByVersion {
-  [key: string]: Promise<BeatmodsAllMod[]>;
-}
