@@ -4,20 +4,20 @@ author: Your name or organization here
 
 # Add your action's branding here. This will appear on the GitHub Marketplace.
 branding:
-  icon: heart
-  color: red
+  icon: upload-cloud
+  color: gray-dark
 
 # Define your inputs here.
 inputs:
-  milliseconds:
-    description: Your input description here
+  mods:
+    description: Mod ids mapped to Beatmods ids
     required: true
-    default: '1000'
+    default: '{}'
 
 # Define your outputs here.
-outputs:
-  time:
-    description: Your output description here
+#outputs:
+#  time:
+#    description: Your output description here
 
 runs:
   using: node20

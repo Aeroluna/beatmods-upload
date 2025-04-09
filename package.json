@@ -1,17 +1,17 @@
 {
-  "name": "typescript-action",
+  "name": "beatmods-upload",
   "description": "GitHub Actions TypeScript template",
   "version": "0.0.0",
   "author": "",
   "type": "module",
   "private": true,
-  "homepage": "https://github.com/actions/typescript-action",
+  "homepage": "https://github.com/Aeroluna/beatmods-upload",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/actions/typescript-action.git"
+    "url": "git+https://github.com/Aeroluna/beatmods-upload.git"
   },
   "bugs": {
-    "url": "https://github.com/actions/typescript-action/issues"
+    "url": "https://github.com/Aeroluna/beatmods-upload/issues"
   },
   "keywords": [
     "actions"
@@ -37,7 +37,13 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@actions/core": "^1.11.1"
+    "@actions/artifact": "^2.3.2",
+    "@actions/core": "^1.11.1",
+    "@types/decompress": "^4.2.7",
+    "@types/semver": "^7.7.0",
+    "decompress": "^4.2.1",
+    "pe-struct": "^0.9.4",
+    "semver": "^7.7.1"
   },
   "devDependencies": {
     "@eslint/compat": "^1.2.8",

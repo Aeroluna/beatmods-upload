@@ -37,4 +37,4 @@ export default {
     ]
   },
   verbose: true
-}
+};
