@@ -116,39 +116,77 @@ export const run = async () => {
           remoteMods = await modPromise;
         }
 
-        const dependencies = [];
+        const dependencies: number[] = [];
         for (const depend in manifest.dependsOn) {
-          const result = remoteMods.find((remote) => remote.mod.name == depend);
-          if (!result) {
-            core.warning(
-              // I really hate this...
-              // Should be able to just say which mod instead of the individual mod version
-              // Obviously not a problem for most people... but extremely frustrating for me
-              `Unable to resolve dependency "${depend}" for "${fileName}", skipping...`
-            );
-            return;
-          }
+          const dependRange = manifest.dependsOn[depend];
 
-          if (
-            !satisfies(result.latest.modVersion, manifest.dependsOn[depend])
-          ) {
-            core.warning(
-              `Invalid semver for "${depend}" for "${fileName}", skipping...`
-            );
-            return;
-          }
+          // if we know the mod's id, use that instead
+          if (depend in modMap) {
+            const id = modMap[depend];
+            let beatmodDepend;
+            if (id in beatmodsModsById) {
+              beatmodDepend = await beatmodsModsById[id];
+            } else {
+              const modPromise = getMod(id);
+              beatmodsModsById[id] = modPromise;
+              beatmodDepend = await modPromise;
+              core.debug(`Found "${depend}" on BeatMods`);
+            }
 
-          dependencies.push(result);
+            if (!beatmodDepend) {
+              core.warning(
+                `Unable to resolve dependency "${depend}" for "${fileName}", skipping...`
+              );
+              return;
+            }
+
+            const dependVersion = beatmodDepend.versions.find(
+              (n) =>
+                n.supportedGameVersions.some((m) => m.id == gameVersion.id) &&
+                satisfies(n.modVersion, dependRange)
+            );
+
+            if (!dependVersion) {
+              core.warning(
+                `No valid version found for "${depend}" for "${fileName}", skipping...`
+              );
+              return;
+            }
+
+            dependencies.push(dependVersion.id);
+          } else {
+            const result = remoteMods.find(
+              (remote) => remote.mod.name == depend
+            );
+            if (!result) {
+              core.warning(
+                // I really hate this...
+                // Would prefer being able to just say which mod instead of the individual mod version
+                // Obviously not a problem for most people... but extremely frustrating for me
+                `Unable to resolve dependency "${depend}" for "${fileName}", skipping...`
+              );
+              return;
+            }
+
+            if (!satisfies(result.latest.modVersion, dependRange)) {
+              core.warning(
+                `Invalid semver for "${depend}" for "${fileName}", skipping...`
+              );
+              return;
+            }
+
+            dependencies.push(result.latest.id);
+          }
         }
 
         const json = {
           modVersion: manifest.version,
           platform: 'universalpc',
-          dependencies: dependencies.map((n) => n.latest.id),
+          dependencies: dependencies,
           supportedGameVersionIds: [gameVersion.id]
         };
 
-        core.debug(JSON.stringify(json));
+        core.debug(`Uploading ${fileName}: ${JSON.stringify(json)}`);
       })
     );
   } catch (error) {

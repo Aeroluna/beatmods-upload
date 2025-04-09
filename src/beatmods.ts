@@ -26,6 +26,7 @@ export interface BeatmodsModInfo {
 export interface BeatmodsModVersion {
   id: number;
   modVersion: string;
+  supportedGameVersions: BeatmodsGameVersion[];
 }
 
 interface GetModsResponse {
