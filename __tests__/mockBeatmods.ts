@@ -58,11 +58,9 @@ export const mockFetchBeatmods = () => {
 
             const formData = init.body;
             const id = input.substring(30).split('/')[0];
-            const supportedGameVersions = JSON.parse(
-              formData.get('supportedGameVersionIds')!.toString()
-            ).map((id: number) =>
+            const supportedGameVersions = formData.get('supportedGameVersionIds')!.toString().split(',').map((id: string) =>
               versions.versions.find(
-                (version: { id: number }) => version.id == id
+                (version: { id: number }) => version.id.toString() == id
               )
             );
             const upload = {

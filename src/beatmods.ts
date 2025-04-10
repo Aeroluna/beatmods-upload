@@ -1,3 +1,5 @@
+import * as core from '@actions/core';
+
 const userAgent = 'beatmods-upload/0.1';
 
 interface GetVersionsResponse {
@@ -98,13 +100,15 @@ export const uploadMod = async (
   request: BeatmodsModVersionUpload
 ) => {
   const formData = new FormData();
-  formData.append('file', new Blob([request.file]), request.fileName);
+  formData.append('file', new File([request.file], request.fileName, {
+    type: 'application/zip'
+  }));
   formData.append('modVersion', request.modVersion);
   formData.append('platform', request.platform);
-  formData.append('dependencies', JSON.stringify(request.dependencies));
+  formData.append('dependencies', request.dependencies);
   formData.append(
     'supportedGameVersionIds',
-    JSON.stringify(request.supportedGameVersionIds)
+    request.supportedGameVersionIds
   );
   const response = await fetch(
     'https://beatmods.com/api/mods/' + id + '/upload',
@@ -114,6 +118,8 @@ export const uploadMod = async (
       body: formData
     }
   );
+
+  core.info(await response.text());
 
   if (!response.ok) {
     throw new Error(`Beatmods did not return ok response [${response.status}]`);
