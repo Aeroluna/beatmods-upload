@@ -192,6 +192,7 @@ export const run = async () => {
         )
       );
 
+      const token = core.getInput('token');
       for (const group of modGroups) {
         await Promise.all(
           group[1].map(async (mod) => {
@@ -277,7 +278,7 @@ export const run = async () => {
             };
 
             core.debug(`Uploading "${fileName}": ${JSON.stringify(json)}`);
-            await uploadMod(mod.id.toString(), json);
+            await uploadMod(token, mod.id.toString(), json);
           })
         );
 

@@ -29,7 +29,8 @@ describe('main.ts', () => {
   beforeEach(() => {
     inputs = {
       path: '__tests__/files/artifacts',
-      mods: '{"CustomJSONData": 129}'
+      mods: '{"CustomJSONData": 129}',
+      token: 'token'
     };
 
     // Set the action's inputs as return values from core.getInput().

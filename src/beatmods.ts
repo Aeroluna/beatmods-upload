@@ -93,6 +93,7 @@ export const getModsForVersion = async (gameVersion: string) => {
 };
 
 export const uploadMod = async (
+  token: string,
   id: string,
   request: BeatmodsModVersionUpload
 ) => {
@@ -109,7 +110,7 @@ export const uploadMod = async (
     'https://beatmods.com/api/mods/' + id + '/upload',
     {
       method: 'POST',
-      headers: { 'User-Agent': userAgent },
+      headers: { 'User-Agent': userAgent, Authorization: 'Bearer ' + token },
       body: formData
     }
   );

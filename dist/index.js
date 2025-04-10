@@ -27282,7 +27282,7 @@ const getModsForVersion = async (gameVersion) => {
     const json = (await response.json());
     return json.mods;
 };
-const uploadMod = async (id, request) => {
+const uploadMod = async (token, id, request) => {
     const formData = new FormData();
     formData.append('file', new Blob([request.file]), request.fileName);
     formData.append('modVersion', request.modVersion);
@@ -27291,7 +27291,7 @@ const uploadMod = async (id, request) => {
     formData.append('supportedGameVersionIds', JSON.stringify(request.supportedGameVersionIds));
     const response = await fetch('https://beatmods.com/api/mods/' + id + '/upload', {
         method: 'POST',
-        headers: { 'User-Agent': userAgent },
+        headers: { 'User-Agent': userAgent, Authorization: 'Bearer ' + token },
         body: formData
     });
     if (!response.ok) {
@@ -47276,6 +47276,7 @@ const run = async () => {
                 });
             }
             const modGroups = Array.from(groupBy(mods.sort((a, b) => a.order - b.order), (n) => n.order));
+            const token = coreExports.getInput('token');
             for (const group of modGroups) {
                 await Promise.all(group[1].map(async (mod) => {
                     const manifest = mod.manifest;
@@ -47339,7 +47340,7 @@ const run = async () => {
                         supportedGameVersionIds: [gameVersion.id]
                     };
                     coreExports.debug(`Uploading "${fileName}": ${JSON.stringify(json)}`);
-                    await uploadMod(mod.id.toString(), json);
+                    await uploadMod(token, mod.id.toString(), json);
                 }));
                 // Clear cache so we can re-fetch new depends
                 beatmodsModsById = {};

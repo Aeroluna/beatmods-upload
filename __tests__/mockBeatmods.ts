@@ -52,6 +52,10 @@ export const mockFetchBeatmods = () => {
               throw new Error('Cannot upload without FormData');
             }
 
+            if (!('Authorization' in headers) || !headers['Authorization']) {
+              return Promise.resolve(new Response(null, { status: 403 }));
+            }
+
             const formData = init.body;
             const id = input.substring(30).split('/')[0];
             const supportedGameVersions = JSON.parse(
