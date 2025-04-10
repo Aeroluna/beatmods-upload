@@ -36,7 +36,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@actions/artifact": "^1.1.2",
+    "@actions/artifact": "^2.3.2",
     "@actions/core": "^1.11.1",
     "@types/decompress": "^4.2.7",
     "@types/semver": "^7.7.0",
