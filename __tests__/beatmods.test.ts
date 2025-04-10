@@ -18,6 +18,8 @@ const { getVersions, getMod, getModsForVersion, uploadMod } = await import(
 
 describe('beatmods.ts', () => {
   beforeEach(() => {
+    core.getInput.mockImplementation(() => 'token');
+
     mockFetchBeatmods();
   });
 
@@ -125,9 +127,8 @@ describe('beatmods.ts', () => {
       supportedGameVersionIds: [78]
     };
 
-    const token = 'token';
     it('uploads mod', async () => {
-      await expect(uploadMod(token, '129', request)).resolves.not.toThrow();
+      await expect(uploadMod('129', request)).resolves.not.toThrow();
       expect(fetch).toHaveBeenCalledWith(
         'https://beatmods.com/api/mods/129/upload',
         expect.objectContaining({
@@ -138,7 +139,7 @@ describe('beatmods.ts', () => {
 
     it('throws if error response', async () => {
       mockFetchError();
-      await expect(uploadMod(token, '129', request)).rejects.toThrow();
+      await expect(uploadMod('129', request)).rejects.toThrow();
     });
   });
 });

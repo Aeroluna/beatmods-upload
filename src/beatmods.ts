@@ -1,6 +1,7 @@
 import * as core from '@actions/core';
 
 const userAgent = 'beatmods-upload/0.1';
+const token = core.getInput('token');
 
 interface GetVersionsResponse {
   versions: BeatmodsGameVersion[];
@@ -53,7 +54,7 @@ export const getVersions = async () => {
   const response = await fetch(
     'https://beatmods.com/api/versions?gameName=beatsaber',
     {
-      headers: { 'User-Agent': userAgent }
+      headers: { 'User-Agent': userAgent, Authorization: 'Bearer ' + token }
     }
   );
 
@@ -67,7 +68,7 @@ export const getVersions = async () => {
 
 export const getMod = async (id: string) => {
   const response = await fetch('https://beatmods.com/api/mods/' + id, {
-    headers: { 'User-Agent': userAgent }
+    headers: { 'User-Agent': userAgent, Authorization: 'Bearer ' + token }
   });
 
   if (!response.ok) {
@@ -82,7 +83,7 @@ export const getModsForVersion = async (gameVersion: string) => {
   const response = await fetch(
     'https://beatmods.com/api/mods?gameVersion=' + gameVersion,
     {
-      headers: { 'User-Agent': userAgent }
+      headers: { 'User-Agent': userAgent, Authorization: 'Bearer ' + token }
     }
   );
 
@@ -95,7 +96,6 @@ export const getModsForVersion = async (gameVersion: string) => {
 };
 
 export const uploadMod = async (
-  token: string,
   id: string,
   request: BeatmodsModVersionUpload
 ) => {
