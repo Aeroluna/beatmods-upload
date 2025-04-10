@@ -10,7 +10,7 @@ Automatically upload zipped Beat Saber mods to BeatMods.
 
 ## Inputs
 
-| Name   | Description                                                    | Required | Default       |
-| ------ | -------------------------------------------------------------- | -------- | ------------- |
-| `path` | Path to get zips from.                                         | No       | `./artifacts` |
-| `mods` | JSON object with mod IDs as keys and BeatMods IDs as values. | Yes      | `./artifacts` |
+| Name   | Description                                                  | Required | Default       |
+| ------ | ------------------------------------------------------------ | -------- | ------------- |
+| `path` | Path to get zips from.                                       | No       | `./artifacts` |
+| `mods` | JSON object with mod IDs as keys and BeatMods IDs as values. | Yes      | `{}`          |
