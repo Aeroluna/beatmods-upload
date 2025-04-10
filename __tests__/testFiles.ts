@@ -7,10 +7,27 @@ const testFilesDirectory = path.join(
   'files'
 );
 
+const artifactDirectory = path.join(testFilesDirectory, 'artifacts');
+
 export const readTestFileSync = (fileName: string) => {
   return fs.readFileSync(path.join(testFilesDirectory, fileName));
 };
 
 export const testExistsSync = (fileName: string) => {
   return fs.existsSync(path.join(testFilesDirectory, fileName));
+};
+
+export const addArtifact = (fileName: string) => {
+  if (!fs.existsSync(artifactDirectory)) {
+    fs.mkdirSync(artifactDirectory);
+  }
+
+  return fs.copyFileSync(
+    path.join(testFilesDirectory, fileName),
+    path.join(artifactDirectory, fileName)
+  );
+};
+
+export const clearArtifacts = () => {
+  return fs.rmSync(artifactDirectory, { recursive: true, force: true });
 };

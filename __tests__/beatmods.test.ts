@@ -108,7 +108,7 @@ describe('beatmods.ts', () => {
 
   describe('uploadMod', () => {
     const fileName = 'CustomJSONData-2.6.8+1.29.1-bs1.29.1-7c2c32c.zip';
-    const file = readTestFileSync('artifacts/' + fileName);
+    const file = readTestFileSync(fileName);
     const request = {
       file: file,
       fileName: fileName,

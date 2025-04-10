@@ -72,13 +72,20 @@ export const run = async () => {
         await fs.promises.mkdir(subDir);
         const data = await fs.promises.readFile(fullZipName);
         await decompress(data, subDir);
-        const assembly = (
-          await fs.promises.readdir(path.join(subDir, 'Plugins'), {
-            withFileTypes: true
-          })
-        ).find((m) => m.name.endsWith('.dll'));
+
+        let assembly;
+
+        const pluginsDir = path.join(subDir, 'Plugins');
+        if (fs.existsSync(pluginsDir)) {
+          assembly = (
+            await fs.promises.readdir(pluginsDir, {
+              withFileTypes: true
+            })
+          ).find((m) => m.name.endsWith('.dll'));
+        }
+
         if (!assembly) {
-          core.warning(`Could not find dll for "${fileName}"`);
+          core.warning(`Could not find dll for "${fileName}", skipping...`);
           return;
         }
 
@@ -119,7 +126,7 @@ export const run = async () => {
           )
         ) {
           core.warning(
-            `Version "${manifest.id}@${manifest.version}" already exists on Beatmods, skipping...`
+            `Version ${manifest.id}@${manifest.version} already exists on Beatmods, skipping...`
           );
           return;
         }
@@ -129,7 +136,7 @@ export const run = async () => {
         );
         if (!gameVersion) {
           core.warning(
-            `Game version "${manifest.gameVersion}" not found on Beatmods, skipping...`
+            `Game version ${manifest.gameVersion} not found on Beatmods, skipping...`
           );
           return;
         }

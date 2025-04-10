@@ -37,15 +37,6 @@
         "deletedAt": null
       },
       {
-        "id": 48,
-        "gameName": "BeatSaber",
-        "version": "1.40.0",
-        "defaultVersion": false,
-        "createdAt": "2024-12-11T00:43:59.010Z",
-        "updatedAt": "2025-01-02T01:04:49.727Z",
-        "deletedAt": null
-      },
-      {
         "id": 47,
         "gameName": "BeatSaber",
         "version": "1.39.1",

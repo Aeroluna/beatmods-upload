@@ -1,0 +1,252 @@
+{
+  "mod": {
+    "info": {
+      "id": 1,
+      "name": "BSIPA",
+      "summary": "A mod loader for Beat Saber. Provides a number of useful tools, now including an auto-updater!",
+      "description": "A mod loader for Beat Saber. Provides a number of useful tools, now including an auto-updater!",
+      "gameName": "BeatSaber",
+      "category": "core",
+      "authors": [
+        {
+          "id": 39,
+          "username": "Meivyn",
+          "githubId": "793322",
+          "sponsorUrl": "",
+          "displayName": "Meivyn",
+          "roles": {
+            "sitewide": [],
+            "perGame": {
+              "BeatSaber": [
+                "approver"
+              ]
+            }
+          },
+          "bio": "null",
+          "createdAt": "2025-01-05T04:58:00.460Z",
+          "updatedAt": "2025-01-29T05:17:31.854Z"
+        }
+      ],
+      "status": "verified",
+      "iconFileName": "default.png",
+      "gitUrl": "https://github.com/nike4613/BeatSaber-IPA-Reloaded",
+      "lastApprovedById": 39,
+      "lastUpdatedById": 39,
+      "createdAt": "2019-04-23T00:40:48.072Z",
+      "updatedAt": "2025-01-29T18:14:13.889Z"
+    },
+    "versions": [
+      {
+        "id": 2062,
+        "modId": 1,
+        "author": {
+          "id": 6,
+          "username": "BeatMods Import",
+          "githubId": null,
+          "sponsorUrl": "https://www.patreon.com/c/beatsabermods",
+          "displayName": "BeatMods Import",
+          "roles": {
+            "sitewide": [],
+            "perGame": {}
+          },
+          "bio": "Mods imported from BeatMods",
+          "createdAt": "2024-12-31T22:25:00.246Z",
+          "updatedAt": "2024-12-31T22:25:00.246Z"
+        },
+        "modVersion": "4.3.5",
+        "platform": "universalpc",
+        "zipHash": "ff100424a1dca0e67511d562620f597f",
+        "status": "verified",
+        "dependencies": [],
+        "contentHashes": [
+          {
+            "path": "IPA.exe.config",
+            "hash": "21fa0b1d75c0cc7369f1e735fe90c7a9"
+          },
+          {
+            "path": "IPA.exe",
+            "hash": "2e5013ef44dc75b7f6479511154ca8c3"
+          },
+          {
+            "path": "IPA.runtimeconfig.json",
+            "hash": "8ca3b7795e000c8aeb8da3e7a4ecbeea"
+          },
+          {
+            "path": "IPA/winhttp.dll",
+            "hash": "cd389c7d74a43986947c9165770b9076"
+          },
+          {
+            "path": "IPA/Data/Managed/IPA.Injector.dll",
+            "hash": "80bb73f65018e88990970332d0a22e63"
+          },
+          {
+            "path": "IPA/Data/Managed/IPA.Injector.pdb",
+            "hash": "399f8130344d8e908a78f411355f16d2"
+          },
+          {
+            "path": "IPA/Data/Managed/IPA.Loader.dll",
+            "hash": "71ca8d22a48f25e9172bd240f911bbce"
+          },
+          {
+            "path": "IPA/Data/Managed/IPA.Loader.pdb",
+            "hash": "a8cc7e7fd4f98c933a8e155d99998534"
+          },
+          {
+            "path": "IPA/Data/Managed/IPA.Loader.xml",
+            "hash": "9120b4cdae0f4ba40b9b18a38d7898ef"
+          },
+          {
+            "path": "IPA/Libs/0Harmony.dll",
+            "hash": "a1cb6f00f3decf5d8561b304b915d3a1"
+          },
+          {
+            "path": "IPA/Libs/0Harmony.xml",
+            "hash": "4a3635d7a212545be9e968a269c644d4"
+          },
+          {
+            "path": "IPA/Libs/Hive.Versioning.dll",
+            "hash": "e7ae2cb487983f5c7fabbf1885d83b68"
+          },
+          {
+            "path": "IPA/Libs/Hive.Versioning.xml",
+            "hash": "7ac7b588565f3c170c88c758a4c9efdd"
+          },
+          {
+            "path": "IPA/Libs/Ionic.Zip.dll",
+            "hash": "6ded8fcbf5f1d9e422b327ca51625e24"
+          },
+          {
+            "path": "IPA/Libs/Microsoft.CSharp.dll",
+            "hash": "a8f13d4df59ebbcae3d07daaeab739af"
+          },
+          {
+            "path": "IPA/Libs/Mono.Cecil.dll",
+            "hash": "037dbbacc199b24bc0ee91f60a561f06"
+          },
+          {
+            "path": "IPA/Libs/Mono.Cecil.Mdb.dll",
+            "hash": "a97d8b05414aaaa056d6aec577ab15a8"
+          },
+          {
+            "path": "IPA/Libs/Mono.Cecil.Pdb.dll",
+            "hash": "358ee793e3f5139ec1f835f0cf306baf"
+          },
+          {
+            "path": "IPA/Libs/Mono.Cecil.Rocks.dll",
+            "hash": "6fcdf77e1f173f269ff56752f273f094"
+          },
+          {
+            "path": "IPA/Libs/MonoMod.RuntimeDetour.dll",
+            "hash": "649751f91c9b9622a7b1fa27ce86d0e7"
+          },
+          {
+            "path": "IPA/Libs/MonoMod.RuntimeDetour.xml",
+            "hash": "7cdc7f0ea1d474acc68c86edfb4d9960"
+          },
+          {
+            "path": "IPA/Libs/MonoMod.Utils.dll",
+            "hash": "6c50bec3c85f38076d7c8ae0d5c26e6f"
+          },
+          {
+            "path": "IPA/Libs/MonoMod.Utils.xml",
+            "hash": "8d9cd92d95928991f126bc8a92dd952d"
+          },
+          {
+            "path": "IPA/Libs/Newtonsoft.Json.dll",
+            "hash": "195ffb7167db3219b217c4fd439eedd6"
+          },
+          {
+            "path": "IPA/Libs/Newtonsoft.Json.xml",
+            "hash": "d398ffe9fdac6a53a8d8bb26f29bbb3c"
+          },
+          {
+            "path": "IPA/Libs/SemVer.dll",
+            "hash": "19853c39dcdbeae3d976fb377417834c"
+          },
+          {
+            "path": "IPA/Libs/SemVer.pdb",
+            "hash": "cc7a4aeaa768540899eec155178c67a0"
+          }
+        ],
+        "downloadCount": 139,
+        "supportedGameVersions": [
+          {
+            "id": 42,
+            "gameName": "BeatSaber",
+            "version": "1.37.2",
+            "defaultVersion": false
+          },
+          {
+            "id": 43,
+            "gameName": "BeatSaber",
+            "version": "1.37.3",
+            "defaultVersion": false
+          },
+          {
+            "id": 44,
+            "gameName": "BeatSaber",
+            "version": "1.37.4",
+            "defaultVersion": false
+          },
+          {
+            "id": 80,
+            "gameName": "BeatSaber",
+            "version": "1.37.5",
+            "defaultVersion": false
+          },
+          {
+            "id": 45,
+            "gameName": "BeatSaber",
+            "version": "1.38.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 46,
+            "gameName": "BeatSaber",
+            "version": "1.39.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 47,
+            "gameName": "BeatSaber",
+            "version": "1.39.1",
+            "defaultVersion": true
+          },
+          {
+            "id": 48,
+            "gameName": "BeatSaber",
+            "version": "1.40.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 81,
+            "gameName": "BeatSaber",
+            "version": "1.40.1",
+            "defaultVersion": false
+          },
+          {
+            "id": 82,
+            "gameName": "BeatSaber",
+            "version": "1.40.2",
+            "defaultVersion": false
+          },
+          {
+            "id": 83,
+            "gameName": "BeatSaber",
+            "version": "1.40.3",
+            "defaultVersion": false
+          },
+          {
+            "id": 84,
+            "gameName": "BeatSaber",
+            "version": "1.40.4",
+            "defaultVersion": false
+          }
+        ],
+        "fileSize": 1658905,
+        "createdAt": "2024-08-09T19:17:05.451Z",
+        "updatedAt": "2025-04-02T20:12:46.240Z"
+      }
+    ]
+  }
+}

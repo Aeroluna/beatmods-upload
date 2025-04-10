@@ -107,7 +107,7 @@ export const uploadMod = async (
     {
       method: 'POST',
       headers: { 'User-Agent': userAgent },
-      body: formData
+      //body: formData
     }
   );
 

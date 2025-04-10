@@ -1,0 +1,306 @@
+{
+  "mods": [
+    {
+      "mod": {
+        "id": 1,
+        "name": "BSIPA",
+        "summary": "A mod loader for Beat Saber. Provides a number of useful tools, now including an auto-updater!",
+        "description": "A mod loader for Beat Saber. Provides a number of useful tools, now including an auto-updater!",
+        "gameName": "BeatSaber",
+        "category": "core",
+        "authors": [
+          {
+            "id": 39,
+            "username": "Meivyn",
+            "githubId": "793322",
+            "sponsorUrl": "",
+            "displayName": "Meivyn",
+            "roles": {
+              "sitewide": [],
+              "perGame": {
+                "BeatSaber": [
+                  "approver"
+                ]
+              }
+            },
+            "bio": "null",
+            "createdAt": "2025-01-05T04:58:00.460Z",
+            "updatedAt": "2025-01-29T05:17:31.854Z"
+          }
+        ],
+        "status": "verified",
+        "iconFileName": "default.png",
+        "gitUrl": "https://github.com/nike4613/BeatSaber-IPA-Reloaded",
+        "lastApprovedById": 39,
+        "lastUpdatedById": 39,
+        "createdAt": "2019-04-23T00:40:48.072Z",
+        "updatedAt": "2025-01-29T18:14:13.889Z"
+      },
+      "latest": {
+        "id": 1840,
+        "modId": 1,
+        "author": {
+          "id": 6,
+          "username": "BeatMods Import",
+          "githubId": null,
+          "sponsorUrl": "https://www.patreon.com/c/beatsabermods",
+          "displayName": "BeatMods Import",
+          "roles": {
+            "sitewide": [],
+            "perGame": {}
+          },
+          "bio": "Mods imported from BeatMods",
+          "createdAt": "2024-12-31T22:25:00.246Z",
+          "updatedAt": "2024-12-31T22:25:00.246Z"
+        },
+        "modVersion": "4.3.2",
+        "platform": "universalpc",
+        "zipHash": "00df3bbdf425f1c750b7c35a02689f5b",
+        "status": "verified",
+        "dependencies": [],
+        "contentHashes": [
+          {
+            "path": "IPA.exe.config",
+            "hash": "21fa0b1d75c0cc7369f1e735fe90c7a9"
+          },
+          {
+            "path": "IPA.exe",
+            "hash": "4364704b9f25ace46e365c496283ff39"
+          },
+          {
+            "path": "IPA.runtimeconfig.json",
+            "hash": "8ca3b7795e000c8aeb8da3e7a4ecbeea"
+          },
+          {
+            "path": "IPA/winhttp.dll",
+            "hash": "82f75d7c08a4e3c77e25e8fb7f839234"
+          },
+          {
+            "path": "IPA/Data/Managed/I18N.dll",
+            "hash": "aa156a789840ef85e6c0fd08b27a18a6"
+          },
+          {
+            "path": "IPA/Data/Managed/I18N.West.dll",
+            "hash": "a75f9881a0e9b61ad1d02bdba0406468"
+          },
+          {
+            "path": "IPA/Data/Managed/IPA.Injector.dll",
+            "hash": "50506a42fcac2e9cc04c0dbb9d680ef8"
+          },
+          {
+            "path": "IPA/Data/Managed/IPA.Injector.pdb",
+            "hash": "c85a084e10e672e0150b16013325c7e8"
+          },
+          {
+            "path": "IPA/Data/Managed/IPA.Loader.dll",
+            "hash": "e54884033bc012cb8b204e776e1dc69e"
+          },
+          {
+            "path": "IPA/Data/Managed/IPA.Loader.pdb",
+            "hash": "b715a8461eabcc2daea0b6f5988aada3"
+          },
+          {
+            "path": "IPA/Data/Managed/IPA.Loader.xml",
+            "hash": "078fc7b1b7f579a84493992d75d9215f"
+          },
+          {
+            "path": "IPA/Data/Managed/Microsoft.CSharp.dll",
+            "hash": "a8f13d4df59ebbcae3d07daaeab739af"
+          },
+          {
+            "path": "IPA/Data/Managed/netstandard.dll",
+            "hash": "e65510933f59fb02d3b3e96527f14b7f"
+          },
+          {
+            "path": "IPA/Data/Managed/System.Runtime.Serialization.dll",
+            "hash": "c739259c418dad08468a4def4c4d1486"
+          },
+          {
+            "path": "IPA/Libs/0Harmony.dll",
+            "hash": "a1cb6f00f3decf5d8561b304b915d3a1"
+          },
+          {
+            "path": "IPA/Libs/0Harmony.xml",
+            "hash": "4a3635d7a212545be9e968a269c644d4"
+          },
+          {
+            "path": "IPA/Libs/Hive.Versioning.dll",
+            "hash": "e7ae2cb487983f5c7fabbf1885d83b68"
+          },
+          {
+            "path": "IPA/Libs/Hive.Versioning.xml",
+            "hash": "7ac7b588565f3c170c88c758a4c9efdd"
+          },
+          {
+            "path": "IPA/Libs/Ionic.Zip.dll",
+            "hash": "6ded8fcbf5f1d9e422b327ca51625e24"
+          },
+          {
+            "path": "IPA/Libs/Mono.Cecil.dll",
+            "hash": "037dbbacc199b24bc0ee91f60a561f06"
+          },
+          {
+            "path": "IPA/Libs/Mono.Cecil.Mdb.dll",
+            "hash": "a97d8b05414aaaa056d6aec577ab15a8"
+          },
+          {
+            "path": "IPA/Libs/Mono.Cecil.Pdb.dll",
+            "hash": "358ee793e3f5139ec1f835f0cf306baf"
+          },
+          {
+            "path": "IPA/Libs/Mono.Cecil.Rocks.dll",
+            "hash": "6fcdf77e1f173f269ff56752f273f094"
+          },
+          {
+            "path": "IPA/Libs/MonoMod.RuntimeDetour.dll",
+            "hash": "649751f91c9b9622a7b1fa27ce86d0e7"
+          },
+          {
+            "path": "IPA/Libs/MonoMod.RuntimeDetour.xml",
+            "hash": "7cdc7f0ea1d474acc68c86edfb4d9960"
+          },
+          {
+            "path": "IPA/Libs/MonoMod.Utils.dll",
+            "hash": "6c50bec3c85f38076d7c8ae0d5c26e6f"
+          },
+          {
+            "path": "IPA/Libs/MonoMod.Utils.xml",
+            "hash": "8d9cd92d95928991f126bc8a92dd952d"
+          },
+          {
+            "path": "IPA/Libs/Newtonsoft.Json.dll",
+            "hash": "195ffb7167db3219b217c4fd439eedd6"
+          },
+          {
+            "path": "IPA/Libs/Newtonsoft.Json.xml",
+            "hash": "d398ffe9fdac6a53a8d8bb26f29bbb3c"
+          },
+          {
+            "path": "IPA/Libs/SemVer.dll",
+            "hash": "1f871f39b02205662e615fda14f527dd"
+          },
+          {
+            "path": "IPA/Libs/SemVer.pdb",
+            "hash": "020fbf896ca5160cfa43454f68bc086f"
+          }
+        ],
+        "downloadCount": 27,
+        "supportedGameVersions": [
+          {
+            "id": 33,
+            "gameName": "BeatSaber",
+            "version": "1.33.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 34,
+            "gameName": "BeatSaber",
+            "version": "1.34.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 35,
+            "gameName": "BeatSaber",
+            "version": "1.34.2",
+            "defaultVersion": false
+          },
+          {
+            "id": 36,
+            "gameName": "BeatSaber",
+            "version": "1.34.5",
+            "defaultVersion": false
+          },
+          {
+            "id": 79,
+            "gameName": "BeatSaber",
+            "version": "1.34.6",
+            "defaultVersion": false
+          }
+        ],
+        "fileSize": 2025043,
+        "createdAt": "2023-11-14T04:50:59.020Z",
+        "updatedAt": "2025-02-23T00:08:20.019Z"
+      }
+    },
+    {
+      "mod": {
+        "id": 129,
+        "name": "CustomJSONData",
+        "summary": "Lets mappers include arbitrary data in beatmaps, and lets modders access that data. Why did I m...",
+        "description": "Lets mappers include arbitrary data in beatmaps, and lets modders access that data. Why did I make this? Good question.\n\nThis mod was imported from BeatMods, and was originally uploaded by Aeroluna at 2020-07-30T03:58:37.865Z.",
+        "gameName": "BeatSaber",
+        "category": "library",
+        "authors": [
+          {
+            "id": 40,
+            "username": "Aeroluna",
+            "githubId": "40481393",
+            "sponsorUrl": "",
+            "displayName": "Aeroluna",
+            "roles": {
+              "sitewide": [],
+              "perGame": {}
+            },
+            "bio": "hi",
+            "createdAt": "2025-01-05T05:33:18.340Z",
+            "updatedAt": "2025-01-05T05:33:18.340Z"
+          }
+        ],
+        "status": "verified",
+        "iconFileName": "default.png",
+        "gitUrl": "https://github.com/Aeroluna/CustomJSONData",
+        "lastApprovedById": 8,
+        "lastUpdatedById": 8,
+        "createdAt": "2020-07-30T03:58:37.865Z",
+        "updatedAt": "2025-01-22T05:10:02.360Z"
+      },
+      "latest": {
+        "id": 1894,
+        "modId": 129,
+        "author": {
+          "id": 6,
+          "username": "BeatMods Import",
+          "githubId": null,
+          "sponsorUrl": "https://www.patreon.com/c/beatsabermods",
+          "displayName": "BeatMods Import",
+          "roles": {
+            "sitewide": [],
+            "perGame": {}
+          },
+          "bio": "Mods imported from BeatMods",
+          "createdAt": "2024-12-31T22:25:00.246Z",
+          "updatedAt": "2024-12-31T22:25:00.246Z"
+        },
+        "modVersion": "2.5.9",
+        "platform": "universalpc",
+        "zipHash": "4a5cf6b6842dcf0f1569bb55c07a4876",
+        "status": "verified",
+        "dependencies": [
+          1840
+        ],
+        "contentHashes": [
+          {
+            "path": "Plugins/CustomJSONData.dll",
+            "hash": "24624a7f17d74e973c32fffee63dba75"
+          },
+          {
+            "path": "Plugins/CustomJSONData.pdb",
+            "hash": "723749a0fde628f36e2913e7b629f9f9"
+          }
+        ],
+        "downloadCount": 23,
+        "supportedGameVersions": [
+          {
+            "id": 35,
+            "gameName": "BeatSaber",
+            "version": "1.34.2",
+            "defaultVersion": false
+          }
+        ],
+        "fileSize": 251149,
+        "createdAt": "2023-12-13T09:02:59.613Z",
+        "updatedAt": "2025-02-23T00:08:31.673Z"
+      }
+    }
+  ]
+}
