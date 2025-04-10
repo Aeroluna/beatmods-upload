@@ -6,7 +6,7 @@ export default {
   collectCoverage: true,
   collectCoverageFrom: ['./src/**'],
   coverageDirectory: './coverage',
-  coveragePathIgnorePatterns: ['/node_modules/', '/dist/'],
+  coveragePathIgnorePatterns: ['/node_modules/', '/dist/', './src/groupBy.ts'],
   coverageReporters: ['json-summary', 'text', 'lcov'],
   // Uncomment the below lines if you would like to enforce a coverage threshold
   // for your action. This will fail the build if the coverage is below the

@@ -6,9 +6,11 @@ import {
   BeatmodsAllMod,
   BeatmodsGameVersion,
   BeatmodsMod,
+  BeatmodsModVersionUpload,
   getMod,
   getModsForVersion,
-  getVersions
+  getVersions,
+  uploadMod
 } from './beatmods.js';
 import { getManifest, Manifest } from './manifest.js';
 import decompress from 'decompress';
@@ -43,7 +45,9 @@ export const run = async () => {
     }
 
     interface ModToUpload {
+      id: number;
       order: number;
+      data: Buffer;
       file: fs.Dirent;
       manifest: Manifest;
       gameVersion: BeatmodsGameVersion;
@@ -51,7 +55,7 @@ export const run = async () => {
 
     const modsToUpload: ModsToUpload = {};
 
-    const files = await fs.promises.readdir('local_action/artifacts', {
+    const files = await fs.promises.readdir(core.getInput('path'), {
       withFileTypes: true
     });
     await Promise.all(
@@ -91,12 +95,12 @@ export const run = async () => {
           return;
         }
 
-        const id = modMap[manifest.id];
+        const id: number = modMap[manifest.id];
         let remoteMod;
         if (id in beatmodsModsById) {
           remoteMod = await beatmodsModsById[id];
         } else {
-          const modPromise = getMod(id);
+          const modPromise = getMod(id.toString());
           beatmodsModsById[id] = modPromise;
           remoteMod = await modPromise;
           core.debug(`Found "${manifest.id}" on BeatMods`);
@@ -117,7 +121,7 @@ export const run = async () => {
           core.warning(
             `Version "${manifest.id}@${manifest.version}" already exists on Beatmods, skipping...`
           );
-          //return;
+          return;
         }
 
         const gameVersion = gameVersions.find(
@@ -135,7 +139,9 @@ export const run = async () => {
         }
 
         modsToUpload[gameVersion.id].push({
+          id: id,
           order: 0,
+          data: data,
           file: file,
           manifest: manifest,
           gameVersion: gameVersion
@@ -262,14 +268,17 @@ export const run = async () => {
               }
             }
 
-            const json = {
+            const json: BeatmodsModVersionUpload = {
+              file: mod.data,
+              fileName: fileName,
               modVersion: manifest.version,
               platform: 'universalpc',
               dependencies: dependencies,
-              supportedGameVersionIds: [gameVersionId]
+              supportedGameVersionIds: [gameVersion.id]
             };
 
             core.debug(`Uploading "${fileName}": ${JSON.stringify(json)}`);
+            await uploadMod(mod.id.toString(), json);
           })
         );
 
@@ -284,11 +293,11 @@ export const run = async () => {
   } finally {
     try {
       if (tmpDir) {
-        fs.rmSync(tmpDir, { recursive: true });
+        fs.rmSync(tmpDir, { recursive: true, force: true });
       }
     } catch (e) {
       console.error(
-        `An error has occurred while removing the temp folder at [${tmpDir}]: ${e}`
+        `An error has occurred while removing the temp folder at ${tmpDir}: ${e}`
       );
     }
   }

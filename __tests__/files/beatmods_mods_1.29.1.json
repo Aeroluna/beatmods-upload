@@ -1,0 +1,1858 @@
+{
+  "mods": [
+    {
+      "mod": {
+        "id": 1,
+        "name": "BSIPA",
+        "summary": "A mod loader for Beat Saber. Provides a number of useful tools, now including an auto-updater!",
+        "description": "A mod loader for Beat Saber. Provides a number of useful tools, now including an auto-updater!",
+        "gameName": "BeatSaber",
+        "category": "core",
+        "authors": [
+          {
+            "id": 39,
+            "username": "Meivyn",
+            "githubId": "793322",
+            "sponsorUrl": "",
+            "displayName": "Meivyn",
+            "roles": {
+              "sitewide": [],
+              "perGame": {
+                "BeatSaber": [
+                  "approver"
+                ]
+              }
+            },
+            "bio": "null",
+            "createdAt": "2025-01-05T04:58:00.460Z",
+            "updatedAt": "2025-01-29T05:17:31.854Z"
+          }
+        ],
+        "status": "verified",
+        "iconFileName": "default.png",
+        "gitUrl": "https://github.com/nike4613/BeatSaber-IPA-Reloaded",
+        "lastApprovedById": 39,
+        "lastUpdatedById": 39,
+        "createdAt": "2019-04-23T00:40:48.072Z",
+        "updatedAt": "2025-01-29T18:14:13.889Z"
+      },
+      "latest": {
+        "id": 1405,
+        "modId": 1,
+        "author": {
+          "id": 6,
+          "username": "BeatMods Import",
+          "githubId": null,
+          "sponsorUrl": "https://www.patreon.com/c/beatsabermods",
+          "displayName": "BeatMods Import",
+          "roles": {
+            "sitewide": [],
+            "perGame": {}
+          },
+          "bio": "Mods imported from BeatMods",
+          "createdAt": "2024-12-31T22:25:00.246Z",
+          "updatedAt": "2024-12-31T22:25:00.246Z"
+        },
+        "modVersion": "4.2.2",
+        "platform": "universalpc",
+        "zipHash": "45c3affc373470d9e62fb3c0dbce87ab",
+        "status": "verified",
+        "dependencies": [],
+        "contentHashes": [
+          {
+            "path": "IPA.exe.config",
+            "hash": "21fa0b1d75c0cc7369f1e735fe90c7a9"
+          },
+          {
+            "path": "IPA.exe",
+            "hash": "3d083ea12077d9730e063eb01862ae56"
+          },
+          {
+            "path": "IPA.runtimeconfig.json",
+            "hash": "8ca3b7795e000c8aeb8da3e7a4ecbeea"
+          },
+          {
+            "path": "IPA/winhttp.dll",
+            "hash": "ffa62e5fa79ae375188ce19cf6b83287"
+          },
+          {
+            "path": "IPA/Data/Managed/I18N.dll",
+            "hash": "aa156a789840ef85e6c0fd08b27a18a6"
+          },
+          {
+            "path": "IPA/Data/Managed/I18N.West.dll",
+            "hash": "a75f9881a0e9b61ad1d02bdba0406468"
+          },
+          {
+            "path": "IPA/Data/Managed/IPA.Injector.dll",
+            "hash": "c354c3df6b08e7245288761b4b1fac2f"
+          },
+          {
+            "path": "IPA/Data/Managed/IPA.Injector.pdb",
+            "hash": "9dccf8fbef08b249d46d9353af591de4"
+          },
+          {
+            "path": "IPA/Data/Managed/IPA.Loader.dll",
+            "hash": "9a44acee312d8571600494848d3d6186"
+          },
+          {
+            "path": "IPA/Data/Managed/IPA.Loader.pdb",
+            "hash": "170be2c6ce0405335ae1960482887234"
+          },
+          {
+            "path": "IPA/Data/Managed/IPA.Loader.xml",
+            "hash": "d93c70eafcfdf1943e70ed74676d5899"
+          },
+          {
+            "path": "IPA/Data/Managed/Microsoft.CSharp.dll",
+            "hash": "a8f13d4df59ebbcae3d07daaeab739af"
+          },
+          {
+            "path": "IPA/Data/Managed/netstandard.dll",
+            "hash": "e65510933f59fb02d3b3e96527f14b7f"
+          },
+          {
+            "path": "IPA/Data/Managed/System.Runtime.Serialization.dll",
+            "hash": "c739259c418dad08468a4def4c4d1486"
+          },
+          {
+            "path": "IPA/Libs/0Harmony.dll",
+            "hash": "6b4025206e5af26ddb4ce164b63072a6"
+          },
+          {
+            "path": "IPA/Libs/Hive.Versioning.dll",
+            "hash": "e7ae2cb487983f5c7fabbf1885d83b68"
+          },
+          {
+            "path": "IPA/Libs/Ionic.Zip.dll",
+            "hash": "6ded8fcbf5f1d9e422b327ca51625e24"
+          },
+          {
+            "path": "IPA/Libs/Mono.Cecil.dll",
+            "hash": "de69bb29d6a9dfb615a90df3580d63b1"
+          },
+          {
+            "path": "IPA/Libs/Mono.Cecil.Mdb.dll",
+            "hash": "1c6aca0f1b1fa1661fc1e43c79334f7c"
+          },
+          {
+            "path": "IPA/Libs/Mono.Cecil.Pdb.dll",
+            "hash": "6d5eb860c2be5dbeb470e7d3f3e7dda4"
+          },
+          {
+            "path": "IPA/Libs/Mono.Cecil.Rocks.dll",
+            "hash": "6e7f0f4fff6c49e3f66127c23b7f1a53"
+          },
+          {
+            "path": "IPA/Libs/MonoMod.RuntimeDetour.dll",
+            "hash": "8c413d1cb7c5010fab0153931db00505"
+          },
+          {
+            "path": "IPA/Libs/MonoMod.Utils.dll",
+            "hash": "65926e13aefe1f02df587d68194974be"
+          },
+          {
+            "path": "IPA/Libs/Newtonsoft.Json.dll",
+            "hash": "6815034209687816d8cf401877ec8133"
+          },
+          {
+            "path": "IPA/Libs/SemVer.dll",
+            "hash": "9781ca403886711744437bd98353d042"
+          },
+          {
+            "path": "IPA/Libs/SemVer.pdb",
+            "hash": "ff2ca319ea0779adcd4637d0eb8dc5b8"
+          }
+        ],
+        "downloadCount": 62,
+        "supportedGameVersions": [
+          {
+            "id": 19,
+            "gameName": "BeatSaber",
+            "version": "1.20.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 20,
+            "gameName": "BeatSaber",
+            "version": "1.21.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 21,
+            "gameName": "BeatSaber",
+            "version": "1.26.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 22,
+            "gameName": "BeatSaber",
+            "version": "1.26.1",
+            "defaultVersion": false
+          },
+          {
+            "id": 23,
+            "gameName": "BeatSaber",
+            "version": "1.26.2",
+            "defaultVersion": false
+          },
+          {
+            "id": 24,
+            "gameName": "BeatSaber",
+            "version": "1.27.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 25,
+            "gameName": "BeatSaber",
+            "version": "1.28.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 26,
+            "gameName": "BeatSaber",
+            "version": "1.29.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 72,
+            "gameName": "BeatSaber",
+            "version": "1.22.1",
+            "defaultVersion": false
+          },
+          {
+            "id": 74,
+            "gameName": "BeatSaber",
+            "version": "1.24.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 76,
+            "gameName": "BeatSaber",
+            "version": "1.25.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 78,
+            "gameName": "BeatSaber",
+            "version": "1.29.1",
+            "defaultVersion": false
+          }
+        ],
+        "fileSize": 1900193,
+        "createdAt": "2022-03-14T23:58:12.891Z",
+        "updatedAt": "2025-02-23T00:08:38.967Z"
+      }
+    },
+    {
+      "mod": {
+        "id": 20,
+        "name": "Ini Parser",
+        "summary": "A .NET, Mono and Unity3d compatible(*) library for reading/writing INI data from IO streams, fi...",
+        "description": "A .NET, Mono and Unity3d compatible(*) library for reading/writing INI data from IO streams, file streams, and strings written in C#. Not made by myself, refer to github link for author.\n\nThis mod was imported from BeatMods, and was originally uploaded by DaNike at 2019-04-22T23:14:26.473Z.",
+        "gameName": "BeatSaber",
+        "category": "library",
+        "authors": [
+          {
+            "id": 6,
+            "username": "BeatMods Import",
+            "githubId": null,
+            "sponsorUrl": "https://www.patreon.com/c/beatsabermods",
+            "displayName": "BeatMods Import",
+            "roles": {
+              "sitewide": [],
+              "perGame": {}
+            },
+            "bio": "Mods imported from BeatMods",
+            "createdAt": "2024-12-31T22:25:00.246Z",
+            "updatedAt": "2024-12-31T22:25:00.246Z"
+          }
+        ],
+        "status": "verified",
+        "iconFileName": "default.png",
+        "gitUrl": "https://github.com/rickyah/ini-parser",
+        "lastApprovedById": 6,
+        "lastUpdatedById": 6,
+        "createdAt": "2019-04-22T23:14:26.473Z",
+        "updatedAt": "2024-12-31T22:34:49.047Z"
+      },
+      "latest": {
+        "id": 1352,
+        "modId": 20,
+        "author": {
+          "id": 6,
+          "username": "BeatMods Import",
+          "githubId": null,
+          "sponsorUrl": "https://www.patreon.com/c/beatsabermods",
+          "displayName": "BeatMods Import",
+          "roles": {
+            "sitewide": [],
+            "perGame": {}
+          },
+          "bio": "Mods imported from BeatMods",
+          "createdAt": "2024-12-31T22:25:00.246Z",
+          "updatedAt": "2024-12-31T22:25:00.246Z"
+        },
+        "modVersion": "2.5.9",
+        "platform": "universalpc",
+        "zipHash": "5df74ad1c6b120fecdc615dd55f15b88",
+        "status": "verified",
+        "dependencies": [],
+        "contentHashes": [
+          {
+            "path": "Libs/INIParser.dll",
+            "hash": "79d9bd77be21a0bb207bcbe381fe8fcf"
+          },
+          {
+            "path": "Plugins/INIParser.manifest",
+            "hash": "1a2de8a165ca21f53d2a3c4a749f66a8"
+          }
+        ],
+        "downloadCount": 150,
+        "supportedGameVersions": [
+          {
+            "id": 18,
+            "gameName": "BeatSaber",
+            "version": "1.19.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 70,
+            "gameName": "BeatSaber",
+            "version": "1.19.1",
+            "defaultVersion": false
+          },
+          {
+            "id": 19,
+            "gameName": "BeatSaber",
+            "version": "1.20.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 20,
+            "gameName": "BeatSaber",
+            "version": "1.21.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 72,
+            "gameName": "BeatSaber",
+            "version": "1.22.1",
+            "defaultVersion": false
+          },
+          {
+            "id": 74,
+            "gameName": "BeatSaber",
+            "version": "1.24.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 76,
+            "gameName": "BeatSaber",
+            "version": "1.25.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 21,
+            "gameName": "BeatSaber",
+            "version": "1.26.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 22,
+            "gameName": "BeatSaber",
+            "version": "1.26.1",
+            "defaultVersion": false
+          },
+          {
+            "id": 23,
+            "gameName": "BeatSaber",
+            "version": "1.26.2",
+            "defaultVersion": false
+          },
+          {
+            "id": 24,
+            "gameName": "BeatSaber",
+            "version": "1.27.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 25,
+            "gameName": "BeatSaber",
+            "version": "1.28.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 26,
+            "gameName": "BeatSaber",
+            "version": "1.29.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 78,
+            "gameName": "BeatSaber",
+            "version": "1.29.1",
+            "defaultVersion": false
+          },
+          {
+            "id": 28,
+            "gameName": "BeatSaber",
+            "version": "1.30.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 29,
+            "gameName": "BeatSaber",
+            "version": "1.30.2",
+            "defaultVersion": false
+          },
+          {
+            "id": 30,
+            "gameName": "BeatSaber",
+            "version": "1.31.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 31,
+            "gameName": "BeatSaber",
+            "version": "1.31.1",
+            "defaultVersion": false
+          },
+          {
+            "id": 32,
+            "gameName": "BeatSaber",
+            "version": "1.32.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 33,
+            "gameName": "BeatSaber",
+            "version": "1.33.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 34,
+            "gameName": "BeatSaber",
+            "version": "1.34.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 35,
+            "gameName": "BeatSaber",
+            "version": "1.34.2",
+            "defaultVersion": false
+          },
+          {
+            "id": 36,
+            "gameName": "BeatSaber",
+            "version": "1.34.5",
+            "defaultVersion": false
+          },
+          {
+            "id": 37,
+            "gameName": "BeatSaber",
+            "version": "1.35.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 38,
+            "gameName": "BeatSaber",
+            "version": "1.36.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 39,
+            "gameName": "BeatSaber",
+            "version": "1.36.2",
+            "defaultVersion": false
+          },
+          {
+            "id": 40,
+            "gameName": "BeatSaber",
+            "version": "1.37.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 41,
+            "gameName": "BeatSaber",
+            "version": "1.37.1",
+            "defaultVersion": false
+          },
+          {
+            "id": 42,
+            "gameName": "BeatSaber",
+            "version": "1.37.2",
+            "defaultVersion": false
+          },
+          {
+            "id": 43,
+            "gameName": "BeatSaber",
+            "version": "1.37.3",
+            "defaultVersion": false
+          },
+          {
+            "id": 44,
+            "gameName": "BeatSaber",
+            "version": "1.37.4",
+            "defaultVersion": false
+          },
+          {
+            "id": 80,
+            "gameName": "BeatSaber",
+            "version": "1.37.5",
+            "defaultVersion": false
+          },
+          {
+            "id": 45,
+            "gameName": "BeatSaber",
+            "version": "1.38.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 46,
+            "gameName": "BeatSaber",
+            "version": "1.39.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 47,
+            "gameName": "BeatSaber",
+            "version": "1.39.1",
+            "defaultVersion": true
+          },
+          {
+            "id": 48,
+            "gameName": "BeatSaber",
+            "version": "1.40.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 81,
+            "gameName": "BeatSaber",
+            "version": "1.40.1",
+            "defaultVersion": false
+          },
+          {
+            "id": 82,
+            "gameName": "BeatSaber",
+            "version": "1.40.2",
+            "defaultVersion": false
+          },
+          {
+            "id": 83,
+            "gameName": "BeatSaber",
+            "version": "1.40.3",
+            "defaultVersion": false
+          },
+          {
+            "id": 84,
+            "gameName": "BeatSaber",
+            "version": "1.40.4",
+            "defaultVersion": false
+          }
+        ],
+        "fileSize": 13063,
+        "createdAt": "2021-12-21T15:41:03.985Z",
+        "updatedAt": "2025-04-02T20:12:46.313Z"
+      }
+    },
+    {
+      "mod": {
+        "id": 22,
+        "name": "BS Utils",
+        "summary": "A basic library for mods to use for common functionality. ",
+        "description": "A basic library for mods to use for common functionality.",
+        "gameName": "BeatSaber",
+        "category": "library",
+        "authors": [
+          {
+            "id": 39,
+            "username": "Meivyn",
+            "githubId": "793322",
+            "sponsorUrl": "",
+            "displayName": "Meivyn",
+            "roles": {
+              "sitewide": [],
+              "perGame": {
+                "BeatSaber": [
+                  "approver"
+                ]
+              }
+            },
+            "bio": "null",
+            "createdAt": "2025-01-05T04:58:00.460Z",
+            "updatedAt": "2025-01-29T05:17:31.854Z"
+          }
+        ],
+        "status": "verified",
+        "iconFileName": "default.png",
+        "gitUrl": "https://github.com/Kylemc1413/Beat-Saber-Utils",
+        "lastApprovedById": 39,
+        "lastUpdatedById": 39,
+        "createdAt": "2019-04-22T23:10:37.739Z",
+        "updatedAt": "2025-01-29T18:22:10.076Z"
+      },
+      "latest": {
+        "id": 1663,
+        "modId": 22,
+        "author": {
+          "id": 6,
+          "username": "BeatMods Import",
+          "githubId": null,
+          "sponsorUrl": "https://www.patreon.com/c/beatsabermods",
+          "displayName": "BeatMods Import",
+          "roles": {
+            "sitewide": [],
+            "perGame": {}
+          },
+          "bio": "Mods imported from BeatMods",
+          "createdAt": "2024-12-31T22:25:00.246Z",
+          "updatedAt": "2024-12-31T22:25:00.246Z"
+        },
+        "modVersion": "1.12.2",
+        "platform": "universalpc",
+        "zipHash": "0e19fb5a18ed1107e3c6c5b9d02211d9",
+        "status": "verified",
+        "dependencies": [
+          1352,
+          1405
+        ],
+        "contentHashes": [
+          {
+            "path": "Plugins/BS_Utils.dll",
+            "hash": "899828868c8627b477afae008aad4e7d"
+          },
+          {
+            "path": "Plugins/BS_Utils.pdb",
+            "hash": "984e906bfd0947d4c9af9ea67fd8c993"
+          }
+        ],
+        "downloadCount": 59,
+        "supportedGameVersions": [
+          {
+            "id": 25,
+            "gameName": "BeatSaber",
+            "version": "1.28.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 26,
+            "gameName": "BeatSaber",
+            "version": "1.29.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 78,
+            "gameName": "BeatSaber",
+            "version": "1.29.1",
+            "defaultVersion": false
+          }
+        ],
+        "fileSize": 52703,
+        "createdAt": "2023-03-05T01:26:41.748Z",
+        "updatedAt": "2025-02-23T00:08:29.614Z"
+      }
+    },
+    {
+      "mod": {
+        "id": 58,
+        "name": "SongCore",
+        "summary": "A plugin for handling custom songs in Beat Saber.",
+        "description": "A plugin for handling custom songs in Beat Saber.",
+        "gameName": "BeatSaber",
+        "category": "core",
+        "authors": [
+          {
+            "id": 39,
+            "username": "Meivyn",
+            "githubId": "793322",
+            "sponsorUrl": "",
+            "displayName": "Meivyn",
+            "roles": {
+              "sitewide": [],
+              "perGame": {
+                "BeatSaber": [
+                  "approver"
+                ]
+              }
+            },
+            "bio": "null",
+            "createdAt": "2025-01-05T04:58:00.460Z",
+            "updatedAt": "2025-01-29T05:17:31.854Z"
+          }
+        ],
+        "status": "verified",
+        "iconFileName": "default.png",
+        "gitUrl": "https://github.com/Kylemc1413/SongCore",
+        "lastApprovedById": 39,
+        "lastUpdatedById": 39,
+        "createdAt": "2019-05-20T23:17:13.793Z",
+        "updatedAt": "2025-02-04T23:16:27.804Z"
+      },
+      "latest": {
+        "id": 1678,
+        "modId": 58,
+        "author": {
+          "id": 6,
+          "username": "BeatMods Import",
+          "githubId": null,
+          "sponsorUrl": "https://www.patreon.com/c/beatsabermods",
+          "displayName": "BeatMods Import",
+          "roles": {
+            "sitewide": [],
+            "perGame": {}
+          },
+          "bio": "Mods imported from BeatMods",
+          "createdAt": "2024-12-31T22:25:00.246Z",
+          "updatedAt": "2024-12-31T22:25:00.246Z"
+        },
+        "modVersion": "3.11.1",
+        "platform": "universalpc",
+        "zipHash": "b9133aa79e80804f66b8b40d0d7f4b8c",
+        "status": "verified",
+        "dependencies": [
+          1719,
+          1663,
+          1405
+        ],
+        "contentHashes": [
+          {
+            "path": "Plugins/SongCore.dll",
+            "hash": "ce5a5a8e2049c6e04e7feeb132c44e4c"
+          },
+          {
+            "path": "Plugins/SongCore.pdb",
+            "hash": "00fadca923d6fbac09761d841dfd998f"
+          }
+        ],
+        "downloadCount": 57,
+        "supportedGameVersions": [
+          {
+            "id": 26,
+            "gameName": "BeatSaber",
+            "version": "1.29.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 78,
+            "gameName": "BeatSaber",
+            "version": "1.29.1",
+            "defaultVersion": false
+          }
+        ],
+        "fileSize": 229379,
+        "createdAt": "2023-08-08T09:31:23.264Z",
+        "updatedAt": "2025-02-23T00:08:29.581Z"
+      }
+    },
+    {
+      "mod": {
+        "id": 129,
+        "name": "CustomJSONData",
+        "summary": "Lets mappers include arbitrary data in beatmaps, and lets modders access that data. Why did I m...",
+        "description": "Lets mappers include arbitrary data in beatmaps, and lets modders access that data. Why did I make this? Good question.\n\nThis mod was imported from BeatMods, and was originally uploaded by Aeroluna at 2020-07-30T03:58:37.865Z.",
+        "gameName": "BeatSaber",
+        "category": "library",
+        "authors": [
+          {
+            "id": 40,
+            "username": "Aeroluna",
+            "githubId": "40481393",
+            "sponsorUrl": "",
+            "displayName": "Aeroluna",
+            "roles": {
+              "sitewide": [],
+              "perGame": {}
+            },
+            "bio": "hi",
+            "createdAt": "2025-01-05T05:33:18.340Z",
+            "updatedAt": "2025-01-05T05:33:18.340Z"
+          }
+        ],
+        "status": "verified",
+        "iconFileName": "default.png",
+        "gitUrl": "https://github.com/Aeroluna/CustomJSONData",
+        "lastApprovedById": 8,
+        "lastUpdatedById": 8,
+        "createdAt": "2020-07-30T03:58:37.865Z",
+        "updatedAt": "2025-01-22T05:10:02.360Z"
+      },
+      "latest": {
+        "id": 1713,
+        "modId": 129,
+        "author": {
+          "id": 6,
+          "username": "BeatMods Import",
+          "githubId": null,
+          "sponsorUrl": "https://www.patreon.com/c/beatsabermods",
+          "displayName": "BeatMods Import",
+          "roles": {
+            "sitewide": [],
+            "perGame": {}
+          },
+          "bio": "Mods imported from BeatMods",
+          "createdAt": "2024-12-31T22:25:00.246Z",
+          "updatedAt": "2024-12-31T22:25:00.246Z"
+        },
+        "modVersion": "2.5.2",
+        "platform": "universalpc",
+        "zipHash": "03a7c1a58f42a07b37d6486b05c95bbc",
+        "status": "verified",
+        "dependencies": [
+          1405
+        ],
+        "contentHashes": [
+          {
+            "path": "Plugins/CustomJSONData.dll",
+            "hash": "cdbc637055491c5e7957ca2982533e3e"
+          }
+        ],
+        "downloadCount": 39,
+        "supportedGameVersions": [
+          {
+            "id": 26,
+            "gameName": "BeatSaber",
+            "version": "1.29.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 78,
+            "gameName": "BeatSaber",
+            "version": "1.29.1",
+            "defaultVersion": false
+          }
+        ],
+        "fileSize": 233990,
+        "createdAt": "2023-08-22T06:22:08.356Z",
+        "updatedAt": "2025-02-23T00:08:38.802Z"
+      }
+    },
+    {
+      "mod": {
+        "id": 130,
+        "name": "SiraUtil",
+        "summary": "A utility/library which provides useful tools to Beat Saber modders.",
+        "description": "A utility/library which provides useful tools to Beat Saber modders.\n\nThis mod was imported from BeatMods, and was originally uploaded by auros at 2020-07-29T13:34:24.988Z.",
+        "gameName": "BeatSaber",
+        "category": "library",
+        "authors": [
+          {
+            "id": 4,
+            "username": "nicoco007",
+            "githubId": "1349975",
+            "sponsorUrl": "",
+            "displayName": "nicoco007",
+            "roles": {
+              "sitewide": [],
+              "perGame": {
+                "BeatSaber": [
+                  "approver"
+                ]
+              }
+            },
+            "bio": "null ",
+            "createdAt": "2024-12-31T21:24:05.529Z",
+            "updatedAt": "2025-01-29T05:17:24.563Z"
+          }
+        ],
+        "status": "verified",
+        "iconFileName": "default.png",
+        "gitUrl": "https://github.com/Auros/SiraUtil",
+        "lastApprovedById": 4,
+        "lastUpdatedById": 4,
+        "createdAt": "2020-07-29T13:34:24.988Z",
+        "updatedAt": "2025-01-29T15:46:20.660Z"
+      },
+      "latest": {
+        "id": 1504,
+        "modId": 130,
+        "author": {
+          "id": 6,
+          "username": "BeatMods Import",
+          "githubId": null,
+          "sponsorUrl": "https://www.patreon.com/c/beatsabermods",
+          "displayName": "BeatMods Import",
+          "roles": {
+            "sitewide": [],
+            "perGame": {}
+          },
+          "bio": "Mods imported from BeatMods",
+          "createdAt": "2024-12-31T22:25:00.246Z",
+          "updatedAt": "2024-12-31T22:25:00.246Z"
+        },
+        "modVersion": "3.1.2",
+        "platform": "universalpc",
+        "zipHash": "d2eca700e097152ca29afefc6800ac01",
+        "status": "verified",
+        "dependencies": [
+          1405
+        ],
+        "contentHashes": [
+          {
+            "path": "Plugins/SiraUtil.dll",
+            "hash": "6ee7c129a8c1c771ccbfe26b4eabe9d7"
+          },
+          {
+            "path": "Plugins/SiraUtil.xml",
+            "hash": "2eb1bcf55de78829fe0182034e679ba4"
+          }
+        ],
+        "downloadCount": 60,
+        "supportedGameVersions": [
+          {
+            "id": 20,
+            "gameName": "BeatSaber",
+            "version": "1.21.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 21,
+            "gameName": "BeatSaber",
+            "version": "1.26.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 22,
+            "gameName": "BeatSaber",
+            "version": "1.26.1",
+            "defaultVersion": false
+          },
+          {
+            "id": 23,
+            "gameName": "BeatSaber",
+            "version": "1.26.2",
+            "defaultVersion": false
+          },
+          {
+            "id": 24,
+            "gameName": "BeatSaber",
+            "version": "1.27.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 25,
+            "gameName": "BeatSaber",
+            "version": "1.28.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 26,
+            "gameName": "BeatSaber",
+            "version": "1.29.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 73,
+            "gameName": "BeatSaber",
+            "version": "1.23.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 76,
+            "gameName": "BeatSaber",
+            "version": "1.25.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 78,
+            "gameName": "BeatSaber",
+            "version": "1.29.1",
+            "defaultVersion": false
+          }
+        ],
+        "fileSize": 96927,
+        "createdAt": "2022-08-25T02:55:25.557Z",
+        "updatedAt": "2025-02-23T00:08:27.822Z"
+      }
+    },
+    {
+      "mod": {
+        "id": 148,
+        "name": "Technicolor",
+        "summary": "Rainbow? To hell with rainbows! Technicolor is where it's at! Sounds fancier! Because it is. Te...",
+        "description": "Rainbow? To hell with rainbows! Technicolor is where it's at! Sounds fancier! Because it is. Technicolor is basically a customizable powerful version of rainbow mod.\n\nThis mod was imported from BeatMods, and was originally uploaded by Aeroluna at 2020-08-22T22:09:16.514Z.",
+        "gameName": "BeatSaber",
+        "category": "lighting",
+        "authors": [
+          {
+            "id": 40,
+            "username": "Aeroluna",
+            "githubId": "40481393",
+            "sponsorUrl": "",
+            "displayName": "Aeroluna",
+            "roles": {
+              "sitewide": [],
+              "perGame": {}
+            },
+            "bio": "hi",
+            "createdAt": "2025-01-05T05:33:18.340Z",
+            "updatedAt": "2025-01-05T05:33:18.340Z"
+          }
+        ],
+        "status": "verified",
+        "iconFileName": "default.png",
+        "gitUrl": "https://github.com/Aeroluna/Technicolor",
+        "lastApprovedById": 8,
+        "lastUpdatedById": 8,
+        "createdAt": "2020-08-22T22:09:16.514Z",
+        "updatedAt": "2025-01-22T14:40:15.730Z"
+      },
+      "latest": {
+        "id": 1725,
+        "modId": 148,
+        "author": {
+          "id": 6,
+          "username": "BeatMods Import",
+          "githubId": null,
+          "sponsorUrl": "https://www.patreon.com/c/beatsabermods",
+          "displayName": "BeatMods Import",
+          "roles": {
+            "sitewide": [],
+            "perGame": {}
+          },
+          "bio": "Mods imported from BeatMods",
+          "createdAt": "2024-12-31T22:25:00.246Z",
+          "updatedAt": "2024-12-31T22:25:00.246Z"
+        },
+        "modVersion": "1.0.14",
+        "platform": "universalpc",
+        "zipHash": "dd929c6b169c1f0f1f7183de3f7d4d40",
+        "status": "verified",
+        "dependencies": [
+          1722,
+          1405,
+          1504,
+          1719,
+          1709
+        ],
+        "contentHashes": [
+          {
+            "path": "Plugins/Technicolor.dll",
+            "hash": "2db24d96939ddb8cb89f47c8870d6f27"
+          }
+        ],
+        "downloadCount": 28,
+        "supportedGameVersions": [
+          {
+            "id": 26,
+            "gameName": "BeatSaber",
+            "version": "1.29.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 78,
+            "gameName": "BeatSaber",
+            "version": "1.29.1",
+            "defaultVersion": false
+          }
+        ],
+        "fileSize": 14585,
+        "createdAt": "2023-08-22T06:24:41.166Z",
+        "updatedAt": "2025-02-23T00:08:29.915Z"
+      }
+    },
+    {
+      "mod": {
+        "id": 132,
+        "name": "Chroma",
+        "summary": "Welcome to Chroma 2.0, featuring a complete code rework that prioritizes performance to bring y...",
+        "description": "Welcome to Chroma 2.0, featuring a complete code rework that prioritizes performance to bring you amazing features like the RGB lights that you all know and love and a rainbow lights mode.\n\nThis mod was imported from BeatMods, and was originally uploaded by Aeroluna at 2020-07-30T06:04:49.733Z.",
+        "gameName": "BeatSaber",
+        "category": "lighting",
+        "authors": [
+          {
+            "id": 40,
+            "username": "Aeroluna",
+            "githubId": "40481393",
+            "sponsorUrl": "",
+            "displayName": "Aeroluna",
+            "roles": {
+              "sitewide": [],
+              "perGame": {}
+            },
+            "bio": "hi",
+            "createdAt": "2025-01-05T05:33:18.340Z",
+            "updatedAt": "2025-01-05T05:33:18.340Z"
+          }
+        ],
+        "status": "verified",
+        "iconFileName": "default.png",
+        "gitUrl": "https://github.com/Aeroluna/Chroma",
+        "lastApprovedById": 8,
+        "lastUpdatedById": 8,
+        "createdAt": "2020-07-30T06:04:49.733Z",
+        "updatedAt": "2025-01-22T05:09:46.774Z"
+      },
+      "latest": {
+        "id": 1722,
+        "modId": 132,
+        "author": {
+          "id": 6,
+          "username": "BeatMods Import",
+          "githubId": null,
+          "sponsorUrl": "https://www.patreon.com/c/beatsabermods",
+          "displayName": "BeatMods Import",
+          "roles": {
+            "sitewide": [],
+            "perGame": {}
+          },
+          "bio": "Mods imported from BeatMods",
+          "createdAt": "2024-12-31T22:25:00.246Z",
+          "updatedAt": "2024-12-31T22:25:00.246Z"
+        },
+        "modVersion": "2.8.0",
+        "platform": "universalpc",
+        "zipHash": "55800116e0e61288bc5c50f5c4cd2734",
+        "status": "verified",
+        "dependencies": [
+          1709,
+          1713,
+          1678,
+          1405,
+          1527,
+          1504,
+          1719
+        ],
+        "contentHashes": [
+          {
+            "path": "Plugins/Chroma.dll",
+            "hash": "ebe0f4da55222d0e7bf5bd7935748443"
+          },
+          {
+            "path": "Plugins/Chroma.pdb",
+            "hash": "83405eb4fce1468bf25975a140a881cb"
+          }
+        ],
+        "downloadCount": 42,
+        "supportedGameVersions": [
+          {
+            "id": 26,
+            "gameName": "BeatSaber",
+            "version": "1.29.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 78,
+            "gameName": "BeatSaber",
+            "version": "1.29.1",
+            "defaultVersion": false
+          }
+        ],
+        "fileSize": 102991,
+        "createdAt": "2024-03-24T23:30:44.948Z",
+        "updatedAt": "2025-02-23T00:08:38.852Z"
+      }
+    },
+    {
+      "mod": {
+        "id": 193,
+        "name": "NoodleExtensions",
+        "summary": "A spiritual successor to Mapping Extensions, this allows mappers to precisely control aspects o...",
+        "description": "A spiritual successor to Mapping Extensions, this allows mappers to precisely control aspects of map elements. Does not allow you to play Mapping Extensions maps!\n\nThis mod was imported from BeatMods, and was originally uploaded by Aeroluna at 2021-04-21T20:03:06.408Z.",
+        "gameName": "BeatSaber",
+        "category": "library",
+        "authors": [
+          {
+            "id": 40,
+            "username": "Aeroluna",
+            "githubId": "40481393",
+            "sponsorUrl": "",
+            "displayName": "Aeroluna",
+            "roles": {
+              "sitewide": [],
+              "perGame": {}
+            },
+            "bio": "hi",
+            "createdAt": "2025-01-05T05:33:18.340Z",
+            "updatedAt": "2025-01-05T05:33:18.340Z"
+          }
+        ],
+        "status": "verified",
+        "iconFileName": "default.png",
+        "gitUrl": "https://github.com/Aeroluna/NoodleExtensions",
+        "lastApprovedById": 8,
+        "lastUpdatedById": 8,
+        "createdAt": "2021-04-21T20:03:06.408Z",
+        "updatedAt": "2025-01-22T05:09:41.860Z"
+      },
+      "latest": {
+        "id": 1691,
+        "modId": 193,
+        "author": {
+          "id": 6,
+          "username": "BeatMods Import",
+          "githubId": null,
+          "sponsorUrl": "https://www.patreon.com/c/beatsabermods",
+          "displayName": "BeatMods Import",
+          "roles": {
+            "sitewide": [],
+            "perGame": {}
+          },
+          "bio": "Mods imported from BeatMods",
+          "createdAt": "2024-12-31T22:25:00.246Z",
+          "updatedAt": "2024-12-31T22:25:00.246Z"
+        },
+        "modVersion": "1.6.0",
+        "platform": "universalpc",
+        "zipHash": "98ddbd0c264d533d014282c281db8c00",
+        "status": "verified",
+        "dependencies": [
+          1709,
+          1504,
+          1405,
+          1678,
+          1713
+        ],
+        "contentHashes": [
+          {
+            "path": "Plugins/NoodleExtensions.dll",
+            "hash": "d5b84a0af05298e23953729aaac1962d"
+          },
+          {
+            "path": "Plugins/NoodleExtensions.pdb",
+            "hash": "fca55d5ec49780d1b59583b91bae4409"
+          }
+        ],
+        "downloadCount": 38,
+        "supportedGameVersions": [
+          {
+            "id": 26,
+            "gameName": "BeatSaber",
+            "version": "1.29.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 78,
+            "gameName": "BeatSaber",
+            "version": "1.29.1",
+            "defaultVersion": false
+          }
+        ],
+        "fileSize": 62806,
+        "createdAt": "2024-03-24T23:29:31.290Z",
+        "updatedAt": "2025-02-23T00:08:29.664Z"
+      }
+    },
+    {
+      "mod": {
+        "id": 205,
+        "name": "_Heck",
+        "summary": "Provides track support for other mods. Used by Chroma and NoodleExtensions.",
+        "description": "Provides track support for other mods. Used by Chroma and NoodleExtensions.\n\nThis mod was imported from BeatMods, and was originally uploaded by Aeroluna at 2021-06-18T12:01:53.814Z.",
+        "gameName": "BeatSaber",
+        "category": "library",
+        "authors": [
+          {
+            "id": 6,
+            "username": "BeatMods Import",
+            "githubId": null,
+            "sponsorUrl": "https://www.patreon.com/c/beatsabermods",
+            "displayName": "BeatMods Import",
+            "roles": {
+              "sitewide": [],
+              "perGame": {}
+            },
+            "bio": "Mods imported from BeatMods",
+            "createdAt": "2024-12-31T22:25:00.246Z",
+            "updatedAt": "2024-12-31T22:25:00.246Z"
+          }
+        ],
+        "status": "verified",
+        "iconFileName": "default.png",
+        "gitUrl": "https://github.com/Aeroluna/Heck",
+        "lastApprovedById": 6,
+        "lastUpdatedById": 6,
+        "createdAt": "2021-06-18T12:01:53.814Z",
+        "updatedAt": "2024-12-31T23:17:54.322Z"
+      },
+      "latest": {
+        "id": 1709,
+        "modId": 205,
+        "author": {
+          "id": 6,
+          "username": "BeatMods Import",
+          "githubId": null,
+          "sponsorUrl": "https://www.patreon.com/c/beatsabermods",
+          "displayName": "BeatMods Import",
+          "roles": {
+            "sitewide": [],
+            "perGame": {}
+          },
+          "bio": "Mods imported from BeatMods",
+          "createdAt": "2024-12-31T22:25:00.246Z",
+          "updatedAt": "2024-12-31T22:25:00.246Z"
+        },
+        "modVersion": "1.5.0",
+        "platform": "universalpc",
+        "zipHash": "5a3cd15c82ac3d15b73413044c9f7ec7",
+        "status": "verified",
+        "dependencies": [
+          1713,
+          1719,
+          1504,
+          1405
+        ],
+        "contentHashes": [
+          {
+            "path": "Plugins/Heck.dll",
+            "hash": "f5c9a6b3538f1b28b092af6efcd49452"
+          },
+          {
+            "path": "Plugins/Heck.pdb",
+            "hash": "f64823465d3ce6164668a2d45a4506bc"
+          }
+        ],
+        "downloadCount": 39,
+        "supportedGameVersions": [
+          {
+            "id": 26,
+            "gameName": "BeatSaber",
+            "version": "1.29.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 78,
+            "gameName": "BeatSaber",
+            "version": "1.29.1",
+            "defaultVersion": false
+          }
+        ],
+        "fileSize": 89456,
+        "createdAt": "2024-03-24T23:28:11.263Z",
+        "updatedAt": "2025-02-23T00:08:29.422Z"
+      }
+    },
+    {
+      "mod": {
+        "id": 231,
+        "name": "LookupID",
+        "summary": "A single method written in C++ for Chroma because regex in mono is unbelievably slow. Also beat...",
+        "description": "A single method written in C++ for Chroma because regex in mono is unbelievably slow. Also beatmods sucks.\n\nThis mod was imported from BeatMods, and was originally uploaded by Aeroluna at 2021-11-30T01:53:15.808Z.",
+        "gameName": "BeatSaber",
+        "category": "library",
+        "authors": [
+          {
+            "id": 40,
+            "username": "Aeroluna",
+            "githubId": "40481393",
+            "sponsorUrl": "",
+            "displayName": "Aeroluna",
+            "roles": {
+              "sitewide": [],
+              "perGame": {}
+            },
+            "bio": "hi",
+            "createdAt": "2025-01-05T05:33:18.340Z",
+            "updatedAt": "2025-01-05T05:33:18.340Z"
+          }
+        ],
+        "status": "verified",
+        "iconFileName": "default.png",
+        "gitUrl": "https://github.com/Aeroluna/Heck",
+        "lastApprovedById": 8,
+        "lastUpdatedById": 8,
+        "createdAt": "2021-11-30T01:53:15.808Z",
+        "updatedAt": "2025-01-22T05:09:53.546Z"
+      },
+      "latest": {
+        "id": 1527,
+        "modId": 231,
+        "author": {
+          "id": 6,
+          "username": "BeatMods Import",
+          "githubId": null,
+          "sponsorUrl": "https://www.patreon.com/c/beatsabermods",
+          "displayName": "BeatMods Import",
+          "roles": {
+            "sitewide": [],
+            "perGame": {}
+          },
+          "bio": "Mods imported from BeatMods",
+          "createdAt": "2024-12-31T22:25:00.246Z",
+          "updatedAt": "2024-12-31T22:25:00.246Z"
+        },
+        "modVersion": "1.0.1",
+        "platform": "universalpc",
+        "zipHash": "5f5655b91193602c0311b8b6d1b4c71c",
+        "status": "verified",
+        "dependencies": [],
+        "contentHashes": [
+          {
+            "path": "Libs/Native/LookupID.dll",
+            "hash": "5e2def649180bff7268db7b31d60a5d8"
+          },
+          {
+            "path": "Plugins/LookupID.manifest",
+            "hash": "7a78c898d1d68498b491c3d8e1b9ac8c"
+          }
+        ],
+        "downloadCount": 97,
+        "supportedGameVersions": [
+          {
+            "id": 20,
+            "gameName": "BeatSaber",
+            "version": "1.21.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 72,
+            "gameName": "BeatSaber",
+            "version": "1.22.1",
+            "defaultVersion": false
+          },
+          {
+            "id": 74,
+            "gameName": "BeatSaber",
+            "version": "1.24.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 76,
+            "gameName": "BeatSaber",
+            "version": "1.25.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 21,
+            "gameName": "BeatSaber",
+            "version": "1.26.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 22,
+            "gameName": "BeatSaber",
+            "version": "1.26.1",
+            "defaultVersion": false
+          },
+          {
+            "id": 23,
+            "gameName": "BeatSaber",
+            "version": "1.26.2",
+            "defaultVersion": false
+          },
+          {
+            "id": 24,
+            "gameName": "BeatSaber",
+            "version": "1.27.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 25,
+            "gameName": "BeatSaber",
+            "version": "1.28.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 26,
+            "gameName": "BeatSaber",
+            "version": "1.29.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 78,
+            "gameName": "BeatSaber",
+            "version": "1.29.1",
+            "defaultVersion": false
+          },
+          {
+            "id": 30,
+            "gameName": "BeatSaber",
+            "version": "1.31.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 31,
+            "gameName": "BeatSaber",
+            "version": "1.31.1",
+            "defaultVersion": false
+          },
+          {
+            "id": 32,
+            "gameName": "BeatSaber",
+            "version": "1.32.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 33,
+            "gameName": "BeatSaber",
+            "version": "1.33.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 34,
+            "gameName": "BeatSaber",
+            "version": "1.34.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 35,
+            "gameName": "BeatSaber",
+            "version": "1.34.2",
+            "defaultVersion": false
+          },
+          {
+            "id": 36,
+            "gameName": "BeatSaber",
+            "version": "1.34.5",
+            "defaultVersion": false
+          },
+          {
+            "id": 37,
+            "gameName": "BeatSaber",
+            "version": "1.35.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 38,
+            "gameName": "BeatSaber",
+            "version": "1.36.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 39,
+            "gameName": "BeatSaber",
+            "version": "1.36.2",
+            "defaultVersion": false
+          },
+          {
+            "id": 40,
+            "gameName": "BeatSaber",
+            "version": "1.37.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 41,
+            "gameName": "BeatSaber",
+            "version": "1.37.1",
+            "defaultVersion": false
+          },
+          {
+            "id": 42,
+            "gameName": "BeatSaber",
+            "version": "1.37.2",
+            "defaultVersion": false
+          },
+          {
+            "id": 43,
+            "gameName": "BeatSaber",
+            "version": "1.37.3",
+            "defaultVersion": false
+          },
+          {
+            "id": 44,
+            "gameName": "BeatSaber",
+            "version": "1.37.4",
+            "defaultVersion": false
+          },
+          {
+            "id": 80,
+            "gameName": "BeatSaber",
+            "version": "1.37.5",
+            "defaultVersion": false
+          },
+          {
+            "id": 45,
+            "gameName": "BeatSaber",
+            "version": "1.38.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 46,
+            "gameName": "BeatSaber",
+            "version": "1.39.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 47,
+            "gameName": "BeatSaber",
+            "version": "1.39.1",
+            "defaultVersion": true
+          },
+          {
+            "id": 48,
+            "gameName": "BeatSaber",
+            "version": "1.40.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 81,
+            "gameName": "BeatSaber",
+            "version": "1.40.1",
+            "defaultVersion": false
+          },
+          {
+            "id": 82,
+            "gameName": "BeatSaber",
+            "version": "1.40.2",
+            "defaultVersion": false
+          },
+          {
+            "id": 83,
+            "gameName": "BeatSaber",
+            "version": "1.40.3",
+            "defaultVersion": false
+          },
+          {
+            "id": 84,
+            "gameName": "BeatSaber",
+            "version": "1.40.4",
+            "defaultVersion": false
+          }
+        ],
+        "fileSize": 69548,
+        "createdAt": "2022-04-02T20:32:17.186Z",
+        "updatedAt": "2025-04-02T20:12:47.619Z"
+      }
+    },
+    {
+      "mod": {
+        "id": 261,
+        "name": "AudioLink",
+        "summary": "VRC AudioLink ported to Beat Saber.",
+        "description": "VRC AudioLink ported to Beat Saber.\n\nThis mod was imported from BeatMods, and was originally uploaded by Aeroluna at 2022-09-13T15:34:47.580Z.",
+        "gameName": "BeatSaber",
+        "category": "cosmetic",
+        "authors": [
+          {
+            "id": 40,
+            "username": "Aeroluna",
+            "githubId": "40481393",
+            "sponsorUrl": "",
+            "displayName": "Aeroluna",
+            "roles": {
+              "sitewide": [],
+              "perGame": {}
+            },
+            "bio": "hi",
+            "createdAt": "2025-01-05T05:33:18.340Z",
+            "updatedAt": "2025-01-05T05:33:18.340Z"
+          }
+        ],
+        "status": "verified",
+        "iconFileName": "default.png",
+        "gitUrl": "https://github.com/Aeroluna/BSAudioLink",
+        "lastApprovedById": 8,
+        "lastUpdatedById": 8,
+        "createdAt": "2022-09-13T15:34:47.580Z",
+        "updatedAt": "2025-01-22T05:09:58.006Z"
+      },
+      "latest": {
+        "id": 1684,
+        "modId": 261,
+        "author": {
+          "id": 6,
+          "username": "BeatMods Import",
+          "githubId": null,
+          "sponsorUrl": "https://www.patreon.com/c/beatsabermods",
+          "displayName": "BeatMods Import",
+          "roles": {
+            "sitewide": [],
+            "perGame": {}
+          },
+          "bio": "Mods imported from BeatMods",
+          "createdAt": "2024-12-31T22:25:00.246Z",
+          "updatedAt": "2024-12-31T22:25:00.246Z"
+        },
+        "modVersion": "1.0.5",
+        "platform": "universalpc",
+        "zipHash": "86458fd18e32fad79c39abe1ce4d729a",
+        "status": "verified",
+        "dependencies": [
+          1405
+        ],
+        "contentHashes": [
+          {
+            "path": "Plugins/AudioLink.dll",
+            "hash": "5cdbba3cf04d3f726557c56c374ff061"
+          }
+        ],
+        "downloadCount": 8,
+        "supportedGameVersions": [
+          {
+            "id": 26,
+            "gameName": "BeatSaber",
+            "version": "1.29.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 78,
+            "gameName": "BeatSaber",
+            "version": "1.29.1",
+            "defaultVersion": false
+          }
+        ],
+        "fileSize": 28799,
+        "createdAt": "2023-08-22T07:23:16.189Z",
+        "updatedAt": "2025-02-23T00:08:29.689Z"
+      }
+    },
+    {
+      "mod": {
+        "id": 265,
+        "name": "CameraUtils",
+        "summary": "Library that standardizes the use of GameObject layers and provides tools for easier rendering ...",
+        "description": "Library that standardizes the use of GameObject layers and provides tools for easier rendering pipeline modifications",
+        "gameName": "BeatSaber",
+        "category": "library",
+        "authors": [
+          {
+            "id": 136,
+            "username": "Reezonate",
+            "githubId": "91229110",
+            "sponsorUrl": "",
+            "displayName": "Reezonate",
+            "roles": {
+              "sitewide": [],
+              "perGame": {}
+            },
+            "bio": "Discord: Reezonate#2038",
+            "createdAt": "2025-02-05T05:20:14.734Z",
+            "updatedAt": "2025-02-05T05:20:14.734Z"
+          }
+        ],
+        "status": "verified",
+        "iconFileName": "default.png",
+        "gitUrl": "https://github.com/Reezonate/CameraUtils",
+        "lastApprovedById": 39,
+        "lastUpdatedById": 39,
+        "createdAt": "2022-11-04T15:18:17.544Z",
+        "updatedAt": "2025-02-05T05:24:19.373Z"
+      },
+      "latest": {
+        "id": 1716,
+        "modId": 265,
+        "author": {
+          "id": 6,
+          "username": "BeatMods Import",
+          "githubId": null,
+          "sponsorUrl": "https://www.patreon.com/c/beatsabermods",
+          "displayName": "BeatMods Import",
+          "roles": {
+            "sitewide": [],
+            "perGame": {}
+          },
+          "bio": "Mods imported from BeatMods",
+          "createdAt": "2024-12-31T22:25:00.246Z",
+          "updatedAt": "2024-12-31T22:25:00.246Z"
+        },
+        "modVersion": "1.0.3",
+        "platform": "universalpc",
+        "zipHash": "048fb78570e9cdf91869c35defea37cc",
+        "status": "verified",
+        "dependencies": [
+          1405
+        ],
+        "contentHashes": [
+          {
+            "path": "Plugins/CameraUtils.dll",
+            "hash": "4f8f1f925c1f2c1ad44ebe445bd79336"
+          }
+        ],
+        "downloadCount": 10,
+        "supportedGameVersions": [
+          {
+            "id": 26,
+            "gameName": "BeatSaber",
+            "version": "1.29.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 78,
+            "gameName": "BeatSaber",
+            "version": "1.29.1",
+            "defaultVersion": false
+          }
+        ],
+        "fileSize": 6979,
+        "createdAt": "2023-04-27T06:10:37.226Z",
+        "updatedAt": "2025-02-23T00:08:29.806Z"
+      }
+    },
+    {
+      "mod": {
+        "id": 96,
+        "name": "BeatSaberMarkupLanguage",
+        "summary": "An XML based UI system.",
+        "description": "An XML based UI system.\n\nThis mod was imported from BeatMods, and was originally uploaded by monkeymanboy at 2019-11-08T00:55:11.115Z.",
+        "gameName": "BeatSaber",
+        "category": "library",
+        "authors": [
+          {
+            "id": 4,
+            "username": "nicoco007",
+            "githubId": "1349975",
+            "sponsorUrl": "",
+            "displayName": "nicoco007",
+            "roles": {
+              "sitewide": [],
+              "perGame": {
+                "BeatSaber": [
+                  "approver"
+                ]
+              }
+            },
+            "bio": "null ",
+            "createdAt": "2024-12-31T21:24:05.529Z",
+            "updatedAt": "2025-01-29T05:17:24.563Z"
+          }
+        ],
+        "status": "verified",
+        "iconFileName": "default.png",
+        "gitUrl": "https://github.com/monkeymanboy/BeatSaberMarkupLanguage",
+        "lastApprovedById": 4,
+        "lastUpdatedById": 4,
+        "createdAt": "2019-11-08T00:55:11.115Z",
+        "updatedAt": "2025-01-29T15:46:01.261Z"
+      },
+      "latest": {
+        "id": 1719,
+        "modId": 96,
+        "author": {
+          "id": 6,
+          "username": "BeatMods Import",
+          "githubId": null,
+          "sponsorUrl": "https://www.patreon.com/c/beatsabermods",
+          "displayName": "BeatMods Import",
+          "roles": {
+            "sitewide": [],
+            "perGame": {}
+          },
+          "bio": "Mods imported from BeatMods",
+          "createdAt": "2024-12-31T22:25:00.246Z",
+          "updatedAt": "2024-12-31T22:25:00.246Z"
+        },
+        "modVersion": "1.6.10",
+        "platform": "universalpc",
+        "zipHash": "3fb90c7ff875f544db92bd9a724e6838",
+        "status": "verified",
+        "dependencies": [
+          1405
+        ],
+        "contentHashes": [
+          {
+            "path": "Plugins/BSML.dll",
+            "hash": "7ced4a4d58cf7c6d850d006217668f21"
+          }
+        ],
+        "downloadCount": 52,
+        "supportedGameVersions": [
+          {
+            "id": 26,
+            "gameName": "BeatSaber",
+            "version": "1.29.0",
+            "defaultVersion": false
+          },
+          {
+            "id": 78,
+            "gameName": "BeatSaber",
+            "version": "1.29.1",
+            "defaultVersion": false
+          }
+        ],
+        "fileSize": 178734,
+        "createdAt": "2023-04-03T22:13:41.704Z",
+        "updatedAt": "2025-02-23T00:08:29.931Z"
+      }
+    }
+  ]
+}

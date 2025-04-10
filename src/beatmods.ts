@@ -1,4 +1,4 @@
-const userAgent = 'beatmods-uploader/0.1';
+const userAgent = 'beatmods-upload/0.1';
 
 interface GetVersionsResponse {
   versions: BeatmodsGameVersion[];
@@ -38,6 +38,15 @@ export interface BeatmodsAllMod {
   latest: BeatmodsModVersion;
 }
 
+export interface BeatmodsModVersionUpload {
+  fileName: string;
+  file: Buffer;
+  modVersion: string;
+  platform: string;
+  dependencies: number[];
+  supportedGameVersionIds: number[];
+}
+
 export const getVersions = async () => {
   const response = await fetch(
     'https://beatmods.com/api/versions?gameName=beatsaber',
@@ -47,9 +56,7 @@ export const getVersions = async () => {
   );
 
   if (!response.ok) {
-    throw new Error(
-      `Beatmods did not return ok response [${response.status}].`
-    );
+    throw new Error(`Beatmods did not return ok response [${response.status}]`);
   }
 
   const json = (await response.json()) as GetVersionsResponse;
@@ -62,9 +69,7 @@ export const getMod = async (id: string) => {
   });
 
   if (!response.ok) {
-    throw new Error(
-      `Beatmods did not return ok response [${response.status}].`
-    );
+    throw new Error(`Beatmods did not return ok response [${response.status}]`);
   }
 
   const json = (await response.json()) as GetModResponse;
@@ -80,11 +85,33 @@ export const getModsForVersion = async (gameVersion: string) => {
   );
 
   if (!response.ok) {
-    throw new Error(
-      `Beatmods did not return ok response [${response.status}].`
-    );
+    throw new Error(`Beatmods did not return ok response [${response.status}]`);
   }
 
   const json = (await response.json()) as GetModsResponse;
   return json.mods;
+};
+
+export const uploadMod = async (
+  id: string,
+  request: BeatmodsModVersionUpload
+) => {
+  const formData = new FormData();
+  formData.append('file', new Blob([request.file]), request.fileName);
+  formData.append('modVersion', request.modVersion);
+  formData.append('platform', request.platform);
+  formData.append('dependencies', request.dependencies);
+  formData.append('supportedGameVersionIds', request.supportedGameVersionIds);
+  const response = await fetch(
+    'https://beatmods.com/api/mods/' + id + '/upload',
+    {
+      method: 'POST',
+      headers: { 'User-Agent': userAgent },
+      body: formData
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error(`Beatmods did not return ok response [${response.status}]`);
+  }
 };

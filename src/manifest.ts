@@ -1,24 +1,17 @@
 import { load, rvaToOffset } from 'pe-struct';
 
+// Loosely based off https://stackoverflow.com/questions/64393919/load-resource-from-assembly-without-loading-the-assembly
 export const getManifest = (data: Buffer) => {
   const buffer = data.buffer;
   let pe;
   try {
     pe = load(buffer);
   } catch {
-    throw new Error('Failed to read portable executable.');
+    throw new Error('Failed to read portable executable');
   }
 
-  if (!pe.mdtManifestResource) {
-    throw new Error('No resources found.');
-  }
-
-  const stringsOffset = pe.mdsStrings?._off;
-  if (!stringsOffset) {
-    throw new Error('No strings found.');
-  }
-
-  const manifestResource = pe.mdtManifestResource.values.find((resource) => {
+  const stringsOffset = pe.mdsStrings!._off;
+  const manifestResource = pe.mdtManifestResource!.values.find((resource) => {
     const nameLocation = resource.Name;
 
     let name = '';
@@ -42,14 +35,10 @@ export const getManifest = (data: Buffer) => {
   });
 
   if (!manifestResource) {
-    throw new Error('Manifest not found.');
+    throw new Error('Manifest not found');
   }
 
-  const resourcesResource = pe.cliHeader?.Resources;
-  if (!resourcesResource) {
-    throw new Error('Resources not found.');
-  }
-
+  const resourcesResource = pe.cliHeader!.Resources;
   const decoder = new TextDecoder();
   let pos =
     rvaToOffset(pe, resourcesResource.Rva.value) +
