@@ -12,6 +12,11 @@ import {
 import { addArtifact, clearArtifacts } from './testFiles.js';
 
 jest.unstable_mockModule('@actions/core', () => core);
+
+const { getVersions, getMod, getModsForVersion, uploadMod } = await import(
+  '../src/beatmods.js'
+);
+
 jest.unstable_mockModule('../src/beatmods.js', () => beatmods);
 
 const { run } = await import('../src/main.js');
@@ -42,7 +47,10 @@ describe('main.ts', () => {
       throw new Error('Unexpected input');
     });
 
-    beatmods.implement();
+    beatmods.getVersions.mockImplementation(getVersions);
+    beatmods.getMod.mockImplementation(getMod);
+    beatmods.getModsForVersion.mockImplementation(getModsForVersion);
+    beatmods.uploadMod.mockImplementation(uploadMod);
 
     mockFetchBeatmods();
   });
@@ -62,7 +70,6 @@ describe('main.ts', () => {
   });
 
   it('uploads multiple artifacts of same mod', async () => {
-    core.warning.mockImplementation(console.log);
     addArtifact('CustomJSONData-2.6.8+1.29.1-bs1.29.1-7c2c32c.zip');
     addArtifact('CustomJSONData-2.6.8+1.34.2-bs1.34.2-7c2c32c.zip');
 
@@ -72,7 +79,6 @@ describe('main.ts', () => {
   });
 
   it('uploads complex dependent artifacts', async () => {
-    core.warning.mockImplementation(console.log);
     setInput(
       'mods',
       '{"CustomJSONData": 129, "AudioLink": 261, "Chroma": 132, "Heck": 338, "NoodleExtensions": 193}'

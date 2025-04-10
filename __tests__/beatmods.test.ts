@@ -2,15 +2,17 @@
  * Unit tests for src/beatmods.ts
  */
 import { jest } from '@jest/globals';
+import * as core from './__fixtures__/core.js';
 import {
   mockFetchBeatmods,
   mockFetchError,
   resetBeatmodsMock
 } from './mockBeatmods.js';
-import { uploadMod } from '../src/beatmods.js';
 import { readTestFileSync } from './testFiles.js';
 
-const { getVersions, getMod, getModsForVersion } = await import(
+jest.unstable_mockModule('@actions/core', () => core);
+
+const { getVersions, getMod, getModsForVersion, uploadMod } = await import(
   '../src/beatmods.js'
 );
 

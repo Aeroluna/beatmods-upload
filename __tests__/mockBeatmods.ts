@@ -53,18 +53,22 @@ export const mockFetchBeatmods = () => {
             }
 
             if (!('Authorization' in headers) || !headers['Authorization']) {
-              return Promise.resolve(new Response(null, { status: 403 }));
+              return Promise.resolve(
+                new Response('{"message": "Unauthorized"}', { status: 403 })
+              );
             }
 
             const formData = init.body;
             const id = input.substring(30).split('/')[0];
-            const supportedGameVersions = JSON.parse(
-              formData.get('supportedGameVersionIds')!.toString()
-            ).map((id: number) =>
-              versions.versions.find(
-                (version: { id: number }) => version.id == id
-              )
-            );
+            const supportedGameVersions = formData
+              .get('supportedGameVersionIds')!
+              .toString()
+              .split(',')
+              .map((id: string) =>
+                versions.versions.find(
+                  (version: { id: number }) => version.id.toString() == id
+                )
+              );
             const upload = {
               id: incrementalId++,
               modId: id,
@@ -76,7 +80,7 @@ export const mockFetchBeatmods = () => {
             };
             modData[id].mod.versions.push(upload);
             return Promise.resolve(
-              new Response(null, {
+              new Response(JSON.stringify(upload), {
                 status: 200
               })
             );

@@ -277,8 +277,9 @@ export const run = async () => {
               supportedGameVersionIds: [gameVersion.id]
             };
 
-            core.debug(`Uploading "${fileName}": ${JSON.stringify(json)}`);
+            core.debug(`Uploading "${fileName}"...`);
             await uploadMod(token, mod.id.toString(), json);
+            core.info(`Uploaded ${manifest.id}@${manifest.version}`);
           })
         );
 

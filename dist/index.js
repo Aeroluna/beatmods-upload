@@ -27284,16 +27284,23 @@ const getModsForVersion = async (gameVersion) => {
 };
 const uploadMod = async (token, id, request) => {
     const formData = new FormData();
-    formData.append('file', new Blob([request.file]), request.fileName);
+    formData.append('file', new File([request.file], request.fileName, { type: 'application/zip' }));
     formData.append('modVersion', request.modVersion);
     formData.append('platform', request.platform);
-    formData.append('dependencies', JSON.stringify(request.dependencies));
-    formData.append('supportedGameVersionIds', JSON.stringify(request.supportedGameVersionIds));
-    const response = await fetch('https://beatmods.com/api/mods/' + id + '/upload', {
+    formData.append('dependencies', request.dependencies);
+    formData.append('supportedGameVersionIds', request.supportedGameVersionIds);
+    const url = 'https://beatmods.com/api/mods/' + id + '/upload';
+    const response = await fetch(url, {
         method: 'POST',
         headers: { 'User-Agent': userAgent, Authorization: 'Bearer ' + token },
         body: formData
     });
+    let json;
+    await response
+        .json()
+        .then((n) => (json = JSON.stringify(n, null, 2)))
+        .catch(() => (json = 'null'));
+    coreExports.debug(`POST ${url} (${response.status}) => ${json}`);
     if (!response.ok) {
         throw new Error(`Beatmods did not return ok response [${response.status}]`);
     }
@@ -47339,8 +47346,9 @@ const run = async () => {
                         dependencies: dependencies,
                         supportedGameVersionIds: [gameVersion.id]
                     };
-                    coreExports.debug(`Uploading "${fileName}": ${JSON.stringify(json)}`);
+                    coreExports.debug(`Uploading "${fileName}"...`);
                     await uploadMod(token, mod.id.toString(), json);
+                    coreExports.info(`Uploaded ${manifest.id}@${manifest.version}`);
                 }));
                 // Clear cache so we can re-fetch new depends
                 beatmodsModsById = {};
