@@ -41,6 +41,8 @@ describe('manifest.ts', () => {
   it('throws if manifest is malformed', () => {
     const input = readTestFileSync('ManifestTest.Malformed.dll');
 
-    expect(() => getManifest(input)).toThrow('Bad control character in string literal in JSON at position 195 (line 7 column 19)');
+    expect(() => getManifest(input)).toThrow(
+      'Bad control character in string literal in JSON at position 195 (line 7 column 19)'
+    );
   });
 });

@@ -4,7 +4,11 @@
 import { jest } from '@jest/globals';
 import * as core from './__fixtures__/core.js';
 import * as beatmods from './__fixtures__/beatmods.js';
-import { mockFetchBeatmods, mockFetchError, resetBeatmodsMock } from './mockBeatmods.js';
+import {
+  mockFetchBeatmods,
+  mockFetchError,
+  resetBeatmodsMock
+} from './mockBeatmods.js';
 import { addArtifact, clearArtifacts } from './testFiles.js';
 
 jest.unstable_mockModule('@actions/core', () => core);
@@ -160,10 +164,7 @@ describe('main.ts', () => {
 
   it('skips if dependency not found on beatmods', async () => {
     addArtifact('NoodleExtensions-1.7.18+1.34.2-bs1.34.2-d93745f.zip');
-    setInput(
-      'mods',
-      '{"CustomJSONData": 129, "NoodleExtensions": 193}'
-    );
+    setInput('mods', '{"CustomJSONData": 129, "NoodleExtensions": 193}');
 
     await run();
 
@@ -174,10 +175,7 @@ describe('main.ts', () => {
 
   it('skips if dependency found on beatmods but no valid version', async () => {
     addArtifact('NoodleExtensions-1.7.18+1.29.1-bs1.29.1-d93745f.zip');
-    setInput(
-      'mods',
-      '{"CustomJSONData": 129, "NoodleExtensions": 193}'
-    );
+    setInput('mods', '{"CustomJSONData": 129, "NoodleExtensions": 193}');
 
     await run();
 

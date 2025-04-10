@@ -1,16 +1,16 @@
 import require$$0 from 'os';
 import require$$0$1 from 'crypto';
-import require$$1 from 'fs';
-import require$$1$5 from 'path';
+import fs from 'fs';
+import path from 'path';
 import require$$2 from 'http';
-import require$$3 from 'https';
+import require$$3$1 from 'https';
 import require$$0$4 from 'net';
 import require$$1$1 from 'tls';
 import require$$4 from 'events';
 import require$$0$3 from 'assert';
-import require$$0$2 from 'util';
+import require$$1 from 'util';
 import require$$0$5 from 'stream';
-import require$$7 from 'buffer';
+import require$$0$2 from 'buffer';
 import require$$8 from 'querystring';
 import require$$14 from 'stream/web';
 import require$$0$7 from 'node:stream';
@@ -22,13 +22,18 @@ import require$$5 from 'util/types';
 import require$$4$1 from 'async_hooks';
 import require$$1$3 from 'console';
 import require$$1$4 from 'url';
-import require$$3$1 from 'zlib';
+import require$$3$2 from 'zlib';
 import require$$6 from 'string_decoder';
 import require$$0$9 from 'diagnostics_channel';
 import require$$2$2 from 'child_process';
 import require$$6$1 from 'timers';
+import require$$0$a from 'constants';
 
 var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
+
+function getDefaultExportFromCjs (x) {
+	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
+}
 
 var core = {};
 
@@ -222,7 +227,7 @@ function requireFileCommand () {
 	// We use any as a valid input type
 	/* eslint-disable @typescript-eslint/no-explicit-any */
 	const crypto = __importStar(require$$0$1);
-	const fs = __importStar(require$$1);
+	const fs$1 = __importStar(fs);
 	const os = __importStar(require$$0);
 	const utils_1 = requireUtils$1();
 	function issueFileCommand(command, message) {
@@ -230,10 +235,10 @@ function requireFileCommand () {
 	    if (!filePath) {
 	        throw new Error(`Unable to find environment variable for file command ${command}`);
 	    }
-	    if (!fs.existsSync(filePath)) {
+	    if (!fs$1.existsSync(filePath)) {
 	        throw new Error(`Missing file at path: ${filePath}`);
 	    }
-	    fs.appendFileSync(filePath, `${(0, utils_1.toCommandValue)(message)}${os.EOL}`, {
+	    fs$1.appendFileSync(filePath, `${(0, utils_1.toCommandValue)(message)}${os.EOL}`, {
 	        encoding: 'utf8'
 	    });
 	}
@@ -259,7 +264,7 @@ function requireFileCommand () {
 
 var oidcUtils = {};
 
-var lib = {};
+var lib$1 = {};
 
 var proxy = {};
 
@@ -374,9 +379,9 @@ function requireTunnel$1 () {
 	hasRequiredTunnel$1 = 1;
 	var tls = require$$1$1;
 	var http = require$$2;
-	var https = require$$3;
+	var https = require$$3$1;
 	var events = require$$4;
-	var util = require$$0$2;
+	var util = require$$1;
 
 
 	tunnel$1.httpOverHttp = httpOverHttp;
@@ -957,12 +962,12 @@ function requireErrors () {
 	return errors;
 }
 
-var constants$4;
-var hasRequiredConstants$4;
+var constants$5;
+var hasRequiredConstants$5;
 
-function requireConstants$4 () {
-	if (hasRequiredConstants$4) return constants$4;
-	hasRequiredConstants$4 = 1;
+function requireConstants$5 () {
+	if (hasRequiredConstants$5) return constants$5;
+	hasRequiredConstants$5 = 1;
 
 	/** @type {Record<string, string | undefined>} */
 	const headerNameLowerCasedRecord = {};
@@ -1076,19 +1081,19 @@ function requireConstants$4 () {
 	// Note: object prototypes should not be able to be referenced. e.g. `Object#hasOwnProperty`.
 	Object.setPrototypeOf(headerNameLowerCasedRecord, null);
 
-	constants$4 = {
+	constants$5 = {
 	  wellknownHeaderNames,
 	  headerNameLowerCasedRecord
 	};
-	return constants$4;
+	return constants$5;
 }
 
-var util$6;
-var hasRequiredUtil$6;
+var util$7;
+var hasRequiredUtil$7;
 
-function requireUtil$6 () {
-	if (hasRequiredUtil$6) return util$6;
-	hasRequiredUtil$6 = 1;
+function requireUtil$7 () {
+	if (hasRequiredUtil$7) return util$7;
+	hasRequiredUtil$7 = 1;
 
 	const assert = require$$0$3;
 	const { kDestroyed, kBodyUsed } = requireSymbols$4();
@@ -1096,10 +1101,10 @@ function requireUtil$6 () {
 	const stream = require$$0$5;
 	const net = require$$0$4;
 	const { InvalidArgumentError } = requireErrors();
-	const { Blob } = require$$7;
-	const nodeUtil = require$$0$2;
+	const { Blob } = require$$0$2;
+	const nodeUtil = require$$1;
 	const { stringify } = require$$8;
-	const { headerNameLowerCasedRecord } = requireConstants$4();
+	const { headerNameLowerCasedRecord } = requireConstants$5();
 
 	const [nodeMajor, nodeMinor] = process.versions.node.split('.').map(v => Number(v));
 
@@ -1573,7 +1578,7 @@ function requireUtil$6 () {
 	const kEnumerableProperty = Object.create(null);
 	kEnumerableProperty.enumerable = true;
 
-	util$6 = {
+	util$7 = {
 	  kEnumerableProperty,
 	  nop,
 	  isDisturbed,
@@ -1610,7 +1615,7 @@ function requireUtil$6 () {
 	  nodeHasAutoSelectFamily: nodeMajor > 18 || (nodeMajor === 18 && nodeMinor >= 13),
 	  safeHTTPMethods: ['GET', 'HEAD', 'OPTIONS', 'TRACE']
 	};
-	return util$6;
+	return util$7;
 }
 
 var timers;
@@ -3345,12 +3350,12 @@ function requireMain () {
 	return main.exports;
 }
 
-var constants$3;
-var hasRequiredConstants$3;
+var constants$4;
+var hasRequiredConstants$4;
 
-function requireConstants$3 () {
-	if (hasRequiredConstants$3) return constants$3;
-	hasRequiredConstants$3 = 1;
+function requireConstants$4 () {
+	if (hasRequiredConstants$4) return constants$4;
+	hasRequiredConstants$4 = 1;
 
 	const { MessageChannel, receiveMessageOnPort } = require$$0$8;
 
@@ -3476,7 +3481,7 @@ function requireConstants$3 () {
 	    return receiveMessageOnPort(channel.port2).message
 	  };
 
-	constants$3 = {
+	constants$4 = {
 	  DOMException,
 	  structuredClone,
 	  subresource,
@@ -3501,7 +3506,7 @@ function requireConstants$3 () {
 	  forbiddenMethodsSet,
 	  referrerPolicySet
 	};
-	return constants$3;
+	return constants$4;
 }
 
 var global$2;
@@ -3552,17 +3557,17 @@ function requireGlobal$1 () {
 	return global$2;
 }
 
-var util$5;
-var hasRequiredUtil$5;
+var util$6;
+var hasRequiredUtil$6;
 
-function requireUtil$5 () {
-	if (hasRequiredUtil$5) return util$5;
-	hasRequiredUtil$5 = 1;
+function requireUtil$6 () {
+	if (hasRequiredUtil$6) return util$6;
+	hasRequiredUtil$6 = 1;
 
-	const { redirectStatusSet, referrerPolicySet: referrerPolicyTokens, badPortsSet } = requireConstants$3();
+	const { redirectStatusSet, referrerPolicySet: referrerPolicyTokens, badPortsSet } = requireConstants$4();
 	const { getGlobalOrigin } = requireGlobal$1();
 	const { performance } = require$$2$1;
-	const { isBlobLike, toUSVString, ReadableStreamFrom } = requireUtil$6();
+	const { isBlobLike, toUSVString, ReadableStreamFrom } = requireUtil$7();
 	const assert = require$$0$3;
 	const { isUint8Array } = require$$5;
 
@@ -4653,7 +4658,7 @@ function requireUtil$5 () {
 	 */
 	const hasOwn = Object.hasOwn || ((dict, key) => Object.prototype.hasOwnProperty.call(dict, key));
 
-	util$5 = {
+	util$6 = {
 	  isAborted,
 	  isCancelled,
 	  createDeferredPromise,
@@ -4700,7 +4705,7 @@ function requireUtil$5 () {
 	  normalizeMethodRecord,
 	  parseMetadata
 	};
-	return util$5;
+	return util$6;
 }
 
 var symbols$3;
@@ -4728,8 +4733,8 @@ function requireWebidl () {
 	if (hasRequiredWebidl) return webidl_1;
 	hasRequiredWebidl = 1;
 
-	const { types } = require$$0$2;
-	const { hasOwn, toUSVString } = requireUtil$5();
+	const { types } = require$$1;
+	const { hasOwn, toUSVString } = requireUtil$6();
 
 	/** @type {import('../../types/webidl').Webidl} */
 	const webidl = {};
@@ -5382,8 +5387,8 @@ function requireDataURL () {
 	if (hasRequiredDataURL) return dataURL;
 	hasRequiredDataURL = 1;
 	const assert = require$$0$3;
-	const { atob } = require$$7;
-	const { isomorphicDecode } = requireUtil$5();
+	const { atob } = require$$0$2;
+	const { isomorphicDecode } = requireUtil$6();
 
 	const encoder = new TextEncoder();
 
@@ -6018,13 +6023,13 @@ function requireFile () {
 	if (hasRequiredFile) return file;
 	hasRequiredFile = 1;
 
-	const { Blob, File: NativeFile } = require$$7;
-	const { types } = require$$0$2;
+	const { Blob, File: NativeFile } = require$$0$2;
+	const { types } = require$$1;
 	const { kState } = requireSymbols$3();
-	const { isBlobLike } = requireUtil$5();
+	const { isBlobLike } = requireUtil$6();
 	const { webidl } = requireWebidl();
 	const { parseMIMEType, serializeAMimeType } = requireDataURL();
-	const { kEnumerableProperty } = requireUtil$6();
+	const { kEnumerableProperty } = requireUtil$7();
 	const encoder = new TextEncoder();
 
 	class File extends Blob {
@@ -6370,11 +6375,11 @@ function requireFormdata () {
 	if (hasRequiredFormdata) return formdata;
 	hasRequiredFormdata = 1;
 
-	const { isBlobLike, toUSVString, makeIterator } = requireUtil$5();
+	const { isBlobLike, toUSVString, makeIterator } = requireUtil$6();
 	const { kState } = requireSymbols$3();
 	const { File: UndiciFile, FileLike, isFileLike } = requireFile();
 	const { webidl } = requireWebidl();
-	const { Blob, File: NativeFile } = require$$7;
+	const { Blob, File: NativeFile } = require$$0$2;
 
 	/** @type {globalThis['File']} */
 	const File = NativeFile ?? UndiciFile;
@@ -6644,7 +6649,7 @@ function requireBody () {
 	hasRequiredBody = 1;
 
 	const Busboy = requireMain();
-	const util = requireUtil$6();
+	const util = requireUtil$7();
 	const {
 	  ReadableStreamFrom,
 	  isBlobLike,
@@ -6652,15 +6657,15 @@ function requireBody () {
 	  readableStreamClose,
 	  createDeferredPromise,
 	  fullyReadBody
-	} = requireUtil$5();
+	} = requireUtil$6();
 	const { FormData } = requireFormdata();
 	const { kState } = requireSymbols$3();
 	const { webidl } = requireWebidl();
-	const { DOMException, structuredClone } = requireConstants$3();
-	const { Blob, File: NativeFile } = require$$7;
+	const { DOMException, structuredClone } = requireConstants$4();
+	const { Blob, File: NativeFile } = require$$0$2;
 	const { kBodyUsed } = requireSymbols$4();
 	const assert = require$$0$3;
-	const { isErrored } = requireUtil$6();
+	const { isErrored } = requireUtil$7();
 	const { isUint8Array, isArrayBuffer } = require$$5;
 	const { File: UndiciFile } = requireFile();
 	const { parseMIMEType, serializeAMimeType } = requireDataURL();
@@ -7270,7 +7275,7 @@ function requireRequest$1 () {
 	} = requireErrors();
 	const assert = require$$0$3;
 	const { kHTTP2BuildRequest, kHTTP2CopyHeaders, kHTTP1BuildRequest } = requireSymbols$4();
-	const util = requireUtil$6();
+	const util = requireUtil$7();
 
 	// tokenRegExp and headerCharRegex have been lifted from
 	// https://github.com/nodejs/node/blob/main/lib/_http_common.js
@@ -8000,7 +8005,7 @@ function requireConnect () {
 
 	const net = require$$0$4;
 	const assert = require$$0$3;
-	const util = requireUtil$6();
+	const util = requireUtil$7();
 	const { InvalidArgumentError, ConnectTimeoutError } = requireErrors();
 
 	let tls; // include tls conditionally since it is not always available
@@ -8188,7 +8193,7 @@ function requireConnect () {
 	return connect;
 }
 
-var constants$2 = {};
+var constants$3 = {};
 
 var utils = {};
 
@@ -8214,11 +8219,11 @@ function requireUtils () {
 	return utils;
 }
 
-var hasRequiredConstants$2;
+var hasRequiredConstants$3;
 
-function requireConstants$2 () {
-	if (hasRequiredConstants$2) return constants$2;
-	hasRequiredConstants$2 = 1;
+function requireConstants$3 () {
+	if (hasRequiredConstants$3) return constants$3;
+	hasRequiredConstants$3 = 1;
 	(function (exports) {
 		Object.defineProperty(exports, "__esModule", { value: true });
 		exports.SPECIAL_HEADERS = exports.HEADER_STATE = exports.MINOR = exports.MAJOR = exports.CONNECTION_TOKEN_CHARS = exports.HEADER_CHARS = exports.TOKEN = exports.STRICT_TOKEN = exports.HEX = exports.URL_CHAR = exports.STRICT_URL_CHAR = exports.USERINFO_CHARS = exports.MARK = exports.ALPHANUM = exports.NUM = exports.HEX_MAP = exports.NUM_MAP = exports.ALPHA = exports.FINISH = exports.H_METHOD_MAP = exports.METHOD_MAP = exports.METHODS_RTSP = exports.METHODS_ICE = exports.METHODS_HTTP = exports.METHODS = exports.LENIENT_FLAGS = exports.FLAGS = exports.TYPE = exports.ERROR = void 0;
@@ -8491,8 +8496,8 @@ function requireConstants$2 () {
 		    'upgrade': HEADER_STATE.UPGRADE,
 		};
 		
-	} (constants$2));
-	return constants$2;
+	} (constants$3));
+	return constants$3;
 }
 
 var RedirectHandler_1;
@@ -8502,7 +8507,7 @@ function requireRedirectHandler () {
 	if (hasRequiredRedirectHandler) return RedirectHandler_1;
 	hasRequiredRedirectHandler = 1;
 
-	const util = requireUtil$6();
+	const util = requireUtil$7();
 	const { kBodyUsed } = requireSymbols$4();
 	const assert = require$$0$3;
 	const { InvalidArgumentError } = requireErrors();
@@ -8768,7 +8773,7 @@ function requireClient () {
 	const net = require$$0$4;
 	const http = require$$2;
 	const { pipeline } = require$$0$5;
-	const util = requireUtil$6();
+	const util = requireUtil$7();
 	const timers = requireTimers();
 	const Request = requireRequest$1();
 	const DispatcherBase = requireDispatcherBase();
@@ -9242,7 +9247,7 @@ function requireClient () {
 	  resume(client);
 	}
 
-	const constants = requireConstants$2();
+	const constants = requireConstants$3();
 	const createRedirectInterceptor = requireRedirectInterceptor();
 	const EMPTY_BUF = Buffer.alloc(0);
 
@@ -11430,7 +11435,7 @@ function requirePool () {
 	const {
 	  InvalidArgumentError
 	} = requireErrors();
-	const util = requireUtil$6();
+	const util = requireUtil$7();
 	const { kUrl, kInterceptors } = requireSymbols$4();
 	const buildConnector = requireConnect();
 
@@ -11492,6 +11497,20 @@ function requirePool () {
 	      ? { ...options.interceptors }
 	      : undefined;
 	    this[kFactory] = factory;
+
+	    this.on('connectionError', (origin, targets, error) => {
+	      // If a connection error occurs, we remove the client from the pool,
+	      // and emit a connectionError event. They will not be re-used.
+	      // Fixes https://github.com/nodejs/undici/issues/3895
+	      for (const target of targets) {
+	        // Do not use kRemoveClient here, as it will close the client,
+	        // but the client cannot be closed in this state.
+	        const idx = this[kClients].indexOf(target);
+	        if (idx !== -1) {
+	          this[kClients].splice(idx, 1);
+	        }
+	      }
+	    });
 	  }
 
 	  [kGetDispatcher] () {
@@ -11535,7 +11554,7 @@ function requireBalancedPool () {
 	} = requirePoolBase();
 	const Pool = requirePool();
 	const { kUrl, kInterceptors } = requireSymbols$4();
-	const { parseOrigin } = requireUtil$6();
+	const { parseOrigin } = requireUtil$7();
 	const kFactory = Symbol('factory');
 
 	const kOptions = Symbol('options');
@@ -11780,7 +11799,7 @@ function requireAgent () {
 	const DispatcherBase = requireDispatcherBase();
 	const Pool = requirePool();
 	const Client = requireClient();
-	const util = requireUtil$6();
+	const util = requireUtil$7();
 	const createRedirectInterceptor = requireRedirectInterceptor();
 	const { WeakRef, FinalizationRegistry } = requireDispatcherWeakref()();
 
@@ -11928,18 +11947,18 @@ var api = {};
 
 var apiRequest = {exports: {}};
 
-var readable;
-var hasRequiredReadable;
+var readable$2;
+var hasRequiredReadable$2;
 
-function requireReadable () {
-	if (hasRequiredReadable) return readable;
-	hasRequiredReadable = 1;
+function requireReadable$2 () {
+	if (hasRequiredReadable$2) return readable$2;
+	hasRequiredReadable$2 = 1;
 
 	const assert = require$$0$3;
 	const { Readable } = require$$0$5;
 	const { RequestAbortedError, NotSupportedError, InvalidArgumentError } = requireErrors();
-	const util = requireUtil$6();
-	const { ReadableStreamFrom, toUSVString } = requireUtil$6();
+	const util = requireUtil$7();
+	const { ReadableStreamFrom, toUSVString } = requireUtil$7();
 
 	let Blob;
 
@@ -11951,7 +11970,7 @@ function requireReadable () {
 
 	const noop = () => {};
 
-	readable = class BodyReadable extends Readable {
+	readable$2 = class BodyReadable extends Readable {
 	  constructor ({
 	    resume,
 	    abort,
@@ -12253,20 +12272,20 @@ function requireReadable () {
 	  consume.length = 0;
 	  consume.body = null;
 	}
-	return readable;
+	return readable$2;
 }
 
-var util$4;
-var hasRequiredUtil$4;
+var util$5;
+var hasRequiredUtil$5;
 
-function requireUtil$4 () {
-	if (hasRequiredUtil$4) return util$4;
-	hasRequiredUtil$4 = 1;
+function requireUtil$5 () {
+	if (hasRequiredUtil$5) return util$5;
+	hasRequiredUtil$5 = 1;
 	const assert = require$$0$3;
 	const {
 	  ResponseStatusCodeError
 	} = requireErrors();
-	const { toUSVString } = requireUtil$6();
+	const { toUSVString } = requireUtil$7();
 
 	async function getResolveErrorBodyCallback ({ callback, body, contentType, statusCode, statusMessage, headers }) {
 	  assert(body);
@@ -12307,8 +12326,8 @@ function requireUtil$4 () {
 	  process.nextTick(callback, new ResponseStatusCodeError(`Response status code ${statusCode}${statusMessage ? `: ${statusMessage}` : ''}`, statusCode, headers));
 	}
 
-	util$4 = { getResolveErrorBodyCallback };
-	return util$4;
+	util$5 = { getResolveErrorBodyCallback };
+	return util$5;
 }
 
 var abortSignal;
@@ -12317,7 +12336,7 @@ var hasRequiredAbortSignal;
 function requireAbortSignal () {
 	if (hasRequiredAbortSignal) return abortSignal;
 	hasRequiredAbortSignal = 1;
-	const { addAbortListener } = requireUtil$6();
+	const { addAbortListener } = requireUtil$7();
 	const { RequestAbortedError } = requireErrors();
 
 	const kListener = Symbol('kListener');
@@ -12380,13 +12399,13 @@ function requireApiRequest () {
 	if (hasRequiredApiRequest) return apiRequest.exports;
 	hasRequiredApiRequest = 1;
 
-	const Readable = requireReadable();
+	const Readable = requireReadable$2();
 	const {
 	  InvalidArgumentError,
 	  RequestAbortedError
 	} = requireErrors();
-	const util = requireUtil$6();
-	const { getResolveErrorBodyCallback } = requireUtil$4();
+	const util = requireUtil$7();
+	const { getResolveErrorBodyCallback } = requireUtil$5();
 	const { AsyncResource } = require$$4$1;
 	const { addSignal, removeSignal } = requireAbortSignal();
 
@@ -12574,8 +12593,8 @@ function requireApiStream () {
 	  InvalidReturnValueError,
 	  RequestAbortedError
 	} = requireErrors();
-	const util = requireUtil$6();
-	const { getResolveErrorBodyCallback } = requireUtil$4();
+	const util = requireUtil$7();
+	const { getResolveErrorBodyCallback } = requireUtil$5();
 	const { AsyncResource } = require$$4$1;
 	const { addSignal, removeSignal } = requireAbortSignal();
 
@@ -12806,7 +12825,7 @@ function requireApiPipeline () {
 	  InvalidReturnValueError,
 	  RequestAbortedError
 	} = requireErrors();
-	const util = requireUtil$6();
+	const util = requireUtil$7();
 	const { AsyncResource } = require$$4$1;
 	const { addSignal, removeSignal } = requireAbortSignal();
 	const assert = require$$0$3;
@@ -13055,7 +13074,7 @@ function requireApiUpgrade () {
 
 	const { InvalidArgumentError, RequestAbortedError, SocketError } = requireErrors();
 	const { AsyncResource } = require$$4$1;
-	const util = requireUtil$6();
+	const util = requireUtil$7();
 	const { addSignal, removeSignal } = requireAbortSignal();
 	const assert = require$$0$3;
 
@@ -13168,7 +13187,7 @@ function requireApiConnect () {
 
 	const { AsyncResource } = require$$4$1;
 	const { InvalidArgumentError, RequestAbortedError, SocketError } = requireErrors();
-	const util = requireUtil$6();
+	const util = requireUtil$7();
 	const { addSignal, removeSignal } = requireAbortSignal();
 
 	class ConnectHandler extends AsyncResource {
@@ -13356,13 +13375,13 @@ function requireMockUtils () {
 	  kOrigin,
 	  kGetNetConnect
 	} = requireMockSymbols();
-	const { buildURL, nop } = requireUtil$6();
+	const { buildURL, nop } = requireUtil$7();
 	const { STATUS_CODES } = require$$2;
 	const {
 	  types: {
 	    isPromise
 	  }
-	} = require$$0$2;
+	} = require$$1;
 
 	function matchValue (match, value) {
 	  if (typeof match === 'string') {
@@ -13718,7 +13737,7 @@ function requireMockInterceptor () {
 	  kMockDispatch
 	} = requireMockSymbols();
 	const { InvalidArgumentError } = requireErrors();
-	const { buildURL } = requireUtil$6();
+	const { buildURL } = requireUtil$7();
 
 	/**
 	 * Defines the scope API for an interceptor reply
@@ -13922,7 +13941,7 @@ function requireMockClient () {
 	if (hasRequiredMockClient) return mockClient;
 	hasRequiredMockClient = 1;
 
-	const { promisify } = require$$0$2;
+	const { promisify } = require$$1;
 	const Client = requireClient();
 	const { buildMockDispatch } = requireMockUtils();
 	const {
@@ -13989,7 +14008,7 @@ function requireMockPool () {
 	if (hasRequiredMockPool) return mockPool;
 	hasRequiredMockPool = 1;
 
-	const { promisify } = require$$0$2;
+	const { promisify } = require$$1;
 	const Pool = requirePool();
 	const { buildMockDispatch } = requireMockUtils();
 	const {
@@ -14520,7 +14539,7 @@ function requireRetryHandler () {
 
 	const { kRetryHandlerDefaultRetry } = requireSymbols$4();
 	const { RequestRetryError } = requireErrors();
-	const { isDisturbed, parseHeaders, parseRangeHeader } = requireUtil$6();
+	const { isDisturbed, parseHeaders, parseRangeHeader } = requireUtil$7();
 
 	function calculateRetryAfterHeader (retryAfter) {
 	  const current = Date.now();
@@ -14938,21 +14957,22 @@ function requireDecoratorHandler () {
 	return DecoratorHandler_1;
 }
 
-var headers;
-var hasRequiredHeaders;
+var headers$1;
+var hasRequiredHeaders$1;
 
-function requireHeaders () {
-	if (hasRequiredHeaders) return headers;
-	hasRequiredHeaders = 1;
+function requireHeaders$1 () {
+	if (hasRequiredHeaders$1) return headers$1;
+	hasRequiredHeaders$1 = 1;
 
 	const { kHeadersList, kConstruct } = requireSymbols$4();
 	const { kGuard } = requireSymbols$3();
-	const { kEnumerableProperty } = requireUtil$6();
+	const { kEnumerableProperty } = requireUtil$7();
 	const {
 	  makeIterator,
 	  isValidHeaderName,
 	  isValidHeaderValue
-	} = requireUtil$5();
+	} = requireUtil$6();
+	const util = require$$1;
 	const { webidl } = requireWebidl();
 	const assert = require$$0$3;
 
@@ -15499,6 +15519,9 @@ function requireHeaders () {
 	  [Symbol.toStringTag]: {
 	    value: 'Headers',
 	    configurable: true
+	  },
+	  [util.inspect.custom]: {
+	    enumerable: false
 	  }
 	});
 
@@ -15518,12 +15541,12 @@ function requireHeaders () {
 	  })
 	};
 
-	headers = {
+	headers$1 = {
 	  fill,
 	  Headers,
 	  HeadersList
 	};
-	return headers;
+	return headers$1;
 }
 
 var response;
@@ -15533,9 +15556,9 @@ function requireResponse () {
 	if (hasRequiredResponse) return response;
 	hasRequiredResponse = 1;
 
-	const { Headers, HeadersList, fill } = requireHeaders();
+	const { Headers, HeadersList, fill } = requireHeaders$1();
 	const { extractBody, cloneBody, mixinBody } = requireBody();
-	const util = requireUtil$6();
+	const util = requireUtil$7();
 	const { kEnumerableProperty } = util;
 	const {
 	  isValidReasonPhrase,
@@ -15545,12 +15568,12 @@ function requireResponse () {
 	  serializeJavascriptValueToJSONString,
 	  isErrorLike,
 	  isomorphicEncode
-	} = requireUtil$5();
+	} = requireUtil$6();
 	const {
 	  redirectStatusSet,
 	  nullBodyStatus,
 	  DOMException
-	} = requireConstants$3();
+	} = requireConstants$4();
 	const { kState, kHeaders, kGuard, kRealm } = requireSymbols$3();
 	const { webidl } = requireWebidl();
 	const { FormData } = requireFormdata();
@@ -15558,7 +15581,7 @@ function requireResponse () {
 	const { URLSerializer } = requireDataURL();
 	const { kHeadersList, kConstruct } = requireSymbols$4();
 	const assert = require$$0$3;
-	const { types } = require$$0$2;
+	const { types } = require$$1;
 
 	const ReadableStream = globalThis.ReadableStream || require$$14.ReadableStream;
 	const textEncoder = new TextEncoder('utf-8');
@@ -16115,16 +16138,16 @@ function requireRequest () {
 	hasRequiredRequest = 1;
 
 	const { extractBody, mixinBody, cloneBody } = requireBody();
-	const { Headers, fill: fillHeaders, HeadersList } = requireHeaders();
+	const { Headers, fill: fillHeaders, HeadersList } = requireHeaders$1();
 	const { FinalizationRegistry } = requireDispatcherWeakref()();
-	const util = requireUtil$6();
+	const util = requireUtil$7();
 	const {
 	  isValidHTTPToken,
 	  sameOrigin,
 	  normalizeMethod,
 	  makePolicyContainer,
 	  normalizeMethodRecord
-	} = requireUtil$5();
+	} = requireUtil$6();
 	const {
 	  forbiddenMethodsSet,
 	  corsSafeListedMethodsSet,
@@ -16134,7 +16157,7 @@ function requireRequest () {
 	  requestCredentials,
 	  requestCache,
 	  requestDuplex
-	} = requireConstants$3();
+	} = requireConstants$4();
 	const { kEnumerableProperty } = util;
 	const { kHeaders, kSignal, kState, kGuard, kRealm } = requireSymbols$3();
 	const { webidl } = requireWebidl();
@@ -17073,9 +17096,9 @@ function requireFetch () {
 	  filterResponse,
 	  makeResponse
 	} = requireResponse();
-	const { Headers } = requireHeaders();
+	const { Headers } = requireHeaders$1();
 	const { Request, makeRequest } = requireRequest();
-	const zlib = require$$3$1;
+	const zlib = require$$3$2;
 	const {
 	  bytesMatch,
 	  makePolicyContainer,
@@ -17105,7 +17128,7 @@ function requireFetch () {
 	  urlIsLocal,
 	  urlIsHttpHttpsScheme,
 	  urlHasHttpsScheme
-	} = requireUtil$5();
+	} = requireUtil$6();
 	const { kState, kHeaders, kGuard, kRealm } = requireSymbols$3();
 	const assert = require$$0$3;
 	const { safelyExtractBody } = requireBody();
@@ -17116,11 +17139,11 @@ function requireFetch () {
 	  requestBodyHeader,
 	  subresourceSet,
 	  DOMException
-	} = requireConstants$3();
+	} = requireConstants$4();
 	const { kHeadersList } = requireSymbols$4();
 	const EE = require$$4;
 	const { Readable, pipeline } = require$$0$5;
-	const { addAbortListener, isErrored, isReadable, nodeMajor, nodeMinor } = requireUtil$6();
+	const { addAbortListener, isErrored, isReadable, nodeMajor, nodeMinor } = requireUtil$7();
 	const { dataURLProcessor, serializeAMimeType } = requireDataURL();
 	const { TransformStream } = require$$14;
 	const { getGlobalDispatcher } = requireGlobal();
@@ -17852,7 +17875,7 @@ function requireFetch () {
 	    }
 	    case 'blob:': {
 	      if (!resolveObjectURL) {
-	        resolveObjectURL = require$$7.resolveObjectURL;
+	        resolveObjectURL = require$$0$2.resolveObjectURL;
 	      }
 
 	      // 1. Let blobURLEntry be request’s current URL’s blob URL entry.
@@ -19541,12 +19564,12 @@ function requireEncoding () {
 	return encoding;
 }
 
-var util$3;
-var hasRequiredUtil$3;
+var util$4;
+var hasRequiredUtil$4;
 
-function requireUtil$3 () {
-	if (hasRequiredUtil$3) return util$3;
-	hasRequiredUtil$3 = 1;
+function requireUtil$4 () {
+	if (hasRequiredUtil$4) return util$4;
+	hasRequiredUtil$4 = 1;
 
 	const {
 	  kState,
@@ -19557,11 +19580,11 @@ function requireUtil$3 () {
 	} = requireSymbols$2();
 	const { ProgressEvent } = requireProgressevent();
 	const { getEncoding } = requireEncoding();
-	const { DOMException } = requireConstants$3();
+	const { DOMException } = requireConstants$4();
 	const { serializeAMimeType, parseMIMEType } = requireDataURL();
-	const { types } = require$$0$2;
+	const { types } = require$$1;
 	const { StringDecoder } = require$$6;
-	const { btoa } = require$$7;
+	const { btoa } = require$$0$2;
 
 	/** @type {PropertyDescriptor} */
 	const staticPropertyDescriptors = {
@@ -19933,12 +19956,12 @@ function requireUtil$3 () {
 	  }, new Uint8Array(size))
 	}
 
-	util$3 = {
+	util$4 = {
 	  staticPropertyDescriptors,
 	  readOperation,
 	  fireAProgressEvent
 	};
-	return util$3;
+	return util$4;
 }
 
 var filereader;
@@ -19952,7 +19975,7 @@ function requireFilereader () {
 	  staticPropertyDescriptors,
 	  readOperation,
 	  fireAProgressEvent
-	} = requireUtil$3();
+	} = requireUtil$4();
 	const {
 	  kState,
 	  kError,
@@ -19961,7 +19984,7 @@ function requireFilereader () {
 	  kAborted
 	} = requireSymbols$2();
 	const { webidl } = requireWebidl();
-	const { kEnumerableProperty } = requireUtil$6();
+	const { kEnumerableProperty } = requireUtil$7();
 
 	class FileReader extends EventTarget {
 	  constructor () {
@@ -20306,16 +20329,16 @@ function requireSymbols$1 () {
 	return symbols$1;
 }
 
-var util$2;
-var hasRequiredUtil$2;
+var util$3;
+var hasRequiredUtil$3;
 
-function requireUtil$2 () {
-	if (hasRequiredUtil$2) return util$2;
-	hasRequiredUtil$2 = 1;
+function requireUtil$3 () {
+	if (hasRequiredUtil$3) return util$3;
+	hasRequiredUtil$3 = 1;
 
 	const assert = require$$0$3;
 	const { URLSerializer } = requireDataURL();
-	const { isValidHeaderName } = requireUtil$5();
+	const { isValidHeaderName } = requireUtil$6();
 
 	/**
 	 * @see https://url.spec.whatwg.org/#concept-url-equals
@@ -20356,11 +20379,11 @@ function requireUtil$2 () {
 	  return values
 	}
 
-	util$2 = {
+	util$3 = {
 	  urlEquals,
 	  fieldValues
 	};
-	return util$2;
+	return util$3;
 }
 
 var cache;
@@ -20371,15 +20394,15 @@ function requireCache () {
 	hasRequiredCache = 1;
 
 	const { kConstruct } = requireSymbols$1();
-	const { urlEquals, fieldValues: getFieldValues } = requireUtil$2();
-	const { kEnumerableProperty, isDisturbed } = requireUtil$6();
+	const { urlEquals, fieldValues: getFieldValues } = requireUtil$3();
+	const { kEnumerableProperty, isDisturbed } = requireUtil$7();
 	const { kHeadersList } = requireSymbols$4();
 	const { webidl } = requireWebidl();
 	const { Response, cloneResponse } = requireResponse();
 	const { Request } = requireRequest();
 	const { kState, kHeaders, kGuard, kRealm } = requireSymbols$3();
 	const { fetching } = requireFetch();
-	const { urlIsHttpHttpsScheme, createDeferredPromise, readAllBytes } = requireUtil$5();
+	const { urlIsHttpHttpsScheme, createDeferredPromise, readAllBytes } = requireUtil$6();
 	const assert = require$$0$3;
 	const { getGlobalDispatcher } = requireGlobal();
 
@@ -21219,7 +21242,7 @@ function requireCachestorage () {
 	const { kConstruct } = requireSymbols$1();
 	const { Cache } = requireCache();
 	const { webidl } = requireWebidl();
-	const { kEnumerableProperty } = requireUtil$6();
+	const { kEnumerableProperty } = requireUtil$7();
 
 	class CacheStorage {
 	  /**
@@ -21361,12 +21384,12 @@ function requireCachestorage () {
 	return cachestorage;
 }
 
-var constants$1;
-var hasRequiredConstants$1;
+var constants$2;
+var hasRequiredConstants$2;
 
-function requireConstants$1 () {
-	if (hasRequiredConstants$1) return constants$1;
-	hasRequiredConstants$1 = 1;
+function requireConstants$2 () {
+	if (hasRequiredConstants$2) return constants$2;
+	hasRequiredConstants$2 = 1;
 
 	// https://wicg.github.io/cookie-store/#cookie-maximum-attribute-value-size
 	const maxAttributeValueSize = 1024;
@@ -21374,23 +21397,24 @@ function requireConstants$1 () {
 	// https://wicg.github.io/cookie-store/#cookie-maximum-name-value-pair-size
 	const maxNameValuePairSize = 4096;
 
-	constants$1 = {
+	constants$2 = {
 	  maxAttributeValueSize,
 	  maxNameValuePairSize
 	};
-	return constants$1;
+	return constants$2;
 }
 
-var util$1;
-var hasRequiredUtil$1;
+var util$2;
+var hasRequiredUtil$2;
 
-function requireUtil$1 () {
-	if (hasRequiredUtil$1) return util$1;
-	hasRequiredUtil$1 = 1;
+function requireUtil$2 () {
+	if (hasRequiredUtil$2) return util$2;
+	hasRequiredUtil$2 = 1;
 
-	const assert = require$$0$3;
-	const { kHeadersList } = requireSymbols$4();
-
+	/**
+	 * @param {string} value
+	 * @returns {boolean}
+	 */
 	function isCTLExcludingHtab (value) {
 	  if (value.length === 0) {
 	    return false
@@ -21651,44 +21675,26 @@ function requireUtil$1 () {
 	  return out.join('; ')
 	}
 
-	let kHeadersListNode;
-
-	function getHeadersList (headers) {
-	  if (headers[kHeadersList]) {
-	    return headers[kHeadersList]
-	  }
-
-	  if (!kHeadersListNode) {
-	    kHeadersListNode = Object.getOwnPropertySymbols(headers).find(
-	      (symbol) => symbol.description === 'headers list'
-	    );
-
-	    assert(kHeadersListNode, 'Headers cannot be parsed');
-	  }
-
-	  const headersList = headers[kHeadersListNode];
-	  assert(headersList);
-
-	  return headersList
-	}
-
-	util$1 = {
+	util$2 = {
 	  isCTLExcludingHtab,
-	  stringify,
-	  getHeadersList
+	  validateCookieName,
+	  validateCookiePath,
+	  validateCookieValue,
+	  toIMFDate,
+	  stringify
 	};
-	return util$1;
+	return util$2;
 }
 
 var parse;
-var hasRequiredParse;
+var hasRequiredParse$1;
 
-function requireParse () {
-	if (hasRequiredParse) return parse;
-	hasRequiredParse = 1;
+function requireParse$1 () {
+	if (hasRequiredParse$1) return parse;
+	hasRequiredParse$1 = 1;
 
-	const { maxNameValuePairSize, maxAttributeValueSize } = requireConstants$1();
-	const { isCTLExcludingHtab } = requireUtil$1();
+	const { maxNameValuePairSize, maxAttributeValueSize } = requireConstants$2();
+	const { isCTLExcludingHtab } = requireUtil$2();
 	const { collectASequenceOfCodePointsFast } = requireDataURL();
 	const assert = require$$0$3;
 
@@ -22012,10 +22018,10 @@ function requireCookies () {
 	if (hasRequiredCookies) return cookies;
 	hasRequiredCookies = 1;
 
-	const { parseSetCookie } = requireParse();
-	const { stringify, getHeadersList } = requireUtil$1();
+	const { parseSetCookie } = requireParse$1();
+	const { stringify } = requireUtil$2();
 	const { webidl } = requireWebidl();
-	const { Headers } = requireHeaders();
+	const { Headers } = requireHeaders$1();
 
 	/**
 	 * @typedef {Object} Cookie
@@ -22089,14 +22095,13 @@ function requireCookies () {
 
 	  webidl.brandCheck(headers, Headers, { strict: false });
 
-	  const cookies = getHeadersList(headers).cookies;
+	  const cookies = headers.getSetCookie();
 
 	  if (!cookies) {
 	    return []
 	  }
 
-	  // In older versions of undici, cookies is a list of name:value.
-	  return cookies.map((pair) => parseSetCookie(Array.isArray(pair) ? pair[1] : pair))
+	  return cookies.map((pair) => parseSetCookie(pair))
 	}
 
 	/**
@@ -22197,12 +22202,12 @@ function requireCookies () {
 	return cookies;
 }
 
-var constants;
-var hasRequiredConstants;
+var constants$1;
+var hasRequiredConstants$1;
 
-function requireConstants () {
-	if (hasRequiredConstants) return constants;
-	hasRequiredConstants = 1;
+function requireConstants$1 () {
+	if (hasRequiredConstants$1) return constants$1;
+	hasRequiredConstants$1 = 1;
 
 	// This is a Globally Unique Identifier unique used
 	// to validate that the endpoint accepts websocket
@@ -22244,7 +22249,7 @@ function requireConstants () {
 
 	const emptyBuffer = Buffer.allocUnsafe(0);
 
-	constants = {
+	constants$1 = {
 	  uid,
 	  staticPropertyDescriptors,
 	  states,
@@ -22253,7 +22258,7 @@ function requireConstants () {
 	  parserStates,
 	  emptyBuffer
 	};
-	return constants;
+	return constants$1;
 }
 
 var symbols;
@@ -22284,7 +22289,7 @@ function requireEvents () {
 	hasRequiredEvents = 1;
 
 	const { webidl } = requireWebidl();
-	const { kEnumerableProperty } = requireUtil$6();
+	const { kEnumerableProperty } = requireUtil$7();
 	const { MessagePort } = require$$0$8;
 
 	/**
@@ -22587,15 +22592,15 @@ function requireEvents () {
 	return events;
 }
 
-var util;
-var hasRequiredUtil;
+var util$1;
+var hasRequiredUtil$1;
 
-function requireUtil () {
-	if (hasRequiredUtil) return util;
-	hasRequiredUtil = 1;
+function requireUtil$1 () {
+	if (hasRequiredUtil$1) return util$1;
+	hasRequiredUtil$1 = 1;
 
 	const { kReadyState, kController, kResponse, kBinaryType, kWebSocketURL } = requireSymbols();
-	const { states, opcodes } = requireConstants();
+	const { states, opcodes } = requireConstants$1();
 	const { MessageEvent, ErrorEvent } = requireEvents();
 
 	/* globals Blob */
@@ -22782,7 +22787,7 @@ function requireUtil () {
 	  }
 	}
 
-	util = {
+	util$1 = {
 	  isEstablished,
 	  isClosing,
 	  isClosed,
@@ -22792,7 +22797,7 @@ function requireUtil () {
 	  failWebsocketConnection,
 	  websocketMessageReceived
 	};
-	return util;
+	return util$1;
 }
 
 var connection;
@@ -22803,18 +22808,18 @@ function requireConnection () {
 	hasRequiredConnection = 1;
 
 	const diagnosticsChannel = require$$0$9;
-	const { uid, states } = requireConstants();
+	const { uid, states } = requireConstants$1();
 	const {
 	  kReadyState,
 	  kSentClose,
 	  kByteParser,
 	  kReceivedClose
 	} = requireSymbols();
-	const { fireEvent, failWebsocketConnection } = requireUtil();
+	const { fireEvent, failWebsocketConnection } = requireUtil$1();
 	const { CloseEvent } = requireEvents();
 	const { makeRequest } = requireRequest();
 	const { fetching } = requireFetch();
-	const { Headers } = requireHeaders();
+	const { Headers } = requireHeaders$1();
 	const { getGlobalDispatcher } = requireGlobal();
 	const { kHeadersList } = requireSymbols$4();
 
@@ -23101,7 +23106,7 @@ function requireFrame () {
 	if (hasRequiredFrame) return frame;
 	hasRequiredFrame = 1;
 
-	const { maxUnsigned16Bit } = requireConstants();
+	const { maxUnsigned16Bit } = requireConstants$1();
 
 	/** @type {import('crypto')} */
 	let crypto;
@@ -23184,9 +23189,9 @@ function requireReceiver () {
 
 	const { Writable } = require$$0$5;
 	const diagnosticsChannel = require$$0$9;
-	const { parserStates, opcodes, states, emptyBuffer } = requireConstants();
+	const { parserStates, opcodes, states, emptyBuffer } = requireConstants$1();
 	const { kReadyState, kSentClose, kResponse, kReceivedClose } = requireSymbols();
-	const { isValidStatusCode, failWebsocketConnection, websocketMessageReceived } = requireUtil();
+	const { isValidStatusCode, failWebsocketConnection, websocketMessageReceived } = requireUtil$1();
 	const { WebsocketFrameSend } = requireFrame();
 
 	// This code was influenced by ws released under the MIT license.
@@ -23535,10 +23540,10 @@ function requireWebsocket () {
 	hasRequiredWebsocket = 1;
 
 	const { webidl } = requireWebidl();
-	const { DOMException } = requireConstants$3();
+	const { DOMException } = requireConstants$4();
 	const { URLSerializer } = requireDataURL();
 	const { getGlobalOrigin } = requireGlobal$1();
-	const { staticPropertyDescriptors, states, opcodes, emptyBuffer } = requireConstants();
+	const { staticPropertyDescriptors, states, opcodes, emptyBuffer } = requireConstants$1();
 	const {
 	  kWebSocketURL,
 	  kReadyState,
@@ -23548,13 +23553,13 @@ function requireWebsocket () {
 	  kSentClose,
 	  kByteParser
 	} = requireSymbols();
-	const { isEstablished, isClosing, isValidSubprotocol, failWebsocketConnection, fireEvent } = requireUtil();
+	const { isEstablished, isClosing, isValidSubprotocol, failWebsocketConnection, fireEvent } = requireUtil$1();
 	const { establishWebSocketConnection } = requireConnection();
 	const { WebsocketFrameSend } = requireFrame();
 	const { ByteParser } = requireReceiver();
-	const { kEnumerableProperty, isBlobLike } = requireUtil$6();
+	const { kEnumerableProperty, isBlobLike } = requireUtil$7();
 	const { getGlobalDispatcher } = requireGlobal();
-	const { types } = require$$0$2;
+	const { types } = require$$1;
 
 	let experimentalWarned = false;
 
@@ -24185,7 +24190,7 @@ function requireUndici () {
 	const Pool = requirePool();
 	const BalancedPool = requireBalancedPool();
 	const Agent = requireAgent();
-	const util = requireUtil$6();
+	const util = requireUtil$7();
 	const { InvalidArgumentError } = errors;
 	const api = requireApi();
 	const buildConnector = requireConnect();
@@ -24294,7 +24299,7 @@ function requireUndici () {
 	      throw err
 	    }
 	  };
-	  undici.Headers = requireHeaders().Headers;
+	  undici.Headers = requireHeaders$1().Headers;
 	  undici.Response = requireResponse().Response;
 	  undici.Request = requireRequest().Request;
 	  undici.FormData = requireFormdata().FormData;
@@ -24347,13 +24352,13 @@ function requireUndici () {
 	return undici;
 }
 
-var hasRequiredLib;
+var hasRequiredLib$1;
 
-function requireLib () {
-	if (hasRequiredLib) return lib;
-	hasRequiredLib = 1;
+function requireLib$1 () {
+	if (hasRequiredLib$1) return lib$1;
+	hasRequiredLib$1 = 1;
 	/* eslint-disable @typescript-eslint/no-explicit-any */
-	var __createBinding = (lib && lib.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+	var __createBinding = (lib$1 && lib$1.__createBinding) || (Object.create ? (function(o, m, k, k2) {
 	    if (k2 === undefined) k2 = k;
 	    var desc = Object.getOwnPropertyDescriptor(m, k);
 	    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
@@ -24364,19 +24369,19 @@ function requireLib () {
 	    if (k2 === undefined) k2 = k;
 	    o[k2] = m[k];
 	}));
-	var __setModuleDefault = (lib && lib.__setModuleDefault) || (Object.create ? (function(o, v) {
+	var __setModuleDefault = (lib$1 && lib$1.__setModuleDefault) || (Object.create ? (function(o, v) {
 	    Object.defineProperty(o, "default", { enumerable: true, value: v });
 	}) : function(o, v) {
 	    o["default"] = v;
 	});
-	var __importStar = (lib && lib.__importStar) || function (mod) {
+	var __importStar = (lib$1 && lib$1.__importStar) || function (mod) {
 	    if (mod && mod.__esModule) return mod;
 	    var result = {};
 	    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
 	    __setModuleDefault(result, mod);
 	    return result;
 	};
-	var __awaiter = (lib && lib.__awaiter) || function (thisArg, _arguments, P, generator) {
+	var __awaiter = (lib$1 && lib$1.__awaiter) || function (thisArg, _arguments, P, generator) {
 	    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
 	    return new (P || (P = Promise))(function (resolve, reject) {
 	        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -24385,10 +24390,10 @@ function requireLib () {
 	        step((generator = generator.apply(thisArg, _arguments || [])).next());
 	    });
 	};
-	Object.defineProperty(lib, "__esModule", { value: true });
-	lib.HttpClient = lib.isHttps = lib.HttpClientResponse = lib.HttpClientError = lib.getProxyUrl = lib.MediaTypes = lib.Headers = lib.HttpCodes = void 0;
+	Object.defineProperty(lib$1, "__esModule", { value: true });
+	lib$1.HttpClient = lib$1.isHttps = lib$1.HttpClientResponse = lib$1.HttpClientError = lib$1.getProxyUrl = lib$1.MediaTypes = lib$1.Headers = lib$1.HttpCodes = void 0;
 	const http = __importStar(require$$2);
-	const https = __importStar(require$$3);
+	const https = __importStar(require$$3$1);
 	const pm = __importStar(requireProxy());
 	const tunnel = __importStar(requireTunnel());
 	const undici_1 = requireUndici();
@@ -24421,16 +24426,16 @@ function requireLib () {
 	    HttpCodes[HttpCodes["BadGateway"] = 502] = "BadGateway";
 	    HttpCodes[HttpCodes["ServiceUnavailable"] = 503] = "ServiceUnavailable";
 	    HttpCodes[HttpCodes["GatewayTimeout"] = 504] = "GatewayTimeout";
-	})(HttpCodes || (lib.HttpCodes = HttpCodes = {}));
+	})(HttpCodes || (lib$1.HttpCodes = HttpCodes = {}));
 	var Headers;
 	(function (Headers) {
 	    Headers["Accept"] = "accept";
 	    Headers["ContentType"] = "content-type";
-	})(Headers || (lib.Headers = Headers = {}));
+	})(Headers || (lib$1.Headers = Headers = {}));
 	var MediaTypes;
 	(function (MediaTypes) {
 	    MediaTypes["ApplicationJson"] = "application/json";
-	})(MediaTypes || (lib.MediaTypes = MediaTypes = {}));
+	})(MediaTypes || (lib$1.MediaTypes = MediaTypes = {}));
 	/**
 	 * Returns the proxy URL, depending upon the supplied url and proxy environment variables.
 	 * @param serverUrl  The server URL where the request will be sent. For example, https://api.github.com
@@ -24439,7 +24444,7 @@ function requireLib () {
 	    const proxyUrl = pm.getProxyUrl(new URL(serverUrl));
 	    return proxyUrl ? proxyUrl.href : '';
 	}
-	lib.getProxyUrl = getProxyUrl;
+	lib$1.getProxyUrl = getProxyUrl;
 	const HttpRedirectCodes = [
 	    HttpCodes.MovedPermanently,
 	    HttpCodes.ResourceMoved,
@@ -24463,7 +24468,7 @@ function requireLib () {
 	        Object.setPrototypeOf(this, HttpClientError.prototype);
 	    }
 	}
-	lib.HttpClientError = HttpClientError;
+	lib$1.HttpClientError = HttpClientError;
 	class HttpClientResponse {
 	    constructor(message) {
 	        this.message = message;
@@ -24495,12 +24500,12 @@ function requireLib () {
 	        });
 	    }
 	}
-	lib.HttpClientResponse = HttpClientResponse;
+	lib$1.HttpClientResponse = HttpClientResponse;
 	function isHttps(requestUrl) {
 	    const parsedUrl = new URL(requestUrl);
 	    return parsedUrl.protocol === 'https:';
 	}
-	lib.isHttps = isHttps;
+	lib$1.isHttps = isHttps;
 	class HttpClient {
 	    constructor(userAgent, handlers, requestOptions) {
 	        this._ignoreSslError = false;
@@ -25000,10 +25005,10 @@ function requireLib () {
 	        });
 	    }
 	}
-	lib.HttpClient = HttpClient;
+	lib$1.HttpClient = HttpClient;
 	const lowercaseKeys = (obj) => Object.keys(obj).reduce((c, k) => ((c[k.toLowerCase()] = obj[k]), c), {});
 	
-	return lib;
+	return lib$1;
 }
 
 var auth = {};
@@ -25112,7 +25117,7 @@ function requireOidcUtils () {
 	};
 	Object.defineProperty(oidcUtils, "__esModule", { value: true });
 	oidcUtils.OidcClient = void 0;
-	const http_client_1 = requireLib();
+	const http_client_1 = requireLib$1();
 	const auth_1 = requireAuth();
 	const core_1 = requireCore();
 	class OidcClient {
@@ -25200,7 +25205,7 @@ function requireSummary () {
 		Object.defineProperty(exports, "__esModule", { value: true });
 		exports.summary = exports.markdownSummary = exports.SUMMARY_DOCS_URL = exports.SUMMARY_ENV_VAR = void 0;
 		const os_1 = require$$0;
-		const fs_1 = require$$1;
+		const fs_1 = fs;
 		const { access, appendFile, writeFile } = fs_1.promises;
 		exports.SUMMARY_ENV_VAR = 'GITHUB_STEP_SUMMARY';
 		exports.SUMMARY_DOCS_URL = 'https://docs.github.com/actions/using-workflows/workflow-commands-for-github-actions#adding-a-job-summary';
@@ -25506,7 +25511,7 @@ function requirePathUtils () {
 	};
 	Object.defineProperty(pathUtils, "__esModule", { value: true });
 	pathUtils.toPlatformPath = pathUtils.toWin32Path = pathUtils.toPosixPath = void 0;
-	const path = __importStar(require$$1$5);
+	const path$1 = __importStar(path);
 	/**
 	 * toPosixPath converts the given path to the posix form. On Windows, \\ will be
 	 * replaced with /.
@@ -25538,7 +25543,7 @@ function requirePathUtils () {
 	 * @return string The platform-specific path.
 	 */
 	function toPlatformPath(pth) {
-	    return pth.replace(/[/\\]/g, path.sep);
+	    return pth.replace(/[/\\]/g, path$1.sep);
 	}
 	pathUtils.toPlatformPath = toPlatformPath;
 	
@@ -25592,16 +25597,16 @@ function requireIoUtil () {
 		var _a;
 		Object.defineProperty(exports, "__esModule", { value: true });
 		exports.getCmdPath = exports.tryGetExecutablePath = exports.isRooted = exports.isDirectory = exports.exists = exports.READONLY = exports.UV_FS_O_EXLOCK = exports.IS_WINDOWS = exports.unlink = exports.symlink = exports.stat = exports.rmdir = exports.rm = exports.rename = exports.readlink = exports.readdir = exports.open = exports.mkdir = exports.lstat = exports.copyFile = exports.chmod = void 0;
-		const fs = __importStar(require$$1);
-		const path = __importStar(require$$1$5);
-		_a = fs.promises
+		const fs$1 = __importStar(fs);
+		const path$1 = __importStar(path);
+		_a = fs$1.promises
 		// export const {open} = 'fs'
 		, exports.chmod = _a.chmod, exports.copyFile = _a.copyFile, exports.lstat = _a.lstat, exports.mkdir = _a.mkdir, exports.open = _a.open, exports.readdir = _a.readdir, exports.readlink = _a.readlink, exports.rename = _a.rename, exports.rm = _a.rm, exports.rmdir = _a.rmdir, exports.stat = _a.stat, exports.symlink = _a.symlink, exports.unlink = _a.unlink;
 		// export const {open} = 'fs'
 		exports.IS_WINDOWS = process.platform === 'win32';
 		// See https://github.com/nodejs/node/blob/d0153aee367422d0858105abec186da4dff0a0c5/deps/uv/include/uv/win.h#L691
 		exports.UV_FS_O_EXLOCK = 0x10000000;
-		exports.READONLY = fs.constants.O_RDONLY;
+		exports.READONLY = fs$1.constants.O_RDONLY;
 		function exists(fsPath) {
 		    return __awaiter(this, void 0, void 0, function* () {
 		        try {
@@ -25662,7 +25667,7 @@ function requireIoUtil () {
 		        if (stats && stats.isFile()) {
 		            if (exports.IS_WINDOWS) {
 		                // on Windows, test for valid extension
-		                const upperExt = path.extname(filePath).toUpperCase();
+		                const upperExt = path$1.extname(filePath).toUpperCase();
 		                if (extensions.some(validExt => validExt.toUpperCase() === upperExt)) {
 		                    return filePath;
 		                }
@@ -25691,11 +25696,11 @@ function requireIoUtil () {
 		                if (exports.IS_WINDOWS) {
 		                    // preserve the case of the actual file (since an extension was appended)
 		                    try {
-		                        const directory = path.dirname(filePath);
-		                        const upperName = path.basename(filePath).toUpperCase();
+		                        const directory = path$1.dirname(filePath);
+		                        const upperName = path$1.basename(filePath).toUpperCase();
 		                        for (const actualName of yield exports.readdir(directory)) {
 		                            if (upperName === actualName.toUpperCase()) {
-		                                filePath = path.join(directory, actualName);
+		                                filePath = path$1.join(directory, actualName);
 		                                break;
 		                            }
 		                        }
@@ -25783,7 +25788,7 @@ function requireIo () {
 	Object.defineProperty(io, "__esModule", { value: true });
 	io.findInPath = io.which = io.mkdirP = io.rmRF = io.mv = io.cp = void 0;
 	const assert_1 = require$$0$3;
-	const path = __importStar(require$$1$5);
+	const path$1 = __importStar(path);
 	const ioUtil = __importStar(requireIoUtil());
 	/**
 	 * Copies a file or folder.
@@ -25803,7 +25808,7 @@ function requireIo () {
 	        }
 	        // If dest is an existing directory, should copy inside.
 	        const newDest = destStat && destStat.isDirectory() && copySourceDirectory
-	            ? path.join(dest, path.basename(source))
+	            ? path$1.join(dest, path$1.basename(source))
 	            : dest;
 	        if (!(yield ioUtil.exists(source))) {
 	            throw new Error(`no such file or directory: ${source}`);
@@ -25818,7 +25823,7 @@ function requireIo () {
 	            }
 	        }
 	        else {
-	            if (path.relative(source, newDest) === '') {
+	            if (path$1.relative(source, newDest) === '') {
 	                // a file cannot be copied to itself
 	                throw new Error(`'${newDest}' and '${source}' are the same file`);
 	            }
@@ -25840,7 +25845,7 @@ function requireIo () {
 	            let destExists = true;
 	            if (yield ioUtil.isDirectory(dest)) {
 	                // If dest is directory copy src into dest
-	                dest = path.join(dest, path.basename(source));
+	                dest = path$1.join(dest, path$1.basename(source));
 	                destExists = yield ioUtil.exists(dest);
 	            }
 	            if (destExists) {
@@ -25852,7 +25857,7 @@ function requireIo () {
 	                }
 	            }
 	        }
-	        yield mkdirP(path.dirname(dest));
+	        yield mkdirP(path$1.dirname(dest));
 	        yield ioUtil.rename(source, dest);
 	    });
 	}
@@ -25947,7 +25952,7 @@ function requireIo () {
 	        // build the list of extensions to try
 	        const extensions = [];
 	        if (ioUtil.IS_WINDOWS && process.env['PATHEXT']) {
-	            for (const extension of process.env['PATHEXT'].split(path.delimiter)) {
+	            for (const extension of process.env['PATHEXT'].split(path$1.delimiter)) {
 	                if (extension) {
 	                    extensions.push(extension);
 	                }
@@ -25962,7 +25967,7 @@ function requireIo () {
 	            return [];
 	        }
 	        // if any path separators, return empty
-	        if (tool.includes(path.sep)) {
+	        if (tool.includes(path$1.sep)) {
 	            return [];
 	        }
 	        // build the list of directories
@@ -25973,7 +25978,7 @@ function requireIo () {
 	        // across platforms.
 	        const directories = [];
 	        if (process.env.PATH) {
-	            for (const p of process.env.PATH.split(path.delimiter)) {
+	            for (const p of process.env.PATH.split(path$1.delimiter)) {
 	                if (p) {
 	                    directories.push(p);
 	                }
@@ -25982,7 +25987,7 @@ function requireIo () {
 	        // find all matches
 	        const matches = [];
 	        for (const directory of directories) {
-	            const filePath = yield ioUtil.tryGetExecutablePath(path.join(directory, tool), extensions);
+	            const filePath = yield ioUtil.tryGetExecutablePath(path$1.join(directory, tool), extensions);
 	            if (filePath) {
 	                matches.push(filePath);
 	            }
@@ -26091,7 +26096,7 @@ function requireToolrunner () {
 	const os = __importStar(require$$0);
 	const events = __importStar(require$$4);
 	const child = __importStar(require$$2$2);
-	const path = __importStar(require$$1$5);
+	const path$1 = __importStar(path);
 	const io = __importStar(requireIo());
 	const ioUtil = __importStar(requireIoUtil());
 	const timers_1 = require$$6$1;
@@ -26446,7 +26451,7 @@ function requireToolrunner () {
 	                (this.toolPath.includes('/') ||
 	                    (IS_WINDOWS && this.toolPath.includes('\\')))) {
 	                // prefer options.cwd if it is specified, however options.cwd may also need to be rooted
-	                this.toolPath = path.resolve(process.cwd(), this.options.cwd || process.cwd(), this.toolPath);
+	                this.toolPath = path$1.resolve(process.cwd(), this.options.cwd || process.cwd(), this.toolPath);
 	            }
 	            // if the tool is only a file name, then resolve it from the PATH
 	            // otherwise verify it exists (add extension on Windows if necessary)
@@ -26935,7 +26940,7 @@ function requireCore () {
 		const file_command_1 = requireFileCommand();
 		const utils_1 = requireUtils$1();
 		const os = __importStar(require$$0);
-		const path = __importStar(require$$1$5);
+		const path$1 = __importStar(path);
 		const oidc_utils_1 = requireOidcUtils();
 		/**
 		 * The code to exit an action
@@ -26990,7 +26995,7 @@ function requireCore () {
 		    else {
 		        (0, command_1.issueCommand)('add-path', {}, inputPath);
 		    }
-		    process.env['PATH'] = `${inputPath}${path.delimiter}${process.env['PATH']}`;
+		    process.env['PATH'] = `${inputPath}${path$1.delimiter}${process.env['PATH']}`;
 		}
 		exports.addPath = addPath;
 		/**
@@ -27246,18 +27251,19920 @@ function requireCore () {
 
 var coreExports = requireCore();
 
-/**
- * Waits for a number of milliseconds.
- *
- * @param milliseconds The number of milliseconds to wait.
- * @returns Resolves with 'done!' after the wait is over.
- */
-async function wait(milliseconds) {
-    return new Promise((resolve) => {
-        if (isNaN(milliseconds))
-            throw new Error('milliseconds is not a number');
-        setTimeout(() => resolve('done!'), milliseconds);
+const userAgent = 'beatmods-upload/0.1';
+const getVersions = async () => {
+    const response = await fetch('https://beatmods.com/api/versions?gameName=beatsaber', {
+        headers: { 'User-Agent': userAgent }
     });
+    if (!response.ok) {
+        throw new Error(`Beatmods did not return ok response [${response.status}]`);
+    }
+    const json = (await response.json());
+    return json.versions;
+};
+const getMod = async (id) => {
+    const response = await fetch('https://beatmods.com/api/mods/' + id, {
+        headers: { 'User-Agent': userAgent }
+    });
+    if (!response.ok) {
+        throw new Error(`Beatmods did not return ok response [${response.status}]`);
+    }
+    const json = (await response.json());
+    return json.mod;
+};
+const getModsForVersion = async (gameVersion) => {
+    const response = await fetch('https://beatmods.com/api/mods?gameVersion=' + gameVersion, {
+        headers: { 'User-Agent': userAgent }
+    });
+    if (!response.ok) {
+        throw new Error(`Beatmods did not return ok response [${response.status}]`);
+    }
+    const json = (await response.json());
+    return json.mods;
+};
+const uploadMod = async (id, request) => {
+    const formData = new FormData();
+    formData.append('file', new Blob([request.file]), request.fileName);
+    formData.append('modVersion', request.modVersion);
+    formData.append('platform', request.platform);
+    formData.append('dependencies', JSON.stringify(request.dependencies));
+    formData.append('supportedGameVersionIds', JSON.stringify(request.supportedGameVersionIds));
+    const response = await fetch('https://beatmods.com/api/mods/' + id + '/upload', {
+        method: 'POST',
+        headers: { 'User-Agent': userAgent },
+        body: formData
+    });
+    if (!response.ok) {
+        throw new Error(`Beatmods did not return ok response [${response.status}]`);
+    }
+};
+
+var peStruct$1 = {exports: {}};
+
+var peStruct = peStruct$1.exports;
+
+var hasRequiredPeStruct;
+
+function requirePeStruct () {
+	if (hasRequiredPeStruct) return peStruct$1.exports;
+	hasRequiredPeStruct = 1;
+	(function (module, exports) {
+		(function webpackUniversalModuleDefinition(root, factory) {
+			module.exports = factory();
+		})(peStruct, function() {
+		return /******/ (function(modules) { // webpackBootstrap
+		/******/ 	// The module cache
+		/******/ 	var installedModules = {};
+		/******/
+		/******/ 	// The require function
+		/******/ 	function __webpack_require__(moduleId) {
+		/******/
+		/******/ 		// Check if module is in cache
+		/******/ 		if(installedModules[moduleId])
+		/******/ 			return installedModules[moduleId].exports;
+		/******/
+		/******/ 		// Create a new module (and put it into the cache)
+		/******/ 		var module = installedModules[moduleId] = {
+		/******/ 			exports: {},
+		/******/ 			id: moduleId,
+		/******/ 			loaded: false
+		/******/ 		};
+		/******/
+		/******/ 		// Execute the module function
+		/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+		/******/
+		/******/ 		// Flag the module as loaded
+		/******/ 		module.loaded = true;
+		/******/
+		/******/ 		// Return the exports of the module
+		/******/ 		return module.exports;
+		/******/ 	}
+		/******/
+		/******/
+		/******/ 	// expose the modules object (__webpack_modules__)
+		/******/ 	__webpack_require__.m = modules;
+		/******/
+		/******/ 	// expose the module cache
+		/******/ 	__webpack_require__.c = installedModules;
+		/******/
+		/******/ 	// __webpack_public_path__
+		/******/ 	__webpack_require__.p = "";
+		/******/
+		/******/ 	// Load entry module and return exports
+		/******/ 	return __webpack_require__(0);
+		/******/ })
+		/************************************************************************/
+		/******/ ([
+		/* 0 */
+		/***/ function(module, exports, __webpack_require__) {
+			function __export(m) {
+			    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+			}
+			__export(__webpack_require__(1));
+			__export(__webpack_require__(2));
+			__export(__webpack_require__(3));
+			__export(__webpack_require__(4));
+
+
+		/***/ },
+		/* 1 */
+		/***/ function(module, exports) {
+			exports.dosSignature = 0x5A4D;
+			exports.ntSignature = 0x00004550;
+			(function (FileMachine) {
+			    FileMachine[FileMachine["IMAGE_FILE_MACHINE_UNKNOWN"] = 0] = "IMAGE_FILE_MACHINE_UNKNOWN";
+			    FileMachine[FileMachine["IMAGE_FILE_MACHINE_I386"] = 332] = "IMAGE_FILE_MACHINE_I386";
+			    FileMachine[FileMachine["IMAGE_FILE_MACHINE_R3000"] = 354] = "IMAGE_FILE_MACHINE_R3000";
+			    FileMachine[FileMachine["IMAGE_FILE_MACHINE_R4000"] = 358] = "IMAGE_FILE_MACHINE_R4000";
+			    FileMachine[FileMachine["IMAGE_FILE_MACHINE_R10000"] = 360] = "IMAGE_FILE_MACHINE_R10000";
+			    FileMachine[FileMachine["IMAGE_FILE_MACHINE_WCEMIPSV2"] = 361] = "IMAGE_FILE_MACHINE_WCEMIPSV2";
+			    FileMachine[FileMachine["IMAGE_FILE_MACHINE_ALPHA"] = 388] = "IMAGE_FILE_MACHINE_ALPHA";
+			    FileMachine[FileMachine["IMAGE_FILE_MACHINE_SH3"] = 418] = "IMAGE_FILE_MACHINE_SH3";
+			    FileMachine[FileMachine["IMAGE_FILE_MACHINE_SH3DSP"] = 419] = "IMAGE_FILE_MACHINE_SH3DSP";
+			    FileMachine[FileMachine["IMAGE_FILE_MACHINE_SH3E"] = 420] = "IMAGE_FILE_MACHINE_SH3E";
+			    FileMachine[FileMachine["IMAGE_FILE_MACHINE_SH4"] = 422] = "IMAGE_FILE_MACHINE_SH4";
+			    FileMachine[FileMachine["IMAGE_FILE_MACHINE_SH5"] = 424] = "IMAGE_FILE_MACHINE_SH5";
+			    FileMachine[FileMachine["IMAGE_FILE_MACHINE_ARM"] = 448] = "IMAGE_FILE_MACHINE_ARM";
+			    FileMachine[FileMachine["IMAGE_FILE_MACHINE_THUMB"] = 450] = "IMAGE_FILE_MACHINE_THUMB";
+			    FileMachine[FileMachine["IMAGE_FILE_MACHINE_ARMNT"] = 452] = "IMAGE_FILE_MACHINE_ARMNT";
+			    FileMachine[FileMachine["IMAGE_FILE_MACHINE_AM33"] = 467] = "IMAGE_FILE_MACHINE_AM33";
+			    FileMachine[FileMachine["IMAGE_FILE_MACHINE_POWERPC"] = 496] = "IMAGE_FILE_MACHINE_POWERPC";
+			    FileMachine[FileMachine["IMAGE_FILE_MACHINE_POWERPCFP"] = 497] = "IMAGE_FILE_MACHINE_POWERPCFP";
+			    FileMachine[FileMachine["IMAGE_FILE_MACHINE_IA64"] = 512] = "IMAGE_FILE_MACHINE_IA64";
+			    FileMachine[FileMachine["IMAGE_FILE_MACHINE_MIPS16"] = 614] = "IMAGE_FILE_MACHINE_MIPS16";
+			    FileMachine[FileMachine["IMAGE_FILE_MACHINE_ALPHA64"] = 644] = "IMAGE_FILE_MACHINE_ALPHA64";
+			    FileMachine[FileMachine["IMAGE_FILE_MACHINE_MIPSFPU"] = 870] = "IMAGE_FILE_MACHINE_MIPSFPU";
+			    FileMachine[FileMachine["IMAGE_FILE_MACHINE_MIPSFPU16"] = 1126] = "IMAGE_FILE_MACHINE_MIPSFPU16";
+			    FileMachine[FileMachine["IMAGE_FILE_MACHINE_TRICORE"] = 1312] = "IMAGE_FILE_MACHINE_TRICORE";
+			    FileMachine[FileMachine["IMAGE_FILE_MACHINE_CEF"] = 3311] = "IMAGE_FILE_MACHINE_CEF";
+			    FileMachine[FileMachine["IMAGE_FILE_MACHINE_EBC"] = 3772] = "IMAGE_FILE_MACHINE_EBC";
+			    FileMachine[FileMachine["IMAGE_FILE_MACHINE_AMD64"] = 34404] = "IMAGE_FILE_MACHINE_AMD64";
+			    FileMachine[FileMachine["IMAGE_FILE_MACHINE_M32R"] = 36929] = "IMAGE_FILE_MACHINE_M32R";
+			    FileMachine[FileMachine["IMAGE_FILE_MACHINE_CEE"] = 49390] = "IMAGE_FILE_MACHINE_CEE";
+			})(exports.FileMachine || (exports.FileMachine = {}));
+			exports.FileMachine;
+			(function (FileAttr) {
+			    FileAttr[FileAttr["IMAGE_FILE_RELOCS_STRIPPED"] = 1] = "IMAGE_FILE_RELOCS_STRIPPED";
+			    FileAttr[FileAttr["IMAGE_FILE_EXECUTABLE_IMAGE"] = 2] = "IMAGE_FILE_EXECUTABLE_IMAGE";
+			    FileAttr[FileAttr["IMAGE_FILE_LINE_NUMS_STRIPPED"] = 4] = "IMAGE_FILE_LINE_NUMS_STRIPPED";
+			    FileAttr[FileAttr["IMAGE_FILE_LOCAL_SYMS_STRIPPED"] = 8] = "IMAGE_FILE_LOCAL_SYMS_STRIPPED";
+			    FileAttr[FileAttr["IMAGE_FILE_AGGRESIVE_WS_TRIM"] = 16] = "IMAGE_FILE_AGGRESIVE_WS_TRIM";
+			    FileAttr[FileAttr["IMAGE_FILE_LARGE_ADDRESS_AWARE"] = 32] = "IMAGE_FILE_LARGE_ADDRESS_AWARE";
+			    FileAttr[FileAttr["IMAGE_FILE_BYTES_REVERSED_LO"] = 128] = "IMAGE_FILE_BYTES_REVERSED_LO";
+			    FileAttr[FileAttr["IMAGE_FILE_32BIT_MACHINE"] = 256] = "IMAGE_FILE_32BIT_MACHINE";
+			    FileAttr[FileAttr["IMAGE_FILE_DEBUG_STRIPPED"] = 512] = "IMAGE_FILE_DEBUG_STRIPPED";
+			    FileAttr[FileAttr["IMAGE_FILE_REMOVABLE_RUN_FROM_SWAP"] = 1024] = "IMAGE_FILE_REMOVABLE_RUN_FROM_SWAP";
+			    FileAttr[FileAttr["IMAGE_FILE_NET_RUN_FROM_SWAP"] = 2048] = "IMAGE_FILE_NET_RUN_FROM_SWAP";
+			    FileAttr[FileAttr["IMAGE_FILE_SYSTEM"] = 4096] = "IMAGE_FILE_SYSTEM";
+			    FileAttr[FileAttr["IMAGE_FILE_DLL"] = 8192] = "IMAGE_FILE_DLL";
+			    FileAttr[FileAttr["IMAGE_FILE_UP_SYSTEM_ONLY"] = 16384] = "IMAGE_FILE_UP_SYSTEM_ONLY";
+			    FileAttr[FileAttr["IMAGE_FILE_BYTES_REVERSED_HI"] = 32768] = "IMAGE_FILE_BYTES_REVERSED_HI";
+			})(exports.FileAttr || (exports.FileAttr = {}));
+			exports.FileAttr;
+			exports.sizeOfOptHdr32 = 0xE0;
+			exports.sizeOfOptHdr64 = 0xF0;
+			exports.ntOptHdr32Magic = 0x010B;
+			exports.ntOptHdr64Magic = 0x020B;
+			exports.numberOfDataDirectories = 16;
+			(function (Subsystem) {
+			    Subsystem[Subsystem["IMAGE_SUBSYSTEM_UNKNOWN"] = 0] = "IMAGE_SUBSYSTEM_UNKNOWN";
+			    Subsystem[Subsystem["IMAGE_SUBSYSTEM_NATIVE"] = 1] = "IMAGE_SUBSYSTEM_NATIVE";
+			    Subsystem[Subsystem["IMAGE_SUBSYSTEM_WINDOWS_GUI"] = 2] = "IMAGE_SUBSYSTEM_WINDOWS_GUI";
+			    Subsystem[Subsystem["IMAGE_SUBSYSTEM_WINDOWS_CUI"] = 3] = "IMAGE_SUBSYSTEM_WINDOWS_CUI";
+			    Subsystem[Subsystem["IMAGE_SUBSYSTEM_OS2_CUI"] = 5] = "IMAGE_SUBSYSTEM_OS2_CUI";
+			    Subsystem[Subsystem["IMAGE_SUBSYSTEM_POSIX_CUI"] = 7] = "IMAGE_SUBSYSTEM_POSIX_CUI";
+			    Subsystem[Subsystem["IMAGE_SUBSYSTEM_NATIVE_WINDOWS"] = 8] = "IMAGE_SUBSYSTEM_NATIVE_WINDOWS";
+			    Subsystem[Subsystem["IMAGE_SUBSYSTEM_WINDOWS_CE_GUI"] = 9] = "IMAGE_SUBSYSTEM_WINDOWS_CE_GUI";
+			    Subsystem[Subsystem["IMAGE_SUBSYSTEM_EFI_APPLICATION"] = 10] = "IMAGE_SUBSYSTEM_EFI_APPLICATION";
+			    Subsystem[Subsystem["IMAGE_SUBSYSTEM_EFI_BOOT_SERVICE_DRIVER"] = 11] = "IMAGE_SUBSYSTEM_EFI_BOOT_SERVICE_DRIVER";
+			    Subsystem[Subsystem["IMAGE_SUBSYSTEM_EFI_RUNTIME_DRIVER"] = 12] = "IMAGE_SUBSYSTEM_EFI_RUNTIME_DRIVER";
+			    Subsystem[Subsystem["IMAGE_SUBSYSTEM_EFI_ROM"] = 13] = "IMAGE_SUBSYSTEM_EFI_ROM";
+			    Subsystem[Subsystem["IMAGE_SUBSYSTEM_XBOX"] = 14] = "IMAGE_SUBSYSTEM_XBOX";
+			    Subsystem[Subsystem["IMAGE_SUBSYSTEM_WINDOWS_BOOT_APPLICATION"] = 16] = "IMAGE_SUBSYSTEM_WINDOWS_BOOT_APPLICATION";
+			})(exports.Subsystem || (exports.Subsystem = {}));
+			exports.Subsystem;
+			(function (DllAttr) {
+			    DllAttr[DllAttr["IMAGE_LIBRARY_PROCESS_INIT"] = 1] = "IMAGE_LIBRARY_PROCESS_INIT";
+			    DllAttr[DllAttr["IMAGE_LIBRARY_PROCESS_TERM"] = 2] = "IMAGE_LIBRARY_PROCESS_TERM";
+			    DllAttr[DllAttr["IMAGE_LIBRARY_THREAD_INIT"] = 4] = "IMAGE_LIBRARY_THREAD_INIT";
+			    DllAttr[DllAttr["IMAGE_LIBRARY_THREAD_TERM"] = 8] = "IMAGE_LIBRARY_THREAD_TERM";
+			    DllAttr[DllAttr["IMAGE_DLLCHARACTERISTICS_HIGH_ENTROPY_VA"] = 32] = "IMAGE_DLLCHARACTERISTICS_HIGH_ENTROPY_VA";
+			    DllAttr[DllAttr["IMAGE_DLLCHARACTERISTICS_DYNAMIC_BASE"] = 64] = "IMAGE_DLLCHARACTERISTICS_DYNAMIC_BASE";
+			    DllAttr[DllAttr["IMAGE_DLLCHARACTERISTICS_FORCE_INTEGRITY"] = 128] = "IMAGE_DLLCHARACTERISTICS_FORCE_INTEGRITY";
+			    DllAttr[DllAttr["IMAGE_DLLCHARACTERISTICS_NX_COMPAT"] = 256] = "IMAGE_DLLCHARACTERISTICS_NX_COMPAT";
+			    DllAttr[DllAttr["IMAGE_DLLCHARACTERISTICS_NO_ISOLATION"] = 512] = "IMAGE_DLLCHARACTERISTICS_NO_ISOLATION";
+			    DllAttr[DllAttr["IMAGE_DLLCHARACTERISTICS_NO_SEH"] = 1024] = "IMAGE_DLLCHARACTERISTICS_NO_SEH";
+			    DllAttr[DllAttr["IMAGE_DLLCHARACTERISTICS_NO_BIND"] = 2048] = "IMAGE_DLLCHARACTERISTICS_NO_BIND";
+			    DllAttr[DllAttr["IMAGE_DLLCHARACTERISTICS_APPCONTAINER"] = 4096] = "IMAGE_DLLCHARACTERISTICS_APPCONTAINER";
+			    DllAttr[DllAttr["IMAGE_DLLCHARACTERISTICS_WDM_DRIVER"] = 8192] = "IMAGE_DLLCHARACTERISTICS_WDM_DRIVER";
+			    DllAttr[DllAttr["IMAGE_DLLCHARACTERISTICS_GUARD_CF"] = 16384] = "IMAGE_DLLCHARACTERISTICS_GUARD_CF";
+			    DllAttr[DllAttr["IMAGE_DLLCHARACTERISTICS_TERMINAL_SERVER_AWARE"] = 32768] = "IMAGE_DLLCHARACTERISTICS_TERMINAL_SERVER_AWARE";
+			})(exports.DllAttr || (exports.DllAttr = {}));
+			exports.DllAttr;
+			(function (DataDirectoryIndex) {
+			    DataDirectoryIndex[DataDirectoryIndex["Export"] = 0] = "Export";
+			    DataDirectoryIndex[DataDirectoryIndex["Import"] = 1] = "Import";
+			    DataDirectoryIndex[DataDirectoryIndex["Resource"] = 2] = "Resource";
+			    DataDirectoryIndex[DataDirectoryIndex["Exception"] = 3] = "Exception";
+			    DataDirectoryIndex[DataDirectoryIndex["Security"] = 4] = "Security";
+			    DataDirectoryIndex[DataDirectoryIndex["Basereloc"] = 5] = "Basereloc";
+			    DataDirectoryIndex[DataDirectoryIndex["Debug"] = 6] = "Debug";
+			    DataDirectoryIndex[DataDirectoryIndex["Copyright"] = 7] = "Copyright";
+			    DataDirectoryIndex[DataDirectoryIndex["Architecture"] = 7] = "Architecture";
+			    DataDirectoryIndex[DataDirectoryIndex["Globalptr"] = 8] = "Globalptr";
+			    DataDirectoryIndex[DataDirectoryIndex["Tls"] = 9] = "Tls";
+			    DataDirectoryIndex[DataDirectoryIndex["LoadConfig"] = 10] = "LoadConfig";
+			    DataDirectoryIndex[DataDirectoryIndex["BoundImport"] = 11] = "BoundImport";
+			    DataDirectoryIndex[DataDirectoryIndex["Iat"] = 12] = "Iat";
+			    DataDirectoryIndex[DataDirectoryIndex["DelayImport"] = 13] = "DelayImport";
+			    DataDirectoryIndex[DataDirectoryIndex["ComDescriptor"] = 14] = "ComDescriptor";
+			})(exports.DataDirectoryIndex || (exports.DataDirectoryIndex = {}));
+			exports.DataDirectoryIndex;
+			(function (SectionAttr) {
+			    SectionAttr[SectionAttr["IMAGE_SCN_SCALE_INDEX"] = 1] = "IMAGE_SCN_SCALE_INDEX";
+			    SectionAttr[SectionAttr["IMAGE_SCN_TYPE_NO_PAD"] = 8] = "IMAGE_SCN_TYPE_NO_PAD";
+			    SectionAttr[SectionAttr["IMAGE_SCN_CNT_CODE"] = 32] = "IMAGE_SCN_CNT_CODE";
+			    SectionAttr[SectionAttr["IMAGE_SCN_CNT_INITIALIZED_DATA"] = 64] = "IMAGE_SCN_CNT_INITIALIZED_DATA";
+			    SectionAttr[SectionAttr["IMAGE_SCN_CNT_UNINITIALIZED_DATA"] = 128] = "IMAGE_SCN_CNT_UNINITIALIZED_DATA";
+			    SectionAttr[SectionAttr["IMAGE_SCN_LNK_OTHER"] = 256] = "IMAGE_SCN_LNK_OTHER";
+			    SectionAttr[SectionAttr["IMAGE_SCN_LNK_INFO"] = 512] = "IMAGE_SCN_LNK_INFO";
+			    SectionAttr[SectionAttr["IMAGE_SCN_LNK_REMOVE"] = 2048] = "IMAGE_SCN_LNK_REMOVE";
+			    SectionAttr[SectionAttr["IMAGE_SCN_LNK_COMDAT"] = 4096] = "IMAGE_SCN_LNK_COMDAT";
+			    SectionAttr[SectionAttr["IMAGE_SCN_NO_DEFER_SPEC_EXC"] = 16384] = "IMAGE_SCN_NO_DEFER_SPEC_EXC";
+			    SectionAttr[SectionAttr["IMAGE_SCN_GPREL"] = 32768] = "IMAGE_SCN_GPREL";
+			    SectionAttr[SectionAttr["IMAGE_SCN_MEM_FARDATA"] = 32768] = "IMAGE_SCN_MEM_FARDATA";
+			    SectionAttr[SectionAttr["IMAGE_SCN_MEM_PURGEABLE"] = 131072] = "IMAGE_SCN_MEM_PURGEABLE";
+			    SectionAttr[SectionAttr["IMAGE_SCN_MEM_16BIT"] = 131072] = "IMAGE_SCN_MEM_16BIT";
+			    SectionAttr[SectionAttr["IMAGE_SCN_MEM_LOCKED"] = 262144] = "IMAGE_SCN_MEM_LOCKED";
+			    SectionAttr[SectionAttr["IMAGE_SCN_MEM_PRELOAD"] = 524288] = "IMAGE_SCN_MEM_PRELOAD";
+			    SectionAttr[SectionAttr["al__Mask"] = 15728640] = "al__Mask";
+			    SectionAttr[SectionAttr["al_IMAGE_SCN_ALIGN_1BYTES"] = 1048576] = "al_IMAGE_SCN_ALIGN_1BYTES";
+			    SectionAttr[SectionAttr["al_IMAGE_SCN_ALIGN_2BYTES"] = 2097152] = "al_IMAGE_SCN_ALIGN_2BYTES";
+			    SectionAttr[SectionAttr["al_IMAGE_SCN_ALIGN_4BYTES"] = 3145728] = "al_IMAGE_SCN_ALIGN_4BYTES";
+			    SectionAttr[SectionAttr["al_IMAGE_SCN_ALIGN_8BYTES"] = 4194304] = "al_IMAGE_SCN_ALIGN_8BYTES";
+			    SectionAttr[SectionAttr["al_IMAGE_SCN_ALIGN_16BYTES"] = 5242880] = "al_IMAGE_SCN_ALIGN_16BYTES";
+			    SectionAttr[SectionAttr["al_IMAGE_SCN_ALIGN_32BYTES"] = 6291456] = "al_IMAGE_SCN_ALIGN_32BYTES";
+			    SectionAttr[SectionAttr["al_IMAGE_SCN_ALIGN_64BYTES"] = 7340032] = "al_IMAGE_SCN_ALIGN_64BYTES";
+			    SectionAttr[SectionAttr["al_IMAGE_SCN_ALIGN_128BYTES"] = 8388608] = "al_IMAGE_SCN_ALIGN_128BYTES";
+			    SectionAttr[SectionAttr["al_IMAGE_SCN_ALIGN_256BYTES"] = 9437184] = "al_IMAGE_SCN_ALIGN_256BYTES";
+			    SectionAttr[SectionAttr["al_IMAGE_SCN_ALIGN_512BYTES"] = 10485760] = "al_IMAGE_SCN_ALIGN_512BYTES";
+			    SectionAttr[SectionAttr["al_IMAGE_SCN_ALIGN_1024BYTES"] = 11534336] = "al_IMAGE_SCN_ALIGN_1024BYTES";
+			    SectionAttr[SectionAttr["al_IMAGE_SCN_ALIGN_2048BYTES"] = 12582912] = "al_IMAGE_SCN_ALIGN_2048BYTES";
+			    SectionAttr[SectionAttr["al_IMAGE_SCN_ALIGN_4096BYTES"] = 13631488] = "al_IMAGE_SCN_ALIGN_4096BYTES";
+			    SectionAttr[SectionAttr["al_IMAGE_SCN_ALIGN_8192BYTES"] = 14680064] = "al_IMAGE_SCN_ALIGN_8192BYTES";
+			    SectionAttr[SectionAttr["IMAGE_SCN_LNK_NRELOC_OVFL"] = 16777216] = "IMAGE_SCN_LNK_NRELOC_OVFL";
+			    SectionAttr[SectionAttr["IMAGE_SCN_MEM_DISCARDABLE"] = 33554432] = "IMAGE_SCN_MEM_DISCARDABLE";
+			    SectionAttr[SectionAttr["IMAGE_SCN_MEM_NOT_CACHED"] = 67108864] = "IMAGE_SCN_MEM_NOT_CACHED";
+			    SectionAttr[SectionAttr["IMAGE_SCN_MEM_NOT_PAGED"] = 134217728] = "IMAGE_SCN_MEM_NOT_PAGED";
+			    SectionAttr[SectionAttr["IMAGE_SCN_MEM_SHARED"] = 268435456] = "IMAGE_SCN_MEM_SHARED";
+			    SectionAttr[SectionAttr["IMAGE_SCN_MEM_EXECUTE"] = 536870912] = "IMAGE_SCN_MEM_EXECUTE";
+			    SectionAttr[SectionAttr["IMAGE_SCN_MEM_READ"] = 1073741824] = "IMAGE_SCN_MEM_READ";
+			    SectionAttr[SectionAttr["IMAGE_SCN_MEM_WRITE"] = 2147483648] = "IMAGE_SCN_MEM_WRITE";
+			})(exports.SectionAttr || (exports.SectionAttr = {}));
+			exports.SectionAttr;
+			(function (ComImageAttr) {
+			    ComImageAttr[ComImageAttr["COMIMAGE_FLAGS_ILONLY"] = 1] = "COMIMAGE_FLAGS_ILONLY";
+			    ComImageAttr[ComImageAttr["COMIMAGE_FLAGS_32BITREQUIRED"] = 2] = "COMIMAGE_FLAGS_32BITREQUIRED";
+			    ComImageAttr[ComImageAttr["COMIMAGE_FLAGS_IL_LIBRARY"] = 4] = "COMIMAGE_FLAGS_IL_LIBRARY";
+			    ComImageAttr[ComImageAttr["COMIMAGE_FLAGS_STRONGNAMESIGNED"] = 8] = "COMIMAGE_FLAGS_STRONGNAMESIGNED";
+			    ComImageAttr[ComImageAttr["COMIMAGE_FLAGS_NATIVE_ENTRYPOINT"] = 16] = "COMIMAGE_FLAGS_NATIVE_ENTRYPOINT";
+			    ComImageAttr[ComImageAttr["COMIMAGE_FLAGS_TRACKDEBUGDATA"] = 65536] = "COMIMAGE_FLAGS_TRACKDEBUGDATA";
+			})(exports.ComImageAttr || (exports.ComImageAttr = {}));
+			exports.ComImageAttr;
+			exports.mdSignature = 0x424A5342;
+			exports.mdsNameTable = "#~";
+			exports.mdsNameStrings = "#Strings";
+			exports.mdsNameUS = "#US";
+			exports.mdsNameGuid = "#GUID";
+			exports.mdsNameBlob = "#Blob";
+			(function (MdHeapSizeAttr) {
+			    MdHeapSizeAttr[MdHeapSizeAttr["Strings"] = 1] = "Strings";
+			    MdHeapSizeAttr[MdHeapSizeAttr["Guid"] = 2] = "Guid";
+			    MdHeapSizeAttr[MdHeapSizeAttr["Blob"] = 4] = "Blob";
+			})(exports.MdHeapSizeAttr || (exports.MdHeapSizeAttr = {}));
+			exports.MdHeapSizeAttr;
+			(function (MdTableIndex) {
+			    MdTableIndex[MdTableIndex["Module"] = 0] = "Module";
+			    MdTableIndex[MdTableIndex["TypeRef"] = 1] = "TypeRef";
+			    MdTableIndex[MdTableIndex["TypeDef"] = 2] = "TypeDef";
+			    MdTableIndex[MdTableIndex["FieldPtr"] = 3] = "FieldPtr";
+			    MdTableIndex[MdTableIndex["Field"] = 4] = "Field";
+			    MdTableIndex[MdTableIndex["MethodPtr"] = 5] = "MethodPtr";
+			    MdTableIndex[MdTableIndex["MethodDef"] = 6] = "MethodDef";
+			    MdTableIndex[MdTableIndex["ParamPtr"] = 7] = "ParamPtr";
+			    MdTableIndex[MdTableIndex["Param"] = 8] = "Param";
+			    MdTableIndex[MdTableIndex["InterfaceImpl"] = 9] = "InterfaceImpl";
+			    MdTableIndex[MdTableIndex["MemberRef"] = 10] = "MemberRef";
+			    MdTableIndex[MdTableIndex["Constant"] = 11] = "Constant";
+			    MdTableIndex[MdTableIndex["CustomAttribute"] = 12] = "CustomAttribute";
+			    MdTableIndex[MdTableIndex["FieldMarshal"] = 13] = "FieldMarshal";
+			    MdTableIndex[MdTableIndex["DeclSecurity"] = 14] = "DeclSecurity";
+			    MdTableIndex[MdTableIndex["ClassLayout"] = 15] = "ClassLayout";
+			    MdTableIndex[MdTableIndex["FieldLayout"] = 16] = "FieldLayout";
+			    MdTableIndex[MdTableIndex["StandAloneSig"] = 17] = "StandAloneSig";
+			    MdTableIndex[MdTableIndex["EventMap"] = 18] = "EventMap";
+			    MdTableIndex[MdTableIndex["EventPtr"] = 19] = "EventPtr";
+			    MdTableIndex[MdTableIndex["Event"] = 20] = "Event";
+			    MdTableIndex[MdTableIndex["PropertyMap"] = 21] = "PropertyMap";
+			    MdTableIndex[MdTableIndex["PropertyPtr"] = 22] = "PropertyPtr";
+			    MdTableIndex[MdTableIndex["Property"] = 23] = "Property";
+			    MdTableIndex[MdTableIndex["MethodSemantics"] = 24] = "MethodSemantics";
+			    MdTableIndex[MdTableIndex["MethodImpl"] = 25] = "MethodImpl";
+			    MdTableIndex[MdTableIndex["ModuleRef"] = 26] = "ModuleRef";
+			    MdTableIndex[MdTableIndex["TypeSpec"] = 27] = "TypeSpec";
+			    MdTableIndex[MdTableIndex["ImplMap"] = 28] = "ImplMap";
+			    MdTableIndex[MdTableIndex["FieldRVA"] = 29] = "FieldRVA";
+			    MdTableIndex[MdTableIndex["ENCLog"] = 30] = "ENCLog";
+			    MdTableIndex[MdTableIndex["ENCMap"] = 31] = "ENCMap";
+			    MdTableIndex[MdTableIndex["Assembly"] = 32] = "Assembly";
+			    MdTableIndex[MdTableIndex["AssemblyProcessor"] = 33] = "AssemblyProcessor";
+			    MdTableIndex[MdTableIndex["AssemblyOS"] = 34] = "AssemblyOS";
+			    MdTableIndex[MdTableIndex["AssemblyRef"] = 35] = "AssemblyRef";
+			    MdTableIndex[MdTableIndex["AssemblyRefProcessor"] = 36] = "AssemblyRefProcessor";
+			    MdTableIndex[MdTableIndex["AssemblyRefOS"] = 37] = "AssemblyRefOS";
+			    MdTableIndex[MdTableIndex["File"] = 38] = "File";
+			    MdTableIndex[MdTableIndex["ExportedType"] = 39] = "ExportedType";
+			    MdTableIndex[MdTableIndex["ManifestResource"] = 40] = "ManifestResource";
+			    MdTableIndex[MdTableIndex["NestedClass"] = 41] = "NestedClass";
+			    MdTableIndex[MdTableIndex["GenericParam"] = 42] = "GenericParam";
+			    MdTableIndex[MdTableIndex["MethodSpec"] = 43] = "MethodSpec";
+			    MdTableIndex[MdTableIndex["GenericParamConstraint"] = 44] = "GenericParamConstraint";
+			    MdTableIndex[MdTableIndex["String"] = 112] = "String";
+			})(exports.MdTableIndex || (exports.MdTableIndex = {}));
+			exports.MdTableIndex;
+			exports.numberOfMdTables = 45;
+			(function (AssemblyHashAlgorithm) {
+			    AssemblyHashAlgorithm[AssemblyHashAlgorithm["None"] = 0] = "None";
+			    AssemblyHashAlgorithm[AssemblyHashAlgorithm["MD5"] = 32771] = "MD5";
+			    AssemblyHashAlgorithm[AssemblyHashAlgorithm["SHA1"] = 32772] = "SHA1";
+			})(exports.AssemblyHashAlgorithm || (exports.AssemblyHashAlgorithm = {}));
+			exports.AssemblyHashAlgorithm;
+			(function (CorAssemblyFlags) {
+			    CorAssemblyFlags[CorAssemblyFlags["PublicKey"] = 1] = "PublicKey";
+			    CorAssemblyFlags[CorAssemblyFlags["pa__Mask"] = 112] = "pa__Mask";
+			    CorAssemblyFlags[CorAssemblyFlags["pa_ProcessorArchitectureNone"] = 0] = "pa_ProcessorArchitectureNone";
+			    CorAssemblyFlags[CorAssemblyFlags["pa_ProcessorArchitectureMsil"] = 16] = "pa_ProcessorArchitectureMsil";
+			    CorAssemblyFlags[CorAssemblyFlags["pa_ProcessorArchitectureX86"] = 32] = "pa_ProcessorArchitectureX86";
+			    CorAssemblyFlags[CorAssemblyFlags["pa_ProcessorArchitectureIa64"] = 48] = "pa_ProcessorArchitectureIa64";
+			    CorAssemblyFlags[CorAssemblyFlags["pa_ProcessorArchitectureAmd64"] = 64] = "pa_ProcessorArchitectureAmd64";
+			    CorAssemblyFlags[CorAssemblyFlags["ProcessorArchitectureSpecified"] = 128] = "ProcessorArchitectureSpecified";
+			    CorAssemblyFlags[CorAssemblyFlags["EnableJitcompileTracking"] = 32768] = "EnableJitcompileTracking";
+			    CorAssemblyFlags[CorAssemblyFlags["DisableJitcompileOptimizer"] = 16384] = "DisableJitcompileOptimizer";
+			    CorAssemblyFlags[CorAssemblyFlags["Retargetable"] = 256] = "Retargetable";
+			})(exports.CorAssemblyFlags || (exports.CorAssemblyFlags = {}));
+			exports.CorAssemblyFlags;
+			(function (CorEventAttr) {
+			    CorEventAttr[CorEventAttr["SpecialName"] = 512] = "SpecialName";
+			    CorEventAttr[CorEventAttr["RtSpecialName"] = 1024] = "RtSpecialName";
+			})(exports.CorEventAttr || (exports.CorEventAttr = {}));
+			exports.CorEventAttr;
+			(function (CorFieldAttr) {
+			    CorFieldAttr[CorFieldAttr["fa__Mask"] = 7] = "fa__Mask";
+			    CorFieldAttr[CorFieldAttr["fa_PrivateScope"] = 0] = "fa_PrivateScope";
+			    CorFieldAttr[CorFieldAttr["fa_Private"] = 1] = "fa_Private";
+			    CorFieldAttr[CorFieldAttr["fa_FamAndAssem"] = 2] = "fa_FamAndAssem";
+			    CorFieldAttr[CorFieldAttr["fa_Assembly"] = 3] = "fa_Assembly";
+			    CorFieldAttr[CorFieldAttr["fa_Family"] = 4] = "fa_Family";
+			    CorFieldAttr[CorFieldAttr["fa_FamOrAssem"] = 5] = "fa_FamOrAssem";
+			    CorFieldAttr[CorFieldAttr["fa_Public"] = 6] = "fa_Public";
+			    CorFieldAttr[CorFieldAttr["Static"] = 16] = "Static";
+			    CorFieldAttr[CorFieldAttr["InitOnly"] = 32] = "InitOnly";
+			    CorFieldAttr[CorFieldAttr["Literal"] = 64] = "Literal";
+			    CorFieldAttr[CorFieldAttr["NotSerialized"] = 128] = "NotSerialized";
+			    CorFieldAttr[CorFieldAttr["SpecialName"] = 512] = "SpecialName";
+			    CorFieldAttr[CorFieldAttr["PinvokeImpl"] = 8192] = "PinvokeImpl";
+			    CorFieldAttr[CorFieldAttr["RtSpecialName"] = 1024] = "RtSpecialName";
+			    CorFieldAttr[CorFieldAttr["HasFieldMarshal"] = 4096] = "HasFieldMarshal";
+			    CorFieldAttr[CorFieldAttr["HasDefault"] = 32768] = "HasDefault";
+			    CorFieldAttr[CorFieldAttr["HasFieldRva"] = 256] = "HasFieldRva";
+			})(exports.CorFieldAttr || (exports.CorFieldAttr = {}));
+			exports.CorFieldAttr;
+			(function (CorFileFlags) {
+			    CorFileFlags[CorFileFlags["ContainsMetaData"] = 0] = "ContainsMetaData";
+			    CorFileFlags[CorFileFlags["ContainsNoMetaData"] = 1] = "ContainsNoMetaData";
+			})(exports.CorFileFlags || (exports.CorFileFlags = {}));
+			exports.CorFileFlags;
+			(function (CorGenericParamAttr) {
+			    CorGenericParamAttr[CorGenericParamAttr["v__Mask"] = 3] = "v__Mask";
+			    CorGenericParamAttr[CorGenericParamAttr["v_NonVariant"] = 0] = "v_NonVariant";
+			    CorGenericParamAttr[CorGenericParamAttr["v_Covariant"] = 1] = "v_Covariant";
+			    CorGenericParamAttr[CorGenericParamAttr["v_Contravariant"] = 2] = "v_Contravariant";
+			    CorGenericParamAttr[CorGenericParamAttr["NoSpecialConstraint"] = 0] = "NoSpecialConstraint";
+			    CorGenericParamAttr[CorGenericParamAttr["ReferenceTypeConstraint"] = 4] = "ReferenceTypeConstraint";
+			    CorGenericParamAttr[CorGenericParamAttr["NotNullableValueTypeConstraint"] = 8] = "NotNullableValueTypeConstraint";
+			    CorGenericParamAttr[CorGenericParamAttr["DefaultConstructorConstraint"] = 16] = "DefaultConstructorConstraint";
+			})(exports.CorGenericParamAttr || (exports.CorGenericParamAttr = {}));
+			exports.CorGenericParamAttr;
+			(function (CorPinvokeMap) {
+			    CorPinvokeMap[CorPinvokeMap["NoMangle"] = 1] = "NoMangle";
+			    CorPinvokeMap[CorPinvokeMap["cs__Mask"] = 6] = "cs__Mask";
+			    CorPinvokeMap[CorPinvokeMap["cs_CharSetNotSpec"] = 0] = "cs_CharSetNotSpec";
+			    CorPinvokeMap[CorPinvokeMap["cs_CharSetAnsi"] = 2] = "cs_CharSetAnsi";
+			    CorPinvokeMap[CorPinvokeMap["cs_CharSetUnicode"] = 4] = "cs_CharSetUnicode";
+			    CorPinvokeMap[CorPinvokeMap["cs_CharSetAuto"] = 6] = "cs_CharSetAuto";
+			    CorPinvokeMap[CorPinvokeMap["bf__Mask"] = 48] = "bf__Mask";
+			    CorPinvokeMap[CorPinvokeMap["bf_BestFitUseAssem"] = 0] = "bf_BestFitUseAssem";
+			    CorPinvokeMap[CorPinvokeMap["bf_BestFitEnabled"] = 16] = "bf_BestFitEnabled";
+			    CorPinvokeMap[CorPinvokeMap["bf_BestFitDisabled"] = 32] = "bf_BestFitDisabled";
+			    CorPinvokeMap[CorPinvokeMap["touc__Mask"] = 12288] = "touc__Mask";
+			    CorPinvokeMap[CorPinvokeMap["touc_ThrowOnUnmappableCharUseAssem"] = 0] = "touc_ThrowOnUnmappableCharUseAssem";
+			    CorPinvokeMap[CorPinvokeMap["touc_ThrowOnUnmappableCharEnabled"] = 4096] = "touc_ThrowOnUnmappableCharEnabled";
+			    CorPinvokeMap[CorPinvokeMap["touc_ThrowOnUnmappableCharDisabled"] = 8192] = "touc_ThrowOnUnmappableCharDisabled";
+			    CorPinvokeMap[CorPinvokeMap["SupportsLastError"] = 64] = "SupportsLastError";
+			    CorPinvokeMap[CorPinvokeMap["cc__Mask"] = 1792] = "cc__Mask";
+			    CorPinvokeMap[CorPinvokeMap["cc_CallConvWinapi"] = 256] = "cc_CallConvWinapi";
+			    CorPinvokeMap[CorPinvokeMap["cc_CallConvCdecl"] = 512] = "cc_CallConvCdecl";
+			    CorPinvokeMap[CorPinvokeMap["cc_CallConvStdcall"] = 768] = "cc_CallConvStdcall";
+			    CorPinvokeMap[CorPinvokeMap["cc_CallConvThiscall"] = 1024] = "cc_CallConvThiscall";
+			    CorPinvokeMap[CorPinvokeMap["cc_CallConvFastcall"] = 1280] = "cc_CallConvFastcall";
+			})(exports.CorPinvokeMap || (exports.CorPinvokeMap = {}));
+			exports.CorPinvokeMap;
+			(function (CorManifestResourceFlags) {
+			    CorManifestResourceFlags[CorManifestResourceFlags["v__Mask"] = 7] = "v__Mask";
+			    CorManifestResourceFlags[CorManifestResourceFlags["v_Public"] = 1] = "v_Public";
+			    CorManifestResourceFlags[CorManifestResourceFlags["v_Private"] = 2] = "v_Private";
+			})(exports.CorManifestResourceFlags || (exports.CorManifestResourceFlags = {}));
+			exports.CorManifestResourceFlags;
+			(function (CorMethodAttr) {
+			    CorMethodAttr[CorMethodAttr["ma__Mask"] = 7] = "ma__Mask";
+			    CorMethodAttr[CorMethodAttr["ma_PrivateScope"] = 0] = "ma_PrivateScope";
+			    CorMethodAttr[CorMethodAttr["ma_Private"] = 1] = "ma_Private";
+			    CorMethodAttr[CorMethodAttr["ma_FamAndAssem"] = 2] = "ma_FamAndAssem";
+			    CorMethodAttr[CorMethodAttr["ma_Assem"] = 3] = "ma_Assem";
+			    CorMethodAttr[CorMethodAttr["ma_Family"] = 4] = "ma_Family";
+			    CorMethodAttr[CorMethodAttr["ma_FamOrAssem"] = 5] = "ma_FamOrAssem";
+			    CorMethodAttr[CorMethodAttr["ma_Public"] = 6] = "ma_Public";
+			    CorMethodAttr[CorMethodAttr["Static"] = 16] = "Static";
+			    CorMethodAttr[CorMethodAttr["Final"] = 32] = "Final";
+			    CorMethodAttr[CorMethodAttr["Virtual"] = 64] = "Virtual";
+			    CorMethodAttr[CorMethodAttr["HideBySig"] = 128] = "HideBySig";
+			    CorMethodAttr[CorMethodAttr["vl__Mask"] = 256] = "vl__Mask";
+			    CorMethodAttr[CorMethodAttr["vl_ReuseSlot"] = 0] = "vl_ReuseSlot";
+			    CorMethodAttr[CorMethodAttr["vl_NewSlot"] = 256] = "vl_NewSlot";
+			    CorMethodAttr[CorMethodAttr["CheckAccessOnOverride"] = 512] = "CheckAccessOnOverride";
+			    CorMethodAttr[CorMethodAttr["Abstract"] = 1024] = "Abstract";
+			    CorMethodAttr[CorMethodAttr["SpecialName"] = 2048] = "SpecialName";
+			    CorMethodAttr[CorMethodAttr["PInvokeImpl"] = 8192] = "PInvokeImpl";
+			    CorMethodAttr[CorMethodAttr["UnmanagedExport"] = 8] = "UnmanagedExport";
+			    CorMethodAttr[CorMethodAttr["RtSpecialName"] = 4096] = "RtSpecialName";
+			    CorMethodAttr[CorMethodAttr["HasSecurity"] = 16384] = "HasSecurity";
+			    CorMethodAttr[CorMethodAttr["RequireSecObject"] = 32768] = "RequireSecObject";
+			})(exports.CorMethodAttr || (exports.CorMethodAttr = {}));
+			exports.CorMethodAttr;
+			(function (CorMethodImpl) {
+			    CorMethodImpl[CorMethodImpl["ct__Mask"] = 3] = "ct__Mask";
+			    CorMethodImpl[CorMethodImpl["ct_IL"] = 0] = "ct_IL";
+			    CorMethodImpl[CorMethodImpl["ct_Native"] = 1] = "ct_Native";
+			    CorMethodImpl[CorMethodImpl["ct_OptIL"] = 2] = "ct_OptIL";
+			    CorMethodImpl[CorMethodImpl["ct_Runtime"] = 3] = "ct_Runtime";
+			    CorMethodImpl[CorMethodImpl["m__Mask"] = 4] = "m__Mask";
+			    CorMethodImpl[CorMethodImpl["m_Unmanaged"] = 4] = "m_Unmanaged";
+			    CorMethodImpl[CorMethodImpl["m_Managed"] = 0] = "m_Managed";
+			    CorMethodImpl[CorMethodImpl["ForwardRef"] = 16] = "ForwardRef";
+			    CorMethodImpl[CorMethodImpl["PreserveSig"] = 128] = "PreserveSig";
+			    CorMethodImpl[CorMethodImpl["InternalCall"] = 4096] = "InternalCall";
+			    CorMethodImpl[CorMethodImpl["Synchronized"] = 32] = "Synchronized";
+			    CorMethodImpl[CorMethodImpl["NoInlining"] = 8] = "NoInlining";
+			})(exports.CorMethodImpl || (exports.CorMethodImpl = {}));
+			exports.CorMethodImpl;
+			(function (CorMethodSemanticsAttr) {
+			    CorMethodSemanticsAttr[CorMethodSemanticsAttr["Setter"] = 1] = "Setter";
+			    CorMethodSemanticsAttr[CorMethodSemanticsAttr["Getter"] = 2] = "Getter";
+			    CorMethodSemanticsAttr[CorMethodSemanticsAttr["Other"] = 4] = "Other";
+			    CorMethodSemanticsAttr[CorMethodSemanticsAttr["AddOn"] = 8] = "AddOn";
+			    CorMethodSemanticsAttr[CorMethodSemanticsAttr["RemoveOn"] = 16] = "RemoveOn";
+			    CorMethodSemanticsAttr[CorMethodSemanticsAttr["Fire"] = 32] = "Fire";
+			})(exports.CorMethodSemanticsAttr || (exports.CorMethodSemanticsAttr = {}));
+			exports.CorMethodSemanticsAttr;
+			(function (CorParamAttr) {
+			    CorParamAttr[CorParamAttr["In"] = 1] = "In";
+			    CorParamAttr[CorParamAttr["Out"] = 2] = "Out";
+			    CorParamAttr[CorParamAttr["Optional"] = 16] = "Optional";
+			    CorParamAttr[CorParamAttr["HasDefault"] = 4096] = "HasDefault";
+			    CorParamAttr[CorParamAttr["HasFieldMarshal"] = 8192] = "HasFieldMarshal";
+			    CorParamAttr[CorParamAttr["Unused"] = 53216] = "Unused";
+			})(exports.CorParamAttr || (exports.CorParamAttr = {}));
+			exports.CorParamAttr;
+			(function (CorPropertyAttr) {
+			    CorPropertyAttr[CorPropertyAttr["SpecialName"] = 512] = "SpecialName";
+			    CorPropertyAttr[CorPropertyAttr["RtSpecialName"] = 1024] = "RtSpecialName";
+			    CorPropertyAttr[CorPropertyAttr["HasDefault"] = 4096] = "HasDefault";
+			    CorPropertyAttr[CorPropertyAttr["Unused"] = 59903] = "Unused";
+			})(exports.CorPropertyAttr || (exports.CorPropertyAttr = {}));
+			exports.CorPropertyAttr;
+			(function (CorTypeAttr) {
+			    CorTypeAttr[CorTypeAttr["v__Mask"] = 7] = "v__Mask";
+			    CorTypeAttr[CorTypeAttr["v_NotPublic"] = 0] = "v_NotPublic";
+			    CorTypeAttr[CorTypeAttr["v_Public"] = 1] = "v_Public";
+			    CorTypeAttr[CorTypeAttr["v_NestedPublic"] = 2] = "v_NestedPublic";
+			    CorTypeAttr[CorTypeAttr["v_NestedPrivate"] = 3] = "v_NestedPrivate";
+			    CorTypeAttr[CorTypeAttr["v_NestedFamily"] = 4] = "v_NestedFamily";
+			    CorTypeAttr[CorTypeAttr["v_NestedAssembly"] = 5] = "v_NestedAssembly";
+			    CorTypeAttr[CorTypeAttr["v_NestedFamAndAssem"] = 6] = "v_NestedFamAndAssem";
+			    CorTypeAttr[CorTypeAttr["v_NestedFamOrAssem"] = 7] = "v_NestedFamOrAssem";
+			    CorTypeAttr[CorTypeAttr["l__Mask"] = 24] = "l__Mask";
+			    CorTypeAttr[CorTypeAttr["l_AutoLayout"] = 0] = "l_AutoLayout";
+			    CorTypeAttr[CorTypeAttr["l_SequentialLayout"] = 8] = "l_SequentialLayout";
+			    CorTypeAttr[CorTypeAttr["l_ExplicitLayout"] = 16] = "l_ExplicitLayout";
+			    CorTypeAttr[CorTypeAttr["cs__Mask"] = 96] = "cs__Mask";
+			    CorTypeAttr[CorTypeAttr["cs_Class"] = 0] = "cs_Class";
+			    CorTypeAttr[CorTypeAttr["cs_Interface"] = 32] = "cs_Interface";
+			    CorTypeAttr[CorTypeAttr["Abstract"] = 128] = "Abstract";
+			    CorTypeAttr[CorTypeAttr["Sealed"] = 256] = "Sealed";
+			    CorTypeAttr[CorTypeAttr["SpecialName"] = 1024] = "SpecialName";
+			    CorTypeAttr[CorTypeAttr["Import"] = 4096] = "Import";
+			    CorTypeAttr[CorTypeAttr["Serializable"] = 8192] = "Serializable";
+			    CorTypeAttr[CorTypeAttr["WindowsRuntime"] = 16384] = "WindowsRuntime";
+			    CorTypeAttr[CorTypeAttr["sf__Mask"] = 196608] = "sf__Mask";
+			    CorTypeAttr[CorTypeAttr["sf_AnsiClass"] = 0] = "sf_AnsiClass";
+			    CorTypeAttr[CorTypeAttr["sf_UnicodeClass"] = 65536] = "sf_UnicodeClass";
+			    CorTypeAttr[CorTypeAttr["sf_AutoClass"] = 131072] = "sf_AutoClass";
+			    CorTypeAttr[CorTypeAttr["sf_CustomFormatClass"] = 196608] = "sf_CustomFormatClass";
+			    CorTypeAttr[CorTypeAttr["CustomFormatMask"] = 12582912] = "CustomFormatMask";
+			    CorTypeAttr[CorTypeAttr["BeforeFieldInit"] = 1048576] = "BeforeFieldInit";
+			    CorTypeAttr[CorTypeAttr["Forwarder"] = 2097152] = "Forwarder";
+			    CorTypeAttr[CorTypeAttr["RtSpecialName"] = 2048] = "RtSpecialName";
+			    CorTypeAttr[CorTypeAttr["HasSecurity"] = 262144] = "HasSecurity";
+			})(exports.CorTypeAttr || (exports.CorTypeAttr = {}));
+			exports.CorTypeAttr;
+			(function (CorDeclSecurity) {
+			    CorDeclSecurity[CorDeclSecurity["ActionNil"] = 0] = "ActionNil";
+			    CorDeclSecurity[CorDeclSecurity["Request"] = 1] = "Request";
+			    CorDeclSecurity[CorDeclSecurity["Demand"] = 2] = "Demand";
+			    CorDeclSecurity[CorDeclSecurity["Assert"] = 3] = "Assert";
+			    CorDeclSecurity[CorDeclSecurity["Deny"] = 4] = "Deny";
+			    CorDeclSecurity[CorDeclSecurity["PermitOnly"] = 5] = "PermitOnly";
+			    CorDeclSecurity[CorDeclSecurity["LinktimeCheck"] = 6] = "LinktimeCheck";
+			    CorDeclSecurity[CorDeclSecurity["InheritanceCheck"] = 7] = "InheritanceCheck";
+			    CorDeclSecurity[CorDeclSecurity["RequestMinimum"] = 8] = "RequestMinimum";
+			    CorDeclSecurity[CorDeclSecurity["RequestOptional"] = 9] = "RequestOptional";
+			    CorDeclSecurity[CorDeclSecurity["RequestRefuse"] = 10] = "RequestRefuse";
+			    CorDeclSecurity[CorDeclSecurity["PrejitGrant"] = 11] = "PrejitGrant";
+			    CorDeclSecurity[CorDeclSecurity["PrejitDenied"] = 12] = "PrejitDenied";
+			    CorDeclSecurity[CorDeclSecurity["NonCasDemand"] = 13] = "NonCasDemand";
+			    CorDeclSecurity[CorDeclSecurity["NonCasLinkDemand"] = 14] = "NonCasLinkDemand";
+			    CorDeclSecurity[CorDeclSecurity["NonCasInheritance"] = 15] = "NonCasInheritance";
+			})(exports.CorDeclSecurity || (exports.CorDeclSecurity = {}));
+			exports.CorDeclSecurity;
+			(function (CorElementType) {
+			    CorElementType[CorElementType["End"] = 0] = "End";
+			    CorElementType[CorElementType["Void"] = 1] = "Void";
+			    CorElementType[CorElementType["Boolean"] = 2] = "Boolean";
+			    CorElementType[CorElementType["Char"] = 3] = "Char";
+			    CorElementType[CorElementType["I1"] = 4] = "I1";
+			    CorElementType[CorElementType["U1"] = 5] = "U1";
+			    CorElementType[CorElementType["I2"] = 6] = "I2";
+			    CorElementType[CorElementType["U2"] = 7] = "U2";
+			    CorElementType[CorElementType["I4"] = 8] = "I4";
+			    CorElementType[CorElementType["U4"] = 9] = "U4";
+			    CorElementType[CorElementType["I8"] = 10] = "I8";
+			    CorElementType[CorElementType["U8"] = 11] = "U8";
+			    CorElementType[CorElementType["R4"] = 12] = "R4";
+			    CorElementType[CorElementType["R8"] = 13] = "R8";
+			    CorElementType[CorElementType["String"] = 14] = "String";
+			    CorElementType[CorElementType["Ptr"] = 15] = "Ptr";
+			    CorElementType[CorElementType["ByRef"] = 16] = "ByRef";
+			    CorElementType[CorElementType["ValueType"] = 17] = "ValueType";
+			    CorElementType[CorElementType["Class"] = 18] = "Class";
+			    CorElementType[CorElementType["Var"] = 19] = "Var";
+			    CorElementType[CorElementType["Array"] = 20] = "Array";
+			    CorElementType[CorElementType["GenericInst"] = 21] = "GenericInst";
+			    CorElementType[CorElementType["TypedByRef"] = 22] = "TypedByRef";
+			    CorElementType[CorElementType["I"] = 24] = "I";
+			    CorElementType[CorElementType["U"] = 25] = "U";
+			    CorElementType[CorElementType["FnPtr"] = 27] = "FnPtr";
+			    CorElementType[CorElementType["Object"] = 28] = "Object";
+			    CorElementType[CorElementType["SzArray"] = 29] = "SzArray";
+			    CorElementType[CorElementType["MVar"] = 30] = "MVar";
+			    CorElementType[CorElementType["CModReqd"] = 31] = "CModReqd";
+			    CorElementType[CorElementType["CModOpt"] = 32] = "CModOpt";
+			    CorElementType[CorElementType["Internal"] = 33] = "Internal";
+			    CorElementType[CorElementType["Modifier"] = 64] = "Modifier";
+			    CorElementType[CorElementType["Sentinel"] = 65] = "Sentinel";
+			    CorElementType[CorElementType["Pinned"] = 69] = "Pinned";
+			    CorElementType[CorElementType["R4HFA"] = 70] = "R4HFA";
+			    CorElementType[CorElementType["R8HFA"] = 71] = "R8HFA";
+			})(exports.CorElementType || (exports.CorElementType = {}));
+			exports.CorElementType;
+			(function (ILMethodFlags) {
+			    ILMethodFlags[ILMethodFlags["InitLocals"] = 16] = "InitLocals";
+			    ILMethodFlags[ILMethodFlags["MoreSects"] = 8] = "MoreSects";
+			    ILMethodFlags[ILMethodFlags["CompressedIL"] = 64] = "CompressedIL";
+			    ILMethodFlags[ILMethodFlags["Format__Mask"] = 3] = "Format__Mask";
+			    ILMethodFlags[ILMethodFlags["Format_TinyFormat"] = 2] = "Format_TinyFormat";
+			    ILMethodFlags[ILMethodFlags["Format_SmallFormat"] = 0] = "Format_SmallFormat";
+			    ILMethodFlags[ILMethodFlags["Format_FatFormat"] = 3] = "Format_FatFormat";
+			    ILMethodFlags[ILMethodFlags["HeaderSizeMask"] = 61440] = "HeaderSizeMask";
+			    ILMethodFlags[ILMethodFlags["HeaderSize"] = 12288] = "HeaderSize";
+			})(exports.ILMethodFlags || (exports.ILMethodFlags = {}));
+			exports.ILMethodFlags;
+			(function (ILOpcode) {
+			    ILOpcode[ILOpcode["nop"] = 0] = "nop";
+			    ILOpcode[ILOpcode["break"] = 1] = "break";
+			    ILOpcode[ILOpcode["ldarg_0"] = 2] = "ldarg_0";
+			    ILOpcode[ILOpcode["ldarg_1"] = 3] = "ldarg_1";
+			    ILOpcode[ILOpcode["ldarg_2"] = 4] = "ldarg_2";
+			    ILOpcode[ILOpcode["ldarg_3"] = 5] = "ldarg_3";
+			    ILOpcode[ILOpcode["ldloc_0"] = 6] = "ldloc_0";
+			    ILOpcode[ILOpcode["ldloc_1"] = 7] = "ldloc_1";
+			    ILOpcode[ILOpcode["ldloc_2"] = 8] = "ldloc_2";
+			    ILOpcode[ILOpcode["ldloc_3"] = 9] = "ldloc_3";
+			    ILOpcode[ILOpcode["stloc_0"] = 10] = "stloc_0";
+			    ILOpcode[ILOpcode["stloc_1"] = 11] = "stloc_1";
+			    ILOpcode[ILOpcode["stloc_2"] = 12] = "stloc_2";
+			    ILOpcode[ILOpcode["stloc_3"] = 13] = "stloc_3";
+			    ILOpcode[ILOpcode["ldarg_s"] = 14] = "ldarg_s";
+			    ILOpcode[ILOpcode["ldarga_s"] = 15] = "ldarga_s";
+			    ILOpcode[ILOpcode["starg_s"] = 16] = "starg_s";
+			    ILOpcode[ILOpcode["ldloc_s"] = 17] = "ldloc_s";
+			    ILOpcode[ILOpcode["ldloca_s"] = 18] = "ldloca_s";
+			    ILOpcode[ILOpcode["stloc_s"] = 19] = "stloc_s";
+			    ILOpcode[ILOpcode["ldnull"] = 20] = "ldnull";
+			    ILOpcode[ILOpcode["ldc_i4_m1"] = 21] = "ldc_i4_m1";
+			    ILOpcode[ILOpcode["ldc_i4_0"] = 22] = "ldc_i4_0";
+			    ILOpcode[ILOpcode["ldc_i4_1"] = 23] = "ldc_i4_1";
+			    ILOpcode[ILOpcode["ldc_i4_2"] = 24] = "ldc_i4_2";
+			    ILOpcode[ILOpcode["ldc_i4_3"] = 25] = "ldc_i4_3";
+			    ILOpcode[ILOpcode["ldc_i4_4"] = 26] = "ldc_i4_4";
+			    ILOpcode[ILOpcode["ldc_i4_5"] = 27] = "ldc_i4_5";
+			    ILOpcode[ILOpcode["ldc_i4_6"] = 28] = "ldc_i4_6";
+			    ILOpcode[ILOpcode["ldc_i4_7"] = 29] = "ldc_i4_7";
+			    ILOpcode[ILOpcode["ldc_i4_8"] = 30] = "ldc_i4_8";
+			    ILOpcode[ILOpcode["ldc_i4_s"] = 31] = "ldc_i4_s";
+			    ILOpcode[ILOpcode["ldc_i4"] = 32] = "ldc_i4";
+			    ILOpcode[ILOpcode["ldc_i8"] = 33] = "ldc_i8";
+			    ILOpcode[ILOpcode["ldc_r4"] = 34] = "ldc_r4";
+			    ILOpcode[ILOpcode["ldc_r8"] = 35] = "ldc_r8";
+			    ILOpcode[ILOpcode["dup"] = 37] = "dup";
+			    ILOpcode[ILOpcode["pop"] = 38] = "pop";
+			    ILOpcode[ILOpcode["jmp"] = 39] = "jmp";
+			    ILOpcode[ILOpcode["call"] = 40] = "call";
+			    ILOpcode[ILOpcode["calli"] = 41] = "calli";
+			    ILOpcode[ILOpcode["ret"] = 42] = "ret";
+			    ILOpcode[ILOpcode["br_s"] = 43] = "br_s";
+			    ILOpcode[ILOpcode["brfalse_s"] = 44] = "brfalse_s";
+			    ILOpcode[ILOpcode["brtrue_s"] = 45] = "brtrue_s";
+			    ILOpcode[ILOpcode["beq_s"] = 46] = "beq_s";
+			    ILOpcode[ILOpcode["bge_s"] = 47] = "bge_s";
+			    ILOpcode[ILOpcode["bgt_s"] = 48] = "bgt_s";
+			    ILOpcode[ILOpcode["ble_s"] = 49] = "ble_s";
+			    ILOpcode[ILOpcode["blt_s"] = 50] = "blt_s";
+			    ILOpcode[ILOpcode["bne_un_s"] = 51] = "bne_un_s";
+			    ILOpcode[ILOpcode["bge_un_s"] = 52] = "bge_un_s";
+			    ILOpcode[ILOpcode["bgt_un_s"] = 53] = "bgt_un_s";
+			    ILOpcode[ILOpcode["ble_un_s"] = 54] = "ble_un_s";
+			    ILOpcode[ILOpcode["blt_un_s"] = 55] = "blt_un_s";
+			    ILOpcode[ILOpcode["br"] = 56] = "br";
+			    ILOpcode[ILOpcode["brfalse"] = 57] = "brfalse";
+			    ILOpcode[ILOpcode["brtrue"] = 58] = "brtrue";
+			    ILOpcode[ILOpcode["beq"] = 59] = "beq";
+			    ILOpcode[ILOpcode["bge"] = 60] = "bge";
+			    ILOpcode[ILOpcode["bgt"] = 61] = "bgt";
+			    ILOpcode[ILOpcode["ble"] = 62] = "ble";
+			    ILOpcode[ILOpcode["blt"] = 63] = "blt";
+			    ILOpcode[ILOpcode["bne_un"] = 64] = "bne_un";
+			    ILOpcode[ILOpcode["bge_un"] = 65] = "bge_un";
+			    ILOpcode[ILOpcode["bgt_un"] = 66] = "bgt_un";
+			    ILOpcode[ILOpcode["ble_un"] = 67] = "ble_un";
+			    ILOpcode[ILOpcode["blt_un"] = 68] = "blt_un";
+			    ILOpcode[ILOpcode["switch"] = 69] = "switch";
+			    ILOpcode[ILOpcode["ldind_i1"] = 70] = "ldind_i1";
+			    ILOpcode[ILOpcode["ldind_u1"] = 71] = "ldind_u1";
+			    ILOpcode[ILOpcode["ldind_i2"] = 72] = "ldind_i2";
+			    ILOpcode[ILOpcode["ldind_u2"] = 73] = "ldind_u2";
+			    ILOpcode[ILOpcode["ldind_i4"] = 74] = "ldind_i4";
+			    ILOpcode[ILOpcode["ldind_u4"] = 75] = "ldind_u4";
+			    ILOpcode[ILOpcode["ldind_i8"] = 76] = "ldind_i8";
+			    ILOpcode[ILOpcode["ldind_i"] = 77] = "ldind_i";
+			    ILOpcode[ILOpcode["ldind_r4"] = 78] = "ldind_r4";
+			    ILOpcode[ILOpcode["ldind_r8"] = 79] = "ldind_r8";
+			    ILOpcode[ILOpcode["ldind_ref"] = 80] = "ldind_ref";
+			    ILOpcode[ILOpcode["stind_ref"] = 81] = "stind_ref";
+			    ILOpcode[ILOpcode["stind_i1"] = 82] = "stind_i1";
+			    ILOpcode[ILOpcode["stind_i2"] = 83] = "stind_i2";
+			    ILOpcode[ILOpcode["stind_i4"] = 84] = "stind_i4";
+			    ILOpcode[ILOpcode["stind_i8"] = 85] = "stind_i8";
+			    ILOpcode[ILOpcode["stind_r4"] = 86] = "stind_r4";
+			    ILOpcode[ILOpcode["stind_r8"] = 87] = "stind_r8";
+			    ILOpcode[ILOpcode["add"] = 88] = "add";
+			    ILOpcode[ILOpcode["sub"] = 89] = "sub";
+			    ILOpcode[ILOpcode["mul"] = 90] = "mul";
+			    ILOpcode[ILOpcode["div"] = 91] = "div";
+			    ILOpcode[ILOpcode["div_un"] = 92] = "div_un";
+			    ILOpcode[ILOpcode["rem"] = 93] = "rem";
+			    ILOpcode[ILOpcode["rem_un"] = 94] = "rem_un";
+			    ILOpcode[ILOpcode["and"] = 95] = "and";
+			    ILOpcode[ILOpcode["or"] = 96] = "or";
+			    ILOpcode[ILOpcode["xor"] = 97] = "xor";
+			    ILOpcode[ILOpcode["shl"] = 98] = "shl";
+			    ILOpcode[ILOpcode["shr"] = 99] = "shr";
+			    ILOpcode[ILOpcode["shr_un"] = 100] = "shr_un";
+			    ILOpcode[ILOpcode["neg"] = 101] = "neg";
+			    ILOpcode[ILOpcode["not"] = 102] = "not";
+			    ILOpcode[ILOpcode["conv_i1"] = 103] = "conv_i1";
+			    ILOpcode[ILOpcode["conv_i2"] = 104] = "conv_i2";
+			    ILOpcode[ILOpcode["conv_i4"] = 105] = "conv_i4";
+			    ILOpcode[ILOpcode["conv_i8"] = 106] = "conv_i8";
+			    ILOpcode[ILOpcode["conv_r4"] = 107] = "conv_r4";
+			    ILOpcode[ILOpcode["conv_r8"] = 108] = "conv_r8";
+			    ILOpcode[ILOpcode["conv_u4"] = 109] = "conv_u4";
+			    ILOpcode[ILOpcode["conv_u8"] = 110] = "conv_u8";
+			    ILOpcode[ILOpcode["callvirt"] = 111] = "callvirt";
+			    ILOpcode[ILOpcode["cpobj"] = 112] = "cpobj";
+			    ILOpcode[ILOpcode["ldobj"] = 113] = "ldobj";
+			    ILOpcode[ILOpcode["ldstr"] = 114] = "ldstr";
+			    ILOpcode[ILOpcode["newobj"] = 115] = "newobj";
+			    ILOpcode[ILOpcode["castclass"] = 116] = "castclass";
+			    ILOpcode[ILOpcode["isinst"] = 117] = "isinst";
+			    ILOpcode[ILOpcode["conv_r_un"] = 118] = "conv_r_un";
+			    ILOpcode[ILOpcode["unbox"] = 121] = "unbox";
+			    ILOpcode[ILOpcode["throw"] = 122] = "throw";
+			    ILOpcode[ILOpcode["ldfld"] = 123] = "ldfld";
+			    ILOpcode[ILOpcode["ldflda"] = 124] = "ldflda";
+			    ILOpcode[ILOpcode["stfld"] = 125] = "stfld";
+			    ILOpcode[ILOpcode["ldsfld"] = 126] = "ldsfld";
+			    ILOpcode[ILOpcode["ldsflda"] = 127] = "ldsflda";
+			    ILOpcode[ILOpcode["stsfld"] = 128] = "stsfld";
+			    ILOpcode[ILOpcode["stobj"] = 129] = "stobj";
+			    ILOpcode[ILOpcode["conv_ovf_i1_un"] = 130] = "conv_ovf_i1_un";
+			    ILOpcode[ILOpcode["conv_ovf_i2_un"] = 131] = "conv_ovf_i2_un";
+			    ILOpcode[ILOpcode["conv_ovf_i4_un"] = 132] = "conv_ovf_i4_un";
+			    ILOpcode[ILOpcode["conv_ovf_i8_un"] = 133] = "conv_ovf_i8_un";
+			    ILOpcode[ILOpcode["conv_ovf_u1_un"] = 134] = "conv_ovf_u1_un";
+			    ILOpcode[ILOpcode["conv_ovf_u2_un"] = 135] = "conv_ovf_u2_un";
+			    ILOpcode[ILOpcode["conv_ovf_u4_un"] = 136] = "conv_ovf_u4_un";
+			    ILOpcode[ILOpcode["conv_ovf_u8_un"] = 137] = "conv_ovf_u8_un";
+			    ILOpcode[ILOpcode["conv_ovf_i_un"] = 138] = "conv_ovf_i_un";
+			    ILOpcode[ILOpcode["conv_ovf_u_un"] = 139] = "conv_ovf_u_un";
+			    ILOpcode[ILOpcode["box"] = 140] = "box";
+			    ILOpcode[ILOpcode["newarr"] = 141] = "newarr";
+			    ILOpcode[ILOpcode["ldlen"] = 142] = "ldlen";
+			    ILOpcode[ILOpcode["ldelema"] = 143] = "ldelema";
+			    ILOpcode[ILOpcode["ldelem_i1"] = 144] = "ldelem_i1";
+			    ILOpcode[ILOpcode["ldelem_u1"] = 145] = "ldelem_u1";
+			    ILOpcode[ILOpcode["ldelem_i2"] = 146] = "ldelem_i2";
+			    ILOpcode[ILOpcode["ldelem_u2"] = 147] = "ldelem_u2";
+			    ILOpcode[ILOpcode["ldelem_i4"] = 148] = "ldelem_i4";
+			    ILOpcode[ILOpcode["ldelem_u4"] = 149] = "ldelem_u4";
+			    ILOpcode[ILOpcode["ldelem_i8"] = 150] = "ldelem_i8";
+			    ILOpcode[ILOpcode["ldelem_i"] = 151] = "ldelem_i";
+			    ILOpcode[ILOpcode["ldelem_r4"] = 152] = "ldelem_r4";
+			    ILOpcode[ILOpcode["ldelem_r8"] = 153] = "ldelem_r8";
+			    ILOpcode[ILOpcode["ldelem_ref"] = 154] = "ldelem_ref";
+			    ILOpcode[ILOpcode["stelem_i"] = 155] = "stelem_i";
+			    ILOpcode[ILOpcode["stelem_i1"] = 156] = "stelem_i1";
+			    ILOpcode[ILOpcode["stelem_i2"] = 157] = "stelem_i2";
+			    ILOpcode[ILOpcode["stelem_i4"] = 158] = "stelem_i4";
+			    ILOpcode[ILOpcode["stelem_i8"] = 159] = "stelem_i8";
+			    ILOpcode[ILOpcode["stelem_r4"] = 160] = "stelem_r4";
+			    ILOpcode[ILOpcode["stelem_r8"] = 161] = "stelem_r8";
+			    ILOpcode[ILOpcode["stelem_ref"] = 162] = "stelem_ref";
+			    ILOpcode[ILOpcode["ldelem"] = 163] = "ldelem";
+			    ILOpcode[ILOpcode["stelem"] = 164] = "stelem";
+			    ILOpcode[ILOpcode["unbox_any"] = 165] = "unbox_any";
+			    ILOpcode[ILOpcode["conv_ovf_i1"] = 179] = "conv_ovf_i1";
+			    ILOpcode[ILOpcode["conv_ovf_u1"] = 180] = "conv_ovf_u1";
+			    ILOpcode[ILOpcode["conv_ovf_i2"] = 181] = "conv_ovf_i2";
+			    ILOpcode[ILOpcode["conv_ovf_u2"] = 182] = "conv_ovf_u2";
+			    ILOpcode[ILOpcode["conv_ovf_i4"] = 183] = "conv_ovf_i4";
+			    ILOpcode[ILOpcode["conv_ovf_u4"] = 184] = "conv_ovf_u4";
+			    ILOpcode[ILOpcode["conv_ovf_i8"] = 185] = "conv_ovf_i8";
+			    ILOpcode[ILOpcode["conv_ovf_u8"] = 186] = "conv_ovf_u8";
+			    ILOpcode[ILOpcode["refanyval"] = 194] = "refanyval";
+			    ILOpcode[ILOpcode["ckfinite"] = 195] = "ckfinite";
+			    ILOpcode[ILOpcode["mkrefany"] = 198] = "mkrefany";
+			    ILOpcode[ILOpcode["ldtoken"] = 208] = "ldtoken";
+			    ILOpcode[ILOpcode["conv_u2"] = 209] = "conv_u2";
+			    ILOpcode[ILOpcode["conv_u1"] = 210] = "conv_u1";
+			    ILOpcode[ILOpcode["conv_i"] = 211] = "conv_i";
+			    ILOpcode[ILOpcode["conv_ovf_i"] = 212] = "conv_ovf_i";
+			    ILOpcode[ILOpcode["conv_ovf_u"] = 213] = "conv_ovf_u";
+			    ILOpcode[ILOpcode["add_ovf"] = 214] = "add_ovf";
+			    ILOpcode[ILOpcode["add_ovf_un"] = 215] = "add_ovf_un";
+			    ILOpcode[ILOpcode["mul_ovf"] = 216] = "mul_ovf";
+			    ILOpcode[ILOpcode["mul_ovf_un"] = 217] = "mul_ovf_un";
+			    ILOpcode[ILOpcode["sub_ovf"] = 218] = "sub_ovf";
+			    ILOpcode[ILOpcode["sub_ovf_un"] = 219] = "sub_ovf_un";
+			    ILOpcode[ILOpcode["endfinally"] = 220] = "endfinally";
+			    ILOpcode[ILOpcode["leave"] = 221] = "leave";
+			    ILOpcode[ILOpcode["leave_s"] = 222] = "leave_s";
+			    ILOpcode[ILOpcode["stind_i"] = 223] = "stind_i";
+			    ILOpcode[ILOpcode["conv_u"] = 224] = "conv_u";
+			    ILOpcode[ILOpcode["arglist"] = 254] = "arglist";
+			    ILOpcode[ILOpcode["ceq"] = 510] = "ceq";
+			    ILOpcode[ILOpcode["cgt"] = 766] = "cgt";
+			    ILOpcode[ILOpcode["cgt_un"] = 1022] = "cgt_un";
+			    ILOpcode[ILOpcode["clt"] = 1278] = "clt";
+			    ILOpcode[ILOpcode["clt_un"] = 1534] = "clt_un";
+			    ILOpcode[ILOpcode["ldftn"] = 1790] = "ldftn";
+			    ILOpcode[ILOpcode["ldvirtftn"] = 2046] = "ldvirtftn";
+			    ILOpcode[ILOpcode["ldarg"] = 2558] = "ldarg";
+			    ILOpcode[ILOpcode["ldarga"] = 2814] = "ldarga";
+			    ILOpcode[ILOpcode["starg"] = 3070] = "starg";
+			    ILOpcode[ILOpcode["ldloc"] = 3326] = "ldloc";
+			    ILOpcode[ILOpcode["ldloca"] = 3582] = "ldloca";
+			    ILOpcode[ILOpcode["stloc"] = 3838] = "stloc";
+			    ILOpcode[ILOpcode["localloc"] = 4094] = "localloc";
+			    ILOpcode[ILOpcode["endfilter"] = 4606] = "endfilter";
+			    ILOpcode[ILOpcode["unaligned_"] = 4862] = "unaligned_";
+			    ILOpcode[ILOpcode["volatile_"] = 5118] = "volatile_";
+			    ILOpcode[ILOpcode["tail_"] = 5374] = "tail_";
+			    ILOpcode[ILOpcode["initobj"] = 5630] = "initobj";
+			    ILOpcode[ILOpcode["constrained_"] = 5886] = "constrained_";
+			    ILOpcode[ILOpcode["cpblk"] = 6142] = "cpblk";
+			    ILOpcode[ILOpcode["initblk"] = 6398] = "initblk";
+			    ILOpcode[ILOpcode["no_"] = 6654] = "no_";
+			    ILOpcode[ILOpcode["rethrow"] = 6910] = "rethrow";
+			    ILOpcode[ILOpcode["sizeof"] = 7422] = "sizeof";
+			    ILOpcode[ILOpcode["refanytype"] = 7678] = "refanytype";
+			    ILOpcode[ILOpcode["readonly_"] = 7934] = "readonly_";
+			})(exports.ILOpcode || (exports.ILOpcode = {}));
+			exports.ILOpcode;
+			(function (ILMethodSectionKind) {
+			    ILMethodSectionKind[ILMethodSectionKind["Kind_Reserved"] = 0] = "Kind_Reserved";
+			    ILMethodSectionKind[ILMethodSectionKind["Kind_EHTable"] = 1] = "Kind_EHTable";
+			    ILMethodSectionKind[ILMethodSectionKind["Kind_OptILTable"] = 2] = "Kind_OptILTable";
+			    ILMethodSectionKind[ILMethodSectionKind["Kind__Mask"] = 63] = "Kind__Mask";
+			    ILMethodSectionKind[ILMethodSectionKind["FatFormat"] = 64] = "FatFormat";
+			    ILMethodSectionKind[ILMethodSectionKind["MoreSects"] = 128] = "MoreSects";
+			})(exports.ILMethodSectionKind || (exports.ILMethodSectionKind = {}));
+			exports.ILMethodSectionKind;
+			(function (ILEHClauseFlags) {
+			    ILEHClauseFlags[ILEHClauseFlags["None"] = 0] = "None";
+			    ILEHClauseFlags[ILEHClauseFlags["Filter"] = 1] = "Filter";
+			    ILEHClauseFlags[ILEHClauseFlags["Finally"] = 2] = "Finally";
+			    ILEHClauseFlags[ILEHClauseFlags["Fault"] = 4] = "Fault";
+			    ILEHClauseFlags[ILEHClauseFlags["Duplicated"] = 8] = "Duplicated";
+			})(exports.ILEHClauseFlags || (exports.ILEHClauseFlags = {}));
+			exports.ILEHClauseFlags;
+			(function (ILEHClauseUsage) {
+			    ILEHClauseUsage[ILEHClauseUsage["None"] = 0] = "None";
+			    ILEHClauseUsage[ILEHClauseUsage["UseClassToken"] = 1] = "UseClassToken";
+			    ILEHClauseUsage[ILEHClauseUsage["UseFilterOffset"] = 2] = "UseFilterOffset";
+			})(exports.ILEHClauseUsage || (exports.ILEHClauseUsage = {}));
+			exports.ILEHClauseUsage;
+
+
+		/***/ },
+		/* 2 */
+		/***/ function(module, exports) {
+			(function (PeErrorType) {
+			    PeErrorType[PeErrorType["Unknown"] = 0] = "Unknown";
+			    PeErrorType[PeErrorType["FileTooShort"] = 1] = "FileTooShort";
+			    PeErrorType[PeErrorType["FileTooLong"] = 2] = "FileTooLong";
+			    PeErrorType[PeErrorType["InvalidOffset"] = 3] = "InvalidOffset";
+			    PeErrorType[PeErrorType["InvalidSize"] = 4] = "InvalidSize";
+			    PeErrorType[PeErrorType["InvalidFilePointer"] = 5] = "InvalidFilePointer";
+			    PeErrorType[PeErrorType["InvalidDosSignature"] = 6] = "InvalidDosSignature";
+			    PeErrorType[PeErrorType["InvalidPeSignature"] = 7] = "InvalidPeSignature";
+			    PeErrorType[PeErrorType["InvalidSizeOfOptionalHeader"] = 8] = "InvalidSizeOfOptionalHeader";
+			    PeErrorType[PeErrorType["InvalidOptionalHeaderMagic"] = 9] = "InvalidOptionalHeaderMagic";
+			    PeErrorType[PeErrorType["InvalidNumberOfDataDirectories"] = 10] = "InvalidNumberOfDataDirectories";
+			    PeErrorType[PeErrorType["InvalidSizeOfCliHeader"] = 11] = "InvalidSizeOfCliHeader";
+			    PeErrorType[PeErrorType["InvalidMdSignature"] = 12] = "InvalidMdSignature";
+			    PeErrorType[PeErrorType["InvalidMethodHeaderFormat"] = 13] = "InvalidMethodHeaderFormat";
+			    PeErrorType[PeErrorType["InvalidILOpcode"] = 14] = "InvalidILOpcode";
+			})(exports.PeErrorType || (exports.PeErrorType = {}));
+			exports.PeErrorType;
+			class PeError {
+			    constructor(type, offset, size, value) {
+			        this.type = type;
+			        this.offset = offset;
+			        this.size = size;
+			        this.value = value;
+			    }
+			}
+			exports.PeError = PeError;
+
+
+		/***/ },
+		/* 3 */
+		/***/ function(module, exports, __webpack_require__) {
+			const PE = __webpack_require__(1);
+			const U = __webpack_require__(4);
+			const E = __webpack_require__(2);
+			function load(buf) {
+			    const d = new DataView(buf);
+			    const pe = {
+			        data: d
+			    };
+			    Object.assign(pe, loadHeaders(d));
+			    if (U.hasMetadata(pe))
+			        Object.assign(pe, loadMetadata(pe));
+			    return pe;
+			}
+			exports.load = load;
+			function loadHeaders(d) {
+			    chk_fsz(d.byteLength);
+			    let pos = 0;
+			    const dosHeader = loadDosHeaders(d, pos);
+			    pos = dosHeader.e_lfanew.value;
+			    const peSignature = loadU4(d, pos);
+			    if (peSignature.value != PE.ntSignature)
+			        err(E.PeErrorType.InvalidPeSignature, peSignature);
+			    pos += peSignature._sz;
+			    const fileHeader = loadFileHeader(d, pos);
+			    pos += fileHeader._sz;
+			    const optionalHeader = loadOptionalHeader(d, pos);
+			    if (fileHeader.SizeOfOptionalHeader.value != optionalHeader._sz)
+			        err(E.PeErrorType.InvalidSizeOfOptionalHeader, fileHeader.SizeOfOptionalHeader);
+			    pos += optionalHeader._sz;
+			    const sectionHeaders = loadSectionHeaders(d, pos, fileHeader.NumberOfSections.value);
+			    return {
+			        dosHeader,
+			        peSignature,
+			        fileHeader,
+			        optionalHeader,
+			        sectionHeaders,
+			    };
+			}
+			function loadDosHeaders(d, _off) {
+			    let pos = _off;
+			    const e_magic = loadU2(d, pos);
+			    pos += e_magic._sz;
+			    if (e_magic.value != PE.dosSignature)
+			        err(E.PeErrorType.InvalidDosSignature, e_magic);
+			    const e_cblp = loadU2(d, pos);
+			    pos += e_cblp._sz;
+			    const e_cp = loadU2(d, pos);
+			    pos += e_cp._sz;
+			    const e_crlc = loadU2(d, pos);
+			    pos += e_crlc._sz;
+			    const e_cparhdr = loadU2(d, pos);
+			    pos += e_cparhdr._sz;
+			    const e_minalloc = loadU2(d, pos);
+			    pos += e_minalloc._sz;
+			    const e_maxalloc = loadU2(d, pos);
+			    pos += e_maxalloc._sz;
+			    const e_ss = loadU2(d, pos);
+			    pos += e_ss._sz;
+			    const e_sp = loadU2(d, pos);
+			    pos += e_sp._sz;
+			    const e_csum = loadU2(d, pos);
+			    pos += e_csum._sz;
+			    const e_ip = loadU2(d, pos);
+			    pos += e_ip._sz;
+			    const e_cs = loadU2(d, pos);
+			    pos += e_cs._sz;
+			    const e_lfarlc = loadU2(d, pos);
+			    pos += e_lfarlc._sz;
+			    const e_ovno = loadU2(d, pos);
+			    pos += e_ovno._sz;
+			    const e_res = loadFileData(d, pos, 2 * 4);
+			    pos += e_res._sz;
+			    const e_oemid = loadU2(d, pos);
+			    pos += e_oemid._sz;
+			    const e_oeminfo = loadU2(d, pos);
+			    pos += e_oeminfo._sz;
+			    const e_res2 = loadFileData(d, pos, 2 * 10);
+			    pos += e_res2._sz;
+			    const e_lfanew = loadU4(d, pos);
+			    pos += e_lfanew._sz;
+			    chk_fp(d, e_lfanew, 4);
+			    return {
+			        _off, _sz: pos - _off,
+			        e_magic,
+			        e_cblp,
+			        e_cp,
+			        e_crlc,
+			        e_cparhdr,
+			        e_minalloc,
+			        e_maxalloc,
+			        e_ss,
+			        e_sp,
+			        e_csum,
+			        e_ip,
+			        e_cs,
+			        e_lfarlc,
+			        e_ovno,
+			        e_res,
+			        e_oemid,
+			        e_oeminfo,
+			        e_res2,
+			        e_lfanew,
+			    };
+			}
+			function loadFileHeader(d, _off) {
+			    let pos = _off;
+			    const Machine = loadE2(d, pos);
+			    pos += Machine._sz;
+			    const NumberOfSections = loadU2(d, pos);
+			    pos += NumberOfSections._sz;
+			    const TimeDateStamp = loadU4(d, pos);
+			    pos += TimeDateStamp._sz;
+			    const PointerToSymbolTable = loadU4(d, pos);
+			    pos += PointerToSymbolTable._sz;
+			    const NumberOfSymbols = loadU4(d, pos);
+			    pos += NumberOfSymbols._sz;
+			    const SizeOfOptionalHeader = loadU2(d, pos);
+			    pos += SizeOfOptionalHeader._sz;
+			    const Characteristics = loadE2(d, pos);
+			    pos += Characteristics._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        Machine,
+			        NumberOfSections,
+			        TimeDateStamp,
+			        PointerToSymbolTable,
+			        NumberOfSymbols,
+			        SizeOfOptionalHeader,
+			        Characteristics,
+			    };
+			}
+			function loadOptionalHeader(d, _off) {
+			    chk(d, _off, 2);
+			    const magic = d.getUint16(_off, true);
+			    switch (magic) {
+			        case PE.ntOptHdr32Magic: return loadOptionalHeader32(d, _off);
+			        case PE.ntOptHdr64Magic: return loadOptionalHeader64(d, _off);
+			        default: throw new E.PeError(E.PeErrorType.InvalidOptionalHeaderMagic, _off, 2, magic);
+			    }
+			}
+			function loadOptionalHeader32(d, _off) {
+			    let pos = _off;
+			    const Magic = loadU2(d, pos);
+			    pos += Magic._sz;
+			    if (Magic.value != PE.ntOptHdr32Magic)
+			        err(E.PeErrorType.InvalidOptionalHeaderMagic, Magic);
+			    const MajorLinkerVersion = loadU1(d, pos);
+			    pos += MajorLinkerVersion._sz;
+			    const MinorLinkerVersion = loadU1(d, pos);
+			    pos += MinorLinkerVersion._sz;
+			    const SizeOfCode = loadU4(d, pos);
+			    pos += SizeOfCode._sz;
+			    const SizeOfInitializedData = loadU4(d, pos);
+			    pos += SizeOfInitializedData._sz;
+			    const SizeOfUninitializedData = loadU4(d, pos);
+			    pos += SizeOfUninitializedData._sz;
+			    const AddressOfEntryPoint = loadU4(d, pos);
+			    pos += AddressOfEntryPoint._sz;
+			    const BaseOfCode = loadU4(d, pos);
+			    pos += BaseOfCode._sz;
+			    const BaseOfData = loadU4(d, pos);
+			    pos += BaseOfData._sz;
+			    const ImageBase = loadU4(d, pos);
+			    pos += ImageBase._sz;
+			    const SectionAlignment = loadU4(d, pos);
+			    pos += SectionAlignment._sz;
+			    const FileAlignment = loadU4(d, pos);
+			    pos += FileAlignment._sz;
+			    const MajorOperatingSystemVersion = loadU2(d, pos);
+			    pos += MajorOperatingSystemVersion._sz;
+			    const MinorOperatingSystemVersion = loadU2(d, pos);
+			    pos += MinorOperatingSystemVersion._sz;
+			    const MajorImageVersion = loadU2(d, pos);
+			    pos += MajorImageVersion._sz;
+			    const MinorImageVersion = loadU2(d, pos);
+			    pos += MinorImageVersion._sz;
+			    const MajorSubsystemVersion = loadU2(d, pos);
+			    pos += MajorSubsystemVersion._sz;
+			    const MinorSubsystemVersion = loadU2(d, pos);
+			    pos += MinorSubsystemVersion._sz;
+			    const Win32VersionValue = loadU4(d, pos);
+			    pos += Win32VersionValue._sz;
+			    const SizeOfImage = loadU4(d, pos);
+			    pos += SizeOfImage._sz;
+			    const SizeOfHeaders = loadU4(d, pos);
+			    pos += SizeOfHeaders._sz;
+			    const CheckSum = loadU4(d, pos);
+			    pos += CheckSum._sz;
+			    const Subsystem = loadE2(d, pos);
+			    pos += Subsystem._sz;
+			    const DllCharacteristics = loadE2(d, pos);
+			    pos += DllCharacteristics._sz;
+			    const SizeOfStackReserve = loadU4(d, pos);
+			    pos += SizeOfStackReserve._sz;
+			    const SizeOfStackCommit = loadU4(d, pos);
+			    pos += SizeOfStackCommit._sz;
+			    const SizeOfHeapReserve = loadU4(d, pos);
+			    pos += SizeOfHeapReserve._sz;
+			    const SizeOfHeapCommit = loadU4(d, pos);
+			    pos += SizeOfHeapCommit._sz;
+			    const LoaderFlags = loadU4(d, pos);
+			    pos += LoaderFlags._sz;
+			    const NumberOfRvaAndSizes = loadU4(d, pos);
+			    pos += NumberOfRvaAndSizes._sz;
+			    if (NumberOfRvaAndSizes.value != PE.numberOfDataDirectories)
+			        err(E.PeErrorType.InvalidNumberOfDataDirectories, NumberOfRvaAndSizes);
+			    const DataDirectories = loadFileDataVecByCount(d, pos, PE.numberOfDataDirectories, loadDataDirectory);
+			    pos += DataDirectories._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        Magic,
+			        MajorLinkerVersion,
+			        MinorLinkerVersion,
+			        SizeOfCode,
+			        SizeOfInitializedData,
+			        SizeOfUninitializedData,
+			        AddressOfEntryPoint,
+			        BaseOfCode,
+			        BaseOfData,
+			        ImageBase,
+			        SectionAlignment,
+			        FileAlignment,
+			        MajorOperatingSystemVersion,
+			        MinorOperatingSystemVersion,
+			        MajorImageVersion,
+			        MinorImageVersion,
+			        MajorSubsystemVersion,
+			        MinorSubsystemVersion,
+			        Win32VersionValue,
+			        SizeOfImage,
+			        SizeOfHeaders,
+			        CheckSum,
+			        Subsystem,
+			        DllCharacteristics,
+			        SizeOfStackReserve,
+			        SizeOfStackCommit,
+			        SizeOfHeapReserve,
+			        SizeOfHeapCommit,
+			        LoaderFlags,
+			        NumberOfRvaAndSizes,
+			        DataDirectories
+			    };
+			}
+			function loadOptionalHeader64(d, _off) {
+			    let pos = _off;
+			    const Magic = loadU2(d, pos);
+			    pos += Magic._sz;
+			    if (Magic.value != PE.ntOptHdr64Magic)
+			        err(E.PeErrorType.InvalidOptionalHeaderMagic, Magic);
+			    const MajorLinkerVersion = loadU1(d, pos);
+			    pos += MajorLinkerVersion._sz;
+			    const MinorLinkerVersion = loadU1(d, pos);
+			    pos += MinorLinkerVersion._sz;
+			    const SizeOfCode = loadU4(d, pos);
+			    pos += SizeOfCode._sz;
+			    const SizeOfInitializedData = loadU4(d, pos);
+			    pos += SizeOfInitializedData._sz;
+			    const SizeOfUninitializedData = loadU4(d, pos);
+			    pos += SizeOfUninitializedData._sz;
+			    const AddressOfEntryPoint = loadU4(d, pos);
+			    pos += AddressOfEntryPoint._sz;
+			    const BaseOfCode = loadU4(d, pos);
+			    pos += BaseOfCode._sz;
+			    const ImageBase = loadU8(d, pos);
+			    pos += ImageBase._sz;
+			    const SectionAlignment = loadU4(d, pos);
+			    pos += SectionAlignment._sz;
+			    const FileAlignment = loadU4(d, pos);
+			    pos += FileAlignment._sz;
+			    const MajorOperatingSystemVersion = loadU2(d, pos);
+			    pos += MajorOperatingSystemVersion._sz;
+			    const MinorOperatingSystemVersion = loadU2(d, pos);
+			    pos += MinorOperatingSystemVersion._sz;
+			    const MajorImageVersion = loadU2(d, pos);
+			    pos += MajorImageVersion._sz;
+			    const MinorImageVersion = loadU2(d, pos);
+			    pos += MinorImageVersion._sz;
+			    const MajorSubsystemVersion = loadU2(d, pos);
+			    pos += MajorSubsystemVersion._sz;
+			    const MinorSubsystemVersion = loadU2(d, pos);
+			    pos += MinorSubsystemVersion._sz;
+			    const Win32VersionValue = loadU4(d, pos);
+			    pos += Win32VersionValue._sz;
+			    const SizeOfImage = loadU4(d, pos);
+			    pos += SizeOfImage._sz;
+			    const SizeOfHeaders = loadU4(d, pos);
+			    pos += SizeOfHeaders._sz;
+			    const CheckSum = loadU4(d, pos);
+			    pos += CheckSum._sz;
+			    const Subsystem = loadU2(d, pos);
+			    pos += Subsystem._sz;
+			    const DllCharacteristics = loadU2(d, pos);
+			    pos += DllCharacteristics._sz;
+			    const SizeOfStackReserve = loadU8(d, pos);
+			    pos += SizeOfStackReserve._sz;
+			    const SizeOfStackCommit = loadU8(d, pos);
+			    pos += SizeOfStackCommit._sz;
+			    const SizeOfHeapReserve = loadU8(d, pos);
+			    pos += SizeOfHeapReserve._sz;
+			    const SizeOfHeapCommit = loadU8(d, pos);
+			    pos += SizeOfHeapCommit._sz;
+			    const LoaderFlags = loadU4(d, pos);
+			    pos += LoaderFlags._sz;
+			    const NumberOfRvaAndSizes = loadU4(d, pos);
+			    pos += NumberOfRvaAndSizes._sz;
+			    if (NumberOfRvaAndSizes.value != PE.numberOfDataDirectories)
+			        err(E.PeErrorType.InvalidNumberOfDataDirectories, NumberOfRvaAndSizes);
+			    const DataDirectories = loadFileDataVecByCount(d, pos, PE.numberOfDataDirectories, loadDataDirectory);
+			    pos += DataDirectories._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        Magic,
+			        MajorLinkerVersion,
+			        MinorLinkerVersion,
+			        SizeOfCode,
+			        SizeOfInitializedData,
+			        SizeOfUninitializedData,
+			        AddressOfEntryPoint,
+			        BaseOfCode,
+			        ImageBase,
+			        SectionAlignment,
+			        FileAlignment,
+			        MajorOperatingSystemVersion,
+			        MinorOperatingSystemVersion,
+			        MajorImageVersion,
+			        MinorImageVersion,
+			        MajorSubsystemVersion,
+			        MinorSubsystemVersion,
+			        Win32VersionValue,
+			        SizeOfImage,
+			        SizeOfHeaders,
+			        CheckSum,
+			        Subsystem,
+			        DllCharacteristics,
+			        SizeOfStackReserve,
+			        SizeOfStackCommit,
+			        SizeOfHeapReserve,
+			        SizeOfHeapCommit,
+			        LoaderFlags,
+			        NumberOfRvaAndSizes,
+			        DataDirectories
+			    };
+			}
+			function loadDataDirectory(d, _off) {
+			    let pos = _off;
+			    const Rva = loadU4(d, pos);
+			    pos += Rva._sz;
+			    const Size = loadU4(d, pos);
+			    pos += Size._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        Rva,
+			        Size,
+			    };
+			}
+			function loadSectionHeader(d, _off) {
+			    let pos = _off;
+			    const Name = loadFixedSizeAsciiString(d, pos, 8);
+			    pos += Name._sz;
+			    const VirtualSize = loadU4(d, pos);
+			    pos += VirtualSize._sz;
+			    const VirtualAddress = loadU4(d, pos);
+			    pos += VirtualAddress._sz;
+			    const SizeOfRawData = loadU4(d, pos);
+			    pos += SizeOfRawData._sz;
+			    const PointerToRawData = loadU4(d, pos);
+			    pos += PointerToRawData._sz;
+			    const PointerToRelocations = loadU4(d, pos);
+			    pos += PointerToRelocations._sz;
+			    const PointerToLinenumbers = loadU4(d, pos);
+			    pos += PointerToLinenumbers._sz;
+			    const NumberOfRelocations = loadU2(d, pos);
+			    pos += NumberOfRelocations._sz;
+			    const NumberOfLinenumbers = loadU2(d, pos);
+			    pos += NumberOfLinenumbers._sz;
+			    const Characteristics = loadE4(d, pos);
+			    pos += Characteristics._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        Name,
+			        VirtualSize,
+			        VirtualAddress,
+			        SizeOfRawData,
+			        PointerToRawData,
+			        PointerToRelocations,
+			        PointerToLinenumbers,
+			        NumberOfRelocations,
+			        NumberOfLinenumbers,
+			        Characteristics,
+			    };
+			}
+			function loadSectionHeaders(d, _off, count) {
+			    return loadFileDataVecByCount(d, _off, count, loadSectionHeader);
+			}
+			function loadMetadata(pe) {
+			    let pos;
+			    const dd = pe.optionalHeader.DataDirectories.values[PE.DataDirectoryIndex.ComDescriptor];
+			    pos = U.rvaToOffset(pe, dd.Rva.value);
+			    const cliHeader = loadCliHeader(pe.data, pos);
+			    let ManRes;
+			    const ddmr = cliHeader.Resources;
+			    if (ddmr.Rva.value > 0 && ddmr.Size.value > 0) {
+			        pos = U.rvaToOffset(pe, ddmr.Rva.value);
+			        const end = pos + ddmr.Size.value;
+			        ManRes = loadFileDataVecByStop(pe.data, pos, (i) => i._off + i._sz >= end, loadManResItem);
+			    }
+			    let SNSignature;
+			    const ddsn = cliHeader.StrongNameSignature;
+			    if (ddsn.Rva.value > 0 && ddsn.Size.value > 0) {
+			        pos = U.rvaToOffset(pe, ddsn.Rva.value);
+			        SNSignature = loadFileData(pe.data, pos, ddsn.Size.value);
+			    }
+			    pos = U.rvaToOffset(pe, cliHeader.MetaData.Rva.value);
+			    const mdRoot = loadMdRoot(pe.data, pos);
+			    let mdsStrings = null;
+			    let mdsUS = null;
+			    let mdsGuid = null;
+			    let mdsBlob = null;
+			    let mdsTable = null;
+			    const mdOffset = U.rvaToOffset(pe, cliHeader.MetaData.Rva.value);
+			    for (let sh of mdRoot.StreamHeaders.values) {
+			        let pos = mdOffset + sh.Offset.value;
+			        switch (sh.Name.value) {
+			            case PE.mdsNameStrings:
+			                mdsStrings = loadMdsStrings(pe.data, sh, pos);
+			                break;
+			            case PE.mdsNameUS:
+			                mdsUS = loadMdsUS(pe.data, sh, pos);
+			                break;
+			            case PE.mdsNameGuid:
+			                mdsGuid = loadMdsGuid(pe.data, sh, pos);
+			                break;
+			            case PE.mdsNameBlob:
+			                mdsBlob = loadMdsBlob(pe.data, sh, pos);
+			                break;
+			            case PE.mdsNameTable:
+			                mdsTable = loadMdTables(pe.data, pos);
+			                break;
+			        }
+			    }
+			    return Object.assign({
+			        cliHeader,
+			        ManRes,
+			        SNSignature,
+			        mdRoot,
+			        mdsStrings,
+			        mdsUS,
+			        mdsGuid,
+			        mdsBlob,
+			    }, mdsTable);
+			}
+			function loadCliHeader(d, _off) {
+			    let pos = _off;
+			    const cb = loadU4(d, pos);
+			    pos += cb._sz;
+			    const MajorRuntimeVersion = loadU2(d, pos);
+			    pos += MajorRuntimeVersion._sz;
+			    const MinorRuntimeVersion = loadU2(d, pos);
+			    pos += MinorRuntimeVersion._sz;
+			    const MetaData = loadDataDirectory(d, pos);
+			    pos += MetaData._sz;
+			    const Flags = loadE4(d, pos);
+			    pos += Flags._sz;
+			    const EntryPointToken = loadU4(d, pos);
+			    pos += EntryPointToken._sz;
+			    const Resources = loadDataDirectory(d, pos);
+			    pos += Resources._sz;
+			    const StrongNameSignature = loadDataDirectory(d, pos);
+			    pos += StrongNameSignature._sz;
+			    const CodeManagerTable = loadDataDirectory(d, pos);
+			    pos += CodeManagerTable._sz;
+			    const VTableFixups = loadDataDirectory(d, pos);
+			    pos += VTableFixups._sz;
+			    const ExportAddressTableJumps = loadDataDirectory(d, pos);
+			    pos += ExportAddressTableJumps._sz;
+			    const ManagedNativeHeader = loadDataDirectory(d, pos);
+			    pos += ManagedNativeHeader._sz;
+			    if (pos - _off != cb.value)
+			        err(E.PeErrorType.InvalidSizeOfCliHeader, cb);
+			    return {
+			        _off, _sz: pos - _off,
+			        cb,
+			        MajorRuntimeVersion,
+			        MinorRuntimeVersion,
+			        MetaData,
+			        Flags,
+			        EntryPointToken,
+			        Resources,
+			        StrongNameSignature,
+			        CodeManagerTable,
+			        VTableFixups,
+			        ExportAddressTableJumps,
+			        ManagedNativeHeader,
+			    };
+			}
+			function loadManResItem(d, _off) {
+			    let pos = _off;
+			    const Size = loadU4(d, pos);
+			    pos += Size._sz;
+			    const Data = loadFileData(d, pos, Size.value);
+			    pos += Data._sz;
+			    const Padding = loadFileData(d, pos, calculatePaddingSize(Data._sz));
+			    pos += Padding._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        Size,
+			        Data,
+			        Padding,
+			    };
+			}
+			function loadMdRoot(d, _off) {
+			    let pos = _off;
+			    const Signature = loadU4(d, pos);
+			    pos += Signature._sz;
+			    if (Signature.value != PE.mdSignature)
+			        err(E.PeErrorType.InvalidMdSignature, Signature);
+			    const MajorVersion = loadU2(d, pos);
+			    pos += MajorVersion._sz;
+			    const MinorVersion = loadU2(d, pos);
+			    pos += MinorVersion._sz;
+			    const Reserved = loadU4(d, pos);
+			    pos += Reserved._sz;
+			    const VersionLength = loadU4(d, pos);
+			    pos += VersionLength._sz;
+			    const Version = loadNullTerminatedUtf8String(d, pos);
+			    pos += Version._sz;
+			    const VersionPadding = loadFileData(d, pos, calculatePaddingSize(Version._sz));
+			    pos += VersionPadding._sz;
+			    const Flags = loadU2(d, pos);
+			    pos += Flags._sz;
+			    const NumberOfStreams = loadU2(d, pos);
+			    pos += NumberOfStreams._sz;
+			    const StreamHeaders = loadFileDataVecByCount(d, pos, NumberOfStreams.value, loadMdStreamHeader);
+			    pos += StreamHeaders._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        Signature,
+			        MajorVersion,
+			        MinorVersion,
+			        Reserved,
+			        VersionLength,
+			        Version,
+			        VersionPadding,
+			        Flags,
+			        NumberOfStreams,
+			        StreamHeaders,
+			    };
+			}
+			function loadMdStreamHeader(d, _off) {
+			    let pos = _off;
+			    const Offset = loadU4(d, pos);
+			    pos += Offset._sz;
+			    const Size = loadU4(d, pos);
+			    pos += Size._sz;
+			    const Name = loadNullTerminatedAsciiString(d, pos);
+			    pos += Name._sz;
+			    const Padding = loadFileData(d, pos, calculatePaddingSize(Name._sz));
+			    pos += Padding._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        Offset,
+			        Size,
+			        Name,
+			        Padding,
+			    };
+			}
+			function loadMdsStrings(d, sh, _off) {
+			    const end = _off + sh.Size.value;
+			    return loadFileDataVecByStop(d, _off, (i) => (i._off + i._sz) >= end, loadNullTerminatedUtf8String);
+			}
+			function loadMdsUS(d, sh, _off) {
+			    const end = _off + sh.Size.value;
+			    return loadFileDataVecByStop(d, _off, (i) => (i._off + i._sz) >= end, loadMdsUsItem);
+			}
+			function loadMdsUsItem(d, _off) {
+			    let pos = _off;
+			    const compressedSize = loadCompressedUint(d, pos);
+			    pos += compressedSize._sz;
+			    let strSize = 0, suffixLen = 0;
+			    if (compressedSize.value > 0) {
+			        strSize = compressedSize.value - 1;
+			        suffixLen = 1;
+			    }
+			    const userString = loadFixedSizeUnicodeString(d, pos, strSize);
+			    pos += userString._sz;
+			    const suffix = loadFileData(d, pos, suffixLen);
+			    pos += suffix._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        compressedSize,
+			        userString,
+			        suffix,
+			    };
+			}
+			function loadMdsGuid(d, sh, _off) {
+			    const end = _off + sh.Size.value;
+			    return loadFileDataVecByStop(d, _off, (i) => (i._off + i._sz) >= end, (d, o) => loadFileData(d, o, 16));
+			}
+			function loadMdsBlob(d, sh, _off) {
+			    const end = _off + sh.Size.value;
+			    return loadFileDataVecByStop(d, _off, (i) => (i._off + i._sz) >= end, loadMdsBlobItem);
+			}
+			function loadMdsBlobItem(d, _off) {
+			    let pos = _off;
+			    const compressedSize = loadCompressedUint(d, pos);
+			    pos += compressedSize._sz;
+			    const data = loadFileData(d, pos, compressedSize.value);
+			    pos += data._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        compressedSize,
+			        data,
+			    };
+			}
+			function loadMdTables(d, _off) {
+			    let pos = _off;
+			    const mdTableHeader = loadMdTableHeader(d, pos);
+			    pos += mdTableHeader._sz;
+			    const mdTableRows = calMdTableRows(mdTableHeader);
+			    const ctx = getMdtLoadingContext(mdTableHeader, mdTableRows);
+			    let mdtModule = loadFileDataVecByCount(d, pos, mdTableRows[PE.MdTableIndex.Module], (d, o) => loadMdtModule(d, o, ctx));
+			    pos += mdtModule._sz;
+			    let mdtTypeRef = loadFileDataVecByCount(d, pos, mdTableRows[PE.MdTableIndex.TypeRef], (d, o) => loadMdtTypeRef(d, o, ctx));
+			    pos += mdtTypeRef._sz;
+			    let mdtTypeDef = loadFileDataVecByCount(d, pos, mdTableRows[PE.MdTableIndex.TypeDef], (d, o) => loadMdtTypeDef(d, o, ctx));
+			    pos += mdtTypeDef._sz;
+			    let mdtFieldPtr = loadFileDataVecByCount(d, pos, mdTableRows[PE.MdTableIndex.FieldPtr], (d, o) => loadMdtFieldPtr(d, o, ctx));
+			    pos += mdtFieldPtr._sz;
+			    let mdtField = loadFileDataVecByCount(d, pos, mdTableRows[PE.MdTableIndex.Field], (d, o) => loadMdtField(d, o, ctx));
+			    pos += mdtField._sz;
+			    let mdtMethodPtr = loadFileDataVecByCount(d, pos, mdTableRows[PE.MdTableIndex.MethodPtr], (d, o) => loadMdtMethodPtr(d, o, ctx));
+			    pos += mdtMethodPtr._sz;
+			    let mdtMethodDef = loadFileDataVecByCount(d, pos, mdTableRows[PE.MdTableIndex.MethodDef], (d, o) => loadMdtMethodDef(d, o, ctx));
+			    pos += mdtMethodDef._sz;
+			    let mdtParamPtr = loadFileDataVecByCount(d, pos, mdTableRows[PE.MdTableIndex.ParamPtr], (d, o) => loadMdtParamPtr(d, o, ctx));
+			    pos += mdtParamPtr._sz;
+			    let mdtParam = loadFileDataVecByCount(d, pos, mdTableRows[PE.MdTableIndex.Param], (d, o) => loadMdtParam(d, o, ctx));
+			    pos += mdtParam._sz;
+			    let mdtInterfaceImpl = loadFileDataVecByCount(d, pos, mdTableRows[PE.MdTableIndex.InterfaceImpl], (d, o) => loadMdtInterfaceImpl(d, o, ctx));
+			    pos += mdtInterfaceImpl._sz;
+			    let mdtMemberRef = loadFileDataVecByCount(d, pos, mdTableRows[PE.MdTableIndex.MemberRef], (d, o) => loadMdtMemberRef(d, o, ctx));
+			    pos += mdtMemberRef._sz;
+			    let mdtConstant = loadFileDataVecByCount(d, pos, mdTableRows[PE.MdTableIndex.Constant], (d, o) => loadMdtConstant(d, o, ctx));
+			    pos += mdtConstant._sz;
+			    let mdtCustomAttribute = loadFileDataVecByCount(d, pos, mdTableRows[PE.MdTableIndex.CustomAttribute], (d, o) => loadMdtCustomAttribute(d, o, ctx));
+			    pos += mdtCustomAttribute._sz;
+			    let mdtFieldMarshal = loadFileDataVecByCount(d, pos, mdTableRows[PE.MdTableIndex.FieldMarshal], (d, o) => loadMdtFieldMarshal(d, o, ctx));
+			    pos += mdtFieldMarshal._sz;
+			    let mdtDeclSecurity = loadFileDataVecByCount(d, pos, mdTableRows[PE.MdTableIndex.DeclSecurity], (d, o) => loadMdtDeclSecurity(d, o, ctx));
+			    pos += mdtDeclSecurity._sz;
+			    let mdtClassLayout = loadFileDataVecByCount(d, pos, mdTableRows[PE.MdTableIndex.ClassLayout], (d, o) => loadMdtClassLayout(d, o, ctx));
+			    pos += mdtClassLayout._sz;
+			    let mdtFieldLayout = loadFileDataVecByCount(d, pos, mdTableRows[PE.MdTableIndex.FieldLayout], (d, o) => loadMdtFieldLayout(d, o, ctx));
+			    pos += mdtFieldLayout._sz;
+			    let mdtStandAloneSig = loadFileDataVecByCount(d, pos, mdTableRows[PE.MdTableIndex.StandAloneSig], (d, o) => loadMdtStandAloneSig(d, o, ctx));
+			    pos += mdtStandAloneSig._sz;
+			    let mdtEventMap = loadFileDataVecByCount(d, pos, mdTableRows[PE.MdTableIndex.EventMap], (d, o) => loadMdtEventMap(d, o, ctx));
+			    pos += mdtEventMap._sz;
+			    let mdtEventPtr = loadFileDataVecByCount(d, pos, mdTableRows[PE.MdTableIndex.EventPtr], (d, o) => loadMdtEventPtr(d, o, ctx));
+			    pos += mdtEventPtr._sz;
+			    let mdtEvent = loadFileDataVecByCount(d, pos, mdTableRows[PE.MdTableIndex.Event], (d, o) => loadMdtEvent(d, o, ctx));
+			    pos += mdtEvent._sz;
+			    let mdtPropertyMap = loadFileDataVecByCount(d, pos, mdTableRows[PE.MdTableIndex.PropertyMap], (d, o) => loadMdtPropertyMap(d, o, ctx));
+			    pos += mdtPropertyMap._sz;
+			    let mdtPropertyPtr = loadFileDataVecByCount(d, pos, mdTableRows[PE.MdTableIndex.PropertyPtr], (d, o) => loadMdtPropertyPtr(d, o, ctx));
+			    pos += mdtPropertyPtr._sz;
+			    let mdtProperty = loadFileDataVecByCount(d, pos, mdTableRows[PE.MdTableIndex.Property], (d, o) => loadMdtProperty(d, o, ctx));
+			    pos += mdtProperty._sz;
+			    let mdtMethodSemantics = loadFileDataVecByCount(d, pos, mdTableRows[PE.MdTableIndex.MethodSemantics], (d, o) => loadMdtMethodSemantics(d, o, ctx));
+			    pos += mdtMethodSemantics._sz;
+			    let mdtMethodImpl = loadFileDataVecByCount(d, pos, mdTableRows[PE.MdTableIndex.MethodImpl], (d, o) => loadMdtMethodImpl(d, o, ctx));
+			    pos += mdtMethodImpl._sz;
+			    let mdtModuleRef = loadFileDataVecByCount(d, pos, mdTableRows[PE.MdTableIndex.ModuleRef], (d, o) => loadMdtModuleRef(d, o, ctx));
+			    pos += mdtModuleRef._sz;
+			    let mdtTypeSpec = loadFileDataVecByCount(d, pos, mdTableRows[PE.MdTableIndex.TypeSpec], (d, o) => loadMdtTypeSpec(d, o, ctx));
+			    pos += mdtTypeSpec._sz;
+			    let mdtImplMap = loadFileDataVecByCount(d, pos, mdTableRows[PE.MdTableIndex.ImplMap], (d, o) => loadMdtImplMap(d, o, ctx));
+			    pos += mdtImplMap._sz;
+			    let mdtFieldRVA = loadFileDataVecByCount(d, pos, mdTableRows[PE.MdTableIndex.FieldRVA], (d, o) => loadMdtFieldRVA(d, o, ctx));
+			    pos += mdtFieldRVA._sz;
+			    let mdtENCLog = loadFileDataVecByCount(d, pos, mdTableRows[PE.MdTableIndex.ENCLog], (d, o) => loadMdtENCLog(d, o));
+			    pos += mdtENCLog._sz;
+			    let mdtENCMap = loadFileDataVecByCount(d, pos, mdTableRows[PE.MdTableIndex.ENCMap], (d, o) => loadMdtENCMap(d, o));
+			    pos += mdtENCMap._sz;
+			    let mdtAssembly = loadFileDataVecByCount(d, pos, mdTableRows[PE.MdTableIndex.Assembly], (d, o) => loadMdtAssembly(d, o, ctx));
+			    pos += mdtAssembly._sz;
+			    let mdtAssemblyProcessor = loadFileDataVecByCount(d, pos, mdTableRows[PE.MdTableIndex.AssemblyProcessor], (d, o) => loadMdtAssemblyProcessor(d, o));
+			    pos += mdtAssemblyProcessor._sz;
+			    let mdtAssemblyOS = loadFileDataVecByCount(d, pos, mdTableRows[PE.MdTableIndex.AssemblyOS], (d, o) => loadMdtAssemblyOS(d, o));
+			    pos += mdtAssemblyOS._sz;
+			    let mdtAssemblyRef = loadFileDataVecByCount(d, pos, mdTableRows[PE.MdTableIndex.AssemblyRef], (d, o) => loadMdtAssemblyRef(d, o, ctx));
+			    pos += mdtAssemblyRef._sz;
+			    let mdtAssemblyRefProcessor = loadFileDataVecByCount(d, pos, mdTableRows[PE.MdTableIndex.AssemblyRefProcessor], (d, o) => loadMdtAssemblyRefProcessor(d, o, ctx));
+			    pos += mdtAssemblyRefProcessor._sz;
+			    let mdtAssemblyRefOS = loadFileDataVecByCount(d, pos, mdTableRows[PE.MdTableIndex.AssemblyRefOS], (d, o) => loadMdtAssemblyRefOS(d, o, ctx));
+			    pos += mdtAssemblyRefOS._sz;
+			    let mdtFile = loadFileDataVecByCount(d, pos, mdTableRows[PE.MdTableIndex.File], (d, o) => loadMdtFile(d, o, ctx));
+			    pos += mdtFile._sz;
+			    let mdtExportedType = loadFileDataVecByCount(d, pos, mdTableRows[PE.MdTableIndex.ExportedType], (d, o) => loadMdtExportedType(d, o, ctx));
+			    pos += mdtExportedType._sz;
+			    let mdtManifestResource = loadFileDataVecByCount(d, pos, mdTableRows[PE.MdTableIndex.ManifestResource], (d, o) => loadMdtManifestResource(d, o, ctx));
+			    pos += mdtManifestResource._sz;
+			    let mdtNestedClass = loadFileDataVecByCount(d, pos, mdTableRows[PE.MdTableIndex.NestedClass], (d, o) => loadMdtNestedClass(d, o, ctx));
+			    pos += mdtNestedClass._sz;
+			    let mdtGenericParam = loadFileDataVecByCount(d, pos, mdTableRows[PE.MdTableIndex.GenericParam], (d, o) => loadMdtGenericParam(d, o, ctx));
+			    pos += mdtGenericParam._sz;
+			    let mdtMethodSpec = loadFileDataVecByCount(d, pos, mdTableRows[PE.MdTableIndex.MethodSpec], (d, o) => loadMdtMethodSpec(d, o, ctx));
+			    pos += mdtMethodSpec._sz;
+			    let mdtGenericParamConstraint = loadFileDataVecByCount(d, pos, mdTableRows[PE.MdTableIndex.GenericParamConstraint], (d, o) => loadMdtGenericParamConstraint(d, o, ctx));
+			    pos += mdtGenericParamConstraint._sz;
+			    return {
+			        mdTableHeader,
+			        mdTableRows,
+			        mdtModule,
+			        mdtTypeRef,
+			        mdtTypeDef,
+			        mdtFieldPtr,
+			        mdtField,
+			        mdtMethodPtr,
+			        mdtMethodDef,
+			        mdtParamPtr,
+			        mdtParam,
+			        mdtInterfaceImpl,
+			        mdtMemberRef,
+			        mdtConstant,
+			        mdtCustomAttribute,
+			        mdtFieldMarshal,
+			        mdtDeclSecurity,
+			        mdtClassLayout,
+			        mdtFieldLayout,
+			        mdtStandAloneSig,
+			        mdtEventMap,
+			        mdtEventPtr,
+			        mdtEvent,
+			        mdtPropertyMap,
+			        mdtPropertyPtr,
+			        mdtProperty,
+			        mdtMethodSemantics,
+			        mdtMethodImpl,
+			        mdtModuleRef,
+			        mdtTypeSpec,
+			        mdtImplMap,
+			        mdtFieldRVA,
+			        mdtENCLog,
+			        mdtENCMap,
+			        mdtAssembly,
+			        mdtAssemblyProcessor,
+			        mdtAssemblyOS,
+			        mdtAssemblyRef,
+			        mdtAssemblyRefProcessor,
+			        mdtAssemblyRefOS,
+			        mdtFile,
+			        mdtExportedType,
+			        mdtManifestResource,
+			        mdtNestedClass,
+			        mdtGenericParam,
+			        mdtMethodSpec,
+			        mdtGenericParamConstraint,
+			    };
+			}
+			function loadMdTableHeader(d, _off) {
+			    let pos = _off;
+			    const Reserved = loadU4(d, pos);
+			    pos += Reserved._sz;
+			    const MajorVersion = loadU1(d, pos);
+			    pos += MajorVersion._sz;
+			    const MinorVersion = loadU1(d, pos);
+			    pos += MinorVersion._sz;
+			    const HeapSizes = loadE1(d, pos);
+			    pos += HeapSizes._sz;
+			    const Reserved2 = loadU1(d, pos);
+			    pos += Reserved2._sz;
+			    const Valid = loadU8(d, pos);
+			    pos += Valid._sz;
+			    const Sorted = loadU8(d, pos);
+			    pos += Sorted._sz;
+			    const rowCount = count1(Valid.high) + count1(Valid.low);
+			    const Rows = loadFileDataVecByCount(d, pos, rowCount, loadU4);
+			    pos += Rows._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        Reserved,
+			        MajorVersion,
+			        MinorVersion,
+			        HeapSizes,
+			        Reserved2,
+			        Valid,
+			        Sorted,
+			        Rows,
+			    };
+			}
+			function calMdTableRows(h) {
+			    let rows = new Array(PE.numberOfMdTables);
+			    let p = 0;
+			    for (let i = 0; i < PE.numberOfMdTables; i++) {
+			        let mask, valid;
+			        if (i < 32) {
+			            mask = 1 << i;
+			            valid = h.Valid.low;
+			        }
+			        else {
+			            mask = 1 << (i - 32);
+			            valid = h.Valid.high;
+			        }
+			        rows[i] = (mask & valid) ? h.Rows.values[p++].value : 0;
+			    }
+			    return rows;
+			}
+			var MdCodedTokenIndex;
+			(function (MdCodedTokenIndex) {
+			    MdCodedTokenIndex[MdCodedTokenIndex["TypeDefOrRef"] = 0] = "TypeDefOrRef";
+			    MdCodedTokenIndex[MdCodedTokenIndex["HasConstant"] = 1] = "HasConstant";
+			    MdCodedTokenIndex[MdCodedTokenIndex["HasCustomAttribute"] = 2] = "HasCustomAttribute";
+			    MdCodedTokenIndex[MdCodedTokenIndex["HasFieldMarshall"] = 3] = "HasFieldMarshall";
+			    MdCodedTokenIndex[MdCodedTokenIndex["HasDeclSecurity"] = 4] = "HasDeclSecurity";
+			    MdCodedTokenIndex[MdCodedTokenIndex["MemberRefParent"] = 5] = "MemberRefParent";
+			    MdCodedTokenIndex[MdCodedTokenIndex["HasSemantics"] = 6] = "HasSemantics";
+			    MdCodedTokenIndex[MdCodedTokenIndex["MethodDefOrRef"] = 7] = "MethodDefOrRef";
+			    MdCodedTokenIndex[MdCodedTokenIndex["MemberForwarded"] = 8] = "MemberForwarded";
+			    MdCodedTokenIndex[MdCodedTokenIndex["Implementation"] = 9] = "Implementation";
+			    MdCodedTokenIndex[MdCodedTokenIndex["CustomAttributeType"] = 10] = "CustomAttributeType";
+			    MdCodedTokenIndex[MdCodedTokenIndex["ResolutionScope"] = 11] = "ResolutionScope";
+			    MdCodedTokenIndex[MdCodedTokenIndex["TypeOrMethodDef"] = 12] = "TypeOrMethodDef";
+			})(MdCodedTokenIndex || (MdCodedTokenIndex = {}));
+			const ctc = [{
+			        tagSize: 2, tables: [
+			            PE.MdTableIndex.TypeDef,
+			            PE.MdTableIndex.TypeRef,
+			            PE.MdTableIndex.TypeSpec,
+			        ]
+			    }, {
+			        tagSize: 2, tables: [
+			            PE.MdTableIndex.Field,
+			            PE.MdTableIndex.Param,
+			            PE.MdTableIndex.Property,
+			        ]
+			    }, {
+			        tagSize: 5, tables: [
+			            PE.MdTableIndex.MethodDef,
+			            PE.MdTableIndex.Field,
+			            PE.MdTableIndex.TypeRef,
+			            PE.MdTableIndex.TypeDef,
+			            PE.MdTableIndex.Param,
+			            PE.MdTableIndex.InterfaceImpl,
+			            PE.MdTableIndex.MemberRef,
+			            PE.MdTableIndex.Module,
+			            PE.MdTableIndex.DeclSecurity,
+			            PE.MdTableIndex.Property,
+			            PE.MdTableIndex.Event,
+			            PE.MdTableIndex.StandAloneSig,
+			            PE.MdTableIndex.ModuleRef,
+			            PE.MdTableIndex.TypeSpec,
+			            PE.MdTableIndex.Assembly,
+			            PE.MdTableIndex.AssemblyRef,
+			            PE.MdTableIndex.File,
+			            PE.MdTableIndex.ExportedType,
+			            PE.MdTableIndex.ManifestResource,
+			            PE.MdTableIndex.GenericParam,
+			            PE.MdTableIndex.GenericParamConstraint,
+			            PE.MdTableIndex.MethodSpec,
+			        ]
+			    }, {
+			        tagSize: 1, tables: [
+			            PE.MdTableIndex.Field,
+			            PE.MdTableIndex.Param,
+			        ]
+			    }, {
+			        tagSize: 2, tables: [
+			            PE.MdTableIndex.TypeDef,
+			            PE.MdTableIndex.MethodDef,
+			            PE.MdTableIndex.Assembly,
+			        ]
+			    }, {
+			        tagSize: 3, tables: [
+			            PE.MdTableIndex.TypeDef,
+			            PE.MdTableIndex.TypeRef,
+			            PE.MdTableIndex.ModuleRef,
+			            PE.MdTableIndex.MethodDef,
+			            PE.MdTableIndex.TypeSpec,
+			        ]
+			    }, {
+			        tagSize: 1, tables: [
+			            PE.MdTableIndex.Event,
+			            PE.MdTableIndex.Property,
+			        ]
+			    }, {
+			        tagSize: 1, tables: [
+			            PE.MdTableIndex.MethodDef,
+			            PE.MdTableIndex.MemberRef,
+			        ]
+			    }, {
+			        tagSize: 1, tables: [
+			            PE.MdTableIndex.Field,
+			            PE.MdTableIndex.MethodDef,
+			        ]
+			    }, {
+			        tagSize: 2, tables: [
+			            PE.MdTableIndex.File,
+			            PE.MdTableIndex.AssemblyRef,
+			            PE.MdTableIndex.ExportedType,
+			        ]
+			    }, {
+			        tagSize: 3, tables: [
+			            PE.MdTableIndex.TypeRef,
+			            PE.MdTableIndex.TypeDef,
+			            PE.MdTableIndex.MethodDef,
+			            PE.MdTableIndex.MemberRef,
+			            PE.MdTableIndex.String,
+			        ]
+			    }, {
+			        tagSize: 2, tables: [
+			            PE.MdTableIndex.Module,
+			            PE.MdTableIndex.ModuleRef,
+			            PE.MdTableIndex.AssemblyRef,
+			            PE.MdTableIndex.TypeRef,
+			        ]
+			    }, {
+			        tagSize: 1, tables: [
+			            PE.MdTableIndex.TypeDef,
+			            PE.MdTableIndex.MethodDef,
+			        ]
+			    }];
+			function getMdtLoadingContext(h, rows) {
+			    const hs = h.HeapSizes.value;
+			    return {
+			        loadStrings: (hs & PE.MdHeapSizeAttr.Strings) != 0 ? loadU4 : loadU2,
+			        loadGuid: (hs & PE.MdHeapSizeAttr.Guid) != 0 ? loadU4 : loadU2,
+			        laodBlob: (hs & PE.MdHeapSizeAttr.Blob) != 0 ? loadU4 : loadU2,
+			        loadRid: rows.map(r => r > 0xFFFF ? loadU4 : loadU2),
+			        loadCodedToken: ctc.map((c) => {
+			            const maxRows = 0xFFFF >> c.tagSize;
+			            for (let tid of c.tables) {
+			                if (rows[tid] > maxRows) {
+			                    return (d, o) => loadMdCodedToken4(d, o, c);
+			                }
+			            }
+			            return (d, o) => loadMdCodedToken2(d, o, c);
+			        })
+			    };
+			}
+			function loadMdtModule(d, _off, ctx) {
+			    let pos = _off;
+			    const Generation = loadU2(d, pos);
+			    pos += Generation._sz;
+			    const Name = ctx.loadStrings(d, pos);
+			    pos += Name._sz;
+			    const Mvid = ctx.loadGuid(d, pos);
+			    pos += Mvid._sz;
+			    const EncId = ctx.loadGuid(d, pos);
+			    pos += EncId._sz;
+			    const EncBaseId = ctx.loadGuid(d, pos);
+			    pos += EncBaseId._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        Generation,
+			        Name,
+			        Mvid,
+			        EncId,
+			        EncBaseId,
+			    };
+			}
+			function loadMdtTypeRef(d, _off, ctx) {
+			    let pos = _off;
+			    const ResolutionScope = ctx.loadCodedToken[MdCodedTokenIndex.ResolutionScope](d, pos);
+			    pos += ResolutionScope._sz;
+			    const Name = ctx.loadStrings(d, pos);
+			    pos += Name._sz;
+			    const Namespace = ctx.loadStrings(d, pos);
+			    pos += Namespace._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        ResolutionScope,
+			        Name,
+			        Namespace,
+			    };
+			}
+			function loadMdtTypeDef(d, _off, ctx) {
+			    let pos = _off;
+			    const Flags = loadE4(d, pos);
+			    pos += Flags._sz;
+			    const Name = ctx.loadStrings(d, pos);
+			    pos += Name._sz;
+			    const Namespace = ctx.loadStrings(d, pos);
+			    pos += Namespace._sz;
+			    const Extends = ctx.loadCodedToken[MdCodedTokenIndex.TypeDefOrRef](d, pos);
+			    pos += Extends._sz;
+			    const FieldList = ctx.loadRid[PE.MdTableIndex.Field](d, pos);
+			    pos += FieldList._sz;
+			    const MethodList = ctx.loadRid[PE.MdTableIndex.MethodDef](d, pos);
+			    pos += MethodList._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        Flags,
+			        Name,
+			        Namespace,
+			        Extends,
+			        FieldList,
+			        MethodList,
+			    };
+			}
+			function loadMdtFieldPtr(d, _off, ctx) {
+			    let pos = _off;
+			    const Field = ctx.loadRid[PE.MdTableIndex.Field](d, pos);
+			    pos += Field._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        Field,
+			    };
+			}
+			function loadMdtField(d, _off, ctx) {
+			    let pos = _off;
+			    const Flags = loadE2(d, pos);
+			    pos += Flags._sz;
+			    const Name = ctx.loadStrings(d, pos);
+			    pos += Name._sz;
+			    const Signature = ctx.laodBlob(d, pos);
+			    pos += Signature._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        Flags,
+			        Name,
+			        Signature,
+			    };
+			}
+			function loadMdtMethodPtr(d, _off, ctx) {
+			    let pos = _off;
+			    const Method = ctx.loadRid[PE.MdTableIndex.MethodDef](d, pos);
+			    pos += Method._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        Method,
+			    };
+			}
+			function loadMdtMethodDef(d, _off, ctx) {
+			    let pos = _off;
+			    const RVA = loadU4(d, pos);
+			    pos += RVA._sz;
+			    const ImplFlags = loadE2(d, pos);
+			    pos += ImplFlags._sz;
+			    const Flags = loadE2(d, pos);
+			    pos += Flags._sz;
+			    const Name = ctx.loadStrings(d, pos);
+			    pos += Name._sz;
+			    const Signature = ctx.laodBlob(d, pos);
+			    pos += Signature._sz;
+			    const ParamList = ctx.loadRid[PE.MdTableIndex.Param](d, pos);
+			    pos += ParamList._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        RVA,
+			        ImplFlags,
+			        Flags,
+			        Name,
+			        Signature,
+			        ParamList,
+			    };
+			}
+			function loadMdtParamPtr(d, _off, ctx) {
+			    let pos = _off;
+			    const Param = ctx.loadRid[PE.MdTableIndex.Param](d, pos);
+			    pos += Param._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        Param,
+			    };
+			}
+			function loadMdtParam(d, _off, ctx) {
+			    let pos = _off;
+			    const Flags = loadE2(d, pos);
+			    pos += Flags._sz;
+			    const Sequence = loadU2(d, pos);
+			    pos += Sequence._sz;
+			    const Name = ctx.loadStrings(d, pos);
+			    pos += Name._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        Flags,
+			        Sequence,
+			        Name,
+			    };
+			}
+			function loadMdtInterfaceImpl(d, _off, ctx) {
+			    let pos = _off;
+			    const Class = ctx.loadRid[PE.MdTableIndex.TypeDef](d, pos);
+			    pos += Class._sz;
+			    const Interface = ctx.loadCodedToken[MdCodedTokenIndex.TypeDefOrRef](d, pos);
+			    pos += Interface._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        Class,
+			        Interface,
+			    };
+			}
+			function loadMdtMemberRef(d, _off, ctx) {
+			    let pos = _off;
+			    const Class = ctx.loadCodedToken[MdCodedTokenIndex.MemberRefParent](d, pos);
+			    pos += Class._sz;
+			    const Name = ctx.loadStrings(d, pos);
+			    pos += Name._sz;
+			    const Signature = ctx.laodBlob(d, pos);
+			    pos += Signature._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        Class,
+			        Name,
+			        Signature,
+			    };
+			}
+			function loadMdtConstant(d, _off, ctx) {
+			    let pos = _off;
+			    const Type = loadE1(d, pos);
+			    pos += Type._sz;
+			    const PaddingZero = loadU1(d, pos);
+			    pos += PaddingZero._sz;
+			    const Parent = ctx.loadCodedToken[MdCodedTokenIndex.HasConstant](d, pos);
+			    pos += Parent._sz;
+			    const Value = ctx.laodBlob(d, pos);
+			    pos += Value._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        Type,
+			        PaddingZero,
+			        Parent,
+			        Value,
+			    };
+			}
+			function loadMdtCustomAttribute(d, _off, ctx) {
+			    let pos = _off;
+			    const Parent = ctx.loadCodedToken[MdCodedTokenIndex.HasCustomAttribute](d, pos);
+			    pos += Parent._sz;
+			    const Type = ctx.loadCodedToken[MdCodedTokenIndex.CustomAttributeType](d, pos);
+			    pos += Type._sz;
+			    const Value = ctx.laodBlob(d, pos);
+			    pos += Value._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        Parent,
+			        Type,
+			        Value,
+			    };
+			}
+			function loadMdtFieldMarshal(d, _off, ctx) {
+			    let pos = _off;
+			    const Parent = ctx.loadCodedToken[MdCodedTokenIndex.HasFieldMarshall](d, pos);
+			    pos += Parent._sz;
+			    const NativeType = ctx.laodBlob(d, pos);
+			    pos += NativeType._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        Parent,
+			        NativeType,
+			    };
+			}
+			function loadMdtDeclSecurity(d, _off, ctx) {
+			    let pos = _off;
+			    const Action = loadE2(d, pos);
+			    pos += Action._sz;
+			    const Parent = ctx.loadCodedToken[MdCodedTokenIndex.HasDeclSecurity](d, pos);
+			    pos += Parent._sz;
+			    const PermissionSet = ctx.laodBlob(d, pos);
+			    pos += PermissionSet._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        Action,
+			        Parent,
+			        PermissionSet,
+			    };
+			}
+			function loadMdtClassLayout(d, _off, ctx) {
+			    let pos = _off;
+			    const PackingSize = loadU2(d, pos);
+			    pos += PackingSize._sz;
+			    const ClassSize = loadU4(d, pos);
+			    pos += ClassSize._sz;
+			    const Parent = ctx.loadRid[PE.MdTableIndex.TypeDef](d, pos);
+			    pos += Parent._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        PackingSize,
+			        ClassSize,
+			        Parent,
+			    };
+			}
+			function loadMdtFieldLayout(d, _off, ctx) {
+			    let pos = _off;
+			    const OffSet = loadU4(d, pos);
+			    pos += OffSet._sz;
+			    const Field = ctx.loadRid[PE.MdTableIndex.Field](d, pos);
+			    pos += Field._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        OffSet,
+			        Field,
+			    };
+			}
+			function loadMdtStandAloneSig(d, _off, ctx) {
+			    let pos = _off;
+			    const Signature = ctx.laodBlob(d, pos);
+			    pos += Signature._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        Signature,
+			    };
+			}
+			function loadMdtEventMap(d, _off, ctx) {
+			    let pos = _off;
+			    const Parent = ctx.loadRid[PE.MdTableIndex.TypeDef](d, pos);
+			    pos += Parent._sz;
+			    const EventList = ctx.loadRid[PE.MdTableIndex.Event](d, pos);
+			    pos += EventList._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        Parent,
+			        EventList,
+			    };
+			}
+			function loadMdtEventPtr(d, _off, ctx) {
+			    let pos = _off;
+			    const Event = ctx.loadRid[PE.MdTableIndex.Event](d, pos);
+			    pos += Event._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        Event,
+			    };
+			}
+			function loadMdtEvent(d, _off, ctx) {
+			    let pos = _off;
+			    const EventFlags = loadE2(d, pos);
+			    pos += EventFlags._sz;
+			    const Name = ctx.loadStrings(d, pos);
+			    pos += Name._sz;
+			    const EventType = ctx.loadCodedToken[MdCodedTokenIndex.TypeDefOrRef](d, pos);
+			    pos += EventType._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        EventFlags,
+			        Name,
+			        EventType,
+			    };
+			}
+			function loadMdtPropertyMap(d, _off, ctx) {
+			    let pos = _off;
+			    const Parent = ctx.loadRid[PE.MdTableIndex.TypeDef](d, pos);
+			    pos += Parent._sz;
+			    const PropertyList = ctx.loadRid[PE.MdTableIndex.Property](d, pos);
+			    pos += PropertyList._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        Parent,
+			        PropertyList,
+			    };
+			}
+			function loadMdtPropertyPtr(d, _off, ctx) {
+			    let pos = _off;
+			    const Property = ctx.loadRid[PE.MdTableIndex.Property](d, pos);
+			    pos += Property._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        Property,
+			    };
+			}
+			function loadMdtProperty(d, _off, ctx) {
+			    let pos = _off;
+			    const PropFlags = loadE2(d, pos);
+			    pos += PropFlags._sz;
+			    const Name = ctx.loadStrings(d, pos);
+			    pos += Name._sz;
+			    const Type = ctx.laodBlob(d, pos);
+			    pos += Type._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        PropFlags,
+			        Name,
+			        Type,
+			    };
+			}
+			function loadMdtMethodSemantics(d, _off, ctx) {
+			    let pos = _off;
+			    const Semantic = loadE2(d, pos);
+			    pos += Semantic._sz;
+			    const Method = ctx.loadRid[PE.MdTableIndex.MethodDef](d, pos);
+			    pos += Method._sz;
+			    const Association = ctx.loadCodedToken[MdCodedTokenIndex.HasSemantics](d, pos);
+			    pos += Association._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        Semantic,
+			        Method,
+			        Association,
+			    };
+			}
+			function loadMdtMethodImpl(d, _off, ctx) {
+			    let pos = _off;
+			    const Class = ctx.loadRid[PE.MdTableIndex.TypeDef](d, pos);
+			    pos += Class._sz;
+			    const MethodBody = ctx.loadCodedToken[MdCodedTokenIndex.MethodDefOrRef](d, pos);
+			    pos += MethodBody._sz;
+			    const MethodDeclaration = ctx.loadCodedToken[MdCodedTokenIndex.MethodDefOrRef](d, pos);
+			    pos += MethodDeclaration._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        Class,
+			        MethodBody,
+			        MethodDeclaration,
+			    };
+			}
+			function loadMdtModuleRef(d, _off, ctx) {
+			    let pos = _off;
+			    const Name = ctx.loadStrings(d, pos);
+			    pos += Name._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        Name,
+			    };
+			}
+			function loadMdtTypeSpec(d, _off, ctx) {
+			    let pos = _off;
+			    const Signature = ctx.laodBlob(d, pos);
+			    pos += Signature._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        Signature,
+			    };
+			}
+			function loadMdtImplMap(d, _off, ctx) {
+			    let pos = _off;
+			    const MappingFlags = loadE2(d, pos);
+			    pos += MappingFlags._sz;
+			    const MemberForwarded = ctx.loadCodedToken[MdCodedTokenIndex.MemberForwarded](d, pos);
+			    pos += MemberForwarded._sz;
+			    const ImportName = ctx.loadStrings(d, pos);
+			    pos += ImportName._sz;
+			    const ImportScope = ctx.loadRid[PE.MdTableIndex.ModuleRef](d, pos);
+			    pos += ImportScope._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        MappingFlags,
+			        MemberForwarded,
+			        ImportName,
+			        ImportScope,
+			    };
+			}
+			function loadMdtFieldRVA(d, _off, ctx) {
+			    let pos = _off;
+			    const RVA = loadU4(d, pos);
+			    pos += RVA._sz;
+			    const Field = ctx.loadRid[PE.MdTableIndex.Field](d, pos);
+			    pos += Field._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        RVA,
+			        Field,
+			    };
+			}
+			function loadMdtENCLog(d, _off, ctx) {
+			    let pos = _off;
+			    const Token = loadU4(d, pos);
+			    pos += Token._sz;
+			    const FuncCode = loadU4(d, pos);
+			    pos += FuncCode._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        Token,
+			        FuncCode,
+			    };
+			}
+			function loadMdtENCMap(d, _off, ctx) {
+			    let pos = _off;
+			    const Token = loadU4(d, pos);
+			    pos += Token._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        Token,
+			    };
+			}
+			function loadMdtAssembly(d, _off, ctx) {
+			    let pos = _off;
+			    const HashAlgId = loadE4(d, pos);
+			    pos += HashAlgId._sz;
+			    const MajorVersion = loadU2(d, pos);
+			    pos += MajorVersion._sz;
+			    const MinorVersion = loadU2(d, pos);
+			    pos += MinorVersion._sz;
+			    const BuildNumber = loadU2(d, pos);
+			    pos += BuildNumber._sz;
+			    const RevisionNumber = loadU2(d, pos);
+			    pos += RevisionNumber._sz;
+			    const Flags = loadE4(d, pos);
+			    pos += Flags._sz;
+			    const PublicKey = ctx.laodBlob(d, pos);
+			    pos += PublicKey._sz;
+			    const Name = ctx.loadStrings(d, pos);
+			    pos += Name._sz;
+			    const Locale = ctx.loadStrings(d, pos);
+			    pos += Locale._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        HashAlgId,
+			        MajorVersion,
+			        MinorVersion,
+			        BuildNumber,
+			        RevisionNumber,
+			        Flags,
+			        PublicKey,
+			        Name,
+			        Locale,
+			    };
+			}
+			function loadMdtAssemblyProcessor(d, _off, ctx) {
+			    let pos = _off;
+			    const Processor = loadU4(d, pos);
+			    pos += Processor._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        Processor,
+			    };
+			}
+			function loadMdtAssemblyOS(d, _off, ctx) {
+			    let pos = _off;
+			    const OSPlatformID = loadU4(d, pos);
+			    pos += OSPlatformID._sz;
+			    const OSMajorVersion = loadU4(d, pos);
+			    pos += OSMajorVersion._sz;
+			    const OSMinorVersion = loadU4(d, pos);
+			    pos += OSMinorVersion._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        OSPlatformID,
+			        OSMajorVersion,
+			        OSMinorVersion,
+			    };
+			}
+			function loadMdtAssemblyRef(d, _off, ctx) {
+			    let pos = _off;
+			    const MajorVersion = loadU2(d, pos);
+			    pos += MajorVersion._sz;
+			    const MinorVersion = loadU2(d, pos);
+			    pos += MinorVersion._sz;
+			    const BuildNumber = loadU2(d, pos);
+			    pos += BuildNumber._sz;
+			    const RevisionNumber = loadU2(d, pos);
+			    pos += RevisionNumber._sz;
+			    const Flags = loadE4(d, pos);
+			    pos += Flags._sz;
+			    const PublicKeyOrToken = ctx.laodBlob(d, pos);
+			    pos += PublicKeyOrToken._sz;
+			    const Name = ctx.loadStrings(d, pos);
+			    pos += Name._sz;
+			    const Locale = ctx.loadStrings(d, pos);
+			    pos += Locale._sz;
+			    const HashValue = ctx.laodBlob(d, pos);
+			    pos += HashValue._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        MajorVersion,
+			        MinorVersion,
+			        BuildNumber,
+			        RevisionNumber,
+			        Flags,
+			        PublicKeyOrToken,
+			        Name,
+			        Locale,
+			        HashValue,
+			    };
+			}
+			function loadMdtAssemblyRefProcessor(d, _off, ctx) {
+			    let pos = _off;
+			    const Processor = loadU4(d, pos);
+			    pos += Processor._sz;
+			    const AssemblyRef = ctx.loadRid[PE.MdTableIndex.AssemblyRef](d, pos);
+			    pos += AssemblyRef._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        Processor,
+			        AssemblyRef,
+			    };
+			}
+			function loadMdtAssemblyRefOS(d, _off, ctx) {
+			    let pos = _off;
+			    const OSPlatformID = loadU4(d, pos);
+			    pos += OSPlatformID._sz;
+			    const OSMajorVersion = loadU4(d, pos);
+			    pos += OSMajorVersion._sz;
+			    const OSMinorVersion = loadU4(d, pos);
+			    pos += OSMinorVersion._sz;
+			    const AssemblyRef = ctx.loadRid[PE.MdTableIndex.AssemblyRef](d, pos);
+			    pos += AssemblyRef._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        OSPlatformID,
+			        OSMajorVersion,
+			        OSMinorVersion,
+			        AssemblyRef,
+			    };
+			}
+			function loadMdtFile(d, _off, ctx) {
+			    let pos = _off;
+			    const Flags = loadE4(d, pos);
+			    pos += Flags._sz;
+			    const Name = ctx.loadStrings(d, pos);
+			    pos += Name._sz;
+			    const HashValue = ctx.laodBlob(d, pos);
+			    pos += HashValue._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        Flags,
+			        Name,
+			        HashValue,
+			    };
+			}
+			function loadMdtExportedType(d, _off, ctx) {
+			    let pos = _off;
+			    const Flags = loadE4(d, pos);
+			    pos += Flags._sz;
+			    const TypeDefId = loadU4(d, pos);
+			    pos += TypeDefId._sz;
+			    const TypeName = ctx.loadStrings(d, pos);
+			    pos += TypeName._sz;
+			    const TypeNamespace = ctx.loadStrings(d, pos);
+			    pos += TypeNamespace._sz;
+			    const Implementation = ctx.loadCodedToken[MdCodedTokenIndex.Implementation](d, pos);
+			    pos += Implementation._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        Flags,
+			        TypeDefId,
+			        TypeName,
+			        TypeNamespace,
+			        Implementation,
+			    };
+			}
+			function loadMdtManifestResource(d, _off, ctx) {
+			    let pos = _off;
+			    const Offset = loadU4(d, pos);
+			    pos += Offset._sz;
+			    const Flags = loadE4(d, pos);
+			    pos += Flags._sz;
+			    const Name = ctx.loadStrings(d, pos);
+			    pos += Name._sz;
+			    const Implementation = ctx.loadCodedToken[MdCodedTokenIndex.Implementation](d, pos);
+			    pos += Implementation._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        Offset,
+			        Flags,
+			        Name,
+			        Implementation,
+			    };
+			}
+			function loadMdtNestedClass(d, _off, ctx) {
+			    let pos = _off;
+			    const NestedClass = ctx.loadRid[PE.MdTableIndex.TypeDef](d, pos);
+			    pos += NestedClass._sz;
+			    const EnclosingClass = ctx.loadRid[PE.MdTableIndex.TypeDef](d, pos);
+			    pos += EnclosingClass._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        NestedClass,
+			        EnclosingClass,
+			    };
+			}
+			function loadMdtGenericParam(d, _off, ctx) {
+			    let pos = _off;
+			    const Number = loadU2(d, pos);
+			    pos += Number._sz;
+			    const Flags = loadE2(d, pos);
+			    pos += Flags._sz;
+			    const Owner = ctx.loadCodedToken[MdCodedTokenIndex.TypeOrMethodDef](d, pos);
+			    pos += Owner._sz;
+			    const Name = ctx.loadStrings(d, pos);
+			    pos += Name._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        Number,
+			        Flags,
+			        Owner,
+			        Name,
+			    };
+			}
+			function loadMdtMethodSpec(d, _off, ctx) {
+			    let pos = _off;
+			    const Method = ctx.loadCodedToken[MdCodedTokenIndex.MethodDefOrRef](d, pos);
+			    pos += Method._sz;
+			    const Instantiation = ctx.laodBlob(d, pos);
+			    pos += Instantiation._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        Method,
+			        Instantiation,
+			    };
+			}
+			function loadMdtGenericParamConstraint(d, _off, ctx) {
+			    let pos = _off;
+			    const Owner = ctx.loadRid[PE.MdTableIndex.GenericParam](d, pos);
+			    pos += Owner._sz;
+			    const Constraint = ctx.loadCodedToken[MdCodedTokenIndex.TypeDefOrRef](d, pos);
+			    pos += Constraint._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        Owner,
+			        Constraint,
+			    };
+			}
+			function loadIL(pe, m) {
+			    if (pe == null || m == null || !U.hasIL(m)) {
+			        return null;
+			    }
+			    let _off = U.rvaToOffset(pe, m.RVA.value);
+			    let pos = _off;
+			    const Header = loadILMethodHeader(pe.data, pos);
+			    pos += Header._sz;
+			    const end = pos + Header.codeSizeValue;
+			    const Body = loadFileDataVecByStop(pe.data, pos, i => i._off + i._sz >= end, loadILInst);
+			    pos += Body._sz;
+			    const Padding = loadFileData(pe.data, pos, calculatePaddingSize(Body._sz));
+			    pos += Padding._sz;
+			    let Sections;
+			    if (Header.flagsValue & PE.ILMethodFlags.MoreSects) {
+			        Sections = loadFileDataVecByStop(pe.data, pos, m => !(m.Kind.value & PE.ILMethodSectionKind.MoreSects), loadILMethodSection);
+			        pos += Sections._sz;
+			    }
+			    return {
+			        _off, _sz: pos - _off,
+			        Header,
+			        Body,
+			        Padding,
+			        Sections
+			    };
+			}
+			exports.loadIL = loadIL;
+			function loadILMethodHeader(d, _off) {
+			    const flag = d.getUint8(_off);
+			    switch (flag & PE.ILMethodFlags.Format__Mask) {
+			        case PE.ILMethodFlags.Format_TinyFormat:
+			            return loadILMethodHeaderTiny(d, _off);
+			        case PE.ILMethodFlags.Format_FatFormat:
+			            return loadILMethodHeaderFat(d, _off);
+			        default:
+			            throw new E.PeError(E.PeErrorType.InvalidMethodHeaderFormat, _off, 1, flag);
+			    }
+			}
+			function loadILMethodHeaderTiny(d, _off) {
+			    let pos = _off;
+			    const FlagsAndCodeSize = loadU1(d, pos);
+			    pos += FlagsAndCodeSize._sz;
+			    const flagsValue = FlagsAndCodeSize.value & 0x03;
+			    const codeSizeValue = FlagsAndCodeSize.value >> 2;
+			    return {
+			        _off, _sz: pos - _off,
+			        flagsValue,
+			        codeSizeValue,
+			        FlagsAndCodeSize,
+			    };
+			}
+			function loadILMethodHeaderFat(d, _off) {
+			    let pos = _off;
+			    const Flags = loadE2(d, pos);
+			    pos += Flags._sz;
+			    const MaxStack = loadU2(d, pos);
+			    pos += MaxStack._sz;
+			    const CodeSize = loadU4(d, pos);
+			    pos += CodeSize._sz;
+			    const LocalVariableSignature = loadMdToken(d, pos);
+			    pos += LocalVariableSignature._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        flagsValue: Flags.value,
+			        codeSizeValue: CodeSize.value,
+			        Flags,
+			        MaxStack,
+			        CodeSize,
+			        LocalVariableSignature
+			    };
+			}
+			function loadILSwitchOprand(d, _off) {
+			    let pos = _off;
+			    const count = loadU4(d, pos);
+			    pos += count._sz;
+			    const targets = loadFileDataVecByCount(d, pos, count.value, loadI4);
+			    pos += targets._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        count,
+			        targets
+			    };
+			}
+			function loadILInst(d, _off) {
+			    let pos = _off;
+			    const opcode = loadOpcode(d, pos);
+			    pos += opcode._sz;
+			    let oprand;
+			    switch (opcode.value) {
+			        case PE.ILOpcode.nop: break;
+			        case PE.ILOpcode.break: break;
+			        case PE.ILOpcode.ldarg_0: break;
+			        case PE.ILOpcode.ldarg_1: break;
+			        case PE.ILOpcode.ldarg_2: break;
+			        case PE.ILOpcode.ldarg_3: break;
+			        case PE.ILOpcode.ldloc_0: break;
+			        case PE.ILOpcode.ldloc_1: break;
+			        case PE.ILOpcode.ldloc_2: break;
+			        case PE.ILOpcode.ldloc_3: break;
+			        case PE.ILOpcode.stloc_0: break;
+			        case PE.ILOpcode.stloc_1: break;
+			        case PE.ILOpcode.stloc_2: break;
+			        case PE.ILOpcode.stloc_3: break;
+			        case PE.ILOpcode.ldarg_s:
+			            oprand = loadU1(d, pos);
+			            break;
+			        case PE.ILOpcode.ldarga_s:
+			            oprand = loadU1(d, pos);
+			            break;
+			        case PE.ILOpcode.starg_s:
+			            oprand = loadU1(d, pos);
+			            break;
+			        case PE.ILOpcode.ldloc_s:
+			            oprand = loadU1(d, pos);
+			            break;
+			        case PE.ILOpcode.ldloca_s:
+			            oprand = loadU1(d, pos);
+			            break;
+			        case PE.ILOpcode.stloc_s:
+			            oprand = loadU1(d, pos);
+			            break;
+			        case PE.ILOpcode.ldnull: break;
+			        case PE.ILOpcode.ldc_i4_m1: break;
+			        case PE.ILOpcode.ldc_i4_0: break;
+			        case PE.ILOpcode.ldc_i4_1: break;
+			        case PE.ILOpcode.ldc_i4_2: break;
+			        case PE.ILOpcode.ldc_i4_3: break;
+			        case PE.ILOpcode.ldc_i4_4: break;
+			        case PE.ILOpcode.ldc_i4_5: break;
+			        case PE.ILOpcode.ldc_i4_6: break;
+			        case PE.ILOpcode.ldc_i4_7: break;
+			        case PE.ILOpcode.ldc_i4_8: break;
+			        case PE.ILOpcode.ldc_i4_s:
+			            oprand = loadI1(d, pos);
+			            break;
+			        case PE.ILOpcode.ldc_i4:
+			            oprand = loadI4(d, pos);
+			            break;
+			        case PE.ILOpcode.ldc_i8:
+			            oprand = loadI8(d, pos);
+			            break;
+			        case PE.ILOpcode.ldc_r4:
+			            oprand = loadR4(d, pos);
+			            break;
+			        case PE.ILOpcode.ldc_r8:
+			            oprand = loadR8(d, pos);
+			            break;
+			        case PE.ILOpcode.dup: break;
+			        case PE.ILOpcode.pop: break;
+			        case PE.ILOpcode.jmp:
+			            oprand = loadMdToken(d, pos);
+			            break;
+			        case PE.ILOpcode.call:
+			            oprand = loadMdToken(d, pos);
+			            break;
+			        case PE.ILOpcode.calli:
+			            oprand = loadMdToken(d, pos);
+			            break;
+			        case PE.ILOpcode.ret: break;
+			        case PE.ILOpcode.br_s:
+			            oprand = loadI1(d, pos);
+			            break;
+			        case PE.ILOpcode.brfalse_s:
+			            oprand = loadI1(d, pos);
+			            break;
+			        case PE.ILOpcode.brtrue_s:
+			            oprand = loadI1(d, pos);
+			            break;
+			        case PE.ILOpcode.beq_s:
+			            oprand = loadI1(d, pos);
+			            break;
+			        case PE.ILOpcode.bge_s:
+			            oprand = loadI1(d, pos);
+			            break;
+			        case PE.ILOpcode.bgt_s:
+			            oprand = loadI1(d, pos);
+			            break;
+			        case PE.ILOpcode.ble_s:
+			            oprand = loadI1(d, pos);
+			            break;
+			        case PE.ILOpcode.blt_s:
+			            oprand = loadI1(d, pos);
+			            break;
+			        case PE.ILOpcode.bne_un_s:
+			            oprand = loadI1(d, pos);
+			            break;
+			        case PE.ILOpcode.bge_un_s:
+			            oprand = loadI1(d, pos);
+			            break;
+			        case PE.ILOpcode.bgt_un_s:
+			            oprand = loadI1(d, pos);
+			            break;
+			        case PE.ILOpcode.ble_un_s:
+			            oprand = loadI1(d, pos);
+			            break;
+			        case PE.ILOpcode.blt_un_s:
+			            oprand = loadI1(d, pos);
+			            break;
+			        case PE.ILOpcode.br:
+			            oprand = loadI4(d, pos);
+			            break;
+			        case PE.ILOpcode.brfalse:
+			            oprand = loadI4(d, pos);
+			            break;
+			        case PE.ILOpcode.brtrue:
+			            oprand = loadI4(d, pos);
+			            break;
+			        case PE.ILOpcode.beq:
+			            oprand = loadI4(d, pos);
+			            break;
+			        case PE.ILOpcode.bge:
+			            oprand = loadI4(d, pos);
+			            break;
+			        case PE.ILOpcode.bgt:
+			            oprand = loadI4(d, pos);
+			            break;
+			        case PE.ILOpcode.ble:
+			            oprand = loadI4(d, pos);
+			            break;
+			        case PE.ILOpcode.blt:
+			            oprand = loadI4(d, pos);
+			            break;
+			        case PE.ILOpcode.bne_un:
+			            oprand = loadI4(d, pos);
+			            break;
+			        case PE.ILOpcode.bge_un:
+			            oprand = loadI4(d, pos);
+			            break;
+			        case PE.ILOpcode.bgt_un:
+			            oprand = loadI4(d, pos);
+			            break;
+			        case PE.ILOpcode.ble_un:
+			            oprand = loadI4(d, pos);
+			            break;
+			        case PE.ILOpcode.blt_un:
+			            oprand = loadI4(d, pos);
+			            break;
+			        case PE.ILOpcode.switch:
+			            oprand = loadILSwitchOprand(d, pos);
+			            break;
+			        case PE.ILOpcode.ldind_i1: break;
+			        case PE.ILOpcode.ldind_u1: break;
+			        case PE.ILOpcode.ldind_i2: break;
+			        case PE.ILOpcode.ldind_u2: break;
+			        case PE.ILOpcode.ldind_i4: break;
+			        case PE.ILOpcode.ldind_u4: break;
+			        case PE.ILOpcode.ldind_i8: break;
+			        case PE.ILOpcode.ldind_i: break;
+			        case PE.ILOpcode.ldind_r4: break;
+			        case PE.ILOpcode.ldind_r8: break;
+			        case PE.ILOpcode.ldind_ref: break;
+			        case PE.ILOpcode.stind_ref: break;
+			        case PE.ILOpcode.stind_i1: break;
+			        case PE.ILOpcode.stind_i2: break;
+			        case PE.ILOpcode.stind_i4: break;
+			        case PE.ILOpcode.stind_i8: break;
+			        case PE.ILOpcode.stind_r4: break;
+			        case PE.ILOpcode.stind_r8: break;
+			        case PE.ILOpcode.add: break;
+			        case PE.ILOpcode.sub: break;
+			        case PE.ILOpcode.mul: break;
+			        case PE.ILOpcode.div: break;
+			        case PE.ILOpcode.div_un: break;
+			        case PE.ILOpcode.rem: break;
+			        case PE.ILOpcode.rem_un: break;
+			        case PE.ILOpcode.and: break;
+			        case PE.ILOpcode.or: break;
+			        case PE.ILOpcode.xor: break;
+			        case PE.ILOpcode.shl: break;
+			        case PE.ILOpcode.shr: break;
+			        case PE.ILOpcode.shr_un: break;
+			        case PE.ILOpcode.neg: break;
+			        case PE.ILOpcode.not: break;
+			        case PE.ILOpcode.conv_i1: break;
+			        case PE.ILOpcode.conv_i2: break;
+			        case PE.ILOpcode.conv_i4: break;
+			        case PE.ILOpcode.conv_i8: break;
+			        case PE.ILOpcode.conv_r4: break;
+			        case PE.ILOpcode.conv_r8: break;
+			        case PE.ILOpcode.conv_u4: break;
+			        case PE.ILOpcode.conv_u8: break;
+			        case PE.ILOpcode.callvirt:
+			            oprand = loadMdToken(d, pos);
+			            break;
+			        case PE.ILOpcode.cpobj:
+			            oprand = loadMdToken(d, pos);
+			            break;
+			        case PE.ILOpcode.ldobj:
+			            oprand = loadMdToken(d, pos);
+			            break;
+			        case PE.ILOpcode.ldstr:
+			            oprand = loadMdToken(d, pos);
+			            break;
+			        case PE.ILOpcode.newobj:
+			            oprand = loadMdToken(d, pos);
+			            break;
+			        case PE.ILOpcode.castclass:
+			            oprand = loadMdToken(d, pos);
+			            break;
+			        case PE.ILOpcode.isinst:
+			            oprand = loadMdToken(d, pos);
+			            break;
+			        case PE.ILOpcode.conv_r_un: break;
+			        case PE.ILOpcode.unbox:
+			            oprand = loadMdToken(d, pos);
+			            break;
+			        case PE.ILOpcode.throw: break;
+			        case PE.ILOpcode.ldfld:
+			            oprand = loadMdToken(d, pos);
+			            break;
+			        case PE.ILOpcode.ldflda:
+			            oprand = loadMdToken(d, pos);
+			            break;
+			        case PE.ILOpcode.stfld:
+			            oprand = loadMdToken(d, pos);
+			            break;
+			        case PE.ILOpcode.ldsfld:
+			            oprand = loadMdToken(d, pos);
+			            break;
+			        case PE.ILOpcode.ldsflda:
+			            oprand = loadMdToken(d, pos);
+			            break;
+			        case PE.ILOpcode.stsfld:
+			            oprand = loadMdToken(d, pos);
+			            break;
+			        case PE.ILOpcode.stobj:
+			            oprand = loadMdToken(d, pos);
+			            break;
+			        case PE.ILOpcode.conv_ovf_i1_un: break;
+			        case PE.ILOpcode.conv_ovf_i2_un: break;
+			        case PE.ILOpcode.conv_ovf_i4_un: break;
+			        case PE.ILOpcode.conv_ovf_i8_un: break;
+			        case PE.ILOpcode.conv_ovf_u1_un: break;
+			        case PE.ILOpcode.conv_ovf_u2_un: break;
+			        case PE.ILOpcode.conv_ovf_u4_un: break;
+			        case PE.ILOpcode.conv_ovf_u8_un: break;
+			        case PE.ILOpcode.conv_ovf_i_un: break;
+			        case PE.ILOpcode.conv_ovf_u_un: break;
+			        case PE.ILOpcode.box:
+			            oprand = loadMdToken(d, pos);
+			            break;
+			        case PE.ILOpcode.newarr:
+			            oprand = loadMdToken(d, pos);
+			            break;
+			        case PE.ILOpcode.ldlen: break;
+			        case PE.ILOpcode.ldelema:
+			            oprand = loadMdToken(d, pos);
+			            break;
+			        case PE.ILOpcode.ldelem_i1: break;
+			        case PE.ILOpcode.ldelem_u1: break;
+			        case PE.ILOpcode.ldelem_i2: break;
+			        case PE.ILOpcode.ldelem_u2: break;
+			        case PE.ILOpcode.ldelem_i4: break;
+			        case PE.ILOpcode.ldelem_u4: break;
+			        case PE.ILOpcode.ldelem_i8: break;
+			        case PE.ILOpcode.ldelem_i: break;
+			        case PE.ILOpcode.ldelem_r4: break;
+			        case PE.ILOpcode.ldelem_r8: break;
+			        case PE.ILOpcode.ldelem_ref: break;
+			        case PE.ILOpcode.stelem_i: break;
+			        case PE.ILOpcode.stelem_i1: break;
+			        case PE.ILOpcode.stelem_i2: break;
+			        case PE.ILOpcode.stelem_i4: break;
+			        case PE.ILOpcode.stelem_i8: break;
+			        case PE.ILOpcode.stelem_r4: break;
+			        case PE.ILOpcode.stelem_r8: break;
+			        case PE.ILOpcode.stelem_ref: break;
+			        case PE.ILOpcode.ldelem:
+			            oprand = loadMdToken(d, pos);
+			            break;
+			        case PE.ILOpcode.stelem:
+			            oprand = loadMdToken(d, pos);
+			            break;
+			        case PE.ILOpcode.unbox_any:
+			            oprand = loadMdToken(d, pos);
+			            break;
+			        case PE.ILOpcode.conv_ovf_i1: break;
+			        case PE.ILOpcode.conv_ovf_u1: break;
+			        case PE.ILOpcode.conv_ovf_i2: break;
+			        case PE.ILOpcode.conv_ovf_u2: break;
+			        case PE.ILOpcode.conv_ovf_i4: break;
+			        case PE.ILOpcode.conv_ovf_u4: break;
+			        case PE.ILOpcode.conv_ovf_i8: break;
+			        case PE.ILOpcode.conv_ovf_u8: break;
+			        case PE.ILOpcode.refanyval:
+			            oprand = loadMdToken(d, pos);
+			            break;
+			        case PE.ILOpcode.ckfinite: break;
+			        case PE.ILOpcode.mkrefany:
+			            oprand = loadMdToken(d, pos);
+			            break;
+			        case PE.ILOpcode.ldtoken:
+			            oprand = loadMdToken(d, pos);
+			            break;
+			        case PE.ILOpcode.conv_u2: break;
+			        case PE.ILOpcode.conv_u1: break;
+			        case PE.ILOpcode.conv_i: break;
+			        case PE.ILOpcode.conv_ovf_i: break;
+			        case PE.ILOpcode.conv_ovf_u: break;
+			        case PE.ILOpcode.add_ovf: break;
+			        case PE.ILOpcode.add_ovf_un: break;
+			        case PE.ILOpcode.mul_ovf: break;
+			        case PE.ILOpcode.mul_ovf_un: break;
+			        case PE.ILOpcode.sub_ovf: break;
+			        case PE.ILOpcode.sub_ovf_un: break;
+			        case PE.ILOpcode.endfinally: break;
+			        case PE.ILOpcode.leave:
+			            oprand = loadI4(d, pos);
+			            break;
+			        case PE.ILOpcode.leave_s:
+			            oprand = loadI1(d, pos);
+			            break;
+			        case PE.ILOpcode.stind_i: break;
+			        case PE.ILOpcode.conv_u: break;
+			        case PE.ILOpcode.arglist: break;
+			        case PE.ILOpcode.ceq: break;
+			        case PE.ILOpcode.cgt: break;
+			        case PE.ILOpcode.cgt_un: break;
+			        case PE.ILOpcode.clt: break;
+			        case PE.ILOpcode.clt_un: break;
+			        case PE.ILOpcode.ldftn:
+			            oprand = loadMdToken(d, pos);
+			            break;
+			        case PE.ILOpcode.ldvirtftn:
+			            oprand = loadMdToken(d, pos);
+			            break;
+			        case PE.ILOpcode.ldarg:
+			            oprand = loadU4(d, pos);
+			            break;
+			        case PE.ILOpcode.ldarga:
+			            oprand = loadU4(d, pos);
+			            break;
+			        case PE.ILOpcode.starg:
+			            oprand = loadU4(d, pos);
+			            break;
+			        case PE.ILOpcode.ldloc:
+			            oprand = loadU4(d, pos);
+			            break;
+			        case PE.ILOpcode.ldloca:
+			            oprand = loadU4(d, pos);
+			            break;
+			        case PE.ILOpcode.stloc:
+			            oprand = loadU4(d, pos);
+			            break;
+			        case PE.ILOpcode.localloc: break;
+			        case PE.ILOpcode.endfilter: break;
+			        case PE.ILOpcode.unaligned_:
+			            oprand = loadU1(d, pos);
+			            break;
+			        case PE.ILOpcode.volatile_: break;
+			        case PE.ILOpcode.tail_: break;
+			        case PE.ILOpcode.initobj:
+			            oprand = loadMdToken(d, pos);
+			            break;
+			        case PE.ILOpcode.constrained_:
+			            oprand = loadMdToken(d, pos);
+			            break;
+			        case PE.ILOpcode.cpblk: break;
+			        case PE.ILOpcode.initblk: break;
+			        case PE.ILOpcode.no_: break;
+			        case PE.ILOpcode.rethrow: break;
+			        case PE.ILOpcode.sizeof:
+			            oprand = loadMdToken(d, pos);
+			            break;
+			        case PE.ILOpcode.refanytype: break;
+			        case PE.ILOpcode.readonly_: break;
+			        default: throw new E.PeError(E.PeErrorType.InvalidILOpcode, opcode._off, opcode._sz, opcode.value);
+			    }
+			    pos += (oprand) ? oprand._sz : 0;
+			    return {
+			        _off, _sz: pos - _off,
+			        opcode,
+			        oprand
+			    };
+			}
+			function loadOpcode(d, _off) {
+			    chk(d, _off, 1);
+			    const b = d.getUint8(_off);
+			    if (b == 0xFE) {
+			        return loadE2(d, _off);
+			    }
+			    else {
+			        return loadE1(d, _off);
+			    }
+			}
+			function loadILMethodSection(d, _off) {
+			    let pos = _off;
+			    const Kind = loadE1(d, pos);
+			    pos += Kind._sz;
+			    if (Kind.value & PE.ILMethodSectionKind.FatFormat) {
+			        const DataSizeBytes = loadFileData(d, pos, 3);
+			        const dataSize = d.getUint8(pos)
+			            | (d.getUint8(pos + 1) << 8)
+			            | (d.getUint8(pos + 2) << 16);
+			        pos += DataSizeBytes._sz;
+			        const end = _off + dataSize;
+			        const Clauses = loadFileDataVecByStop(d, pos, i => i._off + i._sz >= end, loadILEHClauseFat);
+			        pos += Clauses._sz;
+			        adjustILEHClauseCusage(Clauses.values);
+			        return {
+			            _off, _sz: pos - _off,
+			            Kind,
+			            DataSizeBytes,
+			            Clauses,
+			            dataSize
+			        };
+			    }
+			    else {
+			        const DataSizeBytes = loadFileData(d, pos, 1);
+			        const dataSize = d.getUint8(pos);
+			        pos += DataSizeBytes._sz;
+			        const Padding = loadFileData(d, pos, 2);
+			        pos += Padding._sz;
+			        const end = _off + dataSize;
+			        const Clauses = loadFileDataVecByStop(d, pos, i => i._off + i._sz >= end, loadILEHClauseSmall);
+			        pos += Clauses._sz;
+			        adjustILEHClauseCusage(Clauses.values);
+			        return {
+			            _off, _sz: pos - _off,
+			            Kind,
+			            DataSizeBytes,
+			            Padding,
+			            Clauses,
+			            dataSize
+			        };
+			    }
+			}
+			function loadILEHClauseSmall(d, _off) {
+			    let pos = _off;
+			    const Flags = loadE2(d, pos);
+			    pos += Flags._sz;
+			    const TryOffset = loadU2(d, pos);
+			    pos += TryOffset._sz;
+			    const TryLength = loadU1(d, pos);
+			    pos += TryLength._sz;
+			    const HandlerOffset = loadU2(d, pos);
+			    pos += HandlerOffset._sz;
+			    const HandlerLength = loadU1(d, pos);
+			    pos += HandlerLength._sz;
+			    const ClassTokenOrFilterOffset = loadU4(d, pos);
+			    pos += ClassTokenOrFilterOffset._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        Flags,
+			        TryOffset,
+			        TryLength,
+			        HandlerOffset,
+			        HandlerLength,
+			        ClassTokenOrFilterOffset,
+			        usage: PE.ILEHClauseUsage.None
+			    };
+			}
+			function loadILEHClauseFat(d, _off) {
+			    let pos = _off;
+			    const Flags = loadE4(d, pos);
+			    pos += Flags._sz;
+			    const TryOffset = loadU4(d, pos);
+			    pos += TryOffset._sz;
+			    const TryLength = loadU4(d, pos);
+			    pos += TryLength._sz;
+			    const HandlerOffset = loadU4(d, pos);
+			    pos += HandlerOffset._sz;
+			    const HandlerLength = loadU4(d, pos);
+			    pos += HandlerLength._sz;
+			    const ClassTokenOrFilterOffset = loadU4(d, pos);
+			    pos += ClassTokenOrFilterOffset._sz;
+			    return {
+			        _off, _sz: pos - _off,
+			        Flags,
+			        TryOffset,
+			        TryLength,
+			        HandlerOffset,
+			        HandlerLength,
+			        ClassTokenOrFilterOffset,
+			        usage: PE.ILEHClauseUsage.None
+			    };
+			}
+			function adjustILEHClauseCusage(clauses) {
+			    let pc = null;
+			    for (let c of clauses) {
+			        switch (c.Flags.value) {
+			            case PE.ILEHClauseFlags.None:
+			                c.usage = PE.ILEHClauseUsage.UseClassToken;
+			                break;
+			            case PE.ILEHClauseFlags.Filter:
+			                c.usage = PE.ILEHClauseUsage.UseFilterOffset;
+			                break;
+			            case PE.ILEHClauseFlags.Finally:
+			            case PE.ILEHClauseFlags.Fault:
+			                if (pc != null
+			                    && pc.TryOffset.value == c.TryOffset.value
+			                    && pc.TryLength.value == c.TryLength.value)
+			                    c.usage = pc.usage;
+			                break;
+			        }
+			        pc = c;
+			    }
+			}
+			function loadU1(d, _off) {
+			    chk(d, _off, 1);
+			    const value = d.getUint8(_off);
+			    return { _off, _sz: 1, value };
+			}
+			function loadU2(d, _off) {
+			    chk(d, _off, 2);
+			    const value = d.getUint16(_off, true);
+			    return { _off, _sz: 2, value };
+			}
+			function loadU4(d, _off) {
+			    chk(d, _off, 4);
+			    const value = d.getUint32(_off, true);
+			    return { _off, _sz: 4, value };
+			}
+			function loadU8(d, _off) {
+			    chk(d, _off, 8);
+			    const low = d.getUint32(_off, true);
+			    const high = d.getUint32(_off + 4, true);
+			    return { _off, _sz: 8, low, high };
+			}
+			function loadI1(d, _off) {
+			    chk(d, _off, 1);
+			    const value = d.getInt8(_off);
+			    return { _off, _sz: 1, value };
+			}
+			function loadI4(d, _off) {
+			    chk(d, _off, 4);
+			    const value = d.getInt32(_off, true);
+			    return { _off, _sz: 4, value };
+			}
+			function loadI8(d, _off) {
+			    return loadU8(d, _off);
+			}
+			function loadR4(d, _off) {
+			    chk(d, _off, 4);
+			    const value = d.getFloat32(_off, true);
+			    return { _off, _sz: 4, value };
+			}
+			function loadR8(d, _off) {
+			    chk(d, _off, 8);
+			    const value = d.getFloat64(_off, true);
+			    return { _off, _sz: 8, value };
+			}
+			function loadCompressedUint(d, _off) {
+			    chk(d, _off, 1);
+			    const _sz = U.getCompressedIntSize(d.getUint8(_off));
+			    chk(d, _off, _sz);
+			    const arr = new Uint8Array(d.buffer.slice(_off, _off + _sz));
+			    const value = U.decompressUint(arr);
+			    return { _off, _sz, value };
+			}
+			function loadFileData(d, _off, _sz) {
+			    chk(d, _off, _sz);
+			    return { _off, _sz };
+			}
+			function loadFixedSizeAsciiString(d, _off, _sz) {
+			    chk(d, _off, _sz);
+			    let len = strlen(d, _off, _sz);
+			    const bs = new Uint8Array(d.buffer, _off, len);
+			    const value = String.fromCharCode.apply(null, bs);
+			    return { _off, _sz, value };
+			}
+			function loadNullTerminatedAsciiString(d, _off) {
+			    chk(d, _off, 1);
+			    let len = strlen(d, _off);
+			    const bs = new Uint8Array(d.buffer, _off, len);
+			    const value = String.fromCharCode.apply(null, bs);
+			    return { _off, _sz: len + 1, value };
+			}
+			function loadNullTerminatedUtf8String(d, _off) {
+			    chk(d, _off, 1);
+			    let len = strlen(d, _off);
+			    const bs = new Uint8Array(d.buffer, _off, len);
+			    const ss = Array.from(bs).map(b => "%" + b.toString(16));
+			    const value = decodeURIComponent(ss.join(""));
+			    return { _off, _sz: len + 1, value };
+			}
+			function loadFixedSizeUnicodeString(d, _off, _sz) {
+			    chk(d, _off, _sz);
+			    if (_sz == 0)
+			        return { _off, _sz: 0, value: "" };
+			    const buf = d.buffer.slice(_off, _off + _sz);
+			    const arr = new Uint16Array(buf);
+			    const value = String.fromCodePoint.apply(null, arr);
+			    return { _off, _sz, value };
+			}
+			function strlen(d, _off, max) {
+			    chk(d, _off, 1);
+			    let ml = d.byteLength - _off;
+			    if (max && max < ml)
+			        ml = max;
+			    const tb = new Uint8Array(d.buffer, _off);
+			    let len = 0;
+			    while (tb[len] != 0 && len < ml)
+			        len++;
+			    return len;
+			}
+			function loadE1(d, _off) {
+			    chk(d, _off, 1);
+			    const value = d.getUint8(_off);
+			    return { _off, _sz: 1, value };
+			}
+			function loadE2(d, _off) {
+			    chk(d, _off, 2);
+			    const value = d.getUint16(_off, true);
+			    return { _off, _sz: 2, value };
+			}
+			function loadE4(d, _off) {
+			    chk(d, _off, 4);
+			    const value = d.getUint32(_off, true);
+			    return { _off, _sz: 4, value };
+			}
+			function loadFileDataVecByCount(d, _off, count, load) {
+			    let values = [];
+			    let pos = _off;
+			    for (let i = 0; i < count; i++) {
+			        const item = load(d, pos);
+			        pos += item._sz;
+			        values.push(item);
+			    }
+			    return { _off, _sz: pos - _off, values };
+			}
+			function loadFileDataVecByStop(d, _off, stop, load) {
+			    let values = [];
+			    let pos = _off;
+			    let item;
+			    do {
+			        item = load(d, pos);
+			        pos += item._sz;
+			        values.push(item);
+			    } while (!stop(item));
+			    return { _off, _sz: pos - _off, values };
+			}
+			function loadMdCodedToken4(d, _off, cti) {
+			    chk(d, _off, 4);
+			    const value = d.getUint32(_off, true);
+			    return Object.assign({ _off, _sz: 4 }, decodeCodedToken(value, cti));
+			}
+			function loadMdCodedToken2(d, _off, cti) {
+			    chk(d, _off, 4);
+			    const value = d.getUint16(_off, true);
+			    return Object.assign({ _off, _sz: 2 }, decodeCodedToken(value, cti));
+			}
+			function decodeCodedToken(token, cti) {
+			    const tid = cti.tables[token & ((1 << cti.tagSize) - 1)];
+			    const rid = token >> cti.tagSize;
+			    return { tid, rid };
+			}
+			function loadMdToken(d, _off) {
+			    chk(d, _off, 4);
+			    const value = d.getUint32(_off, true);
+			    const tid = (value & 0xFF000000) >> 24;
+			    const rid = value & 0x00FFFFFF;
+			    return { _off, _sz: 4, tid, rid };
+			}
+			function calculatePaddingSize(dataSize, packSize = 4) {
+			    const rem = dataSize % packSize;
+			    return rem == 0 ? 0 : packSize - rem;
+			}
+			function count1(n) {
+			    let c = 0;
+			    for (let i = 0, mask = 1; i < 32; i++, mask <<= 1) {
+			        if (n & mask)
+			            c++;
+			    }
+			    return c;
+			}
+			function chk_fsz(sz) {
+			    if (sz <= 0x80)
+			        throw new E.PeError(E.PeErrorType.FileTooShort, 0, sz);
+			    else if (sz >= 0x80000000)
+			        throw new E.PeError(E.PeErrorType.FileTooLong, 0, sz);
+			}
+			function chk(d, _off, _sz) {
+			    if (_off < 0 || _off >= d.byteLength)
+			        throw new E.PeError(E.PeErrorType.InvalidOffset, _off, _sz);
+			    if (_sz < 0 || _off + _sz > d.byteLength)
+			        throw new E.PeError(E.PeErrorType.InvalidSize, _off, _sz);
+			}
+			function chk_fp(d, field, wantedSize) {
+			    if (field.value < 0 || field.value + wantedSize > d.byteLength)
+			        throw new E.PeError(E.PeErrorType.InvalidFilePointer, field._off, field._sz, field.value);
+			}
+			function err(e, d) {
+			    throw new E.PeError(e, d._off, d._sz, d.value);
+			}
+
+
+		/***/ },
+		/* 4 */
+		/***/ function(module, exports, __webpack_require__) {
+			const PE = __webpack_require__(1);
+			function copyData(pe, data) {
+			    return pe.data.buffer.slice(data._off, data._off + data._sz);
+			}
+			exports.copyData = copyData;
+			function is64Bit(pe) {
+			    return pe.optionalHeader.Magic.value == PE.ntOptHdr64Magic;
+			}
+			exports.is64Bit = is64Bit;
+			function isDll(pe) {
+			    return (pe.fileHeader.Characteristics.value & PE.FileAttr.IMAGE_FILE_DLL) != 0;
+			}
+			exports.isDll = isDll;
+			function rvaToOffset(pe, rva) {
+			    var sh = getSectionHeaderByRva(pe, rva);
+			    if (sh == null)
+			        return 0;
+			    return rva - sh.VirtualAddress.value + sh.PointerToRawData.value;
+			}
+			exports.rvaToOffset = rvaToOffset;
+			function offsetToRva(pe, offset) {
+			    var sh = getSectionHeaderByOffset(pe, offset);
+			    if (sh == null)
+			        return 0;
+			    return offset - sh.PointerToRawData.value + sh.VirtualAddress.value;
+			}
+			exports.offsetToRva = offsetToRva;
+			function getSectionHeaderByRva(pe, rva) {
+			    if (pe.sectionHeaders == null)
+			        return null;
+			    for (let sh of pe.sectionHeaders.values) {
+			        if (rva >= sh.VirtualAddress.value
+			            && rva < sh.VirtualAddress.value + sh.VirtualSize.value)
+			            return sh;
+			    }
+			    return null;
+			}
+			exports.getSectionHeaderByRva = getSectionHeaderByRva;
+			function getSectionHeaderByOffset(pe, offset) {
+			    if (pe.sectionHeaders == null)
+			        return null;
+			    for (let sh of pe.sectionHeaders.values) {
+			        if (offset >= sh.PointerToRawData.value
+			            && offset < sh.PointerToRawData.value + sh.VirtualSize.value)
+			            return sh;
+			    }
+			    return null;
+			}
+			exports.getSectionHeaderByOffset = getSectionHeaderByOffset;
+			function hasMetadata(pe) {
+			    const dd = pe.optionalHeader.DataDirectories
+			        .values[PE.DataDirectoryIndex.ComDescriptor];
+			    return dd.Rva.value > 0 && dd.Size.value > 0;
+			}
+			exports.hasMetadata = hasMetadata;
+			function hasManRes(pe) {
+			    return (hasMetadata(pe)
+			        && pe.cliHeader.Resources.Rva.value > 0
+			        && pe.cliHeader.Resources.Size.value > 0);
+			}
+			exports.hasManRes = hasManRes;
+			function hasSNSignature(pe) {
+			    return (hasMetadata(pe)
+			        && pe.cliHeader.StrongNameSignature.Rva.value > 0
+			        && pe.cliHeader.StrongNameSignature.Size.value > 0);
+			}
+			exports.hasSNSignature = hasSNSignature;
+			function hasIL(methodDef) {
+			    return (methodDef.RVA.value > 0
+			        && (methodDef.ImplFlags.value & PE.CorMethodImpl.ct__Mask) == PE.CorMethodImpl.ct_IL
+			        && (methodDef.ImplFlags.value & PE.CorMethodImpl.m__Mask) == PE.CorMethodImpl.m_Managed);
+			}
+			exports.hasIL = hasIL;
+			function decompressUint(data) {
+			    if ((data[0] & 0x80) == 0 && data.buffer.byteLength == 1)
+			        return data[0];
+			    else if ((data[0] & 0xC0) == 0x80 && data.buffer.byteLength == 2)
+			        return (data[0] & 0x3F) << 8 | data[1];
+			    else if ((data[0] & 0xE0) == 0xC0 && data.buffer.byteLength == 4)
+			        return (data[0] & 0x1F) << 24 | data[1] << 16 | data[2] << 8 | data[3];
+			    else
+			        throw new RangeError();
+			}
+			exports.decompressUint = decompressUint;
+			function decompressInt(data) {
+			    const u = decompressUint(data);
+			    if ((u & 0x00000001) == 0)
+			        return (u >> 1);
+			    const fb = data[0];
+			    if ((fb & 0x80) == 0)
+			        return (u >> 1) | 0xFFFFFFC0;
+			    else if ((fb & 0xC0) == 0x80)
+			        return (u >> 1) | 0xFFFFE000;
+			    else if ((fb & 0xE0) == 0xC0)
+			        return (u >> 1) | 0xF0000000;
+			    else
+			        throw new RangeError();
+			}
+			exports.decompressInt = decompressInt;
+			function getCompressedIntSize(firstByte) {
+			    if ((firstByte & 0xFFFFFF00) != 0)
+			        throw new RangeError();
+			    else if ((firstByte & 0x80) == 0)
+			        return 1;
+			    else if ((firstByte & 0xC0) == 0x80)
+			        return 2;
+			    else if ((firstByte & 0xE0) == 0xC0)
+			        return 4;
+			    else
+			        throw new RangeError();
+			}
+			exports.getCompressedIntSize = getCompressedIntSize;
+
+
+		/***/ }
+		/******/ ])
+		});
+		
+	} (peStruct$1));
+	return peStruct$1.exports;
+}
+
+var peStructExports = requirePeStruct();
+
+// Loosely based off https://stackoverflow.com/questions/64393919/load-resource-from-assembly-without-loading-the-assembly
+const getManifest = (data) => {
+    const buffer = data.buffer;
+    let pe;
+    try {
+        pe = peStructExports.load(buffer);
+    }
+    catch {
+        throw new Error('Failed to read portable executable');
+    }
+    const stringsOffset = pe.mdsStrings._off;
+    const manifestResource = pe.mdtManifestResource.values.find((resource) => {
+        const nameLocation = resource.Name;
+        let name = '';
+        for (let i = stringsOffset + nameLocation.value; i < buffer.byteLength; i++) {
+            const char = String.fromCharCode(pe.data.getUint8(i));
+            if (char != '\0') {
+                name += char;
+                continue;
+            }
+            if (name.endsWith('manifest.json')) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+    });
+    if (!manifestResource) {
+        throw new Error('Manifest not found');
+    }
+    const resourcesResource = pe.cliHeader.Resources;
+    const decoder = new TextDecoder();
+    let pos = peStructExports.rvaToOffset(pe, resourcesResource.Rva.value) +
+        manifestResource.Offset.value;
+    const size = pe.data.getUint32(pos, true);
+    pos += 4;
+    return JSON.parse(decoder.decode(buffer.slice(pos, pos + size)));
+};
+
+var polyfills;
+var hasRequiredPolyfills;
+
+function requirePolyfills () {
+	if (hasRequiredPolyfills) return polyfills;
+	hasRequiredPolyfills = 1;
+	var constants = require$$0$a;
+
+	var origCwd = process.cwd;
+	var cwd = null;
+
+	var platform = process.env.GRACEFUL_FS_PLATFORM || process.platform;
+
+	process.cwd = function() {
+	  if (!cwd)
+	    cwd = origCwd.call(process);
+	  return cwd
+	};
+	try {
+	  process.cwd();
+	} catch (er) {}
+
+	// This check is needed until node.js 12 is required
+	if (typeof process.chdir === 'function') {
+	  var chdir = process.chdir;
+	  process.chdir = function (d) {
+	    cwd = null;
+	    chdir.call(process, d);
+	  };
+	  if (Object.setPrototypeOf) Object.setPrototypeOf(process.chdir, chdir);
+	}
+
+	polyfills = patch;
+
+	function patch (fs) {
+	  // (re-)implement some things that are known busted or missing.
+
+	  // lchmod, broken prior to 0.6.2
+	  // back-port the fix here.
+	  if (constants.hasOwnProperty('O_SYMLINK') &&
+	      process.version.match(/^v0\.6\.[0-2]|^v0\.5\./)) {
+	    patchLchmod(fs);
+	  }
+
+	  // lutimes implementation, or no-op
+	  if (!fs.lutimes) {
+	    patchLutimes(fs);
+	  }
+
+	  // https://github.com/isaacs/node-graceful-fs/issues/4
+	  // Chown should not fail on einval or eperm if non-root.
+	  // It should not fail on enosys ever, as this just indicates
+	  // that a fs doesn't support the intended operation.
+
+	  fs.chown = chownFix(fs.chown);
+	  fs.fchown = chownFix(fs.fchown);
+	  fs.lchown = chownFix(fs.lchown);
+
+	  fs.chmod = chmodFix(fs.chmod);
+	  fs.fchmod = chmodFix(fs.fchmod);
+	  fs.lchmod = chmodFix(fs.lchmod);
+
+	  fs.chownSync = chownFixSync(fs.chownSync);
+	  fs.fchownSync = chownFixSync(fs.fchownSync);
+	  fs.lchownSync = chownFixSync(fs.lchownSync);
+
+	  fs.chmodSync = chmodFixSync(fs.chmodSync);
+	  fs.fchmodSync = chmodFixSync(fs.fchmodSync);
+	  fs.lchmodSync = chmodFixSync(fs.lchmodSync);
+
+	  fs.stat = statFix(fs.stat);
+	  fs.fstat = statFix(fs.fstat);
+	  fs.lstat = statFix(fs.lstat);
+
+	  fs.statSync = statFixSync(fs.statSync);
+	  fs.fstatSync = statFixSync(fs.fstatSync);
+	  fs.lstatSync = statFixSync(fs.lstatSync);
+
+	  // if lchmod/lchown do not exist, then make them no-ops
+	  if (fs.chmod && !fs.lchmod) {
+	    fs.lchmod = function (path, mode, cb) {
+	      if (cb) process.nextTick(cb);
+	    };
+	    fs.lchmodSync = function () {};
+	  }
+	  if (fs.chown && !fs.lchown) {
+	    fs.lchown = function (path, uid, gid, cb) {
+	      if (cb) process.nextTick(cb);
+	    };
+	    fs.lchownSync = function () {};
+	  }
+
+	  // on Windows, A/V software can lock the directory, causing this
+	  // to fail with an EACCES or EPERM if the directory contains newly
+	  // created files.  Try again on failure, for up to 60 seconds.
+
+	  // Set the timeout this long because some Windows Anti-Virus, such as Parity
+	  // bit9, may lock files for up to a minute, causing npm package install
+	  // failures. Also, take care to yield the scheduler. Windows scheduling gives
+	  // CPU to a busy looping process, which can cause the program causing the lock
+	  // contention to be starved of CPU by node, so the contention doesn't resolve.
+	  if (platform === "win32") {
+	    fs.rename = typeof fs.rename !== 'function' ? fs.rename
+	    : (function (fs$rename) {
+	      function rename (from, to, cb) {
+	        var start = Date.now();
+	        var backoff = 0;
+	        fs$rename(from, to, function CB (er) {
+	          if (er
+	              && (er.code === "EACCES" || er.code === "EPERM" || er.code === "EBUSY")
+	              && Date.now() - start < 60000) {
+	            setTimeout(function() {
+	              fs.stat(to, function (stater, st) {
+	                if (stater && stater.code === "ENOENT")
+	                  fs$rename(from, to, CB);
+	                else
+	                  cb(er);
+	              });
+	            }, backoff);
+	            if (backoff < 100)
+	              backoff += 10;
+	            return;
+	          }
+	          if (cb) cb(er);
+	        });
+	      }
+	      if (Object.setPrototypeOf) Object.setPrototypeOf(rename, fs$rename);
+	      return rename
+	    })(fs.rename);
+	  }
+
+	  // if read() returns EAGAIN, then just try it again.
+	  fs.read = typeof fs.read !== 'function' ? fs.read
+	  : (function (fs$read) {
+	    function read (fd, buffer, offset, length, position, callback_) {
+	      var callback;
+	      if (callback_ && typeof callback_ === 'function') {
+	        var eagCounter = 0;
+	        callback = function (er, _, __) {
+	          if (er && er.code === 'EAGAIN' && eagCounter < 10) {
+	            eagCounter ++;
+	            return fs$read.call(fs, fd, buffer, offset, length, position, callback)
+	          }
+	          callback_.apply(this, arguments);
+	        };
+	      }
+	      return fs$read.call(fs, fd, buffer, offset, length, position, callback)
+	    }
+
+	    // This ensures `util.promisify` works as it does for native `fs.read`.
+	    if (Object.setPrototypeOf) Object.setPrototypeOf(read, fs$read);
+	    return read
+	  })(fs.read);
+
+	  fs.readSync = typeof fs.readSync !== 'function' ? fs.readSync
+	  : (function (fs$readSync) { return function (fd, buffer, offset, length, position) {
+	    var eagCounter = 0;
+	    while (true) {
+	      try {
+	        return fs$readSync.call(fs, fd, buffer, offset, length, position)
+	      } catch (er) {
+	        if (er.code === 'EAGAIN' && eagCounter < 10) {
+	          eagCounter ++;
+	          continue
+	        }
+	        throw er
+	      }
+	    }
+	  }})(fs.readSync);
+
+	  function patchLchmod (fs) {
+	    fs.lchmod = function (path, mode, callback) {
+	      fs.open( path
+	             , constants.O_WRONLY | constants.O_SYMLINK
+	             , mode
+	             , function (err, fd) {
+	        if (err) {
+	          if (callback) callback(err);
+	          return
+	        }
+	        // prefer to return the chmod error, if one occurs,
+	        // but still try to close, and report closing errors if they occur.
+	        fs.fchmod(fd, mode, function (err) {
+	          fs.close(fd, function(err2) {
+	            if (callback) callback(err || err2);
+	          });
+	        });
+	      });
+	    };
+
+	    fs.lchmodSync = function (path, mode) {
+	      var fd = fs.openSync(path, constants.O_WRONLY | constants.O_SYMLINK, mode);
+
+	      // prefer to return the chmod error, if one occurs,
+	      // but still try to close, and report closing errors if they occur.
+	      var threw = true;
+	      var ret;
+	      try {
+	        ret = fs.fchmodSync(fd, mode);
+	        threw = false;
+	      } finally {
+	        if (threw) {
+	          try {
+	            fs.closeSync(fd);
+	          } catch (er) {}
+	        } else {
+	          fs.closeSync(fd);
+	        }
+	      }
+	      return ret
+	    };
+	  }
+
+	  function patchLutimes (fs) {
+	    if (constants.hasOwnProperty("O_SYMLINK") && fs.futimes) {
+	      fs.lutimes = function (path, at, mt, cb) {
+	        fs.open(path, constants.O_SYMLINK, function (er, fd) {
+	          if (er) {
+	            if (cb) cb(er);
+	            return
+	          }
+	          fs.futimes(fd, at, mt, function (er) {
+	            fs.close(fd, function (er2) {
+	              if (cb) cb(er || er2);
+	            });
+	          });
+	        });
+	      };
+
+	      fs.lutimesSync = function (path, at, mt) {
+	        var fd = fs.openSync(path, constants.O_SYMLINK);
+	        var ret;
+	        var threw = true;
+	        try {
+	          ret = fs.futimesSync(fd, at, mt);
+	          threw = false;
+	        } finally {
+	          if (threw) {
+	            try {
+	              fs.closeSync(fd);
+	            } catch (er) {}
+	          } else {
+	            fs.closeSync(fd);
+	          }
+	        }
+	        return ret
+	      };
+
+	    } else if (fs.futimes) {
+	      fs.lutimes = function (_a, _b, _c, cb) { if (cb) process.nextTick(cb); };
+	      fs.lutimesSync = function () {};
+	    }
+	  }
+
+	  function chmodFix (orig) {
+	    if (!orig) return orig
+	    return function (target, mode, cb) {
+	      return orig.call(fs, target, mode, function (er) {
+	        if (chownErOk(er)) er = null;
+	        if (cb) cb.apply(this, arguments);
+	      })
+	    }
+	  }
+
+	  function chmodFixSync (orig) {
+	    if (!orig) return orig
+	    return function (target, mode) {
+	      try {
+	        return orig.call(fs, target, mode)
+	      } catch (er) {
+	        if (!chownErOk(er)) throw er
+	      }
+	    }
+	  }
+
+
+	  function chownFix (orig) {
+	    if (!orig) return orig
+	    return function (target, uid, gid, cb) {
+	      return orig.call(fs, target, uid, gid, function (er) {
+	        if (chownErOk(er)) er = null;
+	        if (cb) cb.apply(this, arguments);
+	      })
+	    }
+	  }
+
+	  function chownFixSync (orig) {
+	    if (!orig) return orig
+	    return function (target, uid, gid) {
+	      try {
+	        return orig.call(fs, target, uid, gid)
+	      } catch (er) {
+	        if (!chownErOk(er)) throw er
+	      }
+	    }
+	  }
+
+	  function statFix (orig) {
+	    if (!orig) return orig
+	    // Older versions of Node erroneously returned signed integers for
+	    // uid + gid.
+	    return function (target, options, cb) {
+	      if (typeof options === 'function') {
+	        cb = options;
+	        options = null;
+	      }
+	      function callback (er, stats) {
+	        if (stats) {
+	          if (stats.uid < 0) stats.uid += 0x100000000;
+	          if (stats.gid < 0) stats.gid += 0x100000000;
+	        }
+	        if (cb) cb.apply(this, arguments);
+	      }
+	      return options ? orig.call(fs, target, options, callback)
+	        : orig.call(fs, target, callback)
+	    }
+	  }
+
+	  function statFixSync (orig) {
+	    if (!orig) return orig
+	    // Older versions of Node erroneously returned signed integers for
+	    // uid + gid.
+	    return function (target, options) {
+	      var stats = options ? orig.call(fs, target, options)
+	        : orig.call(fs, target);
+	      if (stats) {
+	        if (stats.uid < 0) stats.uid += 0x100000000;
+	        if (stats.gid < 0) stats.gid += 0x100000000;
+	      }
+	      return stats;
+	    }
+	  }
+
+	  // ENOSYS means that the fs doesn't support the op. Just ignore
+	  // that, because it doesn't matter.
+	  //
+	  // if there's no getuid, or if getuid() is something other
+	  // than 0, and the error is EINVAL or EPERM, then just ignore
+	  // it.
+	  //
+	  // This specific case is a silent failure in cp, install, tar,
+	  // and most other unix tools that manage permissions.
+	  //
+	  // When running as root, or if other types of errors are
+	  // encountered, then it's strict.
+	  function chownErOk (er) {
+	    if (!er)
+	      return true
+
+	    if (er.code === "ENOSYS")
+	      return true
+
+	    var nonroot = !process.getuid || process.getuid() !== 0;
+	    if (nonroot) {
+	      if (er.code === "EINVAL" || er.code === "EPERM")
+	        return true
+	    }
+
+	    return false
+	  }
+	}
+	return polyfills;
+}
+
+var legacyStreams;
+var hasRequiredLegacyStreams;
+
+function requireLegacyStreams () {
+	if (hasRequiredLegacyStreams) return legacyStreams;
+	hasRequiredLegacyStreams = 1;
+	var Stream = require$$0$5.Stream;
+
+	legacyStreams = legacy;
+
+	function legacy (fs) {
+	  return {
+	    ReadStream: ReadStream,
+	    WriteStream: WriteStream
+	  }
+
+	  function ReadStream (path, options) {
+	    if (!(this instanceof ReadStream)) return new ReadStream(path, options);
+
+	    Stream.call(this);
+
+	    var self = this;
+
+	    this.path = path;
+	    this.fd = null;
+	    this.readable = true;
+	    this.paused = false;
+
+	    this.flags = 'r';
+	    this.mode = 438; /*=0666*/
+	    this.bufferSize = 64 * 1024;
+
+	    options = options || {};
+
+	    // Mixin options into this
+	    var keys = Object.keys(options);
+	    for (var index = 0, length = keys.length; index < length; index++) {
+	      var key = keys[index];
+	      this[key] = options[key];
+	    }
+
+	    if (this.encoding) this.setEncoding(this.encoding);
+
+	    if (this.start !== undefined) {
+	      if ('number' !== typeof this.start) {
+	        throw TypeError('start must be a Number');
+	      }
+	      if (this.end === undefined) {
+	        this.end = Infinity;
+	      } else if ('number' !== typeof this.end) {
+	        throw TypeError('end must be a Number');
+	      }
+
+	      if (this.start > this.end) {
+	        throw new Error('start must be <= end');
+	      }
+
+	      this.pos = this.start;
+	    }
+
+	    if (this.fd !== null) {
+	      process.nextTick(function() {
+	        self._read();
+	      });
+	      return;
+	    }
+
+	    fs.open(this.path, this.flags, this.mode, function (err, fd) {
+	      if (err) {
+	        self.emit('error', err);
+	        self.readable = false;
+	        return;
+	      }
+
+	      self.fd = fd;
+	      self.emit('open', fd);
+	      self._read();
+	    });
+	  }
+
+	  function WriteStream (path, options) {
+	    if (!(this instanceof WriteStream)) return new WriteStream(path, options);
+
+	    Stream.call(this);
+
+	    this.path = path;
+	    this.fd = null;
+	    this.writable = true;
+
+	    this.flags = 'w';
+	    this.encoding = 'binary';
+	    this.mode = 438; /*=0666*/
+	    this.bytesWritten = 0;
+
+	    options = options || {};
+
+	    // Mixin options into this
+	    var keys = Object.keys(options);
+	    for (var index = 0, length = keys.length; index < length; index++) {
+	      var key = keys[index];
+	      this[key] = options[key];
+	    }
+
+	    if (this.start !== undefined) {
+	      if ('number' !== typeof this.start) {
+	        throw TypeError('start must be a Number');
+	      }
+	      if (this.start < 0) {
+	        throw new Error('start must be >= zero');
+	      }
+
+	      this.pos = this.start;
+	    }
+
+	    this.busy = false;
+	    this._queue = [];
+
+	    if (this.fd === null) {
+	      this._open = fs.open;
+	      this._queue.push([this._open, this.path, this.flags, this.mode, undefined]);
+	      this.flush();
+	    }
+	  }
+	}
+	return legacyStreams;
+}
+
+var clone_1;
+var hasRequiredClone;
+
+function requireClone () {
+	if (hasRequiredClone) return clone_1;
+	hasRequiredClone = 1;
+
+	clone_1 = clone;
+
+	var getPrototypeOf = Object.getPrototypeOf || function (obj) {
+	  return obj.__proto__
+	};
+
+	function clone (obj) {
+	  if (obj === null || typeof obj !== 'object')
+	    return obj
+
+	  if (obj instanceof Object)
+	    var copy = { __proto__: getPrototypeOf(obj) };
+	  else
+	    var copy = Object.create(null);
+
+	  Object.getOwnPropertyNames(obj).forEach(function (key) {
+	    Object.defineProperty(copy, key, Object.getOwnPropertyDescriptor(obj, key));
+	  });
+
+	  return copy
+	}
+	return clone_1;
+}
+
+var gracefulFs;
+var hasRequiredGracefulFs;
+
+function requireGracefulFs () {
+	if (hasRequiredGracefulFs) return gracefulFs;
+	hasRequiredGracefulFs = 1;
+	var fs$1 = fs;
+	var polyfills = requirePolyfills();
+	var legacy = requireLegacyStreams();
+	var clone = requireClone();
+
+	var util = require$$1;
+
+	/* istanbul ignore next - node 0.x polyfill */
+	var gracefulQueue;
+	var previousSymbol;
+
+	/* istanbul ignore else - node 0.x polyfill */
+	if (typeof Symbol === 'function' && typeof Symbol.for === 'function') {
+	  gracefulQueue = Symbol.for('graceful-fs.queue');
+	  // This is used in testing by future versions
+	  previousSymbol = Symbol.for('graceful-fs.previous');
+	} else {
+	  gracefulQueue = '___graceful-fs.queue';
+	  previousSymbol = '___graceful-fs.previous';
+	}
+
+	function noop () {}
+
+	function publishQueue(context, queue) {
+	  Object.defineProperty(context, gracefulQueue, {
+	    get: function() {
+	      return queue
+	    }
+	  });
+	}
+
+	var debug = noop;
+	if (util.debuglog)
+	  debug = util.debuglog('gfs4');
+	else if (/\bgfs4\b/i.test(process.env.NODE_DEBUG || ''))
+	  debug = function() {
+	    var m = util.format.apply(util, arguments);
+	    m = 'GFS4: ' + m.split(/\n/).join('\nGFS4: ');
+	    console.error(m);
+	  };
+
+	// Once time initialization
+	if (!fs$1[gracefulQueue]) {
+	  // This queue can be shared by multiple loaded instances
+	  var queue = commonjsGlobal[gracefulQueue] || [];
+	  publishQueue(fs$1, queue);
+
+	  // Patch fs.close/closeSync to shared queue version, because we need
+	  // to retry() whenever a close happens *anywhere* in the program.
+	  // This is essential when multiple graceful-fs instances are
+	  // in play at the same time.
+	  fs$1.close = (function (fs$close) {
+	    function close (fd, cb) {
+	      return fs$close.call(fs$1, fd, function (err) {
+	        // This function uses the graceful-fs shared queue
+	        if (!err) {
+	          resetQueue();
+	        }
+
+	        if (typeof cb === 'function')
+	          cb.apply(this, arguments);
+	      })
+	    }
+
+	    Object.defineProperty(close, previousSymbol, {
+	      value: fs$close
+	    });
+	    return close
+	  })(fs$1.close);
+
+	  fs$1.closeSync = (function (fs$closeSync) {
+	    function closeSync (fd) {
+	      // This function uses the graceful-fs shared queue
+	      fs$closeSync.apply(fs$1, arguments);
+	      resetQueue();
+	    }
+
+	    Object.defineProperty(closeSync, previousSymbol, {
+	      value: fs$closeSync
+	    });
+	    return closeSync
+	  })(fs$1.closeSync);
+
+	  if (/\bgfs4\b/i.test(process.env.NODE_DEBUG || '')) {
+	    process.on('exit', function() {
+	      debug(fs$1[gracefulQueue]);
+	      require$$0$3.equal(fs$1[gracefulQueue].length, 0);
+	    });
+	  }
+	}
+
+	if (!commonjsGlobal[gracefulQueue]) {
+	  publishQueue(commonjsGlobal, fs$1[gracefulQueue]);
+	}
+
+	gracefulFs = patch(clone(fs$1));
+	if (process.env.TEST_GRACEFUL_FS_GLOBAL_PATCH && !fs$1.__patched) {
+	    gracefulFs = patch(fs$1);
+	    fs$1.__patched = true;
+	}
+
+	function patch (fs) {
+	  // Everything that references the open() function needs to be in here
+	  polyfills(fs);
+	  fs.gracefulify = patch;
+
+	  fs.createReadStream = createReadStream;
+	  fs.createWriteStream = createWriteStream;
+	  var fs$readFile = fs.readFile;
+	  fs.readFile = readFile;
+	  function readFile (path, options, cb) {
+	    if (typeof options === 'function')
+	      cb = options, options = null;
+
+	    return go$readFile(path, options, cb)
+
+	    function go$readFile (path, options, cb, startTime) {
+	      return fs$readFile(path, options, function (err) {
+	        if (err && (err.code === 'EMFILE' || err.code === 'ENFILE'))
+	          enqueue([go$readFile, [path, options, cb], err, startTime || Date.now(), Date.now()]);
+	        else {
+	          if (typeof cb === 'function')
+	            cb.apply(this, arguments);
+	        }
+	      })
+	    }
+	  }
+
+	  var fs$writeFile = fs.writeFile;
+	  fs.writeFile = writeFile;
+	  function writeFile (path, data, options, cb) {
+	    if (typeof options === 'function')
+	      cb = options, options = null;
+
+	    return go$writeFile(path, data, options, cb)
+
+	    function go$writeFile (path, data, options, cb, startTime) {
+	      return fs$writeFile(path, data, options, function (err) {
+	        if (err && (err.code === 'EMFILE' || err.code === 'ENFILE'))
+	          enqueue([go$writeFile, [path, data, options, cb], err, startTime || Date.now(), Date.now()]);
+	        else {
+	          if (typeof cb === 'function')
+	            cb.apply(this, arguments);
+	        }
+	      })
+	    }
+	  }
+
+	  var fs$appendFile = fs.appendFile;
+	  if (fs$appendFile)
+	    fs.appendFile = appendFile;
+	  function appendFile (path, data, options, cb) {
+	    if (typeof options === 'function')
+	      cb = options, options = null;
+
+	    return go$appendFile(path, data, options, cb)
+
+	    function go$appendFile (path, data, options, cb, startTime) {
+	      return fs$appendFile(path, data, options, function (err) {
+	        if (err && (err.code === 'EMFILE' || err.code === 'ENFILE'))
+	          enqueue([go$appendFile, [path, data, options, cb], err, startTime || Date.now(), Date.now()]);
+	        else {
+	          if (typeof cb === 'function')
+	            cb.apply(this, arguments);
+	        }
+	      })
+	    }
+	  }
+
+	  var fs$copyFile = fs.copyFile;
+	  if (fs$copyFile)
+	    fs.copyFile = copyFile;
+	  function copyFile (src, dest, flags, cb) {
+	    if (typeof flags === 'function') {
+	      cb = flags;
+	      flags = 0;
+	    }
+	    return go$copyFile(src, dest, flags, cb)
+
+	    function go$copyFile (src, dest, flags, cb, startTime) {
+	      return fs$copyFile(src, dest, flags, function (err) {
+	        if (err && (err.code === 'EMFILE' || err.code === 'ENFILE'))
+	          enqueue([go$copyFile, [src, dest, flags, cb], err, startTime || Date.now(), Date.now()]);
+	        else {
+	          if (typeof cb === 'function')
+	            cb.apply(this, arguments);
+	        }
+	      })
+	    }
+	  }
+
+	  var fs$readdir = fs.readdir;
+	  fs.readdir = readdir;
+	  var noReaddirOptionVersions = /^v[0-5]\./;
+	  function readdir (path, options, cb) {
+	    if (typeof options === 'function')
+	      cb = options, options = null;
+
+	    var go$readdir = noReaddirOptionVersions.test(process.version)
+	      ? function go$readdir (path, options, cb, startTime) {
+	        return fs$readdir(path, fs$readdirCallback(
+	          path, options, cb, startTime
+	        ))
+	      }
+	      : function go$readdir (path, options, cb, startTime) {
+	        return fs$readdir(path, options, fs$readdirCallback(
+	          path, options, cb, startTime
+	        ))
+	      };
+
+	    return go$readdir(path, options, cb)
+
+	    function fs$readdirCallback (path, options, cb, startTime) {
+	      return function (err, files) {
+	        if (err && (err.code === 'EMFILE' || err.code === 'ENFILE'))
+	          enqueue([
+	            go$readdir,
+	            [path, options, cb],
+	            err,
+	            startTime || Date.now(),
+	            Date.now()
+	          ]);
+	        else {
+	          if (files && files.sort)
+	            files.sort();
+
+	          if (typeof cb === 'function')
+	            cb.call(this, err, files);
+	        }
+	      }
+	    }
+	  }
+
+	  if (process.version.substr(0, 4) === 'v0.8') {
+	    var legStreams = legacy(fs);
+	    ReadStream = legStreams.ReadStream;
+	    WriteStream = legStreams.WriteStream;
+	  }
+
+	  var fs$ReadStream = fs.ReadStream;
+	  if (fs$ReadStream) {
+	    ReadStream.prototype = Object.create(fs$ReadStream.prototype);
+	    ReadStream.prototype.open = ReadStream$open;
+	  }
+
+	  var fs$WriteStream = fs.WriteStream;
+	  if (fs$WriteStream) {
+	    WriteStream.prototype = Object.create(fs$WriteStream.prototype);
+	    WriteStream.prototype.open = WriteStream$open;
+	  }
+
+	  Object.defineProperty(fs, 'ReadStream', {
+	    get: function () {
+	      return ReadStream
+	    },
+	    set: function (val) {
+	      ReadStream = val;
+	    },
+	    enumerable: true,
+	    configurable: true
+	  });
+	  Object.defineProperty(fs, 'WriteStream', {
+	    get: function () {
+	      return WriteStream
+	    },
+	    set: function (val) {
+	      WriteStream = val;
+	    },
+	    enumerable: true,
+	    configurable: true
+	  });
+
+	  // legacy names
+	  var FileReadStream = ReadStream;
+	  Object.defineProperty(fs, 'FileReadStream', {
+	    get: function () {
+	      return FileReadStream
+	    },
+	    set: function (val) {
+	      FileReadStream = val;
+	    },
+	    enumerable: true,
+	    configurable: true
+	  });
+	  var FileWriteStream = WriteStream;
+	  Object.defineProperty(fs, 'FileWriteStream', {
+	    get: function () {
+	      return FileWriteStream
+	    },
+	    set: function (val) {
+	      FileWriteStream = val;
+	    },
+	    enumerable: true,
+	    configurable: true
+	  });
+
+	  function ReadStream (path, options) {
+	    if (this instanceof ReadStream)
+	      return fs$ReadStream.apply(this, arguments), this
+	    else
+	      return ReadStream.apply(Object.create(ReadStream.prototype), arguments)
+	  }
+
+	  function ReadStream$open () {
+	    var that = this;
+	    open(that.path, that.flags, that.mode, function (err, fd) {
+	      if (err) {
+	        if (that.autoClose)
+	          that.destroy();
+
+	        that.emit('error', err);
+	      } else {
+	        that.fd = fd;
+	        that.emit('open', fd);
+	        that.read();
+	      }
+	    });
+	  }
+
+	  function WriteStream (path, options) {
+	    if (this instanceof WriteStream)
+	      return fs$WriteStream.apply(this, arguments), this
+	    else
+	      return WriteStream.apply(Object.create(WriteStream.prototype), arguments)
+	  }
+
+	  function WriteStream$open () {
+	    var that = this;
+	    open(that.path, that.flags, that.mode, function (err, fd) {
+	      if (err) {
+	        that.destroy();
+	        that.emit('error', err);
+	      } else {
+	        that.fd = fd;
+	        that.emit('open', fd);
+	      }
+	    });
+	  }
+
+	  function createReadStream (path, options) {
+	    return new fs.ReadStream(path, options)
+	  }
+
+	  function createWriteStream (path, options) {
+	    return new fs.WriteStream(path, options)
+	  }
+
+	  var fs$open = fs.open;
+	  fs.open = open;
+	  function open (path, flags, mode, cb) {
+	    if (typeof mode === 'function')
+	      cb = mode, mode = null;
+
+	    return go$open(path, flags, mode, cb)
+
+	    function go$open (path, flags, mode, cb, startTime) {
+	      return fs$open(path, flags, mode, function (err, fd) {
+	        if (err && (err.code === 'EMFILE' || err.code === 'ENFILE'))
+	          enqueue([go$open, [path, flags, mode, cb], err, startTime || Date.now(), Date.now()]);
+	        else {
+	          if (typeof cb === 'function')
+	            cb.apply(this, arguments);
+	        }
+	      })
+	    }
+	  }
+
+	  return fs
+	}
+
+	function enqueue (elem) {
+	  debug('ENQUEUE', elem[0].name, elem[1]);
+	  fs$1[gracefulQueue].push(elem);
+	  retry();
+	}
+
+	// keep track of the timeout between retry() calls
+	var retryTimer;
+
+	// reset the startTime and lastTime to now
+	// this resets the start of the 60 second overall timeout as well as the
+	// delay between attempts so that we'll retry these jobs sooner
+	function resetQueue () {
+	  var now = Date.now();
+	  for (var i = 0; i < fs$1[gracefulQueue].length; ++i) {
+	    // entries that are only a length of 2 are from an older version, don't
+	    // bother modifying those since they'll be retried anyway.
+	    if (fs$1[gracefulQueue][i].length > 2) {
+	      fs$1[gracefulQueue][i][3] = now; // startTime
+	      fs$1[gracefulQueue][i][4] = now; // lastTime
+	    }
+	  }
+	  // call retry to make sure we're actively processing the queue
+	  retry();
+	}
+
+	function retry () {
+	  // clear the timer and remove it to help prevent unintended concurrency
+	  clearTimeout(retryTimer);
+	  retryTimer = undefined;
+
+	  if (fs$1[gracefulQueue].length === 0)
+	    return
+
+	  var elem = fs$1[gracefulQueue].shift();
+	  var fn = elem[0];
+	  var args = elem[1];
+	  // these items may be unset if they were added by an older graceful-fs
+	  var err = elem[2];
+	  var startTime = elem[3];
+	  var lastTime = elem[4];
+
+	  // if we don't have a startTime we have no way of knowing if we've waited
+	  // long enough, so go ahead and retry this item now
+	  if (startTime === undefined) {
+	    debug('RETRY', fn.name, args);
+	    fn.apply(null, args);
+	  } else if (Date.now() - startTime >= 60000) {
+	    // it's been more than 60 seconds total, bail now
+	    debug('TIMEOUT', fn.name, args);
+	    var cb = args.pop();
+	    if (typeof cb === 'function')
+	      cb.call(null, err);
+	  } else {
+	    // the amount of time between the last attempt and right now
+	    var sinceAttempt = Date.now() - lastTime;
+	    // the amount of time between when we first tried, and when we last tried
+	    // rounded up to at least 1
+	    var sinceStart = Math.max(lastTime - startTime, 1);
+	    // backoff. wait longer than the total time we've been retrying, but only
+	    // up to a maximum of 100ms
+	    var desiredDelay = Math.min(sinceStart * 1.2, 100);
+	    // it's been long enough since the last retry, do it again
+	    if (sinceAttempt >= desiredDelay) {
+	      debug('RETRY', fn.name, args);
+	      fn.apply(null, args.concat([startTime]));
+	    } else {
+	      // if we can't do this job yet, push it to the end of the queue
+	      // and let the next iteration check again
+	      fs$1[gracefulQueue].push(elem);
+	    }
+	  }
+
+	  // schedule our next run if one isn't already scheduled
+	  if (retryTimer === undefined) {
+	    retryTimer = setTimeout(retry, 0);
+	  }
+	}
+	return gracefulFs;
+}
+
+var fileType$2;
+var hasRequiredFileType$2;
+
+function requireFileType$2 () {
+	if (hasRequiredFileType$2) return fileType$2;
+	hasRequiredFileType$2 = 1;
+
+	fileType$2 = input => {
+		const buf = new Uint8Array(input);
+
+		if (!(buf && buf.length > 1)) {
+			return null;
+		}
+
+		const check = (header, opts) => {
+			opts = Object.assign({
+				offset: 0
+			}, opts);
+
+			for (let i = 0; i < header.length; i++) {
+				if (header[i] !== buf[i + opts.offset]) {
+					return false;
+				}
+			}
+
+			return true;
+		};
+
+		if (check([0xFF, 0xD8, 0xFF])) {
+			return {
+				ext: 'jpg',
+				mime: 'image/jpeg'
+			};
+		}
+
+		if (check([0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A])) {
+			return {
+				ext: 'png',
+				mime: 'image/png'
+			};
+		}
+
+		if (check([0x47, 0x49, 0x46])) {
+			return {
+				ext: 'gif',
+				mime: 'image/gif'
+			};
+		}
+
+		if (check([0x57, 0x45, 0x42, 0x50], {offset: 8})) {
+			return {
+				ext: 'webp',
+				mime: 'image/webp'
+			};
+		}
+
+		if (check([0x46, 0x4C, 0x49, 0x46])) {
+			return {
+				ext: 'flif',
+				mime: 'image/flif'
+			};
+		}
+
+		// Needs to be before `tif` check
+		if (
+			(check([0x49, 0x49, 0x2A, 0x0]) || check([0x4D, 0x4D, 0x0, 0x2A])) &&
+			check([0x43, 0x52], {offset: 8})
+		) {
+			return {
+				ext: 'cr2',
+				mime: 'image/x-canon-cr2'
+			};
+		}
+
+		if (
+			check([0x49, 0x49, 0x2A, 0x0]) ||
+			check([0x4D, 0x4D, 0x0, 0x2A])
+		) {
+			return {
+				ext: 'tif',
+				mime: 'image/tiff'
+			};
+		}
+
+		if (check([0x42, 0x4D])) {
+			return {
+				ext: 'bmp',
+				mime: 'image/bmp'
+			};
+		}
+
+		if (check([0x49, 0x49, 0xBC])) {
+			return {
+				ext: 'jxr',
+				mime: 'image/vnd.ms-photo'
+			};
+		}
+
+		if (check([0x38, 0x42, 0x50, 0x53])) {
+			return {
+				ext: 'psd',
+				mime: 'image/vnd.adobe.photoshop'
+			};
+		}
+
+		// Needs to be before the `zip` check
+		if (
+			check([0x50, 0x4B, 0x3, 0x4]) &&
+			check([0x6D, 0x69, 0x6D, 0x65, 0x74, 0x79, 0x70, 0x65, 0x61, 0x70, 0x70, 0x6C, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6F, 0x6E, 0x2F, 0x65, 0x70, 0x75, 0x62, 0x2B, 0x7A, 0x69, 0x70], {offset: 30})
+		) {
+			return {
+				ext: 'epub',
+				mime: 'application/epub+zip'
+			};
+		}
+
+		// Needs to be before `zip` check
+		// Assumes signed `.xpi` from addons.mozilla.org
+		if (
+			check([0x50, 0x4B, 0x3, 0x4]) &&
+			check([0x4D, 0x45, 0x54, 0x41, 0x2D, 0x49, 0x4E, 0x46, 0x2F, 0x6D, 0x6F, 0x7A, 0x69, 0x6C, 0x6C, 0x61, 0x2E, 0x72, 0x73, 0x61], {offset: 30})
+		) {
+			return {
+				ext: 'xpi',
+				mime: 'application/x-xpinstall'
+			};
+		}
+
+		if (
+			check([0x50, 0x4B]) &&
+			(buf[2] === 0x3 || buf[2] === 0x5 || buf[2] === 0x7) &&
+			(buf[3] === 0x4 || buf[3] === 0x6 || buf[3] === 0x8)
+		) {
+			return {
+				ext: 'zip',
+				mime: 'application/zip'
+			};
+		}
+
+		if (check([0x75, 0x73, 0x74, 0x61, 0x72], {offset: 257})) {
+			return {
+				ext: 'tar',
+				mime: 'application/x-tar'
+			};
+		}
+
+		if (
+			check([0x52, 0x61, 0x72, 0x21, 0x1A, 0x7]) &&
+			(buf[6] === 0x0 || buf[6] === 0x1)
+		) {
+			return {
+				ext: 'rar',
+				mime: 'application/x-rar-compressed'
+			};
+		}
+
+		if (check([0x1F, 0x8B, 0x8])) {
+			return {
+				ext: 'gz',
+				mime: 'application/gzip'
+			};
+		}
+
+		if (check([0x42, 0x5A, 0x68])) {
+			return {
+				ext: 'bz2',
+				mime: 'application/x-bzip2'
+			};
+		}
+
+		if (check([0x37, 0x7A, 0xBC, 0xAF, 0x27, 0x1C])) {
+			return {
+				ext: '7z',
+				mime: 'application/x-7z-compressed'
+			};
+		}
+
+		if (check([0x78, 0x01])) {
+			return {
+				ext: 'dmg',
+				mime: 'application/x-apple-diskimage'
+			};
+		}
+
+		if (
+			(
+				check([0x0, 0x0, 0x0]) &&
+				(buf[3] === 0x18 || buf[3] === 0x20) &&
+				check([0x66, 0x74, 0x79, 0x70], {offset: 4})
+			) ||
+			check([0x33, 0x67, 0x70, 0x35]) ||
+			(
+				check([0x0, 0x0, 0x0, 0x1C, 0x66, 0x74, 0x79, 0x70, 0x6D, 0x70, 0x34, 0x32]) &&
+				check([0x6D, 0x70, 0x34, 0x31, 0x6D, 0x70, 0x34, 0x32, 0x69, 0x73, 0x6F, 0x6D], {offset: 16})
+			) ||
+			check([0x0, 0x0, 0x0, 0x1C, 0x66, 0x74, 0x79, 0x70, 0x69, 0x73, 0x6F, 0x6D]) ||
+			check([0x0, 0x0, 0x0, 0x1C, 0x66, 0x74, 0x79, 0x70, 0x6D, 0x70, 0x34, 0x32, 0x0, 0x0, 0x0, 0x0])
+		) {
+			return {
+				ext: 'mp4',
+				mime: 'video/mp4'
+			};
+		}
+
+		if (check([0x0, 0x0, 0x0, 0x1C, 0x66, 0x74, 0x79, 0x70, 0x4D, 0x34, 0x56])) {
+			return {
+				ext: 'm4v',
+				mime: 'video/x-m4v'
+			};
+		}
+
+		if (check([0x4D, 0x54, 0x68, 0x64])) {
+			return {
+				ext: 'mid',
+				mime: 'audio/midi'
+			};
+		}
+
+		// https://github.com/threatstack/libmagic/blob/master/magic/Magdir/matroska
+		if (check([0x1A, 0x45, 0xDF, 0xA3])) {
+			const sliced = buf.subarray(4, 4 + 4096);
+			const idPos = sliced.findIndex((el, i, arr) => arr[i] === 0x42 && arr[i + 1] === 0x82);
+
+			if (idPos >= 0) {
+				const docTypePos = idPos + 3;
+				const findDocType = type => Array.from(type).every((c, i) => sliced[docTypePos + i] === c.charCodeAt(0));
+
+				if (findDocType('matroska')) {
+					return {
+						ext: 'mkv',
+						mime: 'video/x-matroska'
+					};
+				}
+
+				if (findDocType('webm')) {
+					return {
+						ext: 'webm',
+						mime: 'video/webm'
+					};
+				}
+			}
+		}
+
+		if (check([0x0, 0x0, 0x0, 0x14, 0x66, 0x74, 0x79, 0x70, 0x71, 0x74, 0x20, 0x20]) ||
+			check([0x66, 0x72, 0x65, 0x65], {offset: 4}) ||
+			check([0x66, 0x74, 0x79, 0x70, 0x71, 0x74, 0x20, 0x20], {offset: 4}) ||
+			check([0x6D, 0x64, 0x61, 0x74], {offset: 4}) || // MJPEG
+			check([0x77, 0x69, 0x64, 0x65], {offset: 4})) {
+			return {
+				ext: 'mov',
+				mime: 'video/quicktime'
+			};
+		}
+
+		if (
+			check([0x52, 0x49, 0x46, 0x46]) &&
+			check([0x41, 0x56, 0x49], {offset: 8})
+		) {
+			return {
+				ext: 'avi',
+				mime: 'video/x-msvideo'
+			};
+		}
+
+		if (check([0x30, 0x26, 0xB2, 0x75, 0x8E, 0x66, 0xCF, 0x11, 0xA6, 0xD9])) {
+			return {
+				ext: 'wmv',
+				mime: 'video/x-ms-wmv'
+			};
+		}
+
+		if (check([0x0, 0x0, 0x1, 0xBA])) {
+			return {
+				ext: 'mpg',
+				mime: 'video/mpeg'
+			};
+		}
+
+		if (
+			check([0x49, 0x44, 0x33]) ||
+			check([0xFF, 0xFB])
+		) {
+			return {
+				ext: 'mp3',
+				mime: 'audio/mpeg'
+			};
+		}
+
+		if (
+			check([0x66, 0x74, 0x79, 0x70, 0x4D, 0x34, 0x41], {offset: 4}) ||
+			check([0x4D, 0x34, 0x41, 0x20])
+		) {
+			return {
+				ext: 'm4a',
+				mime: 'audio/m4a'
+			};
+		}
+
+		// Needs to be before `ogg` check
+		if (check([0x4F, 0x70, 0x75, 0x73, 0x48, 0x65, 0x61, 0x64], {offset: 28})) {
+			return {
+				ext: 'opus',
+				mime: 'audio/opus'
+			};
+		}
+
+		if (check([0x4F, 0x67, 0x67, 0x53])) {
+			return {
+				ext: 'ogg',
+				mime: 'audio/ogg'
+			};
+		}
+
+		if (check([0x66, 0x4C, 0x61, 0x43])) {
+			return {
+				ext: 'flac',
+				mime: 'audio/x-flac'
+			};
+		}
+
+		if (
+			check([0x52, 0x49, 0x46, 0x46]) &&
+			check([0x57, 0x41, 0x56, 0x45], {offset: 8})
+		) {
+			return {
+				ext: 'wav',
+				mime: 'audio/x-wav'
+			};
+		}
+
+		if (check([0x23, 0x21, 0x41, 0x4D, 0x52, 0x0A])) {
+			return {
+				ext: 'amr',
+				mime: 'audio/amr'
+			};
+		}
+
+		if (check([0x25, 0x50, 0x44, 0x46])) {
+			return {
+				ext: 'pdf',
+				mime: 'application/pdf'
+			};
+		}
+
+		if (check([0x4D, 0x5A])) {
+			return {
+				ext: 'exe',
+				mime: 'application/x-msdownload'
+			};
+		}
+
+		if (
+			(buf[0] === 0x43 || buf[0] === 0x46) &&
+			check([0x57, 0x53], {offset: 1})
+		) {
+			return {
+				ext: 'swf',
+				mime: 'application/x-shockwave-flash'
+			};
+		}
+
+		if (check([0x7B, 0x5C, 0x72, 0x74, 0x66])) {
+			return {
+				ext: 'rtf',
+				mime: 'application/rtf'
+			};
+		}
+
+		if (check([0x00, 0x61, 0x73, 0x6D])) {
+			return {
+				ext: 'wasm',
+				mime: 'application/wasm'
+			};
+		}
+
+		if (
+			check([0x77, 0x4F, 0x46, 0x46]) &&
+			(
+				check([0x00, 0x01, 0x00, 0x00], {offset: 4}) ||
+				check([0x4F, 0x54, 0x54, 0x4F], {offset: 4})
+			)
+		) {
+			return {
+				ext: 'woff',
+				mime: 'font/woff'
+			};
+		}
+
+		if (
+			check([0x77, 0x4F, 0x46, 0x32]) &&
+			(
+				check([0x00, 0x01, 0x00, 0x00], {offset: 4}) ||
+				check([0x4F, 0x54, 0x54, 0x4F], {offset: 4})
+			)
+		) {
+			return {
+				ext: 'woff2',
+				mime: 'font/woff2'
+			};
+		}
+
+		if (
+			check([0x4C, 0x50], {offset: 34}) &&
+			(
+				check([0x00, 0x00, 0x01], {offset: 8}) ||
+				check([0x01, 0x00, 0x02], {offset: 8}) ||
+				check([0x02, 0x00, 0x02], {offset: 8})
+			)
+		) {
+			return {
+				ext: 'eot',
+				mime: 'application/octet-stream'
+			};
+		}
+
+		if (check([0x00, 0x01, 0x00, 0x00, 0x00])) {
+			return {
+				ext: 'ttf',
+				mime: 'font/ttf'
+			};
+		}
+
+		if (check([0x4F, 0x54, 0x54, 0x4F, 0x00])) {
+			return {
+				ext: 'otf',
+				mime: 'font/otf'
+			};
+		}
+
+		if (check([0x00, 0x00, 0x01, 0x00])) {
+			return {
+				ext: 'ico',
+				mime: 'image/x-icon'
+			};
+		}
+
+		if (check([0x46, 0x4C, 0x56, 0x01])) {
+			return {
+				ext: 'flv',
+				mime: 'video/x-flv'
+			};
+		}
+
+		if (check([0x25, 0x21])) {
+			return {
+				ext: 'ps',
+				mime: 'application/postscript'
+			};
+		}
+
+		if (check([0xFD, 0x37, 0x7A, 0x58, 0x5A, 0x00])) {
+			return {
+				ext: 'xz',
+				mime: 'application/x-xz'
+			};
+		}
+
+		if (check([0x53, 0x51, 0x4C, 0x69])) {
+			return {
+				ext: 'sqlite',
+				mime: 'application/x-sqlite3'
+			};
+		}
+
+		if (check([0x4E, 0x45, 0x53, 0x1A])) {
+			return {
+				ext: 'nes',
+				mime: 'application/x-nintendo-nes-rom'
+			};
+		}
+
+		if (check([0x43, 0x72, 0x32, 0x34])) {
+			return {
+				ext: 'crx',
+				mime: 'application/x-google-chrome-extension'
+			};
+		}
+
+		if (
+			check([0x4D, 0x53, 0x43, 0x46]) ||
+			check([0x49, 0x53, 0x63, 0x28])
+		) {
+			return {
+				ext: 'cab',
+				mime: 'application/vnd.ms-cab-compressed'
+			};
+		}
+
+		// Needs to be before `ar` check
+		if (check([0x21, 0x3C, 0x61, 0x72, 0x63, 0x68, 0x3E, 0x0A, 0x64, 0x65, 0x62, 0x69, 0x61, 0x6E, 0x2D, 0x62, 0x69, 0x6E, 0x61, 0x72, 0x79])) {
+			return {
+				ext: 'deb',
+				mime: 'application/x-deb'
+			};
+		}
+
+		if (check([0x21, 0x3C, 0x61, 0x72, 0x63, 0x68, 0x3E])) {
+			return {
+				ext: 'ar',
+				mime: 'application/x-unix-archive'
+			};
+		}
+
+		if (check([0xED, 0xAB, 0xEE, 0xDB])) {
+			return {
+				ext: 'rpm',
+				mime: 'application/x-rpm'
+			};
+		}
+
+		if (
+			check([0x1F, 0xA0]) ||
+			check([0x1F, 0x9D])
+		) {
+			return {
+				ext: 'Z',
+				mime: 'application/x-compress'
+			};
+		}
+
+		if (check([0x4C, 0x5A, 0x49, 0x50])) {
+			return {
+				ext: 'lz',
+				mime: 'application/x-lzip'
+			};
+		}
+
+		if (check([0xD0, 0xCF, 0x11, 0xE0, 0xA1, 0xB1, 0x1A, 0xE1])) {
+			return {
+				ext: 'msi',
+				mime: 'application/x-msi'
+			};
+		}
+
+		if (check([0x06, 0x0E, 0x2B, 0x34, 0x02, 0x05, 0x01, 0x01, 0x0D, 0x01, 0x02, 0x01, 0x01, 0x02])) {
+			return {
+				ext: 'mxf',
+				mime: 'application/mxf'
+			};
+		}
+
+		if (check([0x47], {offset: 4}) && (check([0x47], {offset: 192}) || check([0x47], {offset: 196}))) {
+			return {
+				ext: 'mts',
+				mime: 'video/mp2t'
+			};
+		}
+
+		if (check([0x42, 0x4C, 0x45, 0x4E, 0x44, 0x45, 0x52])) {
+			return {
+				ext: 'blend',
+				mime: 'application/x-blender'
+			};
+		}
+
+		if (check([0x42, 0x50, 0x47, 0xFB])) {
+			return {
+				ext: 'bpg',
+				mime: 'image/bpg'
+			};
+		}
+
+		return null;
+	};
+	return fileType$2;
+}
+
+var isStream$2 = {exports: {}};
+
+var hasRequiredIsStream$2;
+
+function requireIsStream$2 () {
+	if (hasRequiredIsStream$2) return isStream$2.exports;
+	hasRequiredIsStream$2 = 1;
+
+	var isStream = isStream$2.exports = function (stream) {
+		return stream !== null && typeof stream === 'object' && typeof stream.pipe === 'function';
+	};
+
+	isStream.writable = function (stream) {
+		return isStream(stream) && stream.writable !== false && typeof stream._write === 'function' && typeof stream._writableState === 'object';
+	};
+
+	isStream.readable = function (stream) {
+		return isStream(stream) && stream.readable !== false && typeof stream._read === 'function' && typeof stream._readableState === 'object';
+	};
+
+	isStream.duplex = function (stream) {
+		return isStream.writable(stream) && isStream.readable(stream);
+	};
+
+	isStream.transform = function (stream) {
+		return isStream.duplex(stream) && typeof stream._transform === 'function' && typeof stream._transformState === 'object';
+	};
+	return isStream$2.exports;
+}
+
+var tarStream = {};
+
+var readable$1 = {exports: {}};
+
+var processNextickArgs = {exports: {}};
+
+var hasRequiredProcessNextickArgs;
+
+function requireProcessNextickArgs () {
+	if (hasRequiredProcessNextickArgs) return processNextickArgs.exports;
+	hasRequiredProcessNextickArgs = 1;
+
+	if (typeof process === 'undefined' ||
+	    !process.version ||
+	    process.version.indexOf('v0.') === 0 ||
+	    process.version.indexOf('v1.') === 0 && process.version.indexOf('v1.8.') !== 0) {
+	  processNextickArgs.exports = { nextTick: nextTick };
+	} else {
+	  processNextickArgs.exports = process;
+	}
+
+	function nextTick(fn, arg1, arg2, arg3) {
+	  if (typeof fn !== 'function') {
+	    throw new TypeError('"callback" argument must be a function');
+	  }
+	  var len = arguments.length;
+	  var args, i;
+	  switch (len) {
+	  case 0:
+	  case 1:
+	    return process.nextTick(fn);
+	  case 2:
+	    return process.nextTick(function afterTickOne() {
+	      fn.call(null, arg1);
+	    });
+	  case 3:
+	    return process.nextTick(function afterTickTwo() {
+	      fn.call(null, arg1, arg2);
+	    });
+	  case 4:
+	    return process.nextTick(function afterTickThree() {
+	      fn.call(null, arg1, arg2, arg3);
+	    });
+	  default:
+	    args = new Array(len - 1);
+	    i = 0;
+	    while (i < args.length) {
+	      args[i++] = arguments[i];
+	    }
+	    return process.nextTick(function afterTick() {
+	      fn.apply(null, args);
+	    });
+	  }
+	}
+	return processNextickArgs.exports;
+}
+
+var isarray$1;
+var hasRequiredIsarray$1;
+
+function requireIsarray$1 () {
+	if (hasRequiredIsarray$1) return isarray$1;
+	hasRequiredIsarray$1 = 1;
+	var toString = {}.toString;
+
+	isarray$1 = Array.isArray || function (arr) {
+	  return toString.call(arr) == '[object Array]';
+	};
+	return isarray$1;
+}
+
+var stream$2;
+var hasRequiredStream$2;
+
+function requireStream$2 () {
+	if (hasRequiredStream$2) return stream$2;
+	hasRequiredStream$2 = 1;
+	stream$2 = require$$0$5;
+	return stream$2;
+}
+
+var safeBuffer$1 = {exports: {}};
+
+/* eslint-disable node/no-deprecated-api */
+
+var hasRequiredSafeBuffer$1;
+
+function requireSafeBuffer$1 () {
+	if (hasRequiredSafeBuffer$1) return safeBuffer$1.exports;
+	hasRequiredSafeBuffer$1 = 1;
+	(function (module, exports) {
+		var buffer = require$$0$2;
+		var Buffer = buffer.Buffer;
+
+		// alternative to using Object.keys for old browsers
+		function copyProps (src, dst) {
+		  for (var key in src) {
+		    dst[key] = src[key];
+		  }
+		}
+		if (Buffer.from && Buffer.alloc && Buffer.allocUnsafe && Buffer.allocUnsafeSlow) {
+		  module.exports = buffer;
+		} else {
+		  // Copy properties from require('buffer')
+		  copyProps(buffer, exports);
+		  exports.Buffer = SafeBuffer;
+		}
+
+		function SafeBuffer (arg, encodingOrOffset, length) {
+		  return Buffer(arg, encodingOrOffset, length)
+		}
+
+		// Copy static methods from Buffer
+		copyProps(Buffer, SafeBuffer);
+
+		SafeBuffer.from = function (arg, encodingOrOffset, length) {
+		  if (typeof arg === 'number') {
+		    throw new TypeError('Argument must not be a number')
+		  }
+		  return Buffer(arg, encodingOrOffset, length)
+		};
+
+		SafeBuffer.alloc = function (size, fill, encoding) {
+		  if (typeof size !== 'number') {
+		    throw new TypeError('Argument must be a number')
+		  }
+		  var buf = Buffer(size);
+		  if (fill !== undefined) {
+		    if (typeof encoding === 'string') {
+		      buf.fill(fill, encoding);
+		    } else {
+		      buf.fill(fill);
+		    }
+		  } else {
+		    buf.fill(0);
+		  }
+		  return buf
+		};
+
+		SafeBuffer.allocUnsafe = function (size) {
+		  if (typeof size !== 'number') {
+		    throw new TypeError('Argument must be a number')
+		  }
+		  return Buffer(size)
+		};
+
+		SafeBuffer.allocUnsafeSlow = function (size) {
+		  if (typeof size !== 'number') {
+		    throw new TypeError('Argument must be a number')
+		  }
+		  return buffer.SlowBuffer(size)
+		}; 
+	} (safeBuffer$1, safeBuffer$1.exports));
+	return safeBuffer$1.exports;
+}
+
+var util = {};
+
+var hasRequiredUtil;
+
+function requireUtil () {
+	if (hasRequiredUtil) return util;
+	hasRequiredUtil = 1;
+	// Copyright Joyent, Inc. and other Node contributors.
+	//
+	// Permission is hereby granted, free of charge, to any person obtaining a
+	// copy of this software and associated documentation files (the
+	// "Software"), to deal in the Software without restriction, including
+	// without limitation the rights to use, copy, modify, merge, publish,
+	// distribute, sublicense, and/or sell copies of the Software, and to permit
+	// persons to whom the Software is furnished to do so, subject to the
+	// following conditions:
+	//
+	// The above copyright notice and this permission notice shall be included
+	// in all copies or substantial portions of the Software.
+	//
+	// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+	// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+	// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+	// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+	// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+	// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+	// NOTE: These type checking functions intentionally don't use `instanceof`
+	// because it is fragile and can be easily faked with `Object.create()`.
+
+	function isArray(arg) {
+	  if (Array.isArray) {
+	    return Array.isArray(arg);
+	  }
+	  return objectToString(arg) === '[object Array]';
+	}
+	util.isArray = isArray;
+
+	function isBoolean(arg) {
+	  return typeof arg === 'boolean';
+	}
+	util.isBoolean = isBoolean;
+
+	function isNull(arg) {
+	  return arg === null;
+	}
+	util.isNull = isNull;
+
+	function isNullOrUndefined(arg) {
+	  return arg == null;
+	}
+	util.isNullOrUndefined = isNullOrUndefined;
+
+	function isNumber(arg) {
+	  return typeof arg === 'number';
+	}
+	util.isNumber = isNumber;
+
+	function isString(arg) {
+	  return typeof arg === 'string';
+	}
+	util.isString = isString;
+
+	function isSymbol(arg) {
+	  return typeof arg === 'symbol';
+	}
+	util.isSymbol = isSymbol;
+
+	function isUndefined(arg) {
+	  return arg === void 0;
+	}
+	util.isUndefined = isUndefined;
+
+	function isRegExp(re) {
+	  return objectToString(re) === '[object RegExp]';
+	}
+	util.isRegExp = isRegExp;
+
+	function isObject(arg) {
+	  return typeof arg === 'object' && arg !== null;
+	}
+	util.isObject = isObject;
+
+	function isDate(d) {
+	  return objectToString(d) === '[object Date]';
+	}
+	util.isDate = isDate;
+
+	function isError(e) {
+	  return (objectToString(e) === '[object Error]' || e instanceof Error);
+	}
+	util.isError = isError;
+
+	function isFunction(arg) {
+	  return typeof arg === 'function';
+	}
+	util.isFunction = isFunction;
+
+	function isPrimitive(arg) {
+	  return arg === null ||
+	         typeof arg === 'boolean' ||
+	         typeof arg === 'number' ||
+	         typeof arg === 'string' ||
+	         typeof arg === 'symbol' ||  // ES6 symbol
+	         typeof arg === 'undefined';
+	}
+	util.isPrimitive = isPrimitive;
+
+	util.isBuffer = require$$0$2.Buffer.isBuffer;
+
+	function objectToString(o) {
+	  return Object.prototype.toString.call(o);
+	}
+	return util;
+}
+
+var inherits = {exports: {}};
+
+var inherits_browser = {exports: {}};
+
+var hasRequiredInherits_browser;
+
+function requireInherits_browser () {
+	if (hasRequiredInherits_browser) return inherits_browser.exports;
+	hasRequiredInherits_browser = 1;
+	if (typeof Object.create === 'function') {
+	  // implementation from standard node.js 'util' module
+	  inherits_browser.exports = function inherits(ctor, superCtor) {
+	    if (superCtor) {
+	      ctor.super_ = superCtor;
+	      ctor.prototype = Object.create(superCtor.prototype, {
+	        constructor: {
+	          value: ctor,
+	          enumerable: false,
+	          writable: true,
+	          configurable: true
+	        }
+	      });
+	    }
+	  };
+	} else {
+	  // old school shim for old browsers
+	  inherits_browser.exports = function inherits(ctor, superCtor) {
+	    if (superCtor) {
+	      ctor.super_ = superCtor;
+	      var TempCtor = function () {};
+	      TempCtor.prototype = superCtor.prototype;
+	      ctor.prototype = new TempCtor();
+	      ctor.prototype.constructor = ctor;
+	    }
+	  };
+	}
+	return inherits_browser.exports;
+}
+
+var hasRequiredInherits;
+
+function requireInherits () {
+	if (hasRequiredInherits) return inherits.exports;
+	hasRequiredInherits = 1;
+	try {
+	  var util = require('util');
+	  /* istanbul ignore next */
+	  if (typeof util.inherits !== 'function') throw '';
+	  inherits.exports = util.inherits;
+	} catch (e) {
+	  /* istanbul ignore next */
+	  inherits.exports = requireInherits_browser();
+	}
+	return inherits.exports;
+}
+
+var BufferList$1 = {exports: {}};
+
+var hasRequiredBufferList$1;
+
+function requireBufferList$1 () {
+	if (hasRequiredBufferList$1) return BufferList$1.exports;
+	hasRequiredBufferList$1 = 1;
+	(function (module) {
+
+		function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+		var Buffer = requireSafeBuffer$1().Buffer;
+		var util = require$$1;
+
+		function copyBuffer(src, target, offset) {
+		  src.copy(target, offset);
+		}
+
+		module.exports = function () {
+		  function BufferList() {
+		    _classCallCheck(this, BufferList);
+
+		    this.head = null;
+		    this.tail = null;
+		    this.length = 0;
+		  }
+
+		  BufferList.prototype.push = function push(v) {
+		    var entry = { data: v, next: null };
+		    if (this.length > 0) this.tail.next = entry;else this.head = entry;
+		    this.tail = entry;
+		    ++this.length;
+		  };
+
+		  BufferList.prototype.unshift = function unshift(v) {
+		    var entry = { data: v, next: this.head };
+		    if (this.length === 0) this.tail = entry;
+		    this.head = entry;
+		    ++this.length;
+		  };
+
+		  BufferList.prototype.shift = function shift() {
+		    if (this.length === 0) return;
+		    var ret = this.head.data;
+		    if (this.length === 1) this.head = this.tail = null;else this.head = this.head.next;
+		    --this.length;
+		    return ret;
+		  };
+
+		  BufferList.prototype.clear = function clear() {
+		    this.head = this.tail = null;
+		    this.length = 0;
+		  };
+
+		  BufferList.prototype.join = function join(s) {
+		    if (this.length === 0) return '';
+		    var p = this.head;
+		    var ret = '' + p.data;
+		    while (p = p.next) {
+		      ret += s + p.data;
+		    }return ret;
+		  };
+
+		  BufferList.prototype.concat = function concat(n) {
+		    if (this.length === 0) return Buffer.alloc(0);
+		    var ret = Buffer.allocUnsafe(n >>> 0);
+		    var p = this.head;
+		    var i = 0;
+		    while (p) {
+		      copyBuffer(p.data, ret, i);
+		      i += p.data.length;
+		      p = p.next;
+		    }
+		    return ret;
+		  };
+
+		  return BufferList;
+		}();
+
+		if (util && util.inspect && util.inspect.custom) {
+		  module.exports.prototype[util.inspect.custom] = function () {
+		    var obj = util.inspect({ length: this.length });
+		    return this.constructor.name + ' ' + obj;
+		  };
+		} 
+	} (BufferList$1));
+	return BufferList$1.exports;
+}
+
+var destroy_1$1;
+var hasRequiredDestroy$1;
+
+function requireDestroy$1 () {
+	if (hasRequiredDestroy$1) return destroy_1$1;
+	hasRequiredDestroy$1 = 1;
+
+	/*<replacement>*/
+
+	var pna = requireProcessNextickArgs();
+	/*</replacement>*/
+
+	// undocumented cb() API, needed for core, not for public API
+	function destroy(err, cb) {
+	  var _this = this;
+
+	  var readableDestroyed = this._readableState && this._readableState.destroyed;
+	  var writableDestroyed = this._writableState && this._writableState.destroyed;
+
+	  if (readableDestroyed || writableDestroyed) {
+	    if (cb) {
+	      cb(err);
+	    } else if (err) {
+	      if (!this._writableState) {
+	        pna.nextTick(emitErrorNT, this, err);
+	      } else if (!this._writableState.errorEmitted) {
+	        this._writableState.errorEmitted = true;
+	        pna.nextTick(emitErrorNT, this, err);
+	      }
+	    }
+
+	    return this;
+	  }
+
+	  // we set destroyed to true before firing error callbacks in order
+	  // to make it re-entrance safe in case destroy() is called within callbacks
+
+	  if (this._readableState) {
+	    this._readableState.destroyed = true;
+	  }
+
+	  // if this is a duplex stream mark the writable part as destroyed as well
+	  if (this._writableState) {
+	    this._writableState.destroyed = true;
+	  }
+
+	  this._destroy(err || null, function (err) {
+	    if (!cb && err) {
+	      if (!_this._writableState) {
+	        pna.nextTick(emitErrorNT, _this, err);
+	      } else if (!_this._writableState.errorEmitted) {
+	        _this._writableState.errorEmitted = true;
+	        pna.nextTick(emitErrorNT, _this, err);
+	      }
+	    } else if (cb) {
+	      cb(err);
+	    }
+	  });
+
+	  return this;
+	}
+
+	function undestroy() {
+	  if (this._readableState) {
+	    this._readableState.destroyed = false;
+	    this._readableState.reading = false;
+	    this._readableState.ended = false;
+	    this._readableState.endEmitted = false;
+	  }
+
+	  if (this._writableState) {
+	    this._writableState.destroyed = false;
+	    this._writableState.ended = false;
+	    this._writableState.ending = false;
+	    this._writableState.finalCalled = false;
+	    this._writableState.prefinished = false;
+	    this._writableState.finished = false;
+	    this._writableState.errorEmitted = false;
+	  }
+	}
+
+	function emitErrorNT(self, err) {
+	  self.emit('error', err);
+	}
+
+	destroy_1$1 = {
+	  destroy: destroy,
+	  undestroy: undestroy
+	};
+	return destroy_1$1;
+}
+
+var node;
+var hasRequiredNode;
+
+function requireNode () {
+	if (hasRequiredNode) return node;
+	hasRequiredNode = 1;
+	/**
+	 * For Node.js, simply re-export the core `util.deprecate` function.
+	 */
+
+	node = require$$1.deprecate;
+	return node;
+}
+
+var _stream_writable$1;
+var hasRequired_stream_writable$1;
+
+function require_stream_writable$1 () {
+	if (hasRequired_stream_writable$1) return _stream_writable$1;
+	hasRequired_stream_writable$1 = 1;
+
+	/*<replacement>*/
+
+	var pna = requireProcessNextickArgs();
+	/*</replacement>*/
+
+	_stream_writable$1 = Writable;
+
+	// It seems a linked list but it is not
+	// there will be only 2 of these for each stream
+	function CorkedRequest(state) {
+	  var _this = this;
+
+	  this.next = null;
+	  this.entry = null;
+	  this.finish = function () {
+	    onCorkedFinish(_this, state);
+	  };
+	}
+	/* </replacement> */
+
+	/*<replacement>*/
+	var asyncWrite = !process.browser && ['v0.10', 'v0.9.'].indexOf(process.version.slice(0, 5)) > -1 ? setImmediate : pna.nextTick;
+	/*</replacement>*/
+
+	/*<replacement>*/
+	var Duplex;
+	/*</replacement>*/
+
+	Writable.WritableState = WritableState;
+
+	/*<replacement>*/
+	var util = Object.create(requireUtil());
+	util.inherits = requireInherits();
+	/*</replacement>*/
+
+	/*<replacement>*/
+	var internalUtil = {
+	  deprecate: requireNode()
+	};
+	/*</replacement>*/
+
+	/*<replacement>*/
+	var Stream = requireStream$2();
+	/*</replacement>*/
+
+	/*<replacement>*/
+
+	var Buffer = requireSafeBuffer$1().Buffer;
+	var OurUint8Array = (typeof commonjsGlobal !== 'undefined' ? commonjsGlobal : typeof window !== 'undefined' ? window : typeof self !== 'undefined' ? self : {}).Uint8Array || function () {};
+	function _uint8ArrayToBuffer(chunk) {
+	  return Buffer.from(chunk);
+	}
+	function _isUint8Array(obj) {
+	  return Buffer.isBuffer(obj) || obj instanceof OurUint8Array;
+	}
+
+	/*</replacement>*/
+
+	var destroyImpl = requireDestroy$1();
+
+	util.inherits(Writable, Stream);
+
+	function nop() {}
+
+	function WritableState(options, stream) {
+	  Duplex = Duplex || require_stream_duplex$1();
+
+	  options = options || {};
+
+	  // Duplex streams are both readable and writable, but share
+	  // the same options object.
+	  // However, some cases require setting options to different
+	  // values for the readable and the writable sides of the duplex stream.
+	  // These options can be provided separately as readableXXX and writableXXX.
+	  var isDuplex = stream instanceof Duplex;
+
+	  // object stream flag to indicate whether or not this stream
+	  // contains buffers or objects.
+	  this.objectMode = !!options.objectMode;
+
+	  if (isDuplex) this.objectMode = this.objectMode || !!options.writableObjectMode;
+
+	  // the point at which write() starts returning false
+	  // Note: 0 is a valid value, means that we always return false if
+	  // the entire buffer is not flushed immediately on write()
+	  var hwm = options.highWaterMark;
+	  var writableHwm = options.writableHighWaterMark;
+	  var defaultHwm = this.objectMode ? 16 : 16 * 1024;
+
+	  if (hwm || hwm === 0) this.highWaterMark = hwm;else if (isDuplex && (writableHwm || writableHwm === 0)) this.highWaterMark = writableHwm;else this.highWaterMark = defaultHwm;
+
+	  // cast to ints.
+	  this.highWaterMark = Math.floor(this.highWaterMark);
+
+	  // if _final has been called
+	  this.finalCalled = false;
+
+	  // drain event flag.
+	  this.needDrain = false;
+	  // at the start of calling end()
+	  this.ending = false;
+	  // when end() has been called, and returned
+	  this.ended = false;
+	  // when 'finish' is emitted
+	  this.finished = false;
+
+	  // has it been destroyed
+	  this.destroyed = false;
+
+	  // should we decode strings into buffers before passing to _write?
+	  // this is here so that some node-core streams can optimize string
+	  // handling at a lower level.
+	  var noDecode = options.decodeStrings === false;
+	  this.decodeStrings = !noDecode;
+
+	  // Crypto is kind of old and crusty.  Historically, its default string
+	  // encoding is 'binary' so we have to make this configurable.
+	  // Everything else in the universe uses 'utf8', though.
+	  this.defaultEncoding = options.defaultEncoding || 'utf8';
+
+	  // not an actual buffer we keep track of, but a measurement
+	  // of how much we're waiting to get pushed to some underlying
+	  // socket or file.
+	  this.length = 0;
+
+	  // a flag to see when we're in the middle of a write.
+	  this.writing = false;
+
+	  // when true all writes will be buffered until .uncork() call
+	  this.corked = 0;
+
+	  // a flag to be able to tell if the onwrite cb is called immediately,
+	  // or on a later tick.  We set this to true at first, because any
+	  // actions that shouldn't happen until "later" should generally also
+	  // not happen before the first write call.
+	  this.sync = true;
+
+	  // a flag to know if we're processing previously buffered items, which
+	  // may call the _write() callback in the same tick, so that we don't
+	  // end up in an overlapped onwrite situation.
+	  this.bufferProcessing = false;
+
+	  // the callback that's passed to _write(chunk,cb)
+	  this.onwrite = function (er) {
+	    onwrite(stream, er);
+	  };
+
+	  // the callback that the user supplies to write(chunk,encoding,cb)
+	  this.writecb = null;
+
+	  // the amount that is being written when _write is called.
+	  this.writelen = 0;
+
+	  this.bufferedRequest = null;
+	  this.lastBufferedRequest = null;
+
+	  // number of pending user-supplied write callbacks
+	  // this must be 0 before 'finish' can be emitted
+	  this.pendingcb = 0;
+
+	  // emit prefinish if the only thing we're waiting for is _write cbs
+	  // This is relevant for synchronous Transform streams
+	  this.prefinished = false;
+
+	  // True if the error was already emitted and should not be thrown again
+	  this.errorEmitted = false;
+
+	  // count buffered requests
+	  this.bufferedRequestCount = 0;
+
+	  // allocate the first CorkedRequest, there is always
+	  // one allocated and free to use, and we maintain at most two
+	  this.corkedRequestsFree = new CorkedRequest(this);
+	}
+
+	WritableState.prototype.getBuffer = function getBuffer() {
+	  var current = this.bufferedRequest;
+	  var out = [];
+	  while (current) {
+	    out.push(current);
+	    current = current.next;
+	  }
+	  return out;
+	};
+
+	(function () {
+	  try {
+	    Object.defineProperty(WritableState.prototype, 'buffer', {
+	      get: internalUtil.deprecate(function () {
+	        return this.getBuffer();
+	      }, '_writableState.buffer is deprecated. Use _writableState.getBuffer ' + 'instead.', 'DEP0003')
+	    });
+	  } catch (_) {}
+	})();
+
+	// Test _writableState for inheritance to account for Duplex streams,
+	// whose prototype chain only points to Readable.
+	var realHasInstance;
+	if (typeof Symbol === 'function' && Symbol.hasInstance && typeof Function.prototype[Symbol.hasInstance] === 'function') {
+	  realHasInstance = Function.prototype[Symbol.hasInstance];
+	  Object.defineProperty(Writable, Symbol.hasInstance, {
+	    value: function (object) {
+	      if (realHasInstance.call(this, object)) return true;
+	      if (this !== Writable) return false;
+
+	      return object && object._writableState instanceof WritableState;
+	    }
+	  });
+	} else {
+	  realHasInstance = function (object) {
+	    return object instanceof this;
+	  };
+	}
+
+	function Writable(options) {
+	  Duplex = Duplex || require_stream_duplex$1();
+
+	  // Writable ctor is applied to Duplexes, too.
+	  // `realHasInstance` is necessary because using plain `instanceof`
+	  // would return false, as no `_writableState` property is attached.
+
+	  // Trying to use the custom `instanceof` for Writable here will also break the
+	  // Node.js LazyTransform implementation, which has a non-trivial getter for
+	  // `_writableState` that would lead to infinite recursion.
+	  if (!realHasInstance.call(Writable, this) && !(this instanceof Duplex)) {
+	    return new Writable(options);
+	  }
+
+	  this._writableState = new WritableState(options, this);
+
+	  // legacy.
+	  this.writable = true;
+
+	  if (options) {
+	    if (typeof options.write === 'function') this._write = options.write;
+
+	    if (typeof options.writev === 'function') this._writev = options.writev;
+
+	    if (typeof options.destroy === 'function') this._destroy = options.destroy;
+
+	    if (typeof options.final === 'function') this._final = options.final;
+	  }
+
+	  Stream.call(this);
+	}
+
+	// Otherwise people can pipe Writable streams, which is just wrong.
+	Writable.prototype.pipe = function () {
+	  this.emit('error', new Error('Cannot pipe, not readable'));
+	};
+
+	function writeAfterEnd(stream, cb) {
+	  var er = new Error('write after end');
+	  // TODO: defer error events consistently everywhere, not just the cb
+	  stream.emit('error', er);
+	  pna.nextTick(cb, er);
+	}
+
+	// Checks that a user-supplied chunk is valid, especially for the particular
+	// mode the stream is in. Currently this means that `null` is never accepted
+	// and undefined/non-string values are only allowed in object mode.
+	function validChunk(stream, state, chunk, cb) {
+	  var valid = true;
+	  var er = false;
+
+	  if (chunk === null) {
+	    er = new TypeError('May not write null values to stream');
+	  } else if (typeof chunk !== 'string' && chunk !== undefined && !state.objectMode) {
+	    er = new TypeError('Invalid non-string/buffer chunk');
+	  }
+	  if (er) {
+	    stream.emit('error', er);
+	    pna.nextTick(cb, er);
+	    valid = false;
+	  }
+	  return valid;
+	}
+
+	Writable.prototype.write = function (chunk, encoding, cb) {
+	  var state = this._writableState;
+	  var ret = false;
+	  var isBuf = !state.objectMode && _isUint8Array(chunk);
+
+	  if (isBuf && !Buffer.isBuffer(chunk)) {
+	    chunk = _uint8ArrayToBuffer(chunk);
+	  }
+
+	  if (typeof encoding === 'function') {
+	    cb = encoding;
+	    encoding = null;
+	  }
+
+	  if (isBuf) encoding = 'buffer';else if (!encoding) encoding = state.defaultEncoding;
+
+	  if (typeof cb !== 'function') cb = nop;
+
+	  if (state.ended) writeAfterEnd(this, cb);else if (isBuf || validChunk(this, state, chunk, cb)) {
+	    state.pendingcb++;
+	    ret = writeOrBuffer(this, state, isBuf, chunk, encoding, cb);
+	  }
+
+	  return ret;
+	};
+
+	Writable.prototype.cork = function () {
+	  var state = this._writableState;
+
+	  state.corked++;
+	};
+
+	Writable.prototype.uncork = function () {
+	  var state = this._writableState;
+
+	  if (state.corked) {
+	    state.corked--;
+
+	    if (!state.writing && !state.corked && !state.bufferProcessing && state.bufferedRequest) clearBuffer(this, state);
+	  }
+	};
+
+	Writable.prototype.setDefaultEncoding = function setDefaultEncoding(encoding) {
+	  // node::ParseEncoding() requires lower case.
+	  if (typeof encoding === 'string') encoding = encoding.toLowerCase();
+	  if (!(['hex', 'utf8', 'utf-8', 'ascii', 'binary', 'base64', 'ucs2', 'ucs-2', 'utf16le', 'utf-16le', 'raw'].indexOf((encoding + '').toLowerCase()) > -1)) throw new TypeError('Unknown encoding: ' + encoding);
+	  this._writableState.defaultEncoding = encoding;
+	  return this;
+	};
+
+	function decodeChunk(state, chunk, encoding) {
+	  if (!state.objectMode && state.decodeStrings !== false && typeof chunk === 'string') {
+	    chunk = Buffer.from(chunk, encoding);
+	  }
+	  return chunk;
+	}
+
+	Object.defineProperty(Writable.prototype, 'writableHighWaterMark', {
+	  // making it explicit this property is not enumerable
+	  // because otherwise some prototype manipulation in
+	  // userland will fail
+	  enumerable: false,
+	  get: function () {
+	    return this._writableState.highWaterMark;
+	  }
+	});
+
+	// if we're already writing something, then just put this
+	// in the queue, and wait our turn.  Otherwise, call _write
+	// If we return false, then we need a drain event, so set that flag.
+	function writeOrBuffer(stream, state, isBuf, chunk, encoding, cb) {
+	  if (!isBuf) {
+	    var newChunk = decodeChunk(state, chunk, encoding);
+	    if (chunk !== newChunk) {
+	      isBuf = true;
+	      encoding = 'buffer';
+	      chunk = newChunk;
+	    }
+	  }
+	  var len = state.objectMode ? 1 : chunk.length;
+
+	  state.length += len;
+
+	  var ret = state.length < state.highWaterMark;
+	  // we must ensure that previous needDrain will not be reset to false.
+	  if (!ret) state.needDrain = true;
+
+	  if (state.writing || state.corked) {
+	    var last = state.lastBufferedRequest;
+	    state.lastBufferedRequest = {
+	      chunk: chunk,
+	      encoding: encoding,
+	      isBuf: isBuf,
+	      callback: cb,
+	      next: null
+	    };
+	    if (last) {
+	      last.next = state.lastBufferedRequest;
+	    } else {
+	      state.bufferedRequest = state.lastBufferedRequest;
+	    }
+	    state.bufferedRequestCount += 1;
+	  } else {
+	    doWrite(stream, state, false, len, chunk, encoding, cb);
+	  }
+
+	  return ret;
+	}
+
+	function doWrite(stream, state, writev, len, chunk, encoding, cb) {
+	  state.writelen = len;
+	  state.writecb = cb;
+	  state.writing = true;
+	  state.sync = true;
+	  if (writev) stream._writev(chunk, state.onwrite);else stream._write(chunk, encoding, state.onwrite);
+	  state.sync = false;
+	}
+
+	function onwriteError(stream, state, sync, er, cb) {
+	  --state.pendingcb;
+
+	  if (sync) {
+	    // defer the callback if we are being called synchronously
+	    // to avoid piling up things on the stack
+	    pna.nextTick(cb, er);
+	    // this can emit finish, and it will always happen
+	    // after error
+	    pna.nextTick(finishMaybe, stream, state);
+	    stream._writableState.errorEmitted = true;
+	    stream.emit('error', er);
+	  } else {
+	    // the caller expect this to happen before if
+	    // it is async
+	    cb(er);
+	    stream._writableState.errorEmitted = true;
+	    stream.emit('error', er);
+	    // this can emit finish, but finish must
+	    // always follow error
+	    finishMaybe(stream, state);
+	  }
+	}
+
+	function onwriteStateUpdate(state) {
+	  state.writing = false;
+	  state.writecb = null;
+	  state.length -= state.writelen;
+	  state.writelen = 0;
+	}
+
+	function onwrite(stream, er) {
+	  var state = stream._writableState;
+	  var sync = state.sync;
+	  var cb = state.writecb;
+
+	  onwriteStateUpdate(state);
+
+	  if (er) onwriteError(stream, state, sync, er, cb);else {
+	    // Check if we're actually ready to finish, but don't emit yet
+	    var finished = needFinish(state);
+
+	    if (!finished && !state.corked && !state.bufferProcessing && state.bufferedRequest) {
+	      clearBuffer(stream, state);
+	    }
+
+	    if (sync) {
+	      /*<replacement>*/
+	      asyncWrite(afterWrite, stream, state, finished, cb);
+	      /*</replacement>*/
+	    } else {
+	      afterWrite(stream, state, finished, cb);
+	    }
+	  }
+	}
+
+	function afterWrite(stream, state, finished, cb) {
+	  if (!finished) onwriteDrain(stream, state);
+	  state.pendingcb--;
+	  cb();
+	  finishMaybe(stream, state);
+	}
+
+	// Must force callback to be called on nextTick, so that we don't
+	// emit 'drain' before the write() consumer gets the 'false' return
+	// value, and has a chance to attach a 'drain' listener.
+	function onwriteDrain(stream, state) {
+	  if (state.length === 0 && state.needDrain) {
+	    state.needDrain = false;
+	    stream.emit('drain');
+	  }
+	}
+
+	// if there's something in the buffer waiting, then process it
+	function clearBuffer(stream, state) {
+	  state.bufferProcessing = true;
+	  var entry = state.bufferedRequest;
+
+	  if (stream._writev && entry && entry.next) {
+	    // Fast case, write everything using _writev()
+	    var l = state.bufferedRequestCount;
+	    var buffer = new Array(l);
+	    var holder = state.corkedRequestsFree;
+	    holder.entry = entry;
+
+	    var count = 0;
+	    var allBuffers = true;
+	    while (entry) {
+	      buffer[count] = entry;
+	      if (!entry.isBuf) allBuffers = false;
+	      entry = entry.next;
+	      count += 1;
+	    }
+	    buffer.allBuffers = allBuffers;
+
+	    doWrite(stream, state, true, state.length, buffer, '', holder.finish);
+
+	    // doWrite is almost always async, defer these to save a bit of time
+	    // as the hot path ends with doWrite
+	    state.pendingcb++;
+	    state.lastBufferedRequest = null;
+	    if (holder.next) {
+	      state.corkedRequestsFree = holder.next;
+	      holder.next = null;
+	    } else {
+	      state.corkedRequestsFree = new CorkedRequest(state);
+	    }
+	    state.bufferedRequestCount = 0;
+	  } else {
+	    // Slow case, write chunks one-by-one
+	    while (entry) {
+	      var chunk = entry.chunk;
+	      var encoding = entry.encoding;
+	      var cb = entry.callback;
+	      var len = state.objectMode ? 1 : chunk.length;
+
+	      doWrite(stream, state, false, len, chunk, encoding, cb);
+	      entry = entry.next;
+	      state.bufferedRequestCount--;
+	      // if we didn't call the onwrite immediately, then
+	      // it means that we need to wait until it does.
+	      // also, that means that the chunk and cb are currently
+	      // being processed, so move the buffer counter past them.
+	      if (state.writing) {
+	        break;
+	      }
+	    }
+
+	    if (entry === null) state.lastBufferedRequest = null;
+	  }
+
+	  state.bufferedRequest = entry;
+	  state.bufferProcessing = false;
+	}
+
+	Writable.prototype._write = function (chunk, encoding, cb) {
+	  cb(new Error('_write() is not implemented'));
+	};
+
+	Writable.prototype._writev = null;
+
+	Writable.prototype.end = function (chunk, encoding, cb) {
+	  var state = this._writableState;
+
+	  if (typeof chunk === 'function') {
+	    cb = chunk;
+	    chunk = null;
+	    encoding = null;
+	  } else if (typeof encoding === 'function') {
+	    cb = encoding;
+	    encoding = null;
+	  }
+
+	  if (chunk !== null && chunk !== undefined) this.write(chunk, encoding);
+
+	  // .end() fully uncorks
+	  if (state.corked) {
+	    state.corked = 1;
+	    this.uncork();
+	  }
+
+	  // ignore unnecessary end() calls.
+	  if (!state.ending) endWritable(this, state, cb);
+	};
+
+	function needFinish(state) {
+	  return state.ending && state.length === 0 && state.bufferedRequest === null && !state.finished && !state.writing;
+	}
+	function callFinal(stream, state) {
+	  stream._final(function (err) {
+	    state.pendingcb--;
+	    if (err) {
+	      stream.emit('error', err);
+	    }
+	    state.prefinished = true;
+	    stream.emit('prefinish');
+	    finishMaybe(stream, state);
+	  });
+	}
+	function prefinish(stream, state) {
+	  if (!state.prefinished && !state.finalCalled) {
+	    if (typeof stream._final === 'function') {
+	      state.pendingcb++;
+	      state.finalCalled = true;
+	      pna.nextTick(callFinal, stream, state);
+	    } else {
+	      state.prefinished = true;
+	      stream.emit('prefinish');
+	    }
+	  }
+	}
+
+	function finishMaybe(stream, state) {
+	  var need = needFinish(state);
+	  if (need) {
+	    prefinish(stream, state);
+	    if (state.pendingcb === 0) {
+	      state.finished = true;
+	      stream.emit('finish');
+	    }
+	  }
+	  return need;
+	}
+
+	function endWritable(stream, state, cb) {
+	  state.ending = true;
+	  finishMaybe(stream, state);
+	  if (cb) {
+	    if (state.finished) pna.nextTick(cb);else stream.once('finish', cb);
+	  }
+	  state.ended = true;
+	  stream.writable = false;
+	}
+
+	function onCorkedFinish(corkReq, state, err) {
+	  var entry = corkReq.entry;
+	  corkReq.entry = null;
+	  while (entry) {
+	    var cb = entry.callback;
+	    state.pendingcb--;
+	    cb(err);
+	    entry = entry.next;
+	  }
+
+	  // reuse the free corkReq.
+	  state.corkedRequestsFree.next = corkReq;
+	}
+
+	Object.defineProperty(Writable.prototype, 'destroyed', {
+	  get: function () {
+	    if (this._writableState === undefined) {
+	      return false;
+	    }
+	    return this._writableState.destroyed;
+	  },
+	  set: function (value) {
+	    // we ignore the value if the stream
+	    // has not been initialized yet
+	    if (!this._writableState) {
+	      return;
+	    }
+
+	    // backward compatibility, the user is explicitly
+	    // managing destroyed
+	    this._writableState.destroyed = value;
+	  }
+	});
+
+	Writable.prototype.destroy = destroyImpl.destroy;
+	Writable.prototype._undestroy = destroyImpl.undestroy;
+	Writable.prototype._destroy = function (err, cb) {
+	  this.end();
+	  cb(err);
+	};
+	return _stream_writable$1;
+}
+
+var _stream_duplex$1;
+var hasRequired_stream_duplex$1;
+
+function require_stream_duplex$1 () {
+	if (hasRequired_stream_duplex$1) return _stream_duplex$1;
+	hasRequired_stream_duplex$1 = 1;
+
+	/*<replacement>*/
+
+	var pna = requireProcessNextickArgs();
+	/*</replacement>*/
+
+	/*<replacement>*/
+	var objectKeys = Object.keys || function (obj) {
+	  var keys = [];
+	  for (var key in obj) {
+	    keys.push(key);
+	  }return keys;
+	};
+	/*</replacement>*/
+
+	_stream_duplex$1 = Duplex;
+
+	/*<replacement>*/
+	var util = Object.create(requireUtil());
+	util.inherits = requireInherits();
+	/*</replacement>*/
+
+	var Readable = require_stream_readable$1();
+	var Writable = require_stream_writable$1();
+
+	util.inherits(Duplex, Readable);
+
+	{
+	  // avoid scope creep, the keys array can then be collected
+	  var keys = objectKeys(Writable.prototype);
+	  for (var v = 0; v < keys.length; v++) {
+	    var method = keys[v];
+	    if (!Duplex.prototype[method]) Duplex.prototype[method] = Writable.prototype[method];
+	  }
+	}
+
+	function Duplex(options) {
+	  if (!(this instanceof Duplex)) return new Duplex(options);
+
+	  Readable.call(this, options);
+	  Writable.call(this, options);
+
+	  if (options && options.readable === false) this.readable = false;
+
+	  if (options && options.writable === false) this.writable = false;
+
+	  this.allowHalfOpen = true;
+	  if (options && options.allowHalfOpen === false) this.allowHalfOpen = false;
+
+	  this.once('end', onend);
+	}
+
+	Object.defineProperty(Duplex.prototype, 'writableHighWaterMark', {
+	  // making it explicit this property is not enumerable
+	  // because otherwise some prototype manipulation in
+	  // userland will fail
+	  enumerable: false,
+	  get: function () {
+	    return this._writableState.highWaterMark;
+	  }
+	});
+
+	// the no-half-open enforcer
+	function onend() {
+	  // if we allow half-open state, or if the writable side ended,
+	  // then we're ok.
+	  if (this.allowHalfOpen || this._writableState.ended) return;
+
+	  // no more data can be written.
+	  // But allow more writes to happen in this tick.
+	  pna.nextTick(onEndNT, this);
+	}
+
+	function onEndNT(self) {
+	  self.end();
+	}
+
+	Object.defineProperty(Duplex.prototype, 'destroyed', {
+	  get: function () {
+	    if (this._readableState === undefined || this._writableState === undefined) {
+	      return false;
+	    }
+	    return this._readableState.destroyed && this._writableState.destroyed;
+	  },
+	  set: function (value) {
+	    // we ignore the value if the stream
+	    // has not been initialized yet
+	    if (this._readableState === undefined || this._writableState === undefined) {
+	      return;
+	    }
+
+	    // backward compatibility, the user is explicitly
+	    // managing destroyed
+	    this._readableState.destroyed = value;
+	    this._writableState.destroyed = value;
+	  }
+	});
+
+	Duplex.prototype._destroy = function (err, cb) {
+	  this.push(null);
+	  this.end();
+
+	  pna.nextTick(cb, err);
+	};
+	return _stream_duplex$1;
+}
+
+var string_decoder$1 = {};
+
+var hasRequiredString_decoder$1;
+
+function requireString_decoder$1 () {
+	if (hasRequiredString_decoder$1) return string_decoder$1;
+	hasRequiredString_decoder$1 = 1;
+
+	/*<replacement>*/
+
+	var Buffer = requireSafeBuffer$1().Buffer;
+	/*</replacement>*/
+
+	var isEncoding = Buffer.isEncoding || function (encoding) {
+	  encoding = '' + encoding;
+	  switch (encoding && encoding.toLowerCase()) {
+	    case 'hex':case 'utf8':case 'utf-8':case 'ascii':case 'binary':case 'base64':case 'ucs2':case 'ucs-2':case 'utf16le':case 'utf-16le':case 'raw':
+	      return true;
+	    default:
+	      return false;
+	  }
+	};
+
+	function _normalizeEncoding(enc) {
+	  if (!enc) return 'utf8';
+	  var retried;
+	  while (true) {
+	    switch (enc) {
+	      case 'utf8':
+	      case 'utf-8':
+	        return 'utf8';
+	      case 'ucs2':
+	      case 'ucs-2':
+	      case 'utf16le':
+	      case 'utf-16le':
+	        return 'utf16le';
+	      case 'latin1':
+	      case 'binary':
+	        return 'latin1';
+	      case 'base64':
+	      case 'ascii':
+	      case 'hex':
+	        return enc;
+	      default:
+	        if (retried) return; // undefined
+	        enc = ('' + enc).toLowerCase();
+	        retried = true;
+	    }
+	  }
+	}
+	// Do not cache `Buffer.isEncoding` when checking encoding names as some
+	// modules monkey-patch it to support additional encodings
+	function normalizeEncoding(enc) {
+	  var nenc = _normalizeEncoding(enc);
+	  if (typeof nenc !== 'string' && (Buffer.isEncoding === isEncoding || !isEncoding(enc))) throw new Error('Unknown encoding: ' + enc);
+	  return nenc || enc;
+	}
+
+	// StringDecoder provides an interface for efficiently splitting a series of
+	// buffers into a series of JS strings without breaking apart multi-byte
+	// characters.
+	string_decoder$1.StringDecoder = StringDecoder;
+	function StringDecoder(encoding) {
+	  this.encoding = normalizeEncoding(encoding);
+	  var nb;
+	  switch (this.encoding) {
+	    case 'utf16le':
+	      this.text = utf16Text;
+	      this.end = utf16End;
+	      nb = 4;
+	      break;
+	    case 'utf8':
+	      this.fillLast = utf8FillLast;
+	      nb = 4;
+	      break;
+	    case 'base64':
+	      this.text = base64Text;
+	      this.end = base64End;
+	      nb = 3;
+	      break;
+	    default:
+	      this.write = simpleWrite;
+	      this.end = simpleEnd;
+	      return;
+	  }
+	  this.lastNeed = 0;
+	  this.lastTotal = 0;
+	  this.lastChar = Buffer.allocUnsafe(nb);
+	}
+
+	StringDecoder.prototype.write = function (buf) {
+	  if (buf.length === 0) return '';
+	  var r;
+	  var i;
+	  if (this.lastNeed) {
+	    r = this.fillLast(buf);
+	    if (r === undefined) return '';
+	    i = this.lastNeed;
+	    this.lastNeed = 0;
+	  } else {
+	    i = 0;
+	  }
+	  if (i < buf.length) return r ? r + this.text(buf, i) : this.text(buf, i);
+	  return r || '';
+	};
+
+	StringDecoder.prototype.end = utf8End;
+
+	// Returns only complete characters in a Buffer
+	StringDecoder.prototype.text = utf8Text;
+
+	// Attempts to complete a partial non-UTF-8 character using bytes from a Buffer
+	StringDecoder.prototype.fillLast = function (buf) {
+	  if (this.lastNeed <= buf.length) {
+	    buf.copy(this.lastChar, this.lastTotal - this.lastNeed, 0, this.lastNeed);
+	    return this.lastChar.toString(this.encoding, 0, this.lastTotal);
+	  }
+	  buf.copy(this.lastChar, this.lastTotal - this.lastNeed, 0, buf.length);
+	  this.lastNeed -= buf.length;
+	};
+
+	// Checks the type of a UTF-8 byte, whether it's ASCII, a leading byte, or a
+	// continuation byte. If an invalid byte is detected, -2 is returned.
+	function utf8CheckByte(byte) {
+	  if (byte <= 0x7F) return 0;else if (byte >> 5 === 0x06) return 2;else if (byte >> 4 === 0x0E) return 3;else if (byte >> 3 === 0x1E) return 4;
+	  return byte >> 6 === 0x02 ? -1 : -2;
+	}
+
+	// Checks at most 3 bytes at the end of a Buffer in order to detect an
+	// incomplete multi-byte UTF-8 character. The total number of bytes (2, 3, or 4)
+	// needed to complete the UTF-8 character (if applicable) are returned.
+	function utf8CheckIncomplete(self, buf, i) {
+	  var j = buf.length - 1;
+	  if (j < i) return 0;
+	  var nb = utf8CheckByte(buf[j]);
+	  if (nb >= 0) {
+	    if (nb > 0) self.lastNeed = nb - 1;
+	    return nb;
+	  }
+	  if (--j < i || nb === -2) return 0;
+	  nb = utf8CheckByte(buf[j]);
+	  if (nb >= 0) {
+	    if (nb > 0) self.lastNeed = nb - 2;
+	    return nb;
+	  }
+	  if (--j < i || nb === -2) return 0;
+	  nb = utf8CheckByte(buf[j]);
+	  if (nb >= 0) {
+	    if (nb > 0) {
+	      if (nb === 2) nb = 0;else self.lastNeed = nb - 3;
+	    }
+	    return nb;
+	  }
+	  return 0;
+	}
+
+	// Validates as many continuation bytes for a multi-byte UTF-8 character as
+	// needed or are available. If we see a non-continuation byte where we expect
+	// one, we "replace" the validated continuation bytes we've seen so far with
+	// a single UTF-8 replacement character ('\ufffd'), to match v8's UTF-8 decoding
+	// behavior. The continuation byte check is included three times in the case
+	// where all of the continuation bytes for a character exist in the same buffer.
+	// It is also done this way as a slight performance increase instead of using a
+	// loop.
+	function utf8CheckExtraBytes(self, buf, p) {
+	  if ((buf[0] & 0xC0) !== 0x80) {
+	    self.lastNeed = 0;
+	    return '\ufffd';
+	  }
+	  if (self.lastNeed > 1 && buf.length > 1) {
+	    if ((buf[1] & 0xC0) !== 0x80) {
+	      self.lastNeed = 1;
+	      return '\ufffd';
+	    }
+	    if (self.lastNeed > 2 && buf.length > 2) {
+	      if ((buf[2] & 0xC0) !== 0x80) {
+	        self.lastNeed = 2;
+	        return '\ufffd';
+	      }
+	    }
+	  }
+	}
+
+	// Attempts to complete a multi-byte UTF-8 character using bytes from a Buffer.
+	function utf8FillLast(buf) {
+	  var p = this.lastTotal - this.lastNeed;
+	  var r = utf8CheckExtraBytes(this, buf);
+	  if (r !== undefined) return r;
+	  if (this.lastNeed <= buf.length) {
+	    buf.copy(this.lastChar, p, 0, this.lastNeed);
+	    return this.lastChar.toString(this.encoding, 0, this.lastTotal);
+	  }
+	  buf.copy(this.lastChar, p, 0, buf.length);
+	  this.lastNeed -= buf.length;
+	}
+
+	// Returns all complete UTF-8 characters in a Buffer. If the Buffer ended on a
+	// partial character, the character's bytes are buffered until the required
+	// number of bytes are available.
+	function utf8Text(buf, i) {
+	  var total = utf8CheckIncomplete(this, buf, i);
+	  if (!this.lastNeed) return buf.toString('utf8', i);
+	  this.lastTotal = total;
+	  var end = buf.length - (total - this.lastNeed);
+	  buf.copy(this.lastChar, 0, end);
+	  return buf.toString('utf8', i, end);
+	}
+
+	// For UTF-8, a replacement character is added when ending on a partial
+	// character.
+	function utf8End(buf) {
+	  var r = buf && buf.length ? this.write(buf) : '';
+	  if (this.lastNeed) return r + '\ufffd';
+	  return r;
+	}
+
+	// UTF-16LE typically needs two bytes per character, but even if we have an even
+	// number of bytes available, we need to check if we end on a leading/high
+	// surrogate. In that case, we need to wait for the next two bytes in order to
+	// decode the last character properly.
+	function utf16Text(buf, i) {
+	  if ((buf.length - i) % 2 === 0) {
+	    var r = buf.toString('utf16le', i);
+	    if (r) {
+	      var c = r.charCodeAt(r.length - 1);
+	      if (c >= 0xD800 && c <= 0xDBFF) {
+	        this.lastNeed = 2;
+	        this.lastTotal = 4;
+	        this.lastChar[0] = buf[buf.length - 2];
+	        this.lastChar[1] = buf[buf.length - 1];
+	        return r.slice(0, -1);
+	      }
+	    }
+	    return r;
+	  }
+	  this.lastNeed = 1;
+	  this.lastTotal = 2;
+	  this.lastChar[0] = buf[buf.length - 1];
+	  return buf.toString('utf16le', i, buf.length - 1);
+	}
+
+	// For UTF-16LE we do not explicitly append special replacement characters if we
+	// end on a partial character, we simply let v8 handle that.
+	function utf16End(buf) {
+	  var r = buf && buf.length ? this.write(buf) : '';
+	  if (this.lastNeed) {
+	    var end = this.lastTotal - this.lastNeed;
+	    return r + this.lastChar.toString('utf16le', 0, end);
+	  }
+	  return r;
+	}
+
+	function base64Text(buf, i) {
+	  var n = (buf.length - i) % 3;
+	  if (n === 0) return buf.toString('base64', i);
+	  this.lastNeed = 3 - n;
+	  this.lastTotal = 3;
+	  if (n === 1) {
+	    this.lastChar[0] = buf[buf.length - 1];
+	  } else {
+	    this.lastChar[0] = buf[buf.length - 2];
+	    this.lastChar[1] = buf[buf.length - 1];
+	  }
+	  return buf.toString('base64', i, buf.length - n);
+	}
+
+	function base64End(buf) {
+	  var r = buf && buf.length ? this.write(buf) : '';
+	  if (this.lastNeed) return r + this.lastChar.toString('base64', 0, 3 - this.lastNeed);
+	  return r;
+	}
+
+	// Pass bytes on through for single-byte encodings (e.g. ascii, latin1, hex)
+	function simpleWrite(buf) {
+	  return buf.toString(this.encoding);
+	}
+
+	function simpleEnd(buf) {
+	  return buf && buf.length ? this.write(buf) : '';
+	}
+	return string_decoder$1;
+}
+
+var _stream_readable$1;
+var hasRequired_stream_readable$1;
+
+function require_stream_readable$1 () {
+	if (hasRequired_stream_readable$1) return _stream_readable$1;
+	hasRequired_stream_readable$1 = 1;
+
+	/*<replacement>*/
+
+	var pna = requireProcessNextickArgs();
+	/*</replacement>*/
+
+	_stream_readable$1 = Readable;
+
+	/*<replacement>*/
+	var isArray = requireIsarray$1();
+	/*</replacement>*/
+
+	/*<replacement>*/
+	var Duplex;
+	/*</replacement>*/
+
+	Readable.ReadableState = ReadableState;
+
+	/*<replacement>*/
+	require$$4.EventEmitter;
+
+	var EElistenerCount = function (emitter, type) {
+	  return emitter.listeners(type).length;
+	};
+	/*</replacement>*/
+
+	/*<replacement>*/
+	var Stream = requireStream$2();
+	/*</replacement>*/
+
+	/*<replacement>*/
+
+	var Buffer = requireSafeBuffer$1().Buffer;
+	var OurUint8Array = (typeof commonjsGlobal !== 'undefined' ? commonjsGlobal : typeof window !== 'undefined' ? window : typeof self !== 'undefined' ? self : {}).Uint8Array || function () {};
+	function _uint8ArrayToBuffer(chunk) {
+	  return Buffer.from(chunk);
+	}
+	function _isUint8Array(obj) {
+	  return Buffer.isBuffer(obj) || obj instanceof OurUint8Array;
+	}
+
+	/*</replacement>*/
+
+	/*<replacement>*/
+	var util = Object.create(requireUtil());
+	util.inherits = requireInherits();
+	/*</replacement>*/
+
+	/*<replacement>*/
+	var debugUtil = require$$1;
+	var debug = void 0;
+	if (debugUtil && debugUtil.debuglog) {
+	  debug = debugUtil.debuglog('stream');
+	} else {
+	  debug = function () {};
+	}
+	/*</replacement>*/
+
+	var BufferList = requireBufferList$1();
+	var destroyImpl = requireDestroy$1();
+	var StringDecoder;
+
+	util.inherits(Readable, Stream);
+
+	var kProxyEvents = ['error', 'close', 'destroy', 'pause', 'resume'];
+
+	function prependListener(emitter, event, fn) {
+	  // Sadly this is not cacheable as some libraries bundle their own
+	  // event emitter implementation with them.
+	  if (typeof emitter.prependListener === 'function') return emitter.prependListener(event, fn);
+
+	  // This is a hack to make sure that our error handler is attached before any
+	  // userland ones.  NEVER DO THIS. This is here only because this code needs
+	  // to continue to work with older versions of Node.js that do not include
+	  // the prependListener() method. The goal is to eventually remove this hack.
+	  if (!emitter._events || !emitter._events[event]) emitter.on(event, fn);else if (isArray(emitter._events[event])) emitter._events[event].unshift(fn);else emitter._events[event] = [fn, emitter._events[event]];
+	}
+
+	function ReadableState(options, stream) {
+	  Duplex = Duplex || require_stream_duplex$1();
+
+	  options = options || {};
+
+	  // Duplex streams are both readable and writable, but share
+	  // the same options object.
+	  // However, some cases require setting options to different
+	  // values for the readable and the writable sides of the duplex stream.
+	  // These options can be provided separately as readableXXX and writableXXX.
+	  var isDuplex = stream instanceof Duplex;
+
+	  // object stream flag. Used to make read(n) ignore n and to
+	  // make all the buffer merging and length checks go away
+	  this.objectMode = !!options.objectMode;
+
+	  if (isDuplex) this.objectMode = this.objectMode || !!options.readableObjectMode;
+
+	  // the point at which it stops calling _read() to fill the buffer
+	  // Note: 0 is a valid value, means "don't call _read preemptively ever"
+	  var hwm = options.highWaterMark;
+	  var readableHwm = options.readableHighWaterMark;
+	  var defaultHwm = this.objectMode ? 16 : 16 * 1024;
+
+	  if (hwm || hwm === 0) this.highWaterMark = hwm;else if (isDuplex && (readableHwm || readableHwm === 0)) this.highWaterMark = readableHwm;else this.highWaterMark = defaultHwm;
+
+	  // cast to ints.
+	  this.highWaterMark = Math.floor(this.highWaterMark);
+
+	  // A linked list is used to store data chunks instead of an array because the
+	  // linked list can remove elements from the beginning faster than
+	  // array.shift()
+	  this.buffer = new BufferList();
+	  this.length = 0;
+	  this.pipes = null;
+	  this.pipesCount = 0;
+	  this.flowing = null;
+	  this.ended = false;
+	  this.endEmitted = false;
+	  this.reading = false;
+
+	  // a flag to be able to tell if the event 'readable'/'data' is emitted
+	  // immediately, or on a later tick.  We set this to true at first, because
+	  // any actions that shouldn't happen until "later" should generally also
+	  // not happen before the first read call.
+	  this.sync = true;
+
+	  // whenever we return null, then we set a flag to say
+	  // that we're awaiting a 'readable' event emission.
+	  this.needReadable = false;
+	  this.emittedReadable = false;
+	  this.readableListening = false;
+	  this.resumeScheduled = false;
+
+	  // has it been destroyed
+	  this.destroyed = false;
+
+	  // Crypto is kind of old and crusty.  Historically, its default string
+	  // encoding is 'binary' so we have to make this configurable.
+	  // Everything else in the universe uses 'utf8', though.
+	  this.defaultEncoding = options.defaultEncoding || 'utf8';
+
+	  // the number of writers that are awaiting a drain event in .pipe()s
+	  this.awaitDrain = 0;
+
+	  // if true, a maybeReadMore has been scheduled
+	  this.readingMore = false;
+
+	  this.decoder = null;
+	  this.encoding = null;
+	  if (options.encoding) {
+	    if (!StringDecoder) StringDecoder = requireString_decoder$1().StringDecoder;
+	    this.decoder = new StringDecoder(options.encoding);
+	    this.encoding = options.encoding;
+	  }
+	}
+
+	function Readable(options) {
+	  Duplex = Duplex || require_stream_duplex$1();
+
+	  if (!(this instanceof Readable)) return new Readable(options);
+
+	  this._readableState = new ReadableState(options, this);
+
+	  // legacy
+	  this.readable = true;
+
+	  if (options) {
+	    if (typeof options.read === 'function') this._read = options.read;
+
+	    if (typeof options.destroy === 'function') this._destroy = options.destroy;
+	  }
+
+	  Stream.call(this);
+	}
+
+	Object.defineProperty(Readable.prototype, 'destroyed', {
+	  get: function () {
+	    if (this._readableState === undefined) {
+	      return false;
+	    }
+	    return this._readableState.destroyed;
+	  },
+	  set: function (value) {
+	    // we ignore the value if the stream
+	    // has not been initialized yet
+	    if (!this._readableState) {
+	      return;
+	    }
+
+	    // backward compatibility, the user is explicitly
+	    // managing destroyed
+	    this._readableState.destroyed = value;
+	  }
+	});
+
+	Readable.prototype.destroy = destroyImpl.destroy;
+	Readable.prototype._undestroy = destroyImpl.undestroy;
+	Readable.prototype._destroy = function (err, cb) {
+	  this.push(null);
+	  cb(err);
+	};
+
+	// Manually shove something into the read() buffer.
+	// This returns true if the highWaterMark has not been hit yet,
+	// similar to how Writable.write() returns true if you should
+	// write() some more.
+	Readable.prototype.push = function (chunk, encoding) {
+	  var state = this._readableState;
+	  var skipChunkCheck;
+
+	  if (!state.objectMode) {
+	    if (typeof chunk === 'string') {
+	      encoding = encoding || state.defaultEncoding;
+	      if (encoding !== state.encoding) {
+	        chunk = Buffer.from(chunk, encoding);
+	        encoding = '';
+	      }
+	      skipChunkCheck = true;
+	    }
+	  } else {
+	    skipChunkCheck = true;
+	  }
+
+	  return readableAddChunk(this, chunk, encoding, false, skipChunkCheck);
+	};
+
+	// Unshift should *always* be something directly out of read()
+	Readable.prototype.unshift = function (chunk) {
+	  return readableAddChunk(this, chunk, null, true, false);
+	};
+
+	function readableAddChunk(stream, chunk, encoding, addToFront, skipChunkCheck) {
+	  var state = stream._readableState;
+	  if (chunk === null) {
+	    state.reading = false;
+	    onEofChunk(stream, state);
+	  } else {
+	    var er;
+	    if (!skipChunkCheck) er = chunkInvalid(state, chunk);
+	    if (er) {
+	      stream.emit('error', er);
+	    } else if (state.objectMode || chunk && chunk.length > 0) {
+	      if (typeof chunk !== 'string' && !state.objectMode && Object.getPrototypeOf(chunk) !== Buffer.prototype) {
+	        chunk = _uint8ArrayToBuffer(chunk);
+	      }
+
+	      if (addToFront) {
+	        if (state.endEmitted) stream.emit('error', new Error('stream.unshift() after end event'));else addChunk(stream, state, chunk, true);
+	      } else if (state.ended) {
+	        stream.emit('error', new Error('stream.push() after EOF'));
+	      } else {
+	        state.reading = false;
+	        if (state.decoder && !encoding) {
+	          chunk = state.decoder.write(chunk);
+	          if (state.objectMode || chunk.length !== 0) addChunk(stream, state, chunk, false);else maybeReadMore(stream, state);
+	        } else {
+	          addChunk(stream, state, chunk, false);
+	        }
+	      }
+	    } else if (!addToFront) {
+	      state.reading = false;
+	    }
+	  }
+
+	  return needMoreData(state);
+	}
+
+	function addChunk(stream, state, chunk, addToFront) {
+	  if (state.flowing && state.length === 0 && !state.sync) {
+	    stream.emit('data', chunk);
+	    stream.read(0);
+	  } else {
+	    // update the buffer info.
+	    state.length += state.objectMode ? 1 : chunk.length;
+	    if (addToFront) state.buffer.unshift(chunk);else state.buffer.push(chunk);
+
+	    if (state.needReadable) emitReadable(stream);
+	  }
+	  maybeReadMore(stream, state);
+	}
+
+	function chunkInvalid(state, chunk) {
+	  var er;
+	  if (!_isUint8Array(chunk) && typeof chunk !== 'string' && chunk !== undefined && !state.objectMode) {
+	    er = new TypeError('Invalid non-string/buffer chunk');
+	  }
+	  return er;
+	}
+
+	// if it's past the high water mark, we can push in some more.
+	// Also, if we have no data yet, we can stand some
+	// more bytes.  This is to work around cases where hwm=0,
+	// such as the repl.  Also, if the push() triggered a
+	// readable event, and the user called read(largeNumber) such that
+	// needReadable was set, then we ought to push more, so that another
+	// 'readable' event will be triggered.
+	function needMoreData(state) {
+	  return !state.ended && (state.needReadable || state.length < state.highWaterMark || state.length === 0);
+	}
+
+	Readable.prototype.isPaused = function () {
+	  return this._readableState.flowing === false;
+	};
+
+	// backwards compatibility.
+	Readable.prototype.setEncoding = function (enc) {
+	  if (!StringDecoder) StringDecoder = requireString_decoder$1().StringDecoder;
+	  this._readableState.decoder = new StringDecoder(enc);
+	  this._readableState.encoding = enc;
+	  return this;
+	};
+
+	// Don't raise the hwm > 8MB
+	var MAX_HWM = 0x800000;
+	function computeNewHighWaterMark(n) {
+	  if (n >= MAX_HWM) {
+	    n = MAX_HWM;
+	  } else {
+	    // Get the next highest power of 2 to prevent increasing hwm excessively in
+	    // tiny amounts
+	    n--;
+	    n |= n >>> 1;
+	    n |= n >>> 2;
+	    n |= n >>> 4;
+	    n |= n >>> 8;
+	    n |= n >>> 16;
+	    n++;
+	  }
+	  return n;
+	}
+
+	// This function is designed to be inlinable, so please take care when making
+	// changes to the function body.
+	function howMuchToRead(n, state) {
+	  if (n <= 0 || state.length === 0 && state.ended) return 0;
+	  if (state.objectMode) return 1;
+	  if (n !== n) {
+	    // Only flow one buffer at a time
+	    if (state.flowing && state.length) return state.buffer.head.data.length;else return state.length;
+	  }
+	  // If we're asking for more than the current hwm, then raise the hwm.
+	  if (n > state.highWaterMark) state.highWaterMark = computeNewHighWaterMark(n);
+	  if (n <= state.length) return n;
+	  // Don't have enough
+	  if (!state.ended) {
+	    state.needReadable = true;
+	    return 0;
+	  }
+	  return state.length;
+	}
+
+	// you can override either this method, or the async _read(n) below.
+	Readable.prototype.read = function (n) {
+	  debug('read', n);
+	  n = parseInt(n, 10);
+	  var state = this._readableState;
+	  var nOrig = n;
+
+	  if (n !== 0) state.emittedReadable = false;
+
+	  // if we're doing read(0) to trigger a readable event, but we
+	  // already have a bunch of data in the buffer, then just trigger
+	  // the 'readable' event and move on.
+	  if (n === 0 && state.needReadable && (state.length >= state.highWaterMark || state.ended)) {
+	    debug('read: emitReadable', state.length, state.ended);
+	    if (state.length === 0 && state.ended) endReadable(this);else emitReadable(this);
+	    return null;
+	  }
+
+	  n = howMuchToRead(n, state);
+
+	  // if we've ended, and we're now clear, then finish it up.
+	  if (n === 0 && state.ended) {
+	    if (state.length === 0) endReadable(this);
+	    return null;
+	  }
+
+	  // All the actual chunk generation logic needs to be
+	  // *below* the call to _read.  The reason is that in certain
+	  // synthetic stream cases, such as passthrough streams, _read
+	  // may be a completely synchronous operation which may change
+	  // the state of the read buffer, providing enough data when
+	  // before there was *not* enough.
+	  //
+	  // So, the steps are:
+	  // 1. Figure out what the state of things will be after we do
+	  // a read from the buffer.
+	  //
+	  // 2. If that resulting state will trigger a _read, then call _read.
+	  // Note that this may be asynchronous, or synchronous.  Yes, it is
+	  // deeply ugly to write APIs this way, but that still doesn't mean
+	  // that the Readable class should behave improperly, as streams are
+	  // designed to be sync/async agnostic.
+	  // Take note if the _read call is sync or async (ie, if the read call
+	  // has returned yet), so that we know whether or not it's safe to emit
+	  // 'readable' etc.
+	  //
+	  // 3. Actually pull the requested chunks out of the buffer and return.
+
+	  // if we need a readable event, then we need to do some reading.
+	  var doRead = state.needReadable;
+	  debug('need readable', doRead);
+
+	  // if we currently have less than the highWaterMark, then also read some
+	  if (state.length === 0 || state.length - n < state.highWaterMark) {
+	    doRead = true;
+	    debug('length less than watermark', doRead);
+	  }
+
+	  // however, if we've ended, then there's no point, and if we're already
+	  // reading, then it's unnecessary.
+	  if (state.ended || state.reading) {
+	    doRead = false;
+	    debug('reading or ended', doRead);
+	  } else if (doRead) {
+	    debug('do read');
+	    state.reading = true;
+	    state.sync = true;
+	    // if the length is currently zero, then we *need* a readable event.
+	    if (state.length === 0) state.needReadable = true;
+	    // call internal read method
+	    this._read(state.highWaterMark);
+	    state.sync = false;
+	    // If _read pushed data synchronously, then `reading` will be false,
+	    // and we need to re-evaluate how much data we can return to the user.
+	    if (!state.reading) n = howMuchToRead(nOrig, state);
+	  }
+
+	  var ret;
+	  if (n > 0) ret = fromList(n, state);else ret = null;
+
+	  if (ret === null) {
+	    state.needReadable = true;
+	    n = 0;
+	  } else {
+	    state.length -= n;
+	  }
+
+	  if (state.length === 0) {
+	    // If we have nothing in the buffer, then we want to know
+	    // as soon as we *do* get something into the buffer.
+	    if (!state.ended) state.needReadable = true;
+
+	    // If we tried to read() past the EOF, then emit end on the next tick.
+	    if (nOrig !== n && state.ended) endReadable(this);
+	  }
+
+	  if (ret !== null) this.emit('data', ret);
+
+	  return ret;
+	};
+
+	function onEofChunk(stream, state) {
+	  if (state.ended) return;
+	  if (state.decoder) {
+	    var chunk = state.decoder.end();
+	    if (chunk && chunk.length) {
+	      state.buffer.push(chunk);
+	      state.length += state.objectMode ? 1 : chunk.length;
+	    }
+	  }
+	  state.ended = true;
+
+	  // emit 'readable' now to make sure it gets picked up.
+	  emitReadable(stream);
+	}
+
+	// Don't emit readable right away in sync mode, because this can trigger
+	// another read() call => stack overflow.  This way, it might trigger
+	// a nextTick recursion warning, but that's not so bad.
+	function emitReadable(stream) {
+	  var state = stream._readableState;
+	  state.needReadable = false;
+	  if (!state.emittedReadable) {
+	    debug('emitReadable', state.flowing);
+	    state.emittedReadable = true;
+	    if (state.sync) pna.nextTick(emitReadable_, stream);else emitReadable_(stream);
+	  }
+	}
+
+	function emitReadable_(stream) {
+	  debug('emit readable');
+	  stream.emit('readable');
+	  flow(stream);
+	}
+
+	// at this point, the user has presumably seen the 'readable' event,
+	// and called read() to consume some data.  that may have triggered
+	// in turn another _read(n) call, in which case reading = true if
+	// it's in progress.
+	// However, if we're not ended, or reading, and the length < hwm,
+	// then go ahead and try to read some more preemptively.
+	function maybeReadMore(stream, state) {
+	  if (!state.readingMore) {
+	    state.readingMore = true;
+	    pna.nextTick(maybeReadMore_, stream, state);
+	  }
+	}
+
+	function maybeReadMore_(stream, state) {
+	  var len = state.length;
+	  while (!state.reading && !state.flowing && !state.ended && state.length < state.highWaterMark) {
+	    debug('maybeReadMore read 0');
+	    stream.read(0);
+	    if (len === state.length)
+	      // didn't get any data, stop spinning.
+	      break;else len = state.length;
+	  }
+	  state.readingMore = false;
+	}
+
+	// abstract method.  to be overridden in specific implementation classes.
+	// call cb(er, data) where data is <= n in length.
+	// for virtual (non-string, non-buffer) streams, "length" is somewhat
+	// arbitrary, and perhaps not very meaningful.
+	Readable.prototype._read = function (n) {
+	  this.emit('error', new Error('_read() is not implemented'));
+	};
+
+	Readable.prototype.pipe = function (dest, pipeOpts) {
+	  var src = this;
+	  var state = this._readableState;
+
+	  switch (state.pipesCount) {
+	    case 0:
+	      state.pipes = dest;
+	      break;
+	    case 1:
+	      state.pipes = [state.pipes, dest];
+	      break;
+	    default:
+	      state.pipes.push(dest);
+	      break;
+	  }
+	  state.pipesCount += 1;
+	  debug('pipe count=%d opts=%j', state.pipesCount, pipeOpts);
+
+	  var doEnd = (!pipeOpts || pipeOpts.end !== false) && dest !== process.stdout && dest !== process.stderr;
+
+	  var endFn = doEnd ? onend : unpipe;
+	  if (state.endEmitted) pna.nextTick(endFn);else src.once('end', endFn);
+
+	  dest.on('unpipe', onunpipe);
+	  function onunpipe(readable, unpipeInfo) {
+	    debug('onunpipe');
+	    if (readable === src) {
+	      if (unpipeInfo && unpipeInfo.hasUnpiped === false) {
+	        unpipeInfo.hasUnpiped = true;
+	        cleanup();
+	      }
+	    }
+	  }
+
+	  function onend() {
+	    debug('onend');
+	    dest.end();
+	  }
+
+	  // when the dest drains, it reduces the awaitDrain counter
+	  // on the source.  This would be more elegant with a .once()
+	  // handler in flow(), but adding and removing repeatedly is
+	  // too slow.
+	  var ondrain = pipeOnDrain(src);
+	  dest.on('drain', ondrain);
+
+	  var cleanedUp = false;
+	  function cleanup() {
+	    debug('cleanup');
+	    // cleanup event handlers once the pipe is broken
+	    dest.removeListener('close', onclose);
+	    dest.removeListener('finish', onfinish);
+	    dest.removeListener('drain', ondrain);
+	    dest.removeListener('error', onerror);
+	    dest.removeListener('unpipe', onunpipe);
+	    src.removeListener('end', onend);
+	    src.removeListener('end', unpipe);
+	    src.removeListener('data', ondata);
+
+	    cleanedUp = true;
+
+	    // if the reader is waiting for a drain event from this
+	    // specific writer, then it would cause it to never start
+	    // flowing again.
+	    // So, if this is awaiting a drain, then we just call it now.
+	    // If we don't know, then assume that we are waiting for one.
+	    if (state.awaitDrain && (!dest._writableState || dest._writableState.needDrain)) ondrain();
+	  }
+
+	  // If the user pushes more data while we're writing to dest then we'll end up
+	  // in ondata again. However, we only want to increase awaitDrain once because
+	  // dest will only emit one 'drain' event for the multiple writes.
+	  // => Introduce a guard on increasing awaitDrain.
+	  var increasedAwaitDrain = false;
+	  src.on('data', ondata);
+	  function ondata(chunk) {
+	    debug('ondata');
+	    increasedAwaitDrain = false;
+	    var ret = dest.write(chunk);
+	    if (false === ret && !increasedAwaitDrain) {
+	      // If the user unpiped during `dest.write()`, it is possible
+	      // to get stuck in a permanently paused state if that write
+	      // also returned false.
+	      // => Check whether `dest` is still a piping destination.
+	      if ((state.pipesCount === 1 && state.pipes === dest || state.pipesCount > 1 && indexOf(state.pipes, dest) !== -1) && !cleanedUp) {
+	        debug('false write response, pause', state.awaitDrain);
+	        state.awaitDrain++;
+	        increasedAwaitDrain = true;
+	      }
+	      src.pause();
+	    }
+	  }
+
+	  // if the dest has an error, then stop piping into it.
+	  // however, don't suppress the throwing behavior for this.
+	  function onerror(er) {
+	    debug('onerror', er);
+	    unpipe();
+	    dest.removeListener('error', onerror);
+	    if (EElistenerCount(dest, 'error') === 0) dest.emit('error', er);
+	  }
+
+	  // Make sure our error handler is attached before userland ones.
+	  prependListener(dest, 'error', onerror);
+
+	  // Both close and finish should trigger unpipe, but only once.
+	  function onclose() {
+	    dest.removeListener('finish', onfinish);
+	    unpipe();
+	  }
+	  dest.once('close', onclose);
+	  function onfinish() {
+	    debug('onfinish');
+	    dest.removeListener('close', onclose);
+	    unpipe();
+	  }
+	  dest.once('finish', onfinish);
+
+	  function unpipe() {
+	    debug('unpipe');
+	    src.unpipe(dest);
+	  }
+
+	  // tell the dest that it's being piped to
+	  dest.emit('pipe', src);
+
+	  // start the flow if it hasn't been started already.
+	  if (!state.flowing) {
+	    debug('pipe resume');
+	    src.resume();
+	  }
+
+	  return dest;
+	};
+
+	function pipeOnDrain(src) {
+	  return function () {
+	    var state = src._readableState;
+	    debug('pipeOnDrain', state.awaitDrain);
+	    if (state.awaitDrain) state.awaitDrain--;
+	    if (state.awaitDrain === 0 && EElistenerCount(src, 'data')) {
+	      state.flowing = true;
+	      flow(src);
+	    }
+	  };
+	}
+
+	Readable.prototype.unpipe = function (dest) {
+	  var state = this._readableState;
+	  var unpipeInfo = { hasUnpiped: false };
+
+	  // if we're not piping anywhere, then do nothing.
+	  if (state.pipesCount === 0) return this;
+
+	  // just one destination.  most common case.
+	  if (state.pipesCount === 1) {
+	    // passed in one, but it's not the right one.
+	    if (dest && dest !== state.pipes) return this;
+
+	    if (!dest) dest = state.pipes;
+
+	    // got a match.
+	    state.pipes = null;
+	    state.pipesCount = 0;
+	    state.flowing = false;
+	    if (dest) dest.emit('unpipe', this, unpipeInfo);
+	    return this;
+	  }
+
+	  // slow case. multiple pipe destinations.
+
+	  if (!dest) {
+	    // remove all.
+	    var dests = state.pipes;
+	    var len = state.pipesCount;
+	    state.pipes = null;
+	    state.pipesCount = 0;
+	    state.flowing = false;
+
+	    for (var i = 0; i < len; i++) {
+	      dests[i].emit('unpipe', this, { hasUnpiped: false });
+	    }return this;
+	  }
+
+	  // try to find the right one.
+	  var index = indexOf(state.pipes, dest);
+	  if (index === -1) return this;
+
+	  state.pipes.splice(index, 1);
+	  state.pipesCount -= 1;
+	  if (state.pipesCount === 1) state.pipes = state.pipes[0];
+
+	  dest.emit('unpipe', this, unpipeInfo);
+
+	  return this;
+	};
+
+	// set up data events if they are asked for
+	// Ensure readable listeners eventually get something
+	Readable.prototype.on = function (ev, fn) {
+	  var res = Stream.prototype.on.call(this, ev, fn);
+
+	  if (ev === 'data') {
+	    // Start flowing on next tick if stream isn't explicitly paused
+	    if (this._readableState.flowing !== false) this.resume();
+	  } else if (ev === 'readable') {
+	    var state = this._readableState;
+	    if (!state.endEmitted && !state.readableListening) {
+	      state.readableListening = state.needReadable = true;
+	      state.emittedReadable = false;
+	      if (!state.reading) {
+	        pna.nextTick(nReadingNextTick, this);
+	      } else if (state.length) {
+	        emitReadable(this);
+	      }
+	    }
+	  }
+
+	  return res;
+	};
+	Readable.prototype.addListener = Readable.prototype.on;
+
+	function nReadingNextTick(self) {
+	  debug('readable nexttick read 0');
+	  self.read(0);
+	}
+
+	// pause() and resume() are remnants of the legacy readable stream API
+	// If the user uses them, then switch into old mode.
+	Readable.prototype.resume = function () {
+	  var state = this._readableState;
+	  if (!state.flowing) {
+	    debug('resume');
+	    state.flowing = true;
+	    resume(this, state);
+	  }
+	  return this;
+	};
+
+	function resume(stream, state) {
+	  if (!state.resumeScheduled) {
+	    state.resumeScheduled = true;
+	    pna.nextTick(resume_, stream, state);
+	  }
+	}
+
+	function resume_(stream, state) {
+	  if (!state.reading) {
+	    debug('resume read 0');
+	    stream.read(0);
+	  }
+
+	  state.resumeScheduled = false;
+	  state.awaitDrain = 0;
+	  stream.emit('resume');
+	  flow(stream);
+	  if (state.flowing && !state.reading) stream.read(0);
+	}
+
+	Readable.prototype.pause = function () {
+	  debug('call pause flowing=%j', this._readableState.flowing);
+	  if (false !== this._readableState.flowing) {
+	    debug('pause');
+	    this._readableState.flowing = false;
+	    this.emit('pause');
+	  }
+	  return this;
+	};
+
+	function flow(stream) {
+	  var state = stream._readableState;
+	  debug('flow', state.flowing);
+	  while (state.flowing && stream.read() !== null) {}
+	}
+
+	// wrap an old-style stream as the async data source.
+	// This is *not* part of the readable stream interface.
+	// It is an ugly unfortunate mess of history.
+	Readable.prototype.wrap = function (stream) {
+	  var _this = this;
+
+	  var state = this._readableState;
+	  var paused = false;
+
+	  stream.on('end', function () {
+	    debug('wrapped end');
+	    if (state.decoder && !state.ended) {
+	      var chunk = state.decoder.end();
+	      if (chunk && chunk.length) _this.push(chunk);
+	    }
+
+	    _this.push(null);
+	  });
+
+	  stream.on('data', function (chunk) {
+	    debug('wrapped data');
+	    if (state.decoder) chunk = state.decoder.write(chunk);
+
+	    // don't skip over falsy values in objectMode
+	    if (state.objectMode && (chunk === null || chunk === undefined)) return;else if (!state.objectMode && (!chunk || !chunk.length)) return;
+
+	    var ret = _this.push(chunk);
+	    if (!ret) {
+	      paused = true;
+	      stream.pause();
+	    }
+	  });
+
+	  // proxy all the other methods.
+	  // important when wrapping filters and duplexes.
+	  for (var i in stream) {
+	    if (this[i] === undefined && typeof stream[i] === 'function') {
+	      this[i] = function (method) {
+	        return function () {
+	          return stream[method].apply(stream, arguments);
+	        };
+	      }(i);
+	    }
+	  }
+
+	  // proxy certain important events.
+	  for (var n = 0; n < kProxyEvents.length; n++) {
+	    stream.on(kProxyEvents[n], this.emit.bind(this, kProxyEvents[n]));
+	  }
+
+	  // when we try to consume some more bytes, simply unpause the
+	  // underlying stream.
+	  this._read = function (n) {
+	    debug('wrapped _read', n);
+	    if (paused) {
+	      paused = false;
+	      stream.resume();
+	    }
+	  };
+
+	  return this;
+	};
+
+	Object.defineProperty(Readable.prototype, 'readableHighWaterMark', {
+	  // making it explicit this property is not enumerable
+	  // because otherwise some prototype manipulation in
+	  // userland will fail
+	  enumerable: false,
+	  get: function () {
+	    return this._readableState.highWaterMark;
+	  }
+	});
+
+	// exposed for testing purposes only.
+	Readable._fromList = fromList;
+
+	// Pluck off n bytes from an array of buffers.
+	// Length is the combined lengths of all the buffers in the list.
+	// This function is designed to be inlinable, so please take care when making
+	// changes to the function body.
+	function fromList(n, state) {
+	  // nothing buffered
+	  if (state.length === 0) return null;
+
+	  var ret;
+	  if (state.objectMode) ret = state.buffer.shift();else if (!n || n >= state.length) {
+	    // read it all, truncate the list
+	    if (state.decoder) ret = state.buffer.join('');else if (state.buffer.length === 1) ret = state.buffer.head.data;else ret = state.buffer.concat(state.length);
+	    state.buffer.clear();
+	  } else {
+	    // read part of list
+	    ret = fromListPartial(n, state.buffer, state.decoder);
+	  }
+
+	  return ret;
+	}
+
+	// Extracts only enough buffered data to satisfy the amount requested.
+	// This function is designed to be inlinable, so please take care when making
+	// changes to the function body.
+	function fromListPartial(n, list, hasStrings) {
+	  var ret;
+	  if (n < list.head.data.length) {
+	    // slice is the same for buffers and strings
+	    ret = list.head.data.slice(0, n);
+	    list.head.data = list.head.data.slice(n);
+	  } else if (n === list.head.data.length) {
+	    // first chunk is a perfect match
+	    ret = list.shift();
+	  } else {
+	    // result spans more than one buffer
+	    ret = hasStrings ? copyFromBufferString(n, list) : copyFromBuffer(n, list);
+	  }
+	  return ret;
+	}
+
+	// Copies a specified amount of characters from the list of buffered data
+	// chunks.
+	// This function is designed to be inlinable, so please take care when making
+	// changes to the function body.
+	function copyFromBufferString(n, list) {
+	  var p = list.head;
+	  var c = 1;
+	  var ret = p.data;
+	  n -= ret.length;
+	  while (p = p.next) {
+	    var str = p.data;
+	    var nb = n > str.length ? str.length : n;
+	    if (nb === str.length) ret += str;else ret += str.slice(0, n);
+	    n -= nb;
+	    if (n === 0) {
+	      if (nb === str.length) {
+	        ++c;
+	        if (p.next) list.head = p.next;else list.head = list.tail = null;
+	      } else {
+	        list.head = p;
+	        p.data = str.slice(nb);
+	      }
+	      break;
+	    }
+	    ++c;
+	  }
+	  list.length -= c;
+	  return ret;
+	}
+
+	// Copies a specified amount of bytes from the list of buffered data chunks.
+	// This function is designed to be inlinable, so please take care when making
+	// changes to the function body.
+	function copyFromBuffer(n, list) {
+	  var ret = Buffer.allocUnsafe(n);
+	  var p = list.head;
+	  var c = 1;
+	  p.data.copy(ret);
+	  n -= p.data.length;
+	  while (p = p.next) {
+	    var buf = p.data;
+	    var nb = n > buf.length ? buf.length : n;
+	    buf.copy(ret, ret.length - n, 0, nb);
+	    n -= nb;
+	    if (n === 0) {
+	      if (nb === buf.length) {
+	        ++c;
+	        if (p.next) list.head = p.next;else list.head = list.tail = null;
+	      } else {
+	        list.head = p;
+	        p.data = buf.slice(nb);
+	      }
+	      break;
+	    }
+	    ++c;
+	  }
+	  list.length -= c;
+	  return ret;
+	}
+
+	function endReadable(stream) {
+	  var state = stream._readableState;
+
+	  // If we get here before consuming all the bytes, then that is a
+	  // bug in node.  Should never happen.
+	  if (state.length > 0) throw new Error('"endReadable()" called on non-empty stream');
+
+	  if (!state.endEmitted) {
+	    state.ended = true;
+	    pna.nextTick(endReadableNT, state, stream);
+	  }
+	}
+
+	function endReadableNT(state, stream) {
+	  // Check that we didn't get one last unshift.
+	  if (!state.endEmitted && state.length === 0) {
+	    state.endEmitted = true;
+	    stream.readable = false;
+	    stream.emit('end');
+	  }
+	}
+
+	function indexOf(xs, x) {
+	  for (var i = 0, l = xs.length; i < l; i++) {
+	    if (xs[i] === x) return i;
+	  }
+	  return -1;
+	}
+	return _stream_readable$1;
+}
+
+var _stream_transform$1;
+var hasRequired_stream_transform$1;
+
+function require_stream_transform$1 () {
+	if (hasRequired_stream_transform$1) return _stream_transform$1;
+	hasRequired_stream_transform$1 = 1;
+
+	_stream_transform$1 = Transform;
+
+	var Duplex = require_stream_duplex$1();
+
+	/*<replacement>*/
+	var util = Object.create(requireUtil());
+	util.inherits = requireInherits();
+	/*</replacement>*/
+
+	util.inherits(Transform, Duplex);
+
+	function afterTransform(er, data) {
+	  var ts = this._transformState;
+	  ts.transforming = false;
+
+	  var cb = ts.writecb;
+
+	  if (!cb) {
+	    return this.emit('error', new Error('write callback called multiple times'));
+	  }
+
+	  ts.writechunk = null;
+	  ts.writecb = null;
+
+	  if (data != null) // single equals check for both `null` and `undefined`
+	    this.push(data);
+
+	  cb(er);
+
+	  var rs = this._readableState;
+	  rs.reading = false;
+	  if (rs.needReadable || rs.length < rs.highWaterMark) {
+	    this._read(rs.highWaterMark);
+	  }
+	}
+
+	function Transform(options) {
+	  if (!(this instanceof Transform)) return new Transform(options);
+
+	  Duplex.call(this, options);
+
+	  this._transformState = {
+	    afterTransform: afterTransform.bind(this),
+	    needTransform: false,
+	    transforming: false,
+	    writecb: null,
+	    writechunk: null,
+	    writeencoding: null
+	  };
+
+	  // start out asking for a readable event once data is transformed.
+	  this._readableState.needReadable = true;
+
+	  // we have implemented the _read method, and done the other things
+	  // that Readable wants before the first _read call, so unset the
+	  // sync guard flag.
+	  this._readableState.sync = false;
+
+	  if (options) {
+	    if (typeof options.transform === 'function') this._transform = options.transform;
+
+	    if (typeof options.flush === 'function') this._flush = options.flush;
+	  }
+
+	  // When the writable side finishes, then flush out anything remaining.
+	  this.on('prefinish', prefinish);
+	}
+
+	function prefinish() {
+	  var _this = this;
+
+	  if (typeof this._flush === 'function') {
+	    this._flush(function (er, data) {
+	      done(_this, er, data);
+	    });
+	  } else {
+	    done(this, null, null);
+	  }
+	}
+
+	Transform.prototype.push = function (chunk, encoding) {
+	  this._transformState.needTransform = false;
+	  return Duplex.prototype.push.call(this, chunk, encoding);
+	};
+
+	// This is the part where you do stuff!
+	// override this function in implementation classes.
+	// 'chunk' is an input chunk.
+	//
+	// Call `push(newChunk)` to pass along transformed output
+	// to the readable side.  You may call 'push' zero or more times.
+	//
+	// Call `cb(err)` when you are done with this chunk.  If you pass
+	// an error, then that'll put the hurt on the whole operation.  If you
+	// never call cb(), then you'll never get another chunk.
+	Transform.prototype._transform = function (chunk, encoding, cb) {
+	  throw new Error('_transform() is not implemented');
+	};
+
+	Transform.prototype._write = function (chunk, encoding, cb) {
+	  var ts = this._transformState;
+	  ts.writecb = cb;
+	  ts.writechunk = chunk;
+	  ts.writeencoding = encoding;
+	  if (!ts.transforming) {
+	    var rs = this._readableState;
+	    if (ts.needTransform || rs.needReadable || rs.length < rs.highWaterMark) this._read(rs.highWaterMark);
+	  }
+	};
+
+	// Doesn't matter what the args are here.
+	// _transform does all the work.
+	// That we got here means that the readable side wants more data.
+	Transform.prototype._read = function (n) {
+	  var ts = this._transformState;
+
+	  if (ts.writechunk !== null && ts.writecb && !ts.transforming) {
+	    ts.transforming = true;
+	    this._transform(ts.writechunk, ts.writeencoding, ts.afterTransform);
+	  } else {
+	    // mark that we need a transform, so that any data that comes in
+	    // will get processed, now that we've asked for it.
+	    ts.needTransform = true;
+	  }
+	};
+
+	Transform.prototype._destroy = function (err, cb) {
+	  var _this2 = this;
+
+	  Duplex.prototype._destroy.call(this, err, function (err2) {
+	    cb(err2);
+	    _this2.emit('close');
+	  });
+	};
+
+	function done(stream, er, data) {
+	  if (er) return stream.emit('error', er);
+
+	  if (data != null) // single equals check for both `null` and `undefined`
+	    stream.push(data);
+
+	  // if there's nothing in the write buffer, then that means
+	  // that nothing more will ever be provided
+	  if (stream._writableState.length) throw new Error('Calling transform done when ws.length != 0');
+
+	  if (stream._transformState.transforming) throw new Error('Calling transform done when still transforming');
+
+	  return stream.push(null);
+	}
+	return _stream_transform$1;
+}
+
+var _stream_passthrough$1;
+var hasRequired_stream_passthrough$1;
+
+function require_stream_passthrough$1 () {
+	if (hasRequired_stream_passthrough$1) return _stream_passthrough$1;
+	hasRequired_stream_passthrough$1 = 1;
+
+	_stream_passthrough$1 = PassThrough;
+
+	var Transform = require_stream_transform$1();
+
+	/*<replacement>*/
+	var util = Object.create(requireUtil());
+	util.inherits = requireInherits();
+	/*</replacement>*/
+
+	util.inherits(PassThrough, Transform);
+
+	function PassThrough(options) {
+	  if (!(this instanceof PassThrough)) return new PassThrough(options);
+
+	  Transform.call(this, options);
+	}
+
+	PassThrough.prototype._transform = function (chunk, encoding, cb) {
+	  cb(null, chunk);
+	};
+	return _stream_passthrough$1;
+}
+
+var hasRequiredReadable$1;
+
+function requireReadable$1 () {
+	if (hasRequiredReadable$1) return readable$1.exports;
+	hasRequiredReadable$1 = 1;
+	(function (module, exports) {
+		var Stream = require$$0$5;
+		if (process.env.READABLE_STREAM === 'disable' && Stream) {
+		  module.exports = Stream;
+		  exports = module.exports = Stream.Readable;
+		  exports.Readable = Stream.Readable;
+		  exports.Writable = Stream.Writable;
+		  exports.Duplex = Stream.Duplex;
+		  exports.Transform = Stream.Transform;
+		  exports.PassThrough = Stream.PassThrough;
+		  exports.Stream = Stream;
+		} else {
+		  exports = module.exports = require_stream_readable$1();
+		  exports.Stream = Stream || exports;
+		  exports.Readable = exports;
+		  exports.Writable = require_stream_writable$1();
+		  exports.Duplex = require_stream_duplex$1();
+		  exports.Transform = require_stream_transform$1();
+		  exports.PassThrough = require_stream_passthrough$1();
+		} 
+	} (readable$1, readable$1.exports));
+	return readable$1.exports;
+}
+
+var duplex;
+var hasRequiredDuplex;
+
+function requireDuplex () {
+	if (hasRequiredDuplex) return duplex;
+	hasRequiredDuplex = 1;
+	duplex = requireReadable$1().Duplex;
+	return duplex;
+}
+
+var bl;
+var hasRequiredBl;
+
+function requireBl () {
+	if (hasRequiredBl) return bl;
+	hasRequiredBl = 1;
+	var DuplexStream = requireDuplex()
+	  , util         = require$$1
+	  , Buffer       = requireSafeBuffer$1().Buffer;
+
+
+	function BufferList (callback) {
+	  if (!(this instanceof BufferList))
+	    return new BufferList(callback)
+
+	  this._bufs  = [];
+	  this.length = 0;
+
+	  if (typeof callback == 'function') {
+	    this._callback = callback;
+
+	    var piper = function piper (err) {
+	      if (this._callback) {
+	        this._callback(err);
+	        this._callback = null;
+	      }
+	    }.bind(this);
+
+	    this.on('pipe', function onPipe (src) {
+	      src.on('error', piper);
+	    });
+	    this.on('unpipe', function onUnpipe (src) {
+	      src.removeListener('error', piper);
+	    });
+	  } else {
+	    this.append(callback);
+	  }
+
+	  DuplexStream.call(this);
+	}
+
+
+	util.inherits(BufferList, DuplexStream);
+
+
+	BufferList.prototype._offset = function _offset (offset) {
+	  var tot = 0, i = 0, _t;
+	  if (offset === 0) return [ 0, 0 ]
+	  for (; i < this._bufs.length; i++) {
+	    _t = tot + this._bufs[i].length;
+	    if (offset < _t || i == this._bufs.length - 1)
+	      return [ i, offset - tot ]
+	    tot = _t;
+	  }
+	};
+
+
+	BufferList.prototype.append = function append (buf) {
+	  var i = 0;
+
+	  if (Buffer.isBuffer(buf)) {
+	    this._appendBuffer(buf);
+	  } else if (Array.isArray(buf)) {
+	    for (; i < buf.length; i++)
+	      this.append(buf[i]);
+	  } else if (buf instanceof BufferList) {
+	    // unwrap argument into individual BufferLists
+	    for (; i < buf._bufs.length; i++)
+	      this.append(buf._bufs[i]);
+	  } else if (buf != null) {
+	    // coerce number arguments to strings, since Buffer(number) does
+	    // uninitialized memory allocation
+	    if (typeof buf == 'number')
+	      buf = buf.toString();
+
+	    this._appendBuffer(Buffer.from(buf));
+	  }
+
+	  return this
+	};
+
+
+	BufferList.prototype._appendBuffer = function appendBuffer (buf) {
+	  this._bufs.push(buf);
+	  this.length += buf.length;
+	};
+
+
+	BufferList.prototype._write = function _write (buf, encoding, callback) {
+	  this._appendBuffer(buf);
+
+	  if (typeof callback == 'function')
+	    callback();
+	};
+
+
+	BufferList.prototype._read = function _read (size) {
+	  if (!this.length)
+	    return this.push(null)
+
+	  size = Math.min(size, this.length);
+	  this.push(this.slice(0, size));
+	  this.consume(size);
+	};
+
+
+	BufferList.prototype.end = function end (chunk) {
+	  DuplexStream.prototype.end.call(this, chunk);
+
+	  if (this._callback) {
+	    this._callback(null, this.slice());
+	    this._callback = null;
+	  }
+	};
+
+
+	BufferList.prototype.get = function get (index) {
+	  return this.slice(index, index + 1)[0]
+	};
+
+
+	BufferList.prototype.slice = function slice (start, end) {
+	  if (typeof start == 'number' && start < 0)
+	    start += this.length;
+	  if (typeof end == 'number' && end < 0)
+	    end += this.length;
+	  return this.copy(null, 0, start, end)
+	};
+
+
+	BufferList.prototype.copy = function copy (dst, dstStart, srcStart, srcEnd) {
+	  if (typeof srcStart != 'number' || srcStart < 0)
+	    srcStart = 0;
+	  if (typeof srcEnd != 'number' || srcEnd > this.length)
+	    srcEnd = this.length;
+	  if (srcStart >= this.length)
+	    return dst || Buffer.alloc(0)
+	  if (srcEnd <= 0)
+	    return dst || Buffer.alloc(0)
+
+	  var copy   = !!dst
+	    , off    = this._offset(srcStart)
+	    , len    = srcEnd - srcStart
+	    , bytes  = len
+	    , bufoff = (copy && dstStart) || 0
+	    , start  = off[1]
+	    , l
+	    , i;
+
+	  // copy/slice everything
+	  if (srcStart === 0 && srcEnd == this.length) {
+	    if (!copy) { // slice, but full concat if multiple buffers
+	      return this._bufs.length === 1
+	        ? this._bufs[0]
+	        : Buffer.concat(this._bufs, this.length)
+	    }
+
+	    // copy, need to copy individual buffers
+	    for (i = 0; i < this._bufs.length; i++) {
+	      this._bufs[i].copy(dst, bufoff);
+	      bufoff += this._bufs[i].length;
+	    }
+
+	    return dst
+	  }
+
+	  // easy, cheap case where it's a subset of one of the buffers
+	  if (bytes <= this._bufs[off[0]].length - start) {
+	    return copy
+	      ? this._bufs[off[0]].copy(dst, dstStart, start, start + bytes)
+	      : this._bufs[off[0]].slice(start, start + bytes)
+	  }
+
+	  if (!copy) // a slice, we need something to copy in to
+	    dst = Buffer.allocUnsafe(len);
+
+	  for (i = off[0]; i < this._bufs.length; i++) {
+	    l = this._bufs[i].length - start;
+
+	    if (bytes > l) {
+	      this._bufs[i].copy(dst, bufoff, start);
+	      bufoff += l;
+	    } else {
+	      this._bufs[i].copy(dst, bufoff, start, start + bytes);
+	      bufoff += l;
+	      break
+	    }
+
+	    bytes -= l;
+
+	    if (start)
+	      start = 0;
+	  }
+
+	  // safeguard so that we don't return uninitialized memory
+	  if (dst.length > bufoff) return dst.slice(0, bufoff)
+
+	  return dst
+	};
+
+	BufferList.prototype.shallowSlice = function shallowSlice (start, end) {
+	  start = start || 0;
+	  end = end || this.length;
+
+	  if (start < 0)
+	    start += this.length;
+	  if (end < 0)
+	    end += this.length;
+
+	  var startOffset = this._offset(start)
+	    , endOffset = this._offset(end)
+	    , buffers = this._bufs.slice(startOffset[0], endOffset[0] + 1);
+
+	  if (endOffset[1] == 0)
+	    buffers.pop();
+	  else
+	    buffers[buffers.length-1] = buffers[buffers.length-1].slice(0, endOffset[1]);
+
+	  if (startOffset[1] != 0)
+	    buffers[0] = buffers[0].slice(startOffset[1]);
+
+	  return new BufferList(buffers)
+	};
+
+	BufferList.prototype.toString = function toString (encoding, start, end) {
+	  return this.slice(start, end).toString(encoding)
+	};
+
+	BufferList.prototype.consume = function consume (bytes) {
+	  // first, normalize the argument, in accordance with how Buffer does it
+	  bytes = Math.trunc(bytes);
+	  // do nothing if not a positive number
+	  if (Number.isNaN(bytes) || bytes <= 0) return this
+
+	  while (this._bufs.length) {
+	    if (bytes >= this._bufs[0].length) {
+	      bytes -= this._bufs[0].length;
+	      this.length -= this._bufs[0].length;
+	      this._bufs.shift();
+	    } else {
+	      this._bufs[0] = this._bufs[0].slice(bytes);
+	      this.length -= bytes;
+	      break
+	    }
+	  }
+	  return this
+	};
+
+
+	BufferList.prototype.duplicate = function duplicate () {
+	  var i = 0
+	    , copy = new BufferList();
+
+	  for (; i < this._bufs.length; i++)
+	    copy.append(this._bufs[i]);
+
+	  return copy
+	};
+
+
+	BufferList.prototype.destroy = function destroy () {
+	  this._bufs.length = 0;
+	  this.length = 0;
+	  this.push(null);
+	}
+
+
+	;(function () {
+	  var methods = {
+	      'readDoubleBE' : 8
+	    , 'readDoubleLE' : 8
+	    , 'readFloatBE'  : 4
+	    , 'readFloatLE'  : 4
+	    , 'readInt32BE'  : 4
+	    , 'readInt32LE'  : 4
+	    , 'readUInt32BE' : 4
+	    , 'readUInt32LE' : 4
+	    , 'readInt16BE'  : 2
+	    , 'readInt16LE'  : 2
+	    , 'readUInt16BE' : 2
+	    , 'readUInt16LE' : 2
+	    , 'readInt8'     : 1
+	    , 'readUInt8'    : 1
+	  };
+
+	  for (var m in methods) {
+	    (function (m) {
+	      BufferList.prototype[m] = function (offset) {
+	        return this.slice(offset, offset + methods[m])[m](0)
+	      };
+	    }(m));
+	  }
+	}());
+
+
+	bl = BufferList;
+	return bl;
+}
+
+var immutable;
+var hasRequiredImmutable;
+
+function requireImmutable () {
+	if (hasRequiredImmutable) return immutable;
+	hasRequiredImmutable = 1;
+	immutable = extend;
+
+	var hasOwnProperty = Object.prototype.hasOwnProperty;
+
+	function extend() {
+	    var target = {};
+
+	    for (var i = 0; i < arguments.length; i++) {
+	        var source = arguments[i];
+
+	        for (var key in source) {
+	            if (hasOwnProperty.call(source, key)) {
+	                target[key] = source[key];
+	            }
+	        }
+	    }
+
+	    return target
+	}
+	return immutable;
+}
+
+var headers = {};
+
+var toBuffer_1;
+var hasRequiredToBuffer;
+
+function requireToBuffer () {
+	if (hasRequiredToBuffer) return toBuffer_1;
+	hasRequiredToBuffer = 1;
+	toBuffer_1 = toBuffer;
+
+	var makeBuffer = Buffer.from && Buffer.from !== Uint8Array.from ? Buffer.from : bufferFrom;
+
+	function bufferFrom (buf, enc) {
+	  return new Buffer(buf, enc)
+	}
+
+	function toBuffer (buf, enc) {
+	  if (Buffer.isBuffer(buf)) return buf
+	  if (typeof buf === 'string') return makeBuffer(buf, enc)
+	  if (Array.isArray(buf)) return makeBuffer(buf)
+	  throw new Error('Input should be a buffer or a string')
+	}
+	return toBuffer_1;
+}
+
+/* Node.js 6.4.0 and up has full support */
+
+var bufferFill;
+var hasRequiredBufferFill;
+
+function requireBufferFill () {
+	if (hasRequiredBufferFill) return bufferFill;
+	hasRequiredBufferFill = 1;
+	var hasFullSupport = (function () {
+	  try {
+	    if (!Buffer.isEncoding('latin1')) {
+	      return false
+	    }
+
+	    var buf = Buffer.alloc ? Buffer.alloc(4) : new Buffer(4);
+
+	    buf.fill('ab', 'ucs2');
+
+	    return (buf.toString('hex') === '61006200')
+	  } catch (_) {
+	    return false
+	  }
+	}());
+
+	function isSingleByte (val) {
+	  return (val.length === 1 && val.charCodeAt(0) < 256)
+	}
+
+	function fillWithNumber (buffer, val, start, end) {
+	  if (start < 0 || end > buffer.length) {
+	    throw new RangeError('Out of range index')
+	  }
+
+	  start = start >>> 0;
+	  end = end === undefined ? buffer.length : end >>> 0;
+
+	  if (end > start) {
+	    buffer.fill(val, start, end);
+	  }
+
+	  return buffer
+	}
+
+	function fillWithBuffer (buffer, val, start, end) {
+	  if (start < 0 || end > buffer.length) {
+	    throw new RangeError('Out of range index')
+	  }
+
+	  if (end <= start) {
+	    return buffer
+	  }
+
+	  start = start >>> 0;
+	  end = end === undefined ? buffer.length : end >>> 0;
+
+	  var pos = start;
+	  var len = val.length;
+	  while (pos <= (end - len)) {
+	    val.copy(buffer, pos);
+	    pos += len;
+	  }
+
+	  if (pos !== end) {
+	    val.copy(buffer, pos, 0, end - pos);
+	  }
+
+	  return buffer
+	}
+
+	function fill (buffer, val, start, end, encoding) {
+	  if (hasFullSupport) {
+	    return buffer.fill(val, start, end, encoding)
+	  }
+
+	  if (typeof val === 'number') {
+	    return fillWithNumber(buffer, val, start, end)
+	  }
+
+	  if (typeof val === 'string') {
+	    if (typeof start === 'string') {
+	      encoding = start;
+	      start = 0;
+	      end = buffer.length;
+	    } else if (typeof end === 'string') {
+	      encoding = end;
+	      end = buffer.length;
+	    }
+
+	    if (encoding !== undefined && typeof encoding !== 'string') {
+	      throw new TypeError('encoding must be a string')
+	    }
+
+	    if (encoding === 'latin1') {
+	      encoding = 'binary';
+	    }
+
+	    if (typeof encoding === 'string' && !Buffer.isEncoding(encoding)) {
+	      throw new TypeError('Unknown encoding: ' + encoding)
+	    }
+
+	    if (val === '') {
+	      return fillWithNumber(buffer, 0, start, end)
+	    }
+
+	    if (isSingleByte(val)) {
+	      return fillWithNumber(buffer, val.charCodeAt(0), start, end)
+	    }
+
+	    val = new Buffer(val, encoding);
+	  }
+
+	  if (Buffer.isBuffer(val)) {
+	    return fillWithBuffer(buffer, val, start, end)
+	  }
+
+	  // Other values (e.g. undefined, boolean, object) results in zero-fill
+	  return fillWithNumber(buffer, 0, start, end)
+	}
+
+	bufferFill = fill;
+	return bufferFill;
+}
+
+var bufferAllocUnsafe;
+var hasRequiredBufferAllocUnsafe;
+
+function requireBufferAllocUnsafe () {
+	if (hasRequiredBufferAllocUnsafe) return bufferAllocUnsafe;
+	hasRequiredBufferAllocUnsafe = 1;
+	function allocUnsafe (size) {
+	  if (typeof size !== 'number') {
+	    throw new TypeError('"size" argument must be a number')
+	  }
+
+	  if (size < 0) {
+	    throw new RangeError('"size" argument must not be negative')
+	  }
+
+	  if (Buffer.allocUnsafe) {
+	    return Buffer.allocUnsafe(size)
+	  } else {
+	    return new Buffer(size)
+	  }
+	}
+
+	bufferAllocUnsafe = allocUnsafe;
+	return bufferAllocUnsafe;
+}
+
+var bufferAlloc;
+var hasRequiredBufferAlloc;
+
+function requireBufferAlloc () {
+	if (hasRequiredBufferAlloc) return bufferAlloc;
+	hasRequiredBufferAlloc = 1;
+	var bufferFill = requireBufferFill();
+	var allocUnsafe = requireBufferAllocUnsafe();
+
+	bufferAlloc = function alloc (size, fill, encoding) {
+	  if (typeof size !== 'number') {
+	    throw new TypeError('"size" argument must be a number')
+	  }
+
+	  if (size < 0) {
+	    throw new RangeError('"size" argument must not be negative')
+	  }
+
+	  if (Buffer.alloc) {
+	    return Buffer.alloc(size, fill, encoding)
+	  }
+
+	  var buffer = allocUnsafe(size);
+
+	  if (size === 0) {
+	    return buffer
+	  }
+
+	  if (fill === undefined) {
+	    return bufferFill(buffer, 0)
+	  }
+
+	  if (typeof encoding !== 'string') {
+	    encoding = undefined;
+	  }
+
+	  return bufferFill(buffer, fill, encoding)
+	};
+	return bufferAlloc;
+}
+
+var hasRequiredHeaders;
+
+function requireHeaders () {
+	if (hasRequiredHeaders) return headers;
+	hasRequiredHeaders = 1;
+	var toBuffer = requireToBuffer();
+	var alloc = requireBufferAlloc();
+
+	var ZEROS = '0000000000000000000';
+	var SEVENS = '7777777777777777777';
+	var ZERO_OFFSET = '0'.charCodeAt(0);
+	var USTAR = 'ustar\x0000';
+	var MASK = parseInt('7777', 8);
+
+	var clamp = function (index, len, defaultValue) {
+	  if (typeof index !== 'number') return defaultValue
+	  index = ~~index; // Coerce to integer.
+	  if (index >= len) return len
+	  if (index >= 0) return index
+	  index += len;
+	  if (index >= 0) return index
+	  return 0
+	};
+
+	var toType = function (flag) {
+	  switch (flag) {
+	    case 0:
+	      return 'file'
+	    case 1:
+	      return 'link'
+	    case 2:
+	      return 'symlink'
+	    case 3:
+	      return 'character-device'
+	    case 4:
+	      return 'block-device'
+	    case 5:
+	      return 'directory'
+	    case 6:
+	      return 'fifo'
+	    case 7:
+	      return 'contiguous-file'
+	    case 72:
+	      return 'pax-header'
+	    case 55:
+	      return 'pax-global-header'
+	    case 27:
+	      return 'gnu-long-link-path'
+	    case 28:
+	    case 30:
+	      return 'gnu-long-path'
+	  }
+
+	  return null
+	};
+
+	var toTypeflag = function (flag) {
+	  switch (flag) {
+	    case 'file':
+	      return 0
+	    case 'link':
+	      return 1
+	    case 'symlink':
+	      return 2
+	    case 'character-device':
+	      return 3
+	    case 'block-device':
+	      return 4
+	    case 'directory':
+	      return 5
+	    case 'fifo':
+	      return 6
+	    case 'contiguous-file':
+	      return 7
+	    case 'pax-header':
+	      return 72
+	  }
+
+	  return 0
+	};
+
+	var indexOf = function (block, num, offset, end) {
+	  for (; offset < end; offset++) {
+	    if (block[offset] === num) return offset
+	  }
+	  return end
+	};
+
+	var cksum = function (block) {
+	  var sum = 8 * 32;
+	  for (var i = 0; i < 148; i++) sum += block[i];
+	  for (var j = 156; j < 512; j++) sum += block[j];
+	  return sum
+	};
+
+	var encodeOct = function (val, n) {
+	  val = val.toString(8);
+	  if (val.length > n) return SEVENS.slice(0, n) + ' '
+	  else return ZEROS.slice(0, n - val.length) + val + ' '
+	};
+
+	/* Copied from the node-tar repo and modified to meet
+	 * tar-stream coding standard.
+	 *
+	 * Source: https://github.com/npm/node-tar/blob/51b6627a1f357d2eb433e7378e5f05e83b7aa6cd/lib/header.js#L349
+	 */
+	function parse256 (buf) {
+	  // first byte MUST be either 80 or FF
+	  // 80 for positive, FF for 2's comp
+	  var positive;
+	  if (buf[0] === 0x80) positive = true;
+	  else if (buf[0] === 0xFF) positive = false;
+	  else return null
+	  var tuple = [];
+	  for (var i = buf.length - 1; i > 0; i--) {
+	    var byte = buf[i];
+	    if (positive) tuple.push(byte);
+	    else tuple.push(0xFF - byte);
+	  }
+
+	  var sum = 0;
+	  var l = tuple.length;
+	  for (i = 0; i < l; i++) {
+	    sum += tuple[i] * Math.pow(256, i);
+	  }
+
+	  return positive ? sum : -1 * sum
+	}
+
+	var decodeOct = function (val, offset, length) {
+	  val = val.slice(offset, offset + length);
+	  offset = 0;
+
+	  // If prefixed with 0x80 then parse as a base-256 integer
+	  if (val[offset] & 0x80) {
+	    return parse256(val)
+	  } else {
+	    // Older versions of tar can prefix with spaces
+	    while (offset < val.length && val[offset] === 32) offset++;
+	    var end = clamp(indexOf(val, 32, offset, val.length), val.length, val.length);
+	    while (offset < end && val[offset] === 0) offset++;
+	    if (end === offset) return 0
+	    return parseInt(val.slice(offset, end).toString(), 8)
+	  }
+	};
+
+	var decodeStr = function (val, offset, length, encoding) {
+	  return val.slice(offset, indexOf(val, 0, offset, offset + length)).toString(encoding)
+	};
+
+	var addLength = function (str) {
+	  var len = Buffer.byteLength(str);
+	  var digits = Math.floor(Math.log(len) / Math.log(10)) + 1;
+	  if (len + digits >= Math.pow(10, digits)) digits++;
+
+	  return (len + digits) + str
+	};
+
+	headers.decodeLongPath = function (buf, encoding) {
+	  return decodeStr(buf, 0, buf.length, encoding)
+	};
+
+	headers.encodePax = function (opts) { // TODO: encode more stuff in pax
+	  var result = '';
+	  if (opts.name) result += addLength(' path=' + opts.name + '\n');
+	  if (opts.linkname) result += addLength(' linkpath=' + opts.linkname + '\n');
+	  var pax = opts.pax;
+	  if (pax) {
+	    for (var key in pax) {
+	      result += addLength(' ' + key + '=' + pax[key] + '\n');
+	    }
+	  }
+	  return toBuffer(result)
+	};
+
+	headers.decodePax = function (buf) {
+	  var result = {};
+
+	  while (buf.length) {
+	    var i = 0;
+	    while (i < buf.length && buf[i] !== 32) i++;
+	    var len = parseInt(buf.slice(0, i).toString(), 10);
+	    if (!len) return result
+
+	    var b = buf.slice(i + 1, len - 1).toString();
+	    var keyIndex = b.indexOf('=');
+	    if (keyIndex === -1) return result
+	    result[b.slice(0, keyIndex)] = b.slice(keyIndex + 1);
+
+	    buf = buf.slice(len);
+	  }
+
+	  return result
+	};
+
+	headers.encode = function (opts) {
+	  var buf = alloc(512);
+	  var name = opts.name;
+	  var prefix = '';
+
+	  if (opts.typeflag === 5 && name[name.length - 1] !== '/') name += '/';
+	  if (Buffer.byteLength(name) !== name.length) return null // utf-8
+
+	  while (Buffer.byteLength(name) > 100) {
+	    var i = name.indexOf('/');
+	    if (i === -1) return null
+	    prefix += prefix ? '/' + name.slice(0, i) : name.slice(0, i);
+	    name = name.slice(i + 1);
+	  }
+
+	  if (Buffer.byteLength(name) > 100 || Buffer.byteLength(prefix) > 155) return null
+	  if (opts.linkname && Buffer.byteLength(opts.linkname) > 100) return null
+
+	  buf.write(name);
+	  buf.write(encodeOct(opts.mode & MASK, 6), 100);
+	  buf.write(encodeOct(opts.uid, 6), 108);
+	  buf.write(encodeOct(opts.gid, 6), 116);
+	  buf.write(encodeOct(opts.size, 11), 124);
+	  buf.write(encodeOct((opts.mtime.getTime() / 1000) | 0, 11), 136);
+
+	  buf[156] = ZERO_OFFSET + toTypeflag(opts.type);
+
+	  if (opts.linkname) buf.write(opts.linkname, 157);
+
+	  buf.write(USTAR, 257);
+	  if (opts.uname) buf.write(opts.uname, 265);
+	  if (opts.gname) buf.write(opts.gname, 297);
+	  buf.write(encodeOct(opts.devmajor || 0, 6), 329);
+	  buf.write(encodeOct(opts.devminor || 0, 6), 337);
+
+	  if (prefix) buf.write(prefix, 345);
+
+	  buf.write(encodeOct(cksum(buf), 6), 148);
+
+	  return buf
+	};
+
+	headers.decode = function (buf, filenameEncoding) {
+	  var typeflag = buf[156] === 0 ? 0 : buf[156] - ZERO_OFFSET;
+
+	  var name = decodeStr(buf, 0, 100, filenameEncoding);
+	  var mode = decodeOct(buf, 100, 8);
+	  var uid = decodeOct(buf, 108, 8);
+	  var gid = decodeOct(buf, 116, 8);
+	  var size = decodeOct(buf, 124, 12);
+	  var mtime = decodeOct(buf, 136, 12);
+	  var type = toType(typeflag);
+	  var linkname = buf[157] === 0 ? null : decodeStr(buf, 157, 100, filenameEncoding);
+	  var uname = decodeStr(buf, 265, 32);
+	  var gname = decodeStr(buf, 297, 32);
+	  var devmajor = decodeOct(buf, 329, 8);
+	  var devminor = decodeOct(buf, 337, 8);
+
+	  if (buf[345]) name = decodeStr(buf, 345, 155, filenameEncoding) + '/' + name;
+
+	  // to support old tar versions that use trailing / to indicate dirs
+	  if (typeflag === 0 && name && name[name.length - 1] === '/') typeflag = 5;
+
+	  var c = cksum(buf);
+
+	  // checksum is still initial value if header was null.
+	  if (c === 8 * 32) return null
+
+	  // valid checksum
+	  if (c !== decodeOct(buf, 148, 8)) throw new Error('Invalid tar header. Maybe the tar is corrupted or it needs to be gunzipped?')
+
+	  return {
+	    name: name,
+	    mode: mode,
+	    uid: uid,
+	    gid: gid,
+	    size: size,
+	    mtime: new Date(1000 * mtime),
+	    type: type,
+	    linkname: linkname,
+	    uname: uname,
+	    gname: gname,
+	    devmajor: devmajor,
+	    devminor: devminor
+	  }
+	};
+	return headers;
+}
+
+var readable = {exports: {}};
+
+var isarray;
+var hasRequiredIsarray;
+
+function requireIsarray () {
+	if (hasRequiredIsarray) return isarray;
+	hasRequiredIsarray = 1;
+	var toString = {}.toString;
+
+	isarray = Array.isArray || function (arr) {
+	  return toString.call(arr) == '[object Array]';
+	};
+	return isarray;
+}
+
+var stream$1;
+var hasRequiredStream$1;
+
+function requireStream$1 () {
+	if (hasRequiredStream$1) return stream$1;
+	hasRequiredStream$1 = 1;
+	stream$1 = require$$0$5;
+	return stream$1;
+}
+
+var safeBuffer = {exports: {}};
+
+/* eslint-disable node/no-deprecated-api */
+
+var hasRequiredSafeBuffer;
+
+function requireSafeBuffer () {
+	if (hasRequiredSafeBuffer) return safeBuffer.exports;
+	hasRequiredSafeBuffer = 1;
+	(function (module, exports) {
+		var buffer = require$$0$2;
+		var Buffer = buffer.Buffer;
+
+		// alternative to using Object.keys for old browsers
+		function copyProps (src, dst) {
+		  for (var key in src) {
+		    dst[key] = src[key];
+		  }
+		}
+		if (Buffer.from && Buffer.alloc && Buffer.allocUnsafe && Buffer.allocUnsafeSlow) {
+		  module.exports = buffer;
+		} else {
+		  // Copy properties from require('buffer')
+		  copyProps(buffer, exports);
+		  exports.Buffer = SafeBuffer;
+		}
+
+		function SafeBuffer (arg, encodingOrOffset, length) {
+		  return Buffer(arg, encodingOrOffset, length)
+		}
+
+		// Copy static methods from Buffer
+		copyProps(Buffer, SafeBuffer);
+
+		SafeBuffer.from = function (arg, encodingOrOffset, length) {
+		  if (typeof arg === 'number') {
+		    throw new TypeError('Argument must not be a number')
+		  }
+		  return Buffer(arg, encodingOrOffset, length)
+		};
+
+		SafeBuffer.alloc = function (size, fill, encoding) {
+		  if (typeof size !== 'number') {
+		    throw new TypeError('Argument must be a number')
+		  }
+		  var buf = Buffer(size);
+		  if (fill !== undefined) {
+		    if (typeof encoding === 'string') {
+		      buf.fill(fill, encoding);
+		    } else {
+		      buf.fill(fill);
+		    }
+		  } else {
+		    buf.fill(0);
+		  }
+		  return buf
+		};
+
+		SafeBuffer.allocUnsafe = function (size) {
+		  if (typeof size !== 'number') {
+		    throw new TypeError('Argument must be a number')
+		  }
+		  return Buffer(size)
+		};
+
+		SafeBuffer.allocUnsafeSlow = function (size) {
+		  if (typeof size !== 'number') {
+		    throw new TypeError('Argument must be a number')
+		  }
+		  return buffer.SlowBuffer(size)
+		}; 
+	} (safeBuffer, safeBuffer.exports));
+	return safeBuffer.exports;
+}
+
+var BufferList = {exports: {}};
+
+var hasRequiredBufferList;
+
+function requireBufferList () {
+	if (hasRequiredBufferList) return BufferList.exports;
+	hasRequiredBufferList = 1;
+	(function (module) {
+
+		function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+		var Buffer = requireSafeBuffer().Buffer;
+		var util = require$$1;
+
+		function copyBuffer(src, target, offset) {
+		  src.copy(target, offset);
+		}
+
+		module.exports = function () {
+		  function BufferList() {
+		    _classCallCheck(this, BufferList);
+
+		    this.head = null;
+		    this.tail = null;
+		    this.length = 0;
+		  }
+
+		  BufferList.prototype.push = function push(v) {
+		    var entry = { data: v, next: null };
+		    if (this.length > 0) this.tail.next = entry;else this.head = entry;
+		    this.tail = entry;
+		    ++this.length;
+		  };
+
+		  BufferList.prototype.unshift = function unshift(v) {
+		    var entry = { data: v, next: this.head };
+		    if (this.length === 0) this.tail = entry;
+		    this.head = entry;
+		    ++this.length;
+		  };
+
+		  BufferList.prototype.shift = function shift() {
+		    if (this.length === 0) return;
+		    var ret = this.head.data;
+		    if (this.length === 1) this.head = this.tail = null;else this.head = this.head.next;
+		    --this.length;
+		    return ret;
+		  };
+
+		  BufferList.prototype.clear = function clear() {
+		    this.head = this.tail = null;
+		    this.length = 0;
+		  };
+
+		  BufferList.prototype.join = function join(s) {
+		    if (this.length === 0) return '';
+		    var p = this.head;
+		    var ret = '' + p.data;
+		    while (p = p.next) {
+		      ret += s + p.data;
+		    }return ret;
+		  };
+
+		  BufferList.prototype.concat = function concat(n) {
+		    if (this.length === 0) return Buffer.alloc(0);
+		    var ret = Buffer.allocUnsafe(n >>> 0);
+		    var p = this.head;
+		    var i = 0;
+		    while (p) {
+		      copyBuffer(p.data, ret, i);
+		      i += p.data.length;
+		      p = p.next;
+		    }
+		    return ret;
+		  };
+
+		  return BufferList;
+		}();
+
+		if (util && util.inspect && util.inspect.custom) {
+		  module.exports.prototype[util.inspect.custom] = function () {
+		    var obj = util.inspect({ length: this.length });
+		    return this.constructor.name + ' ' + obj;
+		  };
+		} 
+	} (BufferList));
+	return BufferList.exports;
+}
+
+var destroy_1;
+var hasRequiredDestroy;
+
+function requireDestroy () {
+	if (hasRequiredDestroy) return destroy_1;
+	hasRequiredDestroy = 1;
+
+	/*<replacement>*/
+
+	var pna = requireProcessNextickArgs();
+	/*</replacement>*/
+
+	// undocumented cb() API, needed for core, not for public API
+	function destroy(err, cb) {
+	  var _this = this;
+
+	  var readableDestroyed = this._readableState && this._readableState.destroyed;
+	  var writableDestroyed = this._writableState && this._writableState.destroyed;
+
+	  if (readableDestroyed || writableDestroyed) {
+	    if (cb) {
+	      cb(err);
+	    } else if (err) {
+	      if (!this._writableState) {
+	        pna.nextTick(emitErrorNT, this, err);
+	      } else if (!this._writableState.errorEmitted) {
+	        this._writableState.errorEmitted = true;
+	        pna.nextTick(emitErrorNT, this, err);
+	      }
+	    }
+
+	    return this;
+	  }
+
+	  // we set destroyed to true before firing error callbacks in order
+	  // to make it re-entrance safe in case destroy() is called within callbacks
+
+	  if (this._readableState) {
+	    this._readableState.destroyed = true;
+	  }
+
+	  // if this is a duplex stream mark the writable part as destroyed as well
+	  if (this._writableState) {
+	    this._writableState.destroyed = true;
+	  }
+
+	  this._destroy(err || null, function (err) {
+	    if (!cb && err) {
+	      if (!_this._writableState) {
+	        pna.nextTick(emitErrorNT, _this, err);
+	      } else if (!_this._writableState.errorEmitted) {
+	        _this._writableState.errorEmitted = true;
+	        pna.nextTick(emitErrorNT, _this, err);
+	      }
+	    } else if (cb) {
+	      cb(err);
+	    }
+	  });
+
+	  return this;
+	}
+
+	function undestroy() {
+	  if (this._readableState) {
+	    this._readableState.destroyed = false;
+	    this._readableState.reading = false;
+	    this._readableState.ended = false;
+	    this._readableState.endEmitted = false;
+	  }
+
+	  if (this._writableState) {
+	    this._writableState.destroyed = false;
+	    this._writableState.ended = false;
+	    this._writableState.ending = false;
+	    this._writableState.finalCalled = false;
+	    this._writableState.prefinished = false;
+	    this._writableState.finished = false;
+	    this._writableState.errorEmitted = false;
+	  }
+	}
+
+	function emitErrorNT(self, err) {
+	  self.emit('error', err);
+	}
+
+	destroy_1 = {
+	  destroy: destroy,
+	  undestroy: undestroy
+	};
+	return destroy_1;
+}
+
+var _stream_writable;
+var hasRequired_stream_writable;
+
+function require_stream_writable () {
+	if (hasRequired_stream_writable) return _stream_writable;
+	hasRequired_stream_writable = 1;
+
+	/*<replacement>*/
+
+	var pna = requireProcessNextickArgs();
+	/*</replacement>*/
+
+	_stream_writable = Writable;
+
+	// It seems a linked list but it is not
+	// there will be only 2 of these for each stream
+	function CorkedRequest(state) {
+	  var _this = this;
+
+	  this.next = null;
+	  this.entry = null;
+	  this.finish = function () {
+	    onCorkedFinish(_this, state);
+	  };
+	}
+	/* </replacement> */
+
+	/*<replacement>*/
+	var asyncWrite = !process.browser && ['v0.10', 'v0.9.'].indexOf(process.version.slice(0, 5)) > -1 ? setImmediate : pna.nextTick;
+	/*</replacement>*/
+
+	/*<replacement>*/
+	var Duplex;
+	/*</replacement>*/
+
+	Writable.WritableState = WritableState;
+
+	/*<replacement>*/
+	var util = Object.create(requireUtil());
+	util.inherits = requireInherits();
+	/*</replacement>*/
+
+	/*<replacement>*/
+	var internalUtil = {
+	  deprecate: requireNode()
+	};
+	/*</replacement>*/
+
+	/*<replacement>*/
+	var Stream = requireStream$1();
+	/*</replacement>*/
+
+	/*<replacement>*/
+
+	var Buffer = requireSafeBuffer().Buffer;
+	var OurUint8Array = (typeof commonjsGlobal !== 'undefined' ? commonjsGlobal : typeof window !== 'undefined' ? window : typeof self !== 'undefined' ? self : {}).Uint8Array || function () {};
+	function _uint8ArrayToBuffer(chunk) {
+	  return Buffer.from(chunk);
+	}
+	function _isUint8Array(obj) {
+	  return Buffer.isBuffer(obj) || obj instanceof OurUint8Array;
+	}
+
+	/*</replacement>*/
+
+	var destroyImpl = requireDestroy();
+
+	util.inherits(Writable, Stream);
+
+	function nop() {}
+
+	function WritableState(options, stream) {
+	  Duplex = Duplex || require_stream_duplex();
+
+	  options = options || {};
+
+	  // Duplex streams are both readable and writable, but share
+	  // the same options object.
+	  // However, some cases require setting options to different
+	  // values for the readable and the writable sides of the duplex stream.
+	  // These options can be provided separately as readableXXX and writableXXX.
+	  var isDuplex = stream instanceof Duplex;
+
+	  // object stream flag to indicate whether or not this stream
+	  // contains buffers or objects.
+	  this.objectMode = !!options.objectMode;
+
+	  if (isDuplex) this.objectMode = this.objectMode || !!options.writableObjectMode;
+
+	  // the point at which write() starts returning false
+	  // Note: 0 is a valid value, means that we always return false if
+	  // the entire buffer is not flushed immediately on write()
+	  var hwm = options.highWaterMark;
+	  var writableHwm = options.writableHighWaterMark;
+	  var defaultHwm = this.objectMode ? 16 : 16 * 1024;
+
+	  if (hwm || hwm === 0) this.highWaterMark = hwm;else if (isDuplex && (writableHwm || writableHwm === 0)) this.highWaterMark = writableHwm;else this.highWaterMark = defaultHwm;
+
+	  // cast to ints.
+	  this.highWaterMark = Math.floor(this.highWaterMark);
+
+	  // if _final has been called
+	  this.finalCalled = false;
+
+	  // drain event flag.
+	  this.needDrain = false;
+	  // at the start of calling end()
+	  this.ending = false;
+	  // when end() has been called, and returned
+	  this.ended = false;
+	  // when 'finish' is emitted
+	  this.finished = false;
+
+	  // has it been destroyed
+	  this.destroyed = false;
+
+	  // should we decode strings into buffers before passing to _write?
+	  // this is here so that some node-core streams can optimize string
+	  // handling at a lower level.
+	  var noDecode = options.decodeStrings === false;
+	  this.decodeStrings = !noDecode;
+
+	  // Crypto is kind of old and crusty.  Historically, its default string
+	  // encoding is 'binary' so we have to make this configurable.
+	  // Everything else in the universe uses 'utf8', though.
+	  this.defaultEncoding = options.defaultEncoding || 'utf8';
+
+	  // not an actual buffer we keep track of, but a measurement
+	  // of how much we're waiting to get pushed to some underlying
+	  // socket or file.
+	  this.length = 0;
+
+	  // a flag to see when we're in the middle of a write.
+	  this.writing = false;
+
+	  // when true all writes will be buffered until .uncork() call
+	  this.corked = 0;
+
+	  // a flag to be able to tell if the onwrite cb is called immediately,
+	  // or on a later tick.  We set this to true at first, because any
+	  // actions that shouldn't happen until "later" should generally also
+	  // not happen before the first write call.
+	  this.sync = true;
+
+	  // a flag to know if we're processing previously buffered items, which
+	  // may call the _write() callback in the same tick, so that we don't
+	  // end up in an overlapped onwrite situation.
+	  this.bufferProcessing = false;
+
+	  // the callback that's passed to _write(chunk,cb)
+	  this.onwrite = function (er) {
+	    onwrite(stream, er);
+	  };
+
+	  // the callback that the user supplies to write(chunk,encoding,cb)
+	  this.writecb = null;
+
+	  // the amount that is being written when _write is called.
+	  this.writelen = 0;
+
+	  this.bufferedRequest = null;
+	  this.lastBufferedRequest = null;
+
+	  // number of pending user-supplied write callbacks
+	  // this must be 0 before 'finish' can be emitted
+	  this.pendingcb = 0;
+
+	  // emit prefinish if the only thing we're waiting for is _write cbs
+	  // This is relevant for synchronous Transform streams
+	  this.prefinished = false;
+
+	  // True if the error was already emitted and should not be thrown again
+	  this.errorEmitted = false;
+
+	  // count buffered requests
+	  this.bufferedRequestCount = 0;
+
+	  // allocate the first CorkedRequest, there is always
+	  // one allocated and free to use, and we maintain at most two
+	  this.corkedRequestsFree = new CorkedRequest(this);
+	}
+
+	WritableState.prototype.getBuffer = function getBuffer() {
+	  var current = this.bufferedRequest;
+	  var out = [];
+	  while (current) {
+	    out.push(current);
+	    current = current.next;
+	  }
+	  return out;
+	};
+
+	(function () {
+	  try {
+	    Object.defineProperty(WritableState.prototype, 'buffer', {
+	      get: internalUtil.deprecate(function () {
+	        return this.getBuffer();
+	      }, '_writableState.buffer is deprecated. Use _writableState.getBuffer ' + 'instead.', 'DEP0003')
+	    });
+	  } catch (_) {}
+	})();
+
+	// Test _writableState for inheritance to account for Duplex streams,
+	// whose prototype chain only points to Readable.
+	var realHasInstance;
+	if (typeof Symbol === 'function' && Symbol.hasInstance && typeof Function.prototype[Symbol.hasInstance] === 'function') {
+	  realHasInstance = Function.prototype[Symbol.hasInstance];
+	  Object.defineProperty(Writable, Symbol.hasInstance, {
+	    value: function (object) {
+	      if (realHasInstance.call(this, object)) return true;
+	      if (this !== Writable) return false;
+
+	      return object && object._writableState instanceof WritableState;
+	    }
+	  });
+	} else {
+	  realHasInstance = function (object) {
+	    return object instanceof this;
+	  };
+	}
+
+	function Writable(options) {
+	  Duplex = Duplex || require_stream_duplex();
+
+	  // Writable ctor is applied to Duplexes, too.
+	  // `realHasInstance` is necessary because using plain `instanceof`
+	  // would return false, as no `_writableState` property is attached.
+
+	  // Trying to use the custom `instanceof` for Writable here will also break the
+	  // Node.js LazyTransform implementation, which has a non-trivial getter for
+	  // `_writableState` that would lead to infinite recursion.
+	  if (!realHasInstance.call(Writable, this) && !(this instanceof Duplex)) {
+	    return new Writable(options);
+	  }
+
+	  this._writableState = new WritableState(options, this);
+
+	  // legacy.
+	  this.writable = true;
+
+	  if (options) {
+	    if (typeof options.write === 'function') this._write = options.write;
+
+	    if (typeof options.writev === 'function') this._writev = options.writev;
+
+	    if (typeof options.destroy === 'function') this._destroy = options.destroy;
+
+	    if (typeof options.final === 'function') this._final = options.final;
+	  }
+
+	  Stream.call(this);
+	}
+
+	// Otherwise people can pipe Writable streams, which is just wrong.
+	Writable.prototype.pipe = function () {
+	  this.emit('error', new Error('Cannot pipe, not readable'));
+	};
+
+	function writeAfterEnd(stream, cb) {
+	  var er = new Error('write after end');
+	  // TODO: defer error events consistently everywhere, not just the cb
+	  stream.emit('error', er);
+	  pna.nextTick(cb, er);
+	}
+
+	// Checks that a user-supplied chunk is valid, especially for the particular
+	// mode the stream is in. Currently this means that `null` is never accepted
+	// and undefined/non-string values are only allowed in object mode.
+	function validChunk(stream, state, chunk, cb) {
+	  var valid = true;
+	  var er = false;
+
+	  if (chunk === null) {
+	    er = new TypeError('May not write null values to stream');
+	  } else if (typeof chunk !== 'string' && chunk !== undefined && !state.objectMode) {
+	    er = new TypeError('Invalid non-string/buffer chunk');
+	  }
+	  if (er) {
+	    stream.emit('error', er);
+	    pna.nextTick(cb, er);
+	    valid = false;
+	  }
+	  return valid;
+	}
+
+	Writable.prototype.write = function (chunk, encoding, cb) {
+	  var state = this._writableState;
+	  var ret = false;
+	  var isBuf = !state.objectMode && _isUint8Array(chunk);
+
+	  if (isBuf && !Buffer.isBuffer(chunk)) {
+	    chunk = _uint8ArrayToBuffer(chunk);
+	  }
+
+	  if (typeof encoding === 'function') {
+	    cb = encoding;
+	    encoding = null;
+	  }
+
+	  if (isBuf) encoding = 'buffer';else if (!encoding) encoding = state.defaultEncoding;
+
+	  if (typeof cb !== 'function') cb = nop;
+
+	  if (state.ended) writeAfterEnd(this, cb);else if (isBuf || validChunk(this, state, chunk, cb)) {
+	    state.pendingcb++;
+	    ret = writeOrBuffer(this, state, isBuf, chunk, encoding, cb);
+	  }
+
+	  return ret;
+	};
+
+	Writable.prototype.cork = function () {
+	  var state = this._writableState;
+
+	  state.corked++;
+	};
+
+	Writable.prototype.uncork = function () {
+	  var state = this._writableState;
+
+	  if (state.corked) {
+	    state.corked--;
+
+	    if (!state.writing && !state.corked && !state.bufferProcessing && state.bufferedRequest) clearBuffer(this, state);
+	  }
+	};
+
+	Writable.prototype.setDefaultEncoding = function setDefaultEncoding(encoding) {
+	  // node::ParseEncoding() requires lower case.
+	  if (typeof encoding === 'string') encoding = encoding.toLowerCase();
+	  if (!(['hex', 'utf8', 'utf-8', 'ascii', 'binary', 'base64', 'ucs2', 'ucs-2', 'utf16le', 'utf-16le', 'raw'].indexOf((encoding + '').toLowerCase()) > -1)) throw new TypeError('Unknown encoding: ' + encoding);
+	  this._writableState.defaultEncoding = encoding;
+	  return this;
+	};
+
+	function decodeChunk(state, chunk, encoding) {
+	  if (!state.objectMode && state.decodeStrings !== false && typeof chunk === 'string') {
+	    chunk = Buffer.from(chunk, encoding);
+	  }
+	  return chunk;
+	}
+
+	Object.defineProperty(Writable.prototype, 'writableHighWaterMark', {
+	  // making it explicit this property is not enumerable
+	  // because otherwise some prototype manipulation in
+	  // userland will fail
+	  enumerable: false,
+	  get: function () {
+	    return this._writableState.highWaterMark;
+	  }
+	});
+
+	// if we're already writing something, then just put this
+	// in the queue, and wait our turn.  Otherwise, call _write
+	// If we return false, then we need a drain event, so set that flag.
+	function writeOrBuffer(stream, state, isBuf, chunk, encoding, cb) {
+	  if (!isBuf) {
+	    var newChunk = decodeChunk(state, chunk, encoding);
+	    if (chunk !== newChunk) {
+	      isBuf = true;
+	      encoding = 'buffer';
+	      chunk = newChunk;
+	    }
+	  }
+	  var len = state.objectMode ? 1 : chunk.length;
+
+	  state.length += len;
+
+	  var ret = state.length < state.highWaterMark;
+	  // we must ensure that previous needDrain will not be reset to false.
+	  if (!ret) state.needDrain = true;
+
+	  if (state.writing || state.corked) {
+	    var last = state.lastBufferedRequest;
+	    state.lastBufferedRequest = {
+	      chunk: chunk,
+	      encoding: encoding,
+	      isBuf: isBuf,
+	      callback: cb,
+	      next: null
+	    };
+	    if (last) {
+	      last.next = state.lastBufferedRequest;
+	    } else {
+	      state.bufferedRequest = state.lastBufferedRequest;
+	    }
+	    state.bufferedRequestCount += 1;
+	  } else {
+	    doWrite(stream, state, false, len, chunk, encoding, cb);
+	  }
+
+	  return ret;
+	}
+
+	function doWrite(stream, state, writev, len, chunk, encoding, cb) {
+	  state.writelen = len;
+	  state.writecb = cb;
+	  state.writing = true;
+	  state.sync = true;
+	  if (writev) stream._writev(chunk, state.onwrite);else stream._write(chunk, encoding, state.onwrite);
+	  state.sync = false;
+	}
+
+	function onwriteError(stream, state, sync, er, cb) {
+	  --state.pendingcb;
+
+	  if (sync) {
+	    // defer the callback if we are being called synchronously
+	    // to avoid piling up things on the stack
+	    pna.nextTick(cb, er);
+	    // this can emit finish, and it will always happen
+	    // after error
+	    pna.nextTick(finishMaybe, stream, state);
+	    stream._writableState.errorEmitted = true;
+	    stream.emit('error', er);
+	  } else {
+	    // the caller expect this to happen before if
+	    // it is async
+	    cb(er);
+	    stream._writableState.errorEmitted = true;
+	    stream.emit('error', er);
+	    // this can emit finish, but finish must
+	    // always follow error
+	    finishMaybe(stream, state);
+	  }
+	}
+
+	function onwriteStateUpdate(state) {
+	  state.writing = false;
+	  state.writecb = null;
+	  state.length -= state.writelen;
+	  state.writelen = 0;
+	}
+
+	function onwrite(stream, er) {
+	  var state = stream._writableState;
+	  var sync = state.sync;
+	  var cb = state.writecb;
+
+	  onwriteStateUpdate(state);
+
+	  if (er) onwriteError(stream, state, sync, er, cb);else {
+	    // Check if we're actually ready to finish, but don't emit yet
+	    var finished = needFinish(state);
+
+	    if (!finished && !state.corked && !state.bufferProcessing && state.bufferedRequest) {
+	      clearBuffer(stream, state);
+	    }
+
+	    if (sync) {
+	      /*<replacement>*/
+	      asyncWrite(afterWrite, stream, state, finished, cb);
+	      /*</replacement>*/
+	    } else {
+	      afterWrite(stream, state, finished, cb);
+	    }
+	  }
+	}
+
+	function afterWrite(stream, state, finished, cb) {
+	  if (!finished) onwriteDrain(stream, state);
+	  state.pendingcb--;
+	  cb();
+	  finishMaybe(stream, state);
+	}
+
+	// Must force callback to be called on nextTick, so that we don't
+	// emit 'drain' before the write() consumer gets the 'false' return
+	// value, and has a chance to attach a 'drain' listener.
+	function onwriteDrain(stream, state) {
+	  if (state.length === 0 && state.needDrain) {
+	    state.needDrain = false;
+	    stream.emit('drain');
+	  }
+	}
+
+	// if there's something in the buffer waiting, then process it
+	function clearBuffer(stream, state) {
+	  state.bufferProcessing = true;
+	  var entry = state.bufferedRequest;
+
+	  if (stream._writev && entry && entry.next) {
+	    // Fast case, write everything using _writev()
+	    var l = state.bufferedRequestCount;
+	    var buffer = new Array(l);
+	    var holder = state.corkedRequestsFree;
+	    holder.entry = entry;
+
+	    var count = 0;
+	    var allBuffers = true;
+	    while (entry) {
+	      buffer[count] = entry;
+	      if (!entry.isBuf) allBuffers = false;
+	      entry = entry.next;
+	      count += 1;
+	    }
+	    buffer.allBuffers = allBuffers;
+
+	    doWrite(stream, state, true, state.length, buffer, '', holder.finish);
+
+	    // doWrite is almost always async, defer these to save a bit of time
+	    // as the hot path ends with doWrite
+	    state.pendingcb++;
+	    state.lastBufferedRequest = null;
+	    if (holder.next) {
+	      state.corkedRequestsFree = holder.next;
+	      holder.next = null;
+	    } else {
+	      state.corkedRequestsFree = new CorkedRequest(state);
+	    }
+	    state.bufferedRequestCount = 0;
+	  } else {
+	    // Slow case, write chunks one-by-one
+	    while (entry) {
+	      var chunk = entry.chunk;
+	      var encoding = entry.encoding;
+	      var cb = entry.callback;
+	      var len = state.objectMode ? 1 : chunk.length;
+
+	      doWrite(stream, state, false, len, chunk, encoding, cb);
+	      entry = entry.next;
+	      state.bufferedRequestCount--;
+	      // if we didn't call the onwrite immediately, then
+	      // it means that we need to wait until it does.
+	      // also, that means that the chunk and cb are currently
+	      // being processed, so move the buffer counter past them.
+	      if (state.writing) {
+	        break;
+	      }
+	    }
+
+	    if (entry === null) state.lastBufferedRequest = null;
+	  }
+
+	  state.bufferedRequest = entry;
+	  state.bufferProcessing = false;
+	}
+
+	Writable.prototype._write = function (chunk, encoding, cb) {
+	  cb(new Error('_write() is not implemented'));
+	};
+
+	Writable.prototype._writev = null;
+
+	Writable.prototype.end = function (chunk, encoding, cb) {
+	  var state = this._writableState;
+
+	  if (typeof chunk === 'function') {
+	    cb = chunk;
+	    chunk = null;
+	    encoding = null;
+	  } else if (typeof encoding === 'function') {
+	    cb = encoding;
+	    encoding = null;
+	  }
+
+	  if (chunk !== null && chunk !== undefined) this.write(chunk, encoding);
+
+	  // .end() fully uncorks
+	  if (state.corked) {
+	    state.corked = 1;
+	    this.uncork();
+	  }
+
+	  // ignore unnecessary end() calls.
+	  if (!state.ending) endWritable(this, state, cb);
+	};
+
+	function needFinish(state) {
+	  return state.ending && state.length === 0 && state.bufferedRequest === null && !state.finished && !state.writing;
+	}
+	function callFinal(stream, state) {
+	  stream._final(function (err) {
+	    state.pendingcb--;
+	    if (err) {
+	      stream.emit('error', err);
+	    }
+	    state.prefinished = true;
+	    stream.emit('prefinish');
+	    finishMaybe(stream, state);
+	  });
+	}
+	function prefinish(stream, state) {
+	  if (!state.prefinished && !state.finalCalled) {
+	    if (typeof stream._final === 'function') {
+	      state.pendingcb++;
+	      state.finalCalled = true;
+	      pna.nextTick(callFinal, stream, state);
+	    } else {
+	      state.prefinished = true;
+	      stream.emit('prefinish');
+	    }
+	  }
+	}
+
+	function finishMaybe(stream, state) {
+	  var need = needFinish(state);
+	  if (need) {
+	    prefinish(stream, state);
+	    if (state.pendingcb === 0) {
+	      state.finished = true;
+	      stream.emit('finish');
+	    }
+	  }
+	  return need;
+	}
+
+	function endWritable(stream, state, cb) {
+	  state.ending = true;
+	  finishMaybe(stream, state);
+	  if (cb) {
+	    if (state.finished) pna.nextTick(cb);else stream.once('finish', cb);
+	  }
+	  state.ended = true;
+	  stream.writable = false;
+	}
+
+	function onCorkedFinish(corkReq, state, err) {
+	  var entry = corkReq.entry;
+	  corkReq.entry = null;
+	  while (entry) {
+	    var cb = entry.callback;
+	    state.pendingcb--;
+	    cb(err);
+	    entry = entry.next;
+	  }
+
+	  // reuse the free corkReq.
+	  state.corkedRequestsFree.next = corkReq;
+	}
+
+	Object.defineProperty(Writable.prototype, 'destroyed', {
+	  get: function () {
+	    if (this._writableState === undefined) {
+	      return false;
+	    }
+	    return this._writableState.destroyed;
+	  },
+	  set: function (value) {
+	    // we ignore the value if the stream
+	    // has not been initialized yet
+	    if (!this._writableState) {
+	      return;
+	    }
+
+	    // backward compatibility, the user is explicitly
+	    // managing destroyed
+	    this._writableState.destroyed = value;
+	  }
+	});
+
+	Writable.prototype.destroy = destroyImpl.destroy;
+	Writable.prototype._undestroy = destroyImpl.undestroy;
+	Writable.prototype._destroy = function (err, cb) {
+	  this.end();
+	  cb(err);
+	};
+	return _stream_writable;
+}
+
+var _stream_duplex;
+var hasRequired_stream_duplex;
+
+function require_stream_duplex () {
+	if (hasRequired_stream_duplex) return _stream_duplex;
+	hasRequired_stream_duplex = 1;
+
+	/*<replacement>*/
+
+	var pna = requireProcessNextickArgs();
+	/*</replacement>*/
+
+	/*<replacement>*/
+	var objectKeys = Object.keys || function (obj) {
+	  var keys = [];
+	  for (var key in obj) {
+	    keys.push(key);
+	  }return keys;
+	};
+	/*</replacement>*/
+
+	_stream_duplex = Duplex;
+
+	/*<replacement>*/
+	var util = Object.create(requireUtil());
+	util.inherits = requireInherits();
+	/*</replacement>*/
+
+	var Readable = require_stream_readable();
+	var Writable = require_stream_writable();
+
+	util.inherits(Duplex, Readable);
+
+	{
+	  // avoid scope creep, the keys array can then be collected
+	  var keys = objectKeys(Writable.prototype);
+	  for (var v = 0; v < keys.length; v++) {
+	    var method = keys[v];
+	    if (!Duplex.prototype[method]) Duplex.prototype[method] = Writable.prototype[method];
+	  }
+	}
+
+	function Duplex(options) {
+	  if (!(this instanceof Duplex)) return new Duplex(options);
+
+	  Readable.call(this, options);
+	  Writable.call(this, options);
+
+	  if (options && options.readable === false) this.readable = false;
+
+	  if (options && options.writable === false) this.writable = false;
+
+	  this.allowHalfOpen = true;
+	  if (options && options.allowHalfOpen === false) this.allowHalfOpen = false;
+
+	  this.once('end', onend);
+	}
+
+	Object.defineProperty(Duplex.prototype, 'writableHighWaterMark', {
+	  // making it explicit this property is not enumerable
+	  // because otherwise some prototype manipulation in
+	  // userland will fail
+	  enumerable: false,
+	  get: function () {
+	    return this._writableState.highWaterMark;
+	  }
+	});
+
+	// the no-half-open enforcer
+	function onend() {
+	  // if we allow half-open state, or if the writable side ended,
+	  // then we're ok.
+	  if (this.allowHalfOpen || this._writableState.ended) return;
+
+	  // no more data can be written.
+	  // But allow more writes to happen in this tick.
+	  pna.nextTick(onEndNT, this);
+	}
+
+	function onEndNT(self) {
+	  self.end();
+	}
+
+	Object.defineProperty(Duplex.prototype, 'destroyed', {
+	  get: function () {
+	    if (this._readableState === undefined || this._writableState === undefined) {
+	      return false;
+	    }
+	    return this._readableState.destroyed && this._writableState.destroyed;
+	  },
+	  set: function (value) {
+	    // we ignore the value if the stream
+	    // has not been initialized yet
+	    if (this._readableState === undefined || this._writableState === undefined) {
+	      return;
+	    }
+
+	    // backward compatibility, the user is explicitly
+	    // managing destroyed
+	    this._readableState.destroyed = value;
+	    this._writableState.destroyed = value;
+	  }
+	});
+
+	Duplex.prototype._destroy = function (err, cb) {
+	  this.push(null);
+	  this.end();
+
+	  pna.nextTick(cb, err);
+	};
+	return _stream_duplex;
+}
+
+var string_decoder = {};
+
+var hasRequiredString_decoder;
+
+function requireString_decoder () {
+	if (hasRequiredString_decoder) return string_decoder;
+	hasRequiredString_decoder = 1;
+
+	/*<replacement>*/
+
+	var Buffer = requireSafeBuffer().Buffer;
+	/*</replacement>*/
+
+	var isEncoding = Buffer.isEncoding || function (encoding) {
+	  encoding = '' + encoding;
+	  switch (encoding && encoding.toLowerCase()) {
+	    case 'hex':case 'utf8':case 'utf-8':case 'ascii':case 'binary':case 'base64':case 'ucs2':case 'ucs-2':case 'utf16le':case 'utf-16le':case 'raw':
+	      return true;
+	    default:
+	      return false;
+	  }
+	};
+
+	function _normalizeEncoding(enc) {
+	  if (!enc) return 'utf8';
+	  var retried;
+	  while (true) {
+	    switch (enc) {
+	      case 'utf8':
+	      case 'utf-8':
+	        return 'utf8';
+	      case 'ucs2':
+	      case 'ucs-2':
+	      case 'utf16le':
+	      case 'utf-16le':
+	        return 'utf16le';
+	      case 'latin1':
+	      case 'binary':
+	        return 'latin1';
+	      case 'base64':
+	      case 'ascii':
+	      case 'hex':
+	        return enc;
+	      default:
+	        if (retried) return; // undefined
+	        enc = ('' + enc).toLowerCase();
+	        retried = true;
+	    }
+	  }
+	}
+	// Do not cache `Buffer.isEncoding` when checking encoding names as some
+	// modules monkey-patch it to support additional encodings
+	function normalizeEncoding(enc) {
+	  var nenc = _normalizeEncoding(enc);
+	  if (typeof nenc !== 'string' && (Buffer.isEncoding === isEncoding || !isEncoding(enc))) throw new Error('Unknown encoding: ' + enc);
+	  return nenc || enc;
+	}
+
+	// StringDecoder provides an interface for efficiently splitting a series of
+	// buffers into a series of JS strings without breaking apart multi-byte
+	// characters.
+	string_decoder.StringDecoder = StringDecoder;
+	function StringDecoder(encoding) {
+	  this.encoding = normalizeEncoding(encoding);
+	  var nb;
+	  switch (this.encoding) {
+	    case 'utf16le':
+	      this.text = utf16Text;
+	      this.end = utf16End;
+	      nb = 4;
+	      break;
+	    case 'utf8':
+	      this.fillLast = utf8FillLast;
+	      nb = 4;
+	      break;
+	    case 'base64':
+	      this.text = base64Text;
+	      this.end = base64End;
+	      nb = 3;
+	      break;
+	    default:
+	      this.write = simpleWrite;
+	      this.end = simpleEnd;
+	      return;
+	  }
+	  this.lastNeed = 0;
+	  this.lastTotal = 0;
+	  this.lastChar = Buffer.allocUnsafe(nb);
+	}
+
+	StringDecoder.prototype.write = function (buf) {
+	  if (buf.length === 0) return '';
+	  var r;
+	  var i;
+	  if (this.lastNeed) {
+	    r = this.fillLast(buf);
+	    if (r === undefined) return '';
+	    i = this.lastNeed;
+	    this.lastNeed = 0;
+	  } else {
+	    i = 0;
+	  }
+	  if (i < buf.length) return r ? r + this.text(buf, i) : this.text(buf, i);
+	  return r || '';
+	};
+
+	StringDecoder.prototype.end = utf8End;
+
+	// Returns only complete characters in a Buffer
+	StringDecoder.prototype.text = utf8Text;
+
+	// Attempts to complete a partial non-UTF-8 character using bytes from a Buffer
+	StringDecoder.prototype.fillLast = function (buf) {
+	  if (this.lastNeed <= buf.length) {
+	    buf.copy(this.lastChar, this.lastTotal - this.lastNeed, 0, this.lastNeed);
+	    return this.lastChar.toString(this.encoding, 0, this.lastTotal);
+	  }
+	  buf.copy(this.lastChar, this.lastTotal - this.lastNeed, 0, buf.length);
+	  this.lastNeed -= buf.length;
+	};
+
+	// Checks the type of a UTF-8 byte, whether it's ASCII, a leading byte, or a
+	// continuation byte. If an invalid byte is detected, -2 is returned.
+	function utf8CheckByte(byte) {
+	  if (byte <= 0x7F) return 0;else if (byte >> 5 === 0x06) return 2;else if (byte >> 4 === 0x0E) return 3;else if (byte >> 3 === 0x1E) return 4;
+	  return byte >> 6 === 0x02 ? -1 : -2;
+	}
+
+	// Checks at most 3 bytes at the end of a Buffer in order to detect an
+	// incomplete multi-byte UTF-8 character. The total number of bytes (2, 3, or 4)
+	// needed to complete the UTF-8 character (if applicable) are returned.
+	function utf8CheckIncomplete(self, buf, i) {
+	  var j = buf.length - 1;
+	  if (j < i) return 0;
+	  var nb = utf8CheckByte(buf[j]);
+	  if (nb >= 0) {
+	    if (nb > 0) self.lastNeed = nb - 1;
+	    return nb;
+	  }
+	  if (--j < i || nb === -2) return 0;
+	  nb = utf8CheckByte(buf[j]);
+	  if (nb >= 0) {
+	    if (nb > 0) self.lastNeed = nb - 2;
+	    return nb;
+	  }
+	  if (--j < i || nb === -2) return 0;
+	  nb = utf8CheckByte(buf[j]);
+	  if (nb >= 0) {
+	    if (nb > 0) {
+	      if (nb === 2) nb = 0;else self.lastNeed = nb - 3;
+	    }
+	    return nb;
+	  }
+	  return 0;
+	}
+
+	// Validates as many continuation bytes for a multi-byte UTF-8 character as
+	// needed or are available. If we see a non-continuation byte where we expect
+	// one, we "replace" the validated continuation bytes we've seen so far with
+	// a single UTF-8 replacement character ('\ufffd'), to match v8's UTF-8 decoding
+	// behavior. The continuation byte check is included three times in the case
+	// where all of the continuation bytes for a character exist in the same buffer.
+	// It is also done this way as a slight performance increase instead of using a
+	// loop.
+	function utf8CheckExtraBytes(self, buf, p) {
+	  if ((buf[0] & 0xC0) !== 0x80) {
+	    self.lastNeed = 0;
+	    return '\ufffd';
+	  }
+	  if (self.lastNeed > 1 && buf.length > 1) {
+	    if ((buf[1] & 0xC0) !== 0x80) {
+	      self.lastNeed = 1;
+	      return '\ufffd';
+	    }
+	    if (self.lastNeed > 2 && buf.length > 2) {
+	      if ((buf[2] & 0xC0) !== 0x80) {
+	        self.lastNeed = 2;
+	        return '\ufffd';
+	      }
+	    }
+	  }
+	}
+
+	// Attempts to complete a multi-byte UTF-8 character using bytes from a Buffer.
+	function utf8FillLast(buf) {
+	  var p = this.lastTotal - this.lastNeed;
+	  var r = utf8CheckExtraBytes(this, buf);
+	  if (r !== undefined) return r;
+	  if (this.lastNeed <= buf.length) {
+	    buf.copy(this.lastChar, p, 0, this.lastNeed);
+	    return this.lastChar.toString(this.encoding, 0, this.lastTotal);
+	  }
+	  buf.copy(this.lastChar, p, 0, buf.length);
+	  this.lastNeed -= buf.length;
+	}
+
+	// Returns all complete UTF-8 characters in a Buffer. If the Buffer ended on a
+	// partial character, the character's bytes are buffered until the required
+	// number of bytes are available.
+	function utf8Text(buf, i) {
+	  var total = utf8CheckIncomplete(this, buf, i);
+	  if (!this.lastNeed) return buf.toString('utf8', i);
+	  this.lastTotal = total;
+	  var end = buf.length - (total - this.lastNeed);
+	  buf.copy(this.lastChar, 0, end);
+	  return buf.toString('utf8', i, end);
+	}
+
+	// For UTF-8, a replacement character is added when ending on a partial
+	// character.
+	function utf8End(buf) {
+	  var r = buf && buf.length ? this.write(buf) : '';
+	  if (this.lastNeed) return r + '\ufffd';
+	  return r;
+	}
+
+	// UTF-16LE typically needs two bytes per character, but even if we have an even
+	// number of bytes available, we need to check if we end on a leading/high
+	// surrogate. In that case, we need to wait for the next two bytes in order to
+	// decode the last character properly.
+	function utf16Text(buf, i) {
+	  if ((buf.length - i) % 2 === 0) {
+	    var r = buf.toString('utf16le', i);
+	    if (r) {
+	      var c = r.charCodeAt(r.length - 1);
+	      if (c >= 0xD800 && c <= 0xDBFF) {
+	        this.lastNeed = 2;
+	        this.lastTotal = 4;
+	        this.lastChar[0] = buf[buf.length - 2];
+	        this.lastChar[1] = buf[buf.length - 1];
+	        return r.slice(0, -1);
+	      }
+	    }
+	    return r;
+	  }
+	  this.lastNeed = 1;
+	  this.lastTotal = 2;
+	  this.lastChar[0] = buf[buf.length - 1];
+	  return buf.toString('utf16le', i, buf.length - 1);
+	}
+
+	// For UTF-16LE we do not explicitly append special replacement characters if we
+	// end on a partial character, we simply let v8 handle that.
+	function utf16End(buf) {
+	  var r = buf && buf.length ? this.write(buf) : '';
+	  if (this.lastNeed) {
+	    var end = this.lastTotal - this.lastNeed;
+	    return r + this.lastChar.toString('utf16le', 0, end);
+	  }
+	  return r;
+	}
+
+	function base64Text(buf, i) {
+	  var n = (buf.length - i) % 3;
+	  if (n === 0) return buf.toString('base64', i);
+	  this.lastNeed = 3 - n;
+	  this.lastTotal = 3;
+	  if (n === 1) {
+	    this.lastChar[0] = buf[buf.length - 1];
+	  } else {
+	    this.lastChar[0] = buf[buf.length - 2];
+	    this.lastChar[1] = buf[buf.length - 1];
+	  }
+	  return buf.toString('base64', i, buf.length - n);
+	}
+
+	function base64End(buf) {
+	  var r = buf && buf.length ? this.write(buf) : '';
+	  if (this.lastNeed) return r + this.lastChar.toString('base64', 0, 3 - this.lastNeed);
+	  return r;
+	}
+
+	// Pass bytes on through for single-byte encodings (e.g. ascii, latin1, hex)
+	function simpleWrite(buf) {
+	  return buf.toString(this.encoding);
+	}
+
+	function simpleEnd(buf) {
+	  return buf && buf.length ? this.write(buf) : '';
+	}
+	return string_decoder;
+}
+
+var _stream_readable;
+var hasRequired_stream_readable;
+
+function require_stream_readable () {
+	if (hasRequired_stream_readable) return _stream_readable;
+	hasRequired_stream_readable = 1;
+
+	/*<replacement>*/
+
+	var pna = requireProcessNextickArgs();
+	/*</replacement>*/
+
+	_stream_readable = Readable;
+
+	/*<replacement>*/
+	var isArray = requireIsarray();
+	/*</replacement>*/
+
+	/*<replacement>*/
+	var Duplex;
+	/*</replacement>*/
+
+	Readable.ReadableState = ReadableState;
+
+	/*<replacement>*/
+	require$$4.EventEmitter;
+
+	var EElistenerCount = function (emitter, type) {
+	  return emitter.listeners(type).length;
+	};
+	/*</replacement>*/
+
+	/*<replacement>*/
+	var Stream = requireStream$1();
+	/*</replacement>*/
+
+	/*<replacement>*/
+
+	var Buffer = requireSafeBuffer().Buffer;
+	var OurUint8Array = (typeof commonjsGlobal !== 'undefined' ? commonjsGlobal : typeof window !== 'undefined' ? window : typeof self !== 'undefined' ? self : {}).Uint8Array || function () {};
+	function _uint8ArrayToBuffer(chunk) {
+	  return Buffer.from(chunk);
+	}
+	function _isUint8Array(obj) {
+	  return Buffer.isBuffer(obj) || obj instanceof OurUint8Array;
+	}
+
+	/*</replacement>*/
+
+	/*<replacement>*/
+	var util = Object.create(requireUtil());
+	util.inherits = requireInherits();
+	/*</replacement>*/
+
+	/*<replacement>*/
+	var debugUtil = require$$1;
+	var debug = void 0;
+	if (debugUtil && debugUtil.debuglog) {
+	  debug = debugUtil.debuglog('stream');
+	} else {
+	  debug = function () {};
+	}
+	/*</replacement>*/
+
+	var BufferList = requireBufferList();
+	var destroyImpl = requireDestroy();
+	var StringDecoder;
+
+	util.inherits(Readable, Stream);
+
+	var kProxyEvents = ['error', 'close', 'destroy', 'pause', 'resume'];
+
+	function prependListener(emitter, event, fn) {
+	  // Sadly this is not cacheable as some libraries bundle their own
+	  // event emitter implementation with them.
+	  if (typeof emitter.prependListener === 'function') return emitter.prependListener(event, fn);
+
+	  // This is a hack to make sure that our error handler is attached before any
+	  // userland ones.  NEVER DO THIS. This is here only because this code needs
+	  // to continue to work with older versions of Node.js that do not include
+	  // the prependListener() method. The goal is to eventually remove this hack.
+	  if (!emitter._events || !emitter._events[event]) emitter.on(event, fn);else if (isArray(emitter._events[event])) emitter._events[event].unshift(fn);else emitter._events[event] = [fn, emitter._events[event]];
+	}
+
+	function ReadableState(options, stream) {
+	  Duplex = Duplex || require_stream_duplex();
+
+	  options = options || {};
+
+	  // Duplex streams are both readable and writable, but share
+	  // the same options object.
+	  // However, some cases require setting options to different
+	  // values for the readable and the writable sides of the duplex stream.
+	  // These options can be provided separately as readableXXX and writableXXX.
+	  var isDuplex = stream instanceof Duplex;
+
+	  // object stream flag. Used to make read(n) ignore n and to
+	  // make all the buffer merging and length checks go away
+	  this.objectMode = !!options.objectMode;
+
+	  if (isDuplex) this.objectMode = this.objectMode || !!options.readableObjectMode;
+
+	  // the point at which it stops calling _read() to fill the buffer
+	  // Note: 0 is a valid value, means "don't call _read preemptively ever"
+	  var hwm = options.highWaterMark;
+	  var readableHwm = options.readableHighWaterMark;
+	  var defaultHwm = this.objectMode ? 16 : 16 * 1024;
+
+	  if (hwm || hwm === 0) this.highWaterMark = hwm;else if (isDuplex && (readableHwm || readableHwm === 0)) this.highWaterMark = readableHwm;else this.highWaterMark = defaultHwm;
+
+	  // cast to ints.
+	  this.highWaterMark = Math.floor(this.highWaterMark);
+
+	  // A linked list is used to store data chunks instead of an array because the
+	  // linked list can remove elements from the beginning faster than
+	  // array.shift()
+	  this.buffer = new BufferList();
+	  this.length = 0;
+	  this.pipes = null;
+	  this.pipesCount = 0;
+	  this.flowing = null;
+	  this.ended = false;
+	  this.endEmitted = false;
+	  this.reading = false;
+
+	  // a flag to be able to tell if the event 'readable'/'data' is emitted
+	  // immediately, or on a later tick.  We set this to true at first, because
+	  // any actions that shouldn't happen until "later" should generally also
+	  // not happen before the first read call.
+	  this.sync = true;
+
+	  // whenever we return null, then we set a flag to say
+	  // that we're awaiting a 'readable' event emission.
+	  this.needReadable = false;
+	  this.emittedReadable = false;
+	  this.readableListening = false;
+	  this.resumeScheduled = false;
+
+	  // has it been destroyed
+	  this.destroyed = false;
+
+	  // Crypto is kind of old and crusty.  Historically, its default string
+	  // encoding is 'binary' so we have to make this configurable.
+	  // Everything else in the universe uses 'utf8', though.
+	  this.defaultEncoding = options.defaultEncoding || 'utf8';
+
+	  // the number of writers that are awaiting a drain event in .pipe()s
+	  this.awaitDrain = 0;
+
+	  // if true, a maybeReadMore has been scheduled
+	  this.readingMore = false;
+
+	  this.decoder = null;
+	  this.encoding = null;
+	  if (options.encoding) {
+	    if (!StringDecoder) StringDecoder = requireString_decoder().StringDecoder;
+	    this.decoder = new StringDecoder(options.encoding);
+	    this.encoding = options.encoding;
+	  }
+	}
+
+	function Readable(options) {
+	  Duplex = Duplex || require_stream_duplex();
+
+	  if (!(this instanceof Readable)) return new Readable(options);
+
+	  this._readableState = new ReadableState(options, this);
+
+	  // legacy
+	  this.readable = true;
+
+	  if (options) {
+	    if (typeof options.read === 'function') this._read = options.read;
+
+	    if (typeof options.destroy === 'function') this._destroy = options.destroy;
+	  }
+
+	  Stream.call(this);
+	}
+
+	Object.defineProperty(Readable.prototype, 'destroyed', {
+	  get: function () {
+	    if (this._readableState === undefined) {
+	      return false;
+	    }
+	    return this._readableState.destroyed;
+	  },
+	  set: function (value) {
+	    // we ignore the value if the stream
+	    // has not been initialized yet
+	    if (!this._readableState) {
+	      return;
+	    }
+
+	    // backward compatibility, the user is explicitly
+	    // managing destroyed
+	    this._readableState.destroyed = value;
+	  }
+	});
+
+	Readable.prototype.destroy = destroyImpl.destroy;
+	Readable.prototype._undestroy = destroyImpl.undestroy;
+	Readable.prototype._destroy = function (err, cb) {
+	  this.push(null);
+	  cb(err);
+	};
+
+	// Manually shove something into the read() buffer.
+	// This returns true if the highWaterMark has not been hit yet,
+	// similar to how Writable.write() returns true if you should
+	// write() some more.
+	Readable.prototype.push = function (chunk, encoding) {
+	  var state = this._readableState;
+	  var skipChunkCheck;
+
+	  if (!state.objectMode) {
+	    if (typeof chunk === 'string') {
+	      encoding = encoding || state.defaultEncoding;
+	      if (encoding !== state.encoding) {
+	        chunk = Buffer.from(chunk, encoding);
+	        encoding = '';
+	      }
+	      skipChunkCheck = true;
+	    }
+	  } else {
+	    skipChunkCheck = true;
+	  }
+
+	  return readableAddChunk(this, chunk, encoding, false, skipChunkCheck);
+	};
+
+	// Unshift should *always* be something directly out of read()
+	Readable.prototype.unshift = function (chunk) {
+	  return readableAddChunk(this, chunk, null, true, false);
+	};
+
+	function readableAddChunk(stream, chunk, encoding, addToFront, skipChunkCheck) {
+	  var state = stream._readableState;
+	  if (chunk === null) {
+	    state.reading = false;
+	    onEofChunk(stream, state);
+	  } else {
+	    var er;
+	    if (!skipChunkCheck) er = chunkInvalid(state, chunk);
+	    if (er) {
+	      stream.emit('error', er);
+	    } else if (state.objectMode || chunk && chunk.length > 0) {
+	      if (typeof chunk !== 'string' && !state.objectMode && Object.getPrototypeOf(chunk) !== Buffer.prototype) {
+	        chunk = _uint8ArrayToBuffer(chunk);
+	      }
+
+	      if (addToFront) {
+	        if (state.endEmitted) stream.emit('error', new Error('stream.unshift() after end event'));else addChunk(stream, state, chunk, true);
+	      } else if (state.ended) {
+	        stream.emit('error', new Error('stream.push() after EOF'));
+	      } else {
+	        state.reading = false;
+	        if (state.decoder && !encoding) {
+	          chunk = state.decoder.write(chunk);
+	          if (state.objectMode || chunk.length !== 0) addChunk(stream, state, chunk, false);else maybeReadMore(stream, state);
+	        } else {
+	          addChunk(stream, state, chunk, false);
+	        }
+	      }
+	    } else if (!addToFront) {
+	      state.reading = false;
+	    }
+	  }
+
+	  return needMoreData(state);
+	}
+
+	function addChunk(stream, state, chunk, addToFront) {
+	  if (state.flowing && state.length === 0 && !state.sync) {
+	    stream.emit('data', chunk);
+	    stream.read(0);
+	  } else {
+	    // update the buffer info.
+	    state.length += state.objectMode ? 1 : chunk.length;
+	    if (addToFront) state.buffer.unshift(chunk);else state.buffer.push(chunk);
+
+	    if (state.needReadable) emitReadable(stream);
+	  }
+	  maybeReadMore(stream, state);
+	}
+
+	function chunkInvalid(state, chunk) {
+	  var er;
+	  if (!_isUint8Array(chunk) && typeof chunk !== 'string' && chunk !== undefined && !state.objectMode) {
+	    er = new TypeError('Invalid non-string/buffer chunk');
+	  }
+	  return er;
+	}
+
+	// if it's past the high water mark, we can push in some more.
+	// Also, if we have no data yet, we can stand some
+	// more bytes.  This is to work around cases where hwm=0,
+	// such as the repl.  Also, if the push() triggered a
+	// readable event, and the user called read(largeNumber) such that
+	// needReadable was set, then we ought to push more, so that another
+	// 'readable' event will be triggered.
+	function needMoreData(state) {
+	  return !state.ended && (state.needReadable || state.length < state.highWaterMark || state.length === 0);
+	}
+
+	Readable.prototype.isPaused = function () {
+	  return this._readableState.flowing === false;
+	};
+
+	// backwards compatibility.
+	Readable.prototype.setEncoding = function (enc) {
+	  if (!StringDecoder) StringDecoder = requireString_decoder().StringDecoder;
+	  this._readableState.decoder = new StringDecoder(enc);
+	  this._readableState.encoding = enc;
+	  return this;
+	};
+
+	// Don't raise the hwm > 8MB
+	var MAX_HWM = 0x800000;
+	function computeNewHighWaterMark(n) {
+	  if (n >= MAX_HWM) {
+	    n = MAX_HWM;
+	  } else {
+	    // Get the next highest power of 2 to prevent increasing hwm excessively in
+	    // tiny amounts
+	    n--;
+	    n |= n >>> 1;
+	    n |= n >>> 2;
+	    n |= n >>> 4;
+	    n |= n >>> 8;
+	    n |= n >>> 16;
+	    n++;
+	  }
+	  return n;
+	}
+
+	// This function is designed to be inlinable, so please take care when making
+	// changes to the function body.
+	function howMuchToRead(n, state) {
+	  if (n <= 0 || state.length === 0 && state.ended) return 0;
+	  if (state.objectMode) return 1;
+	  if (n !== n) {
+	    // Only flow one buffer at a time
+	    if (state.flowing && state.length) return state.buffer.head.data.length;else return state.length;
+	  }
+	  // If we're asking for more than the current hwm, then raise the hwm.
+	  if (n > state.highWaterMark) state.highWaterMark = computeNewHighWaterMark(n);
+	  if (n <= state.length) return n;
+	  // Don't have enough
+	  if (!state.ended) {
+	    state.needReadable = true;
+	    return 0;
+	  }
+	  return state.length;
+	}
+
+	// you can override either this method, or the async _read(n) below.
+	Readable.prototype.read = function (n) {
+	  debug('read', n);
+	  n = parseInt(n, 10);
+	  var state = this._readableState;
+	  var nOrig = n;
+
+	  if (n !== 0) state.emittedReadable = false;
+
+	  // if we're doing read(0) to trigger a readable event, but we
+	  // already have a bunch of data in the buffer, then just trigger
+	  // the 'readable' event and move on.
+	  if (n === 0 && state.needReadable && (state.length >= state.highWaterMark || state.ended)) {
+	    debug('read: emitReadable', state.length, state.ended);
+	    if (state.length === 0 && state.ended) endReadable(this);else emitReadable(this);
+	    return null;
+	  }
+
+	  n = howMuchToRead(n, state);
+
+	  // if we've ended, and we're now clear, then finish it up.
+	  if (n === 0 && state.ended) {
+	    if (state.length === 0) endReadable(this);
+	    return null;
+	  }
+
+	  // All the actual chunk generation logic needs to be
+	  // *below* the call to _read.  The reason is that in certain
+	  // synthetic stream cases, such as passthrough streams, _read
+	  // may be a completely synchronous operation which may change
+	  // the state of the read buffer, providing enough data when
+	  // before there was *not* enough.
+	  //
+	  // So, the steps are:
+	  // 1. Figure out what the state of things will be after we do
+	  // a read from the buffer.
+	  //
+	  // 2. If that resulting state will trigger a _read, then call _read.
+	  // Note that this may be asynchronous, or synchronous.  Yes, it is
+	  // deeply ugly to write APIs this way, but that still doesn't mean
+	  // that the Readable class should behave improperly, as streams are
+	  // designed to be sync/async agnostic.
+	  // Take note if the _read call is sync or async (ie, if the read call
+	  // has returned yet), so that we know whether or not it's safe to emit
+	  // 'readable' etc.
+	  //
+	  // 3. Actually pull the requested chunks out of the buffer and return.
+
+	  // if we need a readable event, then we need to do some reading.
+	  var doRead = state.needReadable;
+	  debug('need readable', doRead);
+
+	  // if we currently have less than the highWaterMark, then also read some
+	  if (state.length === 0 || state.length - n < state.highWaterMark) {
+	    doRead = true;
+	    debug('length less than watermark', doRead);
+	  }
+
+	  // however, if we've ended, then there's no point, and if we're already
+	  // reading, then it's unnecessary.
+	  if (state.ended || state.reading) {
+	    doRead = false;
+	    debug('reading or ended', doRead);
+	  } else if (doRead) {
+	    debug('do read');
+	    state.reading = true;
+	    state.sync = true;
+	    // if the length is currently zero, then we *need* a readable event.
+	    if (state.length === 0) state.needReadable = true;
+	    // call internal read method
+	    this._read(state.highWaterMark);
+	    state.sync = false;
+	    // If _read pushed data synchronously, then `reading` will be false,
+	    // and we need to re-evaluate how much data we can return to the user.
+	    if (!state.reading) n = howMuchToRead(nOrig, state);
+	  }
+
+	  var ret;
+	  if (n > 0) ret = fromList(n, state);else ret = null;
+
+	  if (ret === null) {
+	    state.needReadable = true;
+	    n = 0;
+	  } else {
+	    state.length -= n;
+	  }
+
+	  if (state.length === 0) {
+	    // If we have nothing in the buffer, then we want to know
+	    // as soon as we *do* get something into the buffer.
+	    if (!state.ended) state.needReadable = true;
+
+	    // If we tried to read() past the EOF, then emit end on the next tick.
+	    if (nOrig !== n && state.ended) endReadable(this);
+	  }
+
+	  if (ret !== null) this.emit('data', ret);
+
+	  return ret;
+	};
+
+	function onEofChunk(stream, state) {
+	  if (state.ended) return;
+	  if (state.decoder) {
+	    var chunk = state.decoder.end();
+	    if (chunk && chunk.length) {
+	      state.buffer.push(chunk);
+	      state.length += state.objectMode ? 1 : chunk.length;
+	    }
+	  }
+	  state.ended = true;
+
+	  // emit 'readable' now to make sure it gets picked up.
+	  emitReadable(stream);
+	}
+
+	// Don't emit readable right away in sync mode, because this can trigger
+	// another read() call => stack overflow.  This way, it might trigger
+	// a nextTick recursion warning, but that's not so bad.
+	function emitReadable(stream) {
+	  var state = stream._readableState;
+	  state.needReadable = false;
+	  if (!state.emittedReadable) {
+	    debug('emitReadable', state.flowing);
+	    state.emittedReadable = true;
+	    if (state.sync) pna.nextTick(emitReadable_, stream);else emitReadable_(stream);
+	  }
+	}
+
+	function emitReadable_(stream) {
+	  debug('emit readable');
+	  stream.emit('readable');
+	  flow(stream);
+	}
+
+	// at this point, the user has presumably seen the 'readable' event,
+	// and called read() to consume some data.  that may have triggered
+	// in turn another _read(n) call, in which case reading = true if
+	// it's in progress.
+	// However, if we're not ended, or reading, and the length < hwm,
+	// then go ahead and try to read some more preemptively.
+	function maybeReadMore(stream, state) {
+	  if (!state.readingMore) {
+	    state.readingMore = true;
+	    pna.nextTick(maybeReadMore_, stream, state);
+	  }
+	}
+
+	function maybeReadMore_(stream, state) {
+	  var len = state.length;
+	  while (!state.reading && !state.flowing && !state.ended && state.length < state.highWaterMark) {
+	    debug('maybeReadMore read 0');
+	    stream.read(0);
+	    if (len === state.length)
+	      // didn't get any data, stop spinning.
+	      break;else len = state.length;
+	  }
+	  state.readingMore = false;
+	}
+
+	// abstract method.  to be overridden in specific implementation classes.
+	// call cb(er, data) where data is <= n in length.
+	// for virtual (non-string, non-buffer) streams, "length" is somewhat
+	// arbitrary, and perhaps not very meaningful.
+	Readable.prototype._read = function (n) {
+	  this.emit('error', new Error('_read() is not implemented'));
+	};
+
+	Readable.prototype.pipe = function (dest, pipeOpts) {
+	  var src = this;
+	  var state = this._readableState;
+
+	  switch (state.pipesCount) {
+	    case 0:
+	      state.pipes = dest;
+	      break;
+	    case 1:
+	      state.pipes = [state.pipes, dest];
+	      break;
+	    default:
+	      state.pipes.push(dest);
+	      break;
+	  }
+	  state.pipesCount += 1;
+	  debug('pipe count=%d opts=%j', state.pipesCount, pipeOpts);
+
+	  var doEnd = (!pipeOpts || pipeOpts.end !== false) && dest !== process.stdout && dest !== process.stderr;
+
+	  var endFn = doEnd ? onend : unpipe;
+	  if (state.endEmitted) pna.nextTick(endFn);else src.once('end', endFn);
+
+	  dest.on('unpipe', onunpipe);
+	  function onunpipe(readable, unpipeInfo) {
+	    debug('onunpipe');
+	    if (readable === src) {
+	      if (unpipeInfo && unpipeInfo.hasUnpiped === false) {
+	        unpipeInfo.hasUnpiped = true;
+	        cleanup();
+	      }
+	    }
+	  }
+
+	  function onend() {
+	    debug('onend');
+	    dest.end();
+	  }
+
+	  // when the dest drains, it reduces the awaitDrain counter
+	  // on the source.  This would be more elegant with a .once()
+	  // handler in flow(), but adding and removing repeatedly is
+	  // too slow.
+	  var ondrain = pipeOnDrain(src);
+	  dest.on('drain', ondrain);
+
+	  var cleanedUp = false;
+	  function cleanup() {
+	    debug('cleanup');
+	    // cleanup event handlers once the pipe is broken
+	    dest.removeListener('close', onclose);
+	    dest.removeListener('finish', onfinish);
+	    dest.removeListener('drain', ondrain);
+	    dest.removeListener('error', onerror);
+	    dest.removeListener('unpipe', onunpipe);
+	    src.removeListener('end', onend);
+	    src.removeListener('end', unpipe);
+	    src.removeListener('data', ondata);
+
+	    cleanedUp = true;
+
+	    // if the reader is waiting for a drain event from this
+	    // specific writer, then it would cause it to never start
+	    // flowing again.
+	    // So, if this is awaiting a drain, then we just call it now.
+	    // If we don't know, then assume that we are waiting for one.
+	    if (state.awaitDrain && (!dest._writableState || dest._writableState.needDrain)) ondrain();
+	  }
+
+	  // If the user pushes more data while we're writing to dest then we'll end up
+	  // in ondata again. However, we only want to increase awaitDrain once because
+	  // dest will only emit one 'drain' event for the multiple writes.
+	  // => Introduce a guard on increasing awaitDrain.
+	  var increasedAwaitDrain = false;
+	  src.on('data', ondata);
+	  function ondata(chunk) {
+	    debug('ondata');
+	    increasedAwaitDrain = false;
+	    var ret = dest.write(chunk);
+	    if (false === ret && !increasedAwaitDrain) {
+	      // If the user unpiped during `dest.write()`, it is possible
+	      // to get stuck in a permanently paused state if that write
+	      // also returned false.
+	      // => Check whether `dest` is still a piping destination.
+	      if ((state.pipesCount === 1 && state.pipes === dest || state.pipesCount > 1 && indexOf(state.pipes, dest) !== -1) && !cleanedUp) {
+	        debug('false write response, pause', state.awaitDrain);
+	        state.awaitDrain++;
+	        increasedAwaitDrain = true;
+	      }
+	      src.pause();
+	    }
+	  }
+
+	  // if the dest has an error, then stop piping into it.
+	  // however, don't suppress the throwing behavior for this.
+	  function onerror(er) {
+	    debug('onerror', er);
+	    unpipe();
+	    dest.removeListener('error', onerror);
+	    if (EElistenerCount(dest, 'error') === 0) dest.emit('error', er);
+	  }
+
+	  // Make sure our error handler is attached before userland ones.
+	  prependListener(dest, 'error', onerror);
+
+	  // Both close and finish should trigger unpipe, but only once.
+	  function onclose() {
+	    dest.removeListener('finish', onfinish);
+	    unpipe();
+	  }
+	  dest.once('close', onclose);
+	  function onfinish() {
+	    debug('onfinish');
+	    dest.removeListener('close', onclose);
+	    unpipe();
+	  }
+	  dest.once('finish', onfinish);
+
+	  function unpipe() {
+	    debug('unpipe');
+	    src.unpipe(dest);
+	  }
+
+	  // tell the dest that it's being piped to
+	  dest.emit('pipe', src);
+
+	  // start the flow if it hasn't been started already.
+	  if (!state.flowing) {
+	    debug('pipe resume');
+	    src.resume();
+	  }
+
+	  return dest;
+	};
+
+	function pipeOnDrain(src) {
+	  return function () {
+	    var state = src._readableState;
+	    debug('pipeOnDrain', state.awaitDrain);
+	    if (state.awaitDrain) state.awaitDrain--;
+	    if (state.awaitDrain === 0 && EElistenerCount(src, 'data')) {
+	      state.flowing = true;
+	      flow(src);
+	    }
+	  };
+	}
+
+	Readable.prototype.unpipe = function (dest) {
+	  var state = this._readableState;
+	  var unpipeInfo = { hasUnpiped: false };
+
+	  // if we're not piping anywhere, then do nothing.
+	  if (state.pipesCount === 0) return this;
+
+	  // just one destination.  most common case.
+	  if (state.pipesCount === 1) {
+	    // passed in one, but it's not the right one.
+	    if (dest && dest !== state.pipes) return this;
+
+	    if (!dest) dest = state.pipes;
+
+	    // got a match.
+	    state.pipes = null;
+	    state.pipesCount = 0;
+	    state.flowing = false;
+	    if (dest) dest.emit('unpipe', this, unpipeInfo);
+	    return this;
+	  }
+
+	  // slow case. multiple pipe destinations.
+
+	  if (!dest) {
+	    // remove all.
+	    var dests = state.pipes;
+	    var len = state.pipesCount;
+	    state.pipes = null;
+	    state.pipesCount = 0;
+	    state.flowing = false;
+
+	    for (var i = 0; i < len; i++) {
+	      dests[i].emit('unpipe', this, { hasUnpiped: false });
+	    }return this;
+	  }
+
+	  // try to find the right one.
+	  var index = indexOf(state.pipes, dest);
+	  if (index === -1) return this;
+
+	  state.pipes.splice(index, 1);
+	  state.pipesCount -= 1;
+	  if (state.pipesCount === 1) state.pipes = state.pipes[0];
+
+	  dest.emit('unpipe', this, unpipeInfo);
+
+	  return this;
+	};
+
+	// set up data events if they are asked for
+	// Ensure readable listeners eventually get something
+	Readable.prototype.on = function (ev, fn) {
+	  var res = Stream.prototype.on.call(this, ev, fn);
+
+	  if (ev === 'data') {
+	    // Start flowing on next tick if stream isn't explicitly paused
+	    if (this._readableState.flowing !== false) this.resume();
+	  } else if (ev === 'readable') {
+	    var state = this._readableState;
+	    if (!state.endEmitted && !state.readableListening) {
+	      state.readableListening = state.needReadable = true;
+	      state.emittedReadable = false;
+	      if (!state.reading) {
+	        pna.nextTick(nReadingNextTick, this);
+	      } else if (state.length) {
+	        emitReadable(this);
+	      }
+	    }
+	  }
+
+	  return res;
+	};
+	Readable.prototype.addListener = Readable.prototype.on;
+
+	function nReadingNextTick(self) {
+	  debug('readable nexttick read 0');
+	  self.read(0);
+	}
+
+	// pause() and resume() are remnants of the legacy readable stream API
+	// If the user uses them, then switch into old mode.
+	Readable.prototype.resume = function () {
+	  var state = this._readableState;
+	  if (!state.flowing) {
+	    debug('resume');
+	    state.flowing = true;
+	    resume(this, state);
+	  }
+	  return this;
+	};
+
+	function resume(stream, state) {
+	  if (!state.resumeScheduled) {
+	    state.resumeScheduled = true;
+	    pna.nextTick(resume_, stream, state);
+	  }
+	}
+
+	function resume_(stream, state) {
+	  if (!state.reading) {
+	    debug('resume read 0');
+	    stream.read(0);
+	  }
+
+	  state.resumeScheduled = false;
+	  state.awaitDrain = 0;
+	  stream.emit('resume');
+	  flow(stream);
+	  if (state.flowing && !state.reading) stream.read(0);
+	}
+
+	Readable.prototype.pause = function () {
+	  debug('call pause flowing=%j', this._readableState.flowing);
+	  if (false !== this._readableState.flowing) {
+	    debug('pause');
+	    this._readableState.flowing = false;
+	    this.emit('pause');
+	  }
+	  return this;
+	};
+
+	function flow(stream) {
+	  var state = stream._readableState;
+	  debug('flow', state.flowing);
+	  while (state.flowing && stream.read() !== null) {}
+	}
+
+	// wrap an old-style stream as the async data source.
+	// This is *not* part of the readable stream interface.
+	// It is an ugly unfortunate mess of history.
+	Readable.prototype.wrap = function (stream) {
+	  var _this = this;
+
+	  var state = this._readableState;
+	  var paused = false;
+
+	  stream.on('end', function () {
+	    debug('wrapped end');
+	    if (state.decoder && !state.ended) {
+	      var chunk = state.decoder.end();
+	      if (chunk && chunk.length) _this.push(chunk);
+	    }
+
+	    _this.push(null);
+	  });
+
+	  stream.on('data', function (chunk) {
+	    debug('wrapped data');
+	    if (state.decoder) chunk = state.decoder.write(chunk);
+
+	    // don't skip over falsy values in objectMode
+	    if (state.objectMode && (chunk === null || chunk === undefined)) return;else if (!state.objectMode && (!chunk || !chunk.length)) return;
+
+	    var ret = _this.push(chunk);
+	    if (!ret) {
+	      paused = true;
+	      stream.pause();
+	    }
+	  });
+
+	  // proxy all the other methods.
+	  // important when wrapping filters and duplexes.
+	  for (var i in stream) {
+	    if (this[i] === undefined && typeof stream[i] === 'function') {
+	      this[i] = function (method) {
+	        return function () {
+	          return stream[method].apply(stream, arguments);
+	        };
+	      }(i);
+	    }
+	  }
+
+	  // proxy certain important events.
+	  for (var n = 0; n < kProxyEvents.length; n++) {
+	    stream.on(kProxyEvents[n], this.emit.bind(this, kProxyEvents[n]));
+	  }
+
+	  // when we try to consume some more bytes, simply unpause the
+	  // underlying stream.
+	  this._read = function (n) {
+	    debug('wrapped _read', n);
+	    if (paused) {
+	      paused = false;
+	      stream.resume();
+	    }
+	  };
+
+	  return this;
+	};
+
+	Object.defineProperty(Readable.prototype, 'readableHighWaterMark', {
+	  // making it explicit this property is not enumerable
+	  // because otherwise some prototype manipulation in
+	  // userland will fail
+	  enumerable: false,
+	  get: function () {
+	    return this._readableState.highWaterMark;
+	  }
+	});
+
+	// exposed for testing purposes only.
+	Readable._fromList = fromList;
+
+	// Pluck off n bytes from an array of buffers.
+	// Length is the combined lengths of all the buffers in the list.
+	// This function is designed to be inlinable, so please take care when making
+	// changes to the function body.
+	function fromList(n, state) {
+	  // nothing buffered
+	  if (state.length === 0) return null;
+
+	  var ret;
+	  if (state.objectMode) ret = state.buffer.shift();else if (!n || n >= state.length) {
+	    // read it all, truncate the list
+	    if (state.decoder) ret = state.buffer.join('');else if (state.buffer.length === 1) ret = state.buffer.head.data;else ret = state.buffer.concat(state.length);
+	    state.buffer.clear();
+	  } else {
+	    // read part of list
+	    ret = fromListPartial(n, state.buffer, state.decoder);
+	  }
+
+	  return ret;
+	}
+
+	// Extracts only enough buffered data to satisfy the amount requested.
+	// This function is designed to be inlinable, so please take care when making
+	// changes to the function body.
+	function fromListPartial(n, list, hasStrings) {
+	  var ret;
+	  if (n < list.head.data.length) {
+	    // slice is the same for buffers and strings
+	    ret = list.head.data.slice(0, n);
+	    list.head.data = list.head.data.slice(n);
+	  } else if (n === list.head.data.length) {
+	    // first chunk is a perfect match
+	    ret = list.shift();
+	  } else {
+	    // result spans more than one buffer
+	    ret = hasStrings ? copyFromBufferString(n, list) : copyFromBuffer(n, list);
+	  }
+	  return ret;
+	}
+
+	// Copies a specified amount of characters from the list of buffered data
+	// chunks.
+	// This function is designed to be inlinable, so please take care when making
+	// changes to the function body.
+	function copyFromBufferString(n, list) {
+	  var p = list.head;
+	  var c = 1;
+	  var ret = p.data;
+	  n -= ret.length;
+	  while (p = p.next) {
+	    var str = p.data;
+	    var nb = n > str.length ? str.length : n;
+	    if (nb === str.length) ret += str;else ret += str.slice(0, n);
+	    n -= nb;
+	    if (n === 0) {
+	      if (nb === str.length) {
+	        ++c;
+	        if (p.next) list.head = p.next;else list.head = list.tail = null;
+	      } else {
+	        list.head = p;
+	        p.data = str.slice(nb);
+	      }
+	      break;
+	    }
+	    ++c;
+	  }
+	  list.length -= c;
+	  return ret;
+	}
+
+	// Copies a specified amount of bytes from the list of buffered data chunks.
+	// This function is designed to be inlinable, so please take care when making
+	// changes to the function body.
+	function copyFromBuffer(n, list) {
+	  var ret = Buffer.allocUnsafe(n);
+	  var p = list.head;
+	  var c = 1;
+	  p.data.copy(ret);
+	  n -= p.data.length;
+	  while (p = p.next) {
+	    var buf = p.data;
+	    var nb = n > buf.length ? buf.length : n;
+	    buf.copy(ret, ret.length - n, 0, nb);
+	    n -= nb;
+	    if (n === 0) {
+	      if (nb === buf.length) {
+	        ++c;
+	        if (p.next) list.head = p.next;else list.head = list.tail = null;
+	      } else {
+	        list.head = p;
+	        p.data = buf.slice(nb);
+	      }
+	      break;
+	    }
+	    ++c;
+	  }
+	  list.length -= c;
+	  return ret;
+	}
+
+	function endReadable(stream) {
+	  var state = stream._readableState;
+
+	  // If we get here before consuming all the bytes, then that is a
+	  // bug in node.  Should never happen.
+	  if (state.length > 0) throw new Error('"endReadable()" called on non-empty stream');
+
+	  if (!state.endEmitted) {
+	    state.ended = true;
+	    pna.nextTick(endReadableNT, state, stream);
+	  }
+	}
+
+	function endReadableNT(state, stream) {
+	  // Check that we didn't get one last unshift.
+	  if (!state.endEmitted && state.length === 0) {
+	    state.endEmitted = true;
+	    stream.readable = false;
+	    stream.emit('end');
+	  }
+	}
+
+	function indexOf(xs, x) {
+	  for (var i = 0, l = xs.length; i < l; i++) {
+	    if (xs[i] === x) return i;
+	  }
+	  return -1;
+	}
+	return _stream_readable;
+}
+
+var _stream_transform;
+var hasRequired_stream_transform;
+
+function require_stream_transform () {
+	if (hasRequired_stream_transform) return _stream_transform;
+	hasRequired_stream_transform = 1;
+
+	_stream_transform = Transform;
+
+	var Duplex = require_stream_duplex();
+
+	/*<replacement>*/
+	var util = Object.create(requireUtil());
+	util.inherits = requireInherits();
+	/*</replacement>*/
+
+	util.inherits(Transform, Duplex);
+
+	function afterTransform(er, data) {
+	  var ts = this._transformState;
+	  ts.transforming = false;
+
+	  var cb = ts.writecb;
+
+	  if (!cb) {
+	    return this.emit('error', new Error('write callback called multiple times'));
+	  }
+
+	  ts.writechunk = null;
+	  ts.writecb = null;
+
+	  if (data != null) // single equals check for both `null` and `undefined`
+	    this.push(data);
+
+	  cb(er);
+
+	  var rs = this._readableState;
+	  rs.reading = false;
+	  if (rs.needReadable || rs.length < rs.highWaterMark) {
+	    this._read(rs.highWaterMark);
+	  }
+	}
+
+	function Transform(options) {
+	  if (!(this instanceof Transform)) return new Transform(options);
+
+	  Duplex.call(this, options);
+
+	  this._transformState = {
+	    afterTransform: afterTransform.bind(this),
+	    needTransform: false,
+	    transforming: false,
+	    writecb: null,
+	    writechunk: null,
+	    writeencoding: null
+	  };
+
+	  // start out asking for a readable event once data is transformed.
+	  this._readableState.needReadable = true;
+
+	  // we have implemented the _read method, and done the other things
+	  // that Readable wants before the first _read call, so unset the
+	  // sync guard flag.
+	  this._readableState.sync = false;
+
+	  if (options) {
+	    if (typeof options.transform === 'function') this._transform = options.transform;
+
+	    if (typeof options.flush === 'function') this._flush = options.flush;
+	  }
+
+	  // When the writable side finishes, then flush out anything remaining.
+	  this.on('prefinish', prefinish);
+	}
+
+	function prefinish() {
+	  var _this = this;
+
+	  if (typeof this._flush === 'function') {
+	    this._flush(function (er, data) {
+	      done(_this, er, data);
+	    });
+	  } else {
+	    done(this, null, null);
+	  }
+	}
+
+	Transform.prototype.push = function (chunk, encoding) {
+	  this._transformState.needTransform = false;
+	  return Duplex.prototype.push.call(this, chunk, encoding);
+	};
+
+	// This is the part where you do stuff!
+	// override this function in implementation classes.
+	// 'chunk' is an input chunk.
+	//
+	// Call `push(newChunk)` to pass along transformed output
+	// to the readable side.  You may call 'push' zero or more times.
+	//
+	// Call `cb(err)` when you are done with this chunk.  If you pass
+	// an error, then that'll put the hurt on the whole operation.  If you
+	// never call cb(), then you'll never get another chunk.
+	Transform.prototype._transform = function (chunk, encoding, cb) {
+	  throw new Error('_transform() is not implemented');
+	};
+
+	Transform.prototype._write = function (chunk, encoding, cb) {
+	  var ts = this._transformState;
+	  ts.writecb = cb;
+	  ts.writechunk = chunk;
+	  ts.writeencoding = encoding;
+	  if (!ts.transforming) {
+	    var rs = this._readableState;
+	    if (ts.needTransform || rs.needReadable || rs.length < rs.highWaterMark) this._read(rs.highWaterMark);
+	  }
+	};
+
+	// Doesn't matter what the args are here.
+	// _transform does all the work.
+	// That we got here means that the readable side wants more data.
+	Transform.prototype._read = function (n) {
+	  var ts = this._transformState;
+
+	  if (ts.writechunk !== null && ts.writecb && !ts.transforming) {
+	    ts.transforming = true;
+	    this._transform(ts.writechunk, ts.writeencoding, ts.afterTransform);
+	  } else {
+	    // mark that we need a transform, so that any data that comes in
+	    // will get processed, now that we've asked for it.
+	    ts.needTransform = true;
+	  }
+	};
+
+	Transform.prototype._destroy = function (err, cb) {
+	  var _this2 = this;
+
+	  Duplex.prototype._destroy.call(this, err, function (err2) {
+	    cb(err2);
+	    _this2.emit('close');
+	  });
+	};
+
+	function done(stream, er, data) {
+	  if (er) return stream.emit('error', er);
+
+	  if (data != null) // single equals check for both `null` and `undefined`
+	    stream.push(data);
+
+	  // if there's nothing in the write buffer, then that means
+	  // that nothing more will ever be provided
+	  if (stream._writableState.length) throw new Error('Calling transform done when ws.length != 0');
+
+	  if (stream._transformState.transforming) throw new Error('Calling transform done when still transforming');
+
+	  return stream.push(null);
+	}
+	return _stream_transform;
+}
+
+var _stream_passthrough;
+var hasRequired_stream_passthrough;
+
+function require_stream_passthrough () {
+	if (hasRequired_stream_passthrough) return _stream_passthrough;
+	hasRequired_stream_passthrough = 1;
+
+	_stream_passthrough = PassThrough;
+
+	var Transform = require_stream_transform();
+
+	/*<replacement>*/
+	var util = Object.create(requireUtil());
+	util.inherits = requireInherits();
+	/*</replacement>*/
+
+	util.inherits(PassThrough, Transform);
+
+	function PassThrough(options) {
+	  if (!(this instanceof PassThrough)) return new PassThrough(options);
+
+	  Transform.call(this, options);
+	}
+
+	PassThrough.prototype._transform = function (chunk, encoding, cb) {
+	  cb(null, chunk);
+	};
+	return _stream_passthrough;
+}
+
+var hasRequiredReadable;
+
+function requireReadable () {
+	if (hasRequiredReadable) return readable.exports;
+	hasRequiredReadable = 1;
+	(function (module, exports) {
+		var Stream = require$$0$5;
+		if (process.env.READABLE_STREAM === 'disable' && Stream) {
+		  module.exports = Stream;
+		  exports = module.exports = Stream.Readable;
+		  exports.Readable = Stream.Readable;
+		  exports.Writable = Stream.Writable;
+		  exports.Duplex = Stream.Duplex;
+		  exports.Transform = Stream.Transform;
+		  exports.PassThrough = Stream.PassThrough;
+		  exports.Stream = Stream;
+		} else {
+		  exports = module.exports = require_stream_readable();
+		  exports.Stream = Stream || exports;
+		  exports.Readable = exports;
+		  exports.Writable = require_stream_writable();
+		  exports.Duplex = require_stream_duplex();
+		  exports.Transform = require_stream_transform();
+		  exports.PassThrough = require_stream_passthrough();
+		} 
+	} (readable, readable.exports));
+	return readable.exports;
+}
+
+var extract;
+var hasRequiredExtract;
+
+function requireExtract () {
+	if (hasRequiredExtract) return extract;
+	hasRequiredExtract = 1;
+	var util = require$$1;
+	var bl = requireBl();
+	var xtend = requireImmutable();
+	var headers = requireHeaders();
+
+	var Writable = requireReadable().Writable;
+	var PassThrough = requireReadable().PassThrough;
+
+	var noop = function () {};
+
+	var overflow = function (size) {
+	  size &= 511;
+	  return size && 512 - size
+	};
+
+	var emptyStream = function (self, offset) {
+	  var s = new Source(self, offset);
+	  s.end();
+	  return s
+	};
+
+	var mixinPax = function (header, pax) {
+	  if (pax.path) header.name = pax.path;
+	  if (pax.linkpath) header.linkname = pax.linkpath;
+	  if (pax.size) header.size = parseInt(pax.size, 10);
+	  header.pax = pax;
+	  return header
+	};
+
+	var Source = function (self, offset) {
+	  this._parent = self;
+	  this.offset = offset;
+	  PassThrough.call(this);
+	};
+
+	util.inherits(Source, PassThrough);
+
+	Source.prototype.destroy = function (err) {
+	  this._parent.destroy(err);
+	};
+
+	var Extract = function (opts) {
+	  if (!(this instanceof Extract)) return new Extract(opts)
+	  Writable.call(this, opts);
+
+	  opts = opts || {};
+
+	  this._offset = 0;
+	  this._buffer = bl();
+	  this._missing = 0;
+	  this._partial = false;
+	  this._onparse = noop;
+	  this._header = null;
+	  this._stream = null;
+	  this._overflow = null;
+	  this._cb = null;
+	  this._locked = false;
+	  this._destroyed = false;
+	  this._pax = null;
+	  this._paxGlobal = null;
+	  this._gnuLongPath = null;
+	  this._gnuLongLinkPath = null;
+
+	  var self = this;
+	  var b = self._buffer;
+
+	  var oncontinue = function () {
+	    self._continue();
+	  };
+
+	  var onunlock = function (err) {
+	    self._locked = false;
+	    if (err) return self.destroy(err)
+	    if (!self._stream) oncontinue();
+	  };
+
+	  var onstreamend = function () {
+	    self._stream = null;
+	    var drain = overflow(self._header.size);
+	    if (drain) self._parse(drain, ondrain);
+	    else self._parse(512, onheader);
+	    if (!self._locked) oncontinue();
+	  };
+
+	  var ondrain = function () {
+	    self._buffer.consume(overflow(self._header.size));
+	    self._parse(512, onheader);
+	    oncontinue();
+	  };
+
+	  var onpaxglobalheader = function () {
+	    var size = self._header.size;
+	    self._paxGlobal = headers.decodePax(b.slice(0, size));
+	    b.consume(size);
+	    onstreamend();
+	  };
+
+	  var onpaxheader = function () {
+	    var size = self._header.size;
+	    self._pax = headers.decodePax(b.slice(0, size));
+	    if (self._paxGlobal) self._pax = xtend(self._paxGlobal, self._pax);
+	    b.consume(size);
+	    onstreamend();
+	  };
+
+	  var ongnulongpath = function () {
+	    var size = self._header.size;
+	    this._gnuLongPath = headers.decodeLongPath(b.slice(0, size), opts.filenameEncoding);
+	    b.consume(size);
+	    onstreamend();
+	  };
+
+	  var ongnulonglinkpath = function () {
+	    var size = self._header.size;
+	    this._gnuLongLinkPath = headers.decodeLongPath(b.slice(0, size), opts.filenameEncoding);
+	    b.consume(size);
+	    onstreamend();
+	  };
+
+	  var onheader = function () {
+	    var offset = self._offset;
+	    var header;
+	    try {
+	      header = self._header = headers.decode(b.slice(0, 512), opts.filenameEncoding);
+	    } catch (err) {
+	      self.emit('error', err);
+	    }
+	    b.consume(512);
+
+	    if (!header) {
+	      self._parse(512, onheader);
+	      oncontinue();
+	      return
+	    }
+	    if (header.type === 'gnu-long-path') {
+	      self._parse(header.size, ongnulongpath);
+	      oncontinue();
+	      return
+	    }
+	    if (header.type === 'gnu-long-link-path') {
+	      self._parse(header.size, ongnulonglinkpath);
+	      oncontinue();
+	      return
+	    }
+	    if (header.type === 'pax-global-header') {
+	      self._parse(header.size, onpaxglobalheader);
+	      oncontinue();
+	      return
+	    }
+	    if (header.type === 'pax-header') {
+	      self._parse(header.size, onpaxheader);
+	      oncontinue();
+	      return
+	    }
+
+	    if (self._gnuLongPath) {
+	      header.name = self._gnuLongPath;
+	      self._gnuLongPath = null;
+	    }
+
+	    if (self._gnuLongLinkPath) {
+	      header.linkname = self._gnuLongLinkPath;
+	      self._gnuLongLinkPath = null;
+	    }
+
+	    if (self._pax) {
+	      self._header = header = mixinPax(header, self._pax);
+	      self._pax = null;
+	    }
+
+	    self._locked = true;
+
+	    if (!header.size || header.type === 'directory') {
+	      self._parse(512, onheader);
+	      self.emit('entry', header, emptyStream(self, offset), onunlock);
+	      return
+	    }
+
+	    self._stream = new Source(self, offset);
+
+	    self.emit('entry', header, self._stream, onunlock);
+	    self._parse(header.size, onstreamend);
+	    oncontinue();
+	  };
+
+	  this._onheader = onheader;
+	  this._parse(512, onheader);
+	};
+
+	util.inherits(Extract, Writable);
+
+	Extract.prototype.destroy = function (err) {
+	  if (this._destroyed) return
+	  this._destroyed = true;
+
+	  if (err) this.emit('error', err);
+	  this.emit('close');
+	  if (this._stream) this._stream.emit('close');
+	};
+
+	Extract.prototype._parse = function (size, onparse) {
+	  if (this._destroyed) return
+	  this._offset += size;
+	  this._missing = size;
+	  if (onparse === this._onheader) this._partial = false;
+	  this._onparse = onparse;
+	};
+
+	Extract.prototype._continue = function () {
+	  if (this._destroyed) return
+	  var cb = this._cb;
+	  this._cb = noop;
+	  if (this._overflow) this._write(this._overflow, undefined, cb);
+	  else cb();
+	};
+
+	Extract.prototype._write = function (data, enc, cb) {
+	  if (this._destroyed) return
+
+	  var s = this._stream;
+	  var b = this._buffer;
+	  var missing = this._missing;
+	  if (data.length) this._partial = true;
+
+	  // we do not reach end-of-chunk now. just forward it
+
+	  if (data.length < missing) {
+	    this._missing -= data.length;
+	    this._overflow = null;
+	    if (s) return s.write(data, cb)
+	    b.append(data);
+	    return cb()
+	  }
+
+	  // end-of-chunk. the parser should call cb.
+
+	  this._cb = cb;
+	  this._missing = 0;
+
+	  var overflow = null;
+	  if (data.length > missing) {
+	    overflow = data.slice(missing);
+	    data = data.slice(0, missing);
+	  }
+
+	  if (s) s.end(data);
+	  else b.append(data);
+
+	  this._overflow = overflow;
+	  this._onparse();
+	};
+
+	Extract.prototype._final = function (cb) {
+	  if (this._partial) return this.destroy(new Error('Unexpected end of data'))
+	  cb();
+	};
+
+	extract = Extract;
+	return extract;
+}
+
+var fsConstants;
+var hasRequiredFsConstants;
+
+function requireFsConstants () {
+	if (hasRequiredFsConstants) return fsConstants;
+	hasRequiredFsConstants = 1;
+	fsConstants = fs.constants || require$$0$a;
+	return fsConstants;
+}
+
+var once = {exports: {}};
+
+var wrappy_1;
+var hasRequiredWrappy;
+
+function requireWrappy () {
+	if (hasRequiredWrappy) return wrappy_1;
+	hasRequiredWrappy = 1;
+	// Returns a wrapper function that returns a wrapped callback
+	// The wrapper function should do some stuff, and return a
+	// presumably different callback function.
+	// This makes sure that own properties are retained, so that
+	// decorations and such are not lost along the way.
+	wrappy_1 = wrappy;
+	function wrappy (fn, cb) {
+	  if (fn && cb) return wrappy(fn)(cb)
+
+	  if (typeof fn !== 'function')
+	    throw new TypeError('need wrapper function')
+
+	  Object.keys(fn).forEach(function (k) {
+	    wrapper[k] = fn[k];
+	  });
+
+	  return wrapper
+
+	  function wrapper() {
+	    var args = new Array(arguments.length);
+	    for (var i = 0; i < args.length; i++) {
+	      args[i] = arguments[i];
+	    }
+	    var ret = fn.apply(this, args);
+	    var cb = args[args.length-1];
+	    if (typeof ret === 'function' && ret !== cb) {
+	      Object.keys(cb).forEach(function (k) {
+	        ret[k] = cb[k];
+	      });
+	    }
+	    return ret
+	  }
+	}
+	return wrappy_1;
+}
+
+var hasRequiredOnce;
+
+function requireOnce () {
+	if (hasRequiredOnce) return once.exports;
+	hasRequiredOnce = 1;
+	var wrappy = requireWrappy();
+	once.exports = wrappy(once$1);
+	once.exports.strict = wrappy(onceStrict);
+
+	once$1.proto = once$1(function () {
+	  Object.defineProperty(Function.prototype, 'once', {
+	    value: function () {
+	      return once$1(this)
+	    },
+	    configurable: true
+	  });
+
+	  Object.defineProperty(Function.prototype, 'onceStrict', {
+	    value: function () {
+	      return onceStrict(this)
+	    },
+	    configurable: true
+	  });
+	});
+
+	function once$1 (fn) {
+	  var f = function () {
+	    if (f.called) return f.value
+	    f.called = true;
+	    return f.value = fn.apply(this, arguments)
+	  };
+	  f.called = false;
+	  return f
+	}
+
+	function onceStrict (fn) {
+	  var f = function () {
+	    if (f.called)
+	      throw new Error(f.onceError)
+	    f.called = true;
+	    return f.value = fn.apply(this, arguments)
+	  };
+	  var name = fn.name || 'Function wrapped with `once`';
+	  f.onceError = name + " shouldn't be called more than once";
+	  f.called = false;
+	  return f
+	}
+	return once.exports;
+}
+
+var endOfStream;
+var hasRequiredEndOfStream;
+
+function requireEndOfStream () {
+	if (hasRequiredEndOfStream) return endOfStream;
+	hasRequiredEndOfStream = 1;
+	var once = requireOnce();
+
+	var noop = function() {};
+
+	var isRequest = function(stream) {
+		return stream.setHeader && typeof stream.abort === 'function';
+	};
+
+	var isChildProcess = function(stream) {
+		return stream.stdio && Array.isArray(stream.stdio) && stream.stdio.length === 3
+	};
+
+	var eos = function(stream, opts, callback) {
+		if (typeof opts === 'function') return eos(stream, null, opts);
+		if (!opts) opts = {};
+
+		callback = once(callback || noop);
+
+		var ws = stream._writableState;
+		var rs = stream._readableState;
+		var readable = opts.readable || (opts.readable !== false && stream.readable);
+		var writable = opts.writable || (opts.writable !== false && stream.writable);
+		var cancelled = false;
+
+		var onlegacyfinish = function() {
+			if (!stream.writable) onfinish();
+		};
+
+		var onfinish = function() {
+			writable = false;
+			if (!readable) callback.call(stream);
+		};
+
+		var onend = function() {
+			readable = false;
+			if (!writable) callback.call(stream);
+		};
+
+		var onexit = function(exitCode) {
+			callback.call(stream, exitCode ? new Error('exited with error code: ' + exitCode) : null);
+		};
+
+		var onerror = function(err) {
+			callback.call(stream, err);
+		};
+
+		var onclose = function() {
+			process.nextTick(onclosenexttick);
+		};
+
+		var onclosenexttick = function() {
+			if (cancelled) return;
+			if (readable && !(rs && (rs.ended && !rs.destroyed))) return callback.call(stream, new Error('premature close'));
+			if (writable && !(ws && (ws.ended && !ws.destroyed))) return callback.call(stream, new Error('premature close'));
+		};
+
+		var onrequest = function() {
+			stream.req.on('finish', onfinish);
+		};
+
+		if (isRequest(stream)) {
+			stream.on('complete', onfinish);
+			stream.on('abort', onclose);
+			if (stream.req) onrequest();
+			else stream.on('request', onrequest);
+		} else if (writable && !ws) { // legacy streams
+			stream.on('end', onlegacyfinish);
+			stream.on('close', onlegacyfinish);
+		}
+
+		if (isChildProcess(stream)) stream.on('exit', onexit);
+
+		stream.on('end', onend);
+		stream.on('finish', onfinish);
+		if (opts.error !== false) stream.on('error', onerror);
+		stream.on('close', onclose);
+
+		return function() {
+			cancelled = true;
+			stream.removeListener('complete', onfinish);
+			stream.removeListener('abort', onclose);
+			stream.removeListener('request', onrequest);
+			if (stream.req) stream.req.removeListener('finish', onfinish);
+			stream.removeListener('end', onlegacyfinish);
+			stream.removeListener('close', onlegacyfinish);
+			stream.removeListener('finish', onfinish);
+			stream.removeListener('exit', onexit);
+			stream.removeListener('end', onend);
+			stream.removeListener('error', onerror);
+			stream.removeListener('close', onclose);
+		};
+	};
+
+	endOfStream = eos;
+	return endOfStream;
+}
+
+var pack;
+var hasRequiredPack;
+
+function requirePack () {
+	if (hasRequiredPack) return pack;
+	hasRequiredPack = 1;
+	var constants = requireFsConstants();
+	var eos = requireEndOfStream();
+	var util = require$$1;
+	var alloc = requireBufferAlloc();
+	var toBuffer = requireToBuffer();
+
+	var Readable = requireReadable().Readable;
+	var Writable = requireReadable().Writable;
+	var StringDecoder = require$$6.StringDecoder;
+
+	var headers = requireHeaders();
+
+	var DMODE = parseInt('755', 8);
+	var FMODE = parseInt('644', 8);
+
+	var END_OF_TAR = alloc(1024);
+
+	var noop = function () {};
+
+	var overflow = function (self, size) {
+	  size &= 511;
+	  if (size) self.push(END_OF_TAR.slice(0, 512 - size));
+	};
+
+	function modeToType (mode) {
+	  switch (mode & constants.S_IFMT) {
+	    case constants.S_IFBLK: return 'block-device'
+	    case constants.S_IFCHR: return 'character-device'
+	    case constants.S_IFDIR: return 'directory'
+	    case constants.S_IFIFO: return 'fifo'
+	    case constants.S_IFLNK: return 'symlink'
+	  }
+
+	  return 'file'
+	}
+
+	var Sink = function (to) {
+	  Writable.call(this);
+	  this.written = 0;
+	  this._to = to;
+	  this._destroyed = false;
+	};
+
+	util.inherits(Sink, Writable);
+
+	Sink.prototype._write = function (data, enc, cb) {
+	  this.written += data.length;
+	  if (this._to.push(data)) return cb()
+	  this._to._drain = cb;
+	};
+
+	Sink.prototype.destroy = function () {
+	  if (this._destroyed) return
+	  this._destroyed = true;
+	  this.emit('close');
+	};
+
+	var LinkSink = function () {
+	  Writable.call(this);
+	  this.linkname = '';
+	  this._decoder = new StringDecoder('utf-8');
+	  this._destroyed = false;
+	};
+
+	util.inherits(LinkSink, Writable);
+
+	LinkSink.prototype._write = function (data, enc, cb) {
+	  this.linkname += this._decoder.write(data);
+	  cb();
+	};
+
+	LinkSink.prototype.destroy = function () {
+	  if (this._destroyed) return
+	  this._destroyed = true;
+	  this.emit('close');
+	};
+
+	var Void = function () {
+	  Writable.call(this);
+	  this._destroyed = false;
+	};
+
+	util.inherits(Void, Writable);
+
+	Void.prototype._write = function (data, enc, cb) {
+	  cb(new Error('No body allowed for this entry'));
+	};
+
+	Void.prototype.destroy = function () {
+	  if (this._destroyed) return
+	  this._destroyed = true;
+	  this.emit('close');
+	};
+
+	var Pack = function (opts) {
+	  if (!(this instanceof Pack)) return new Pack(opts)
+	  Readable.call(this, opts);
+
+	  this._drain = noop;
+	  this._finalized = false;
+	  this._finalizing = false;
+	  this._destroyed = false;
+	  this._stream = null;
+	};
+
+	util.inherits(Pack, Readable);
+
+	Pack.prototype.entry = function (header, buffer, callback) {
+	  if (this._stream) throw new Error('already piping an entry')
+	  if (this._finalized || this._destroyed) return
+
+	  if (typeof buffer === 'function') {
+	    callback = buffer;
+	    buffer = null;
+	  }
+
+	  if (!callback) callback = noop;
+
+	  var self = this;
+
+	  if (!header.size || header.type === 'symlink') header.size = 0;
+	  if (!header.type) header.type = modeToType(header.mode);
+	  if (!header.mode) header.mode = header.type === 'directory' ? DMODE : FMODE;
+	  if (!header.uid) header.uid = 0;
+	  if (!header.gid) header.gid = 0;
+	  if (!header.mtime) header.mtime = new Date();
+
+	  if (typeof buffer === 'string') buffer = toBuffer(buffer);
+	  if (Buffer.isBuffer(buffer)) {
+	    header.size = buffer.length;
+	    this._encode(header);
+	    this.push(buffer);
+	    overflow(self, header.size);
+	    process.nextTick(callback);
+	    return new Void()
+	  }
+
+	  if (header.type === 'symlink' && !header.linkname) {
+	    var linkSink = new LinkSink();
+	    eos(linkSink, function (err) {
+	      if (err) { // stream was closed
+	        self.destroy();
+	        return callback(err)
+	      }
+
+	      header.linkname = linkSink.linkname;
+	      self._encode(header);
+	      callback();
+	    });
+
+	    return linkSink
+	  }
+
+	  this._encode(header);
+
+	  if (header.type !== 'file' && header.type !== 'contiguous-file') {
+	    process.nextTick(callback);
+	    return new Void()
+	  }
+
+	  var sink = new Sink(this);
+
+	  this._stream = sink;
+
+	  eos(sink, function (err) {
+	    self._stream = null;
+
+	    if (err) { // stream was closed
+	      self.destroy();
+	      return callback(err)
+	    }
+
+	    if (sink.written !== header.size) { // corrupting tar
+	      self.destroy();
+	      return callback(new Error('size mismatch'))
+	    }
+
+	    overflow(self, header.size);
+	    if (self._finalizing) self.finalize();
+	    callback();
+	  });
+
+	  return sink
+	};
+
+	Pack.prototype.finalize = function () {
+	  if (this._stream) {
+	    this._finalizing = true;
+	    return
+	  }
+
+	  if (this._finalized) return
+	  this._finalized = true;
+	  this.push(END_OF_TAR);
+	  this.push(null);
+	};
+
+	Pack.prototype.destroy = function (err) {
+	  if (this._destroyed) return
+	  this._destroyed = true;
+
+	  if (err) this.emit('error', err);
+	  this.emit('close');
+	  if (this._stream && this._stream.destroy) this._stream.destroy();
+	};
+
+	Pack.prototype._encode = function (header) {
+	  if (!header.pax) {
+	    var buf = headers.encode(header);
+	    if (buf) {
+	      this.push(buf);
+	      return
+	    }
+	  }
+	  this._encodePax(header);
+	};
+
+	Pack.prototype._encodePax = function (header) {
+	  var paxHeader = headers.encodePax({
+	    name: header.name,
+	    linkname: header.linkname,
+	    pax: header.pax
+	  });
+
+	  var newHeader = {
+	    name: 'PaxHeader',
+	    mode: header.mode,
+	    uid: header.uid,
+	    gid: header.gid,
+	    size: paxHeader.length,
+	    mtime: header.mtime,
+	    type: 'pax-header',
+	    linkname: header.linkname && 'PaxHeader',
+	    uname: header.uname,
+	    gname: header.gname,
+	    devmajor: header.devmajor,
+	    devminor: header.devminor
+	  };
+
+	  this.push(headers.encode(newHeader));
+	  this.push(paxHeader);
+	  overflow(this, paxHeader.length);
+
+	  newHeader.size = header.size;
+	  newHeader.type = header.type;
+	  this.push(headers.encode(newHeader));
+	};
+
+	Pack.prototype._read = function (n) {
+	  var drain = this._drain;
+	  this._drain = noop;
+	  drain();
+	};
+
+	pack = Pack;
+	return pack;
+}
+
+var hasRequiredTarStream;
+
+function requireTarStream () {
+	if (hasRequiredTarStream) return tarStream;
+	hasRequiredTarStream = 1;
+	tarStream.extract = requireExtract();
+	tarStream.pack = requirePack();
+	return tarStream;
+}
+
+var decompressTar;
+var hasRequiredDecompressTar;
+
+function requireDecompressTar () {
+	if (hasRequiredDecompressTar) return decompressTar;
+	hasRequiredDecompressTar = 1;
+	const fileType = requireFileType$2();
+	const isStream = requireIsStream$2();
+	const tarStream = requireTarStream();
+
+	decompressTar = () => input => {
+		if (!Buffer.isBuffer(input) && !isStream(input)) {
+			return Promise.reject(new TypeError(`Expected a Buffer or Stream, got ${typeof input}`));
+		}
+
+		if (Buffer.isBuffer(input) && (!fileType(input) || fileType(input).ext !== 'tar')) {
+			return Promise.resolve([]);
+		}
+
+		const extract = tarStream.extract();
+		const files = [];
+
+		extract.on('entry', (header, stream, cb) => {
+			const chunk = [];
+
+			stream.on('data', data => chunk.push(data));
+			stream.on('end', () => {
+				const file = {
+					data: Buffer.concat(chunk),
+					mode: header.mode,
+					mtime: header.mtime,
+					path: header.name,
+					type: header.type
+				};
+
+				if (header.type === 'symlink' || header.type === 'link') {
+					file.linkname = header.linkname;
+				}
+
+				files.push(file);
+				cb();
+			});
+		});
+
+		const promise = new Promise((resolve, reject) => {
+			if (!Buffer.isBuffer(input)) {
+				input.on('error', reject);
+			}
+
+			extract.on('finish', () => resolve(files));
+			extract.on('error', reject);
+		});
+
+		extract.then = promise.then.bind(promise);
+		extract.catch = promise.catch.bind(promise);
+
+		if (Buffer.isBuffer(input)) {
+			extract.end(input);
+		} else {
+			input.pipe(extract);
+		}
+
+		return extract;
+	};
+	return decompressTar;
+}
+
+var fileType$1;
+var hasRequiredFileType$1;
+
+function requireFileType$1 () {
+	if (hasRequiredFileType$1) return fileType$1;
+	hasRequiredFileType$1 = 1;
+	const toBytes = s => Array.from(s).map(c => c.charCodeAt(0));
+	const xpiZipFilename = toBytes('META-INF/mozilla.rsa');
+	const oxmlContentTypes = toBytes('[Content_Types].xml');
+	const oxmlRels = toBytes('_rels/.rels');
+
+	fileType$1 = input => {
+		const buf = new Uint8Array(input);
+
+		if (!(buf && buf.length > 1)) {
+			return null;
+		}
+
+		const check = (header, opts) => {
+			opts = Object.assign({
+				offset: 0
+			}, opts);
+
+			for (let i = 0; i < header.length; i++) {
+				// If a bitmask is set
+				if (opts.mask) {
+					// If header doesn't equal `buf` with bits masked off
+					if (header[i] !== (opts.mask[i] & buf[i + opts.offset])) {
+						return false;
+					}
+				} else if (header[i] !== buf[i + opts.offset]) {
+					return false;
+				}
+			}
+
+			return true;
+		};
+
+		if (check([0xFF, 0xD8, 0xFF])) {
+			return {
+				ext: 'jpg',
+				mime: 'image/jpeg'
+			};
+		}
+
+		if (check([0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A])) {
+			return {
+				ext: 'png',
+				mime: 'image/png'
+			};
+		}
+
+		if (check([0x47, 0x49, 0x46])) {
+			return {
+				ext: 'gif',
+				mime: 'image/gif'
+			};
+		}
+
+		if (check([0x57, 0x45, 0x42, 0x50], {offset: 8})) {
+			return {
+				ext: 'webp',
+				mime: 'image/webp'
+			};
+		}
+
+		if (check([0x46, 0x4C, 0x49, 0x46])) {
+			return {
+				ext: 'flif',
+				mime: 'image/flif'
+			};
+		}
+
+		// Needs to be before `tif` check
+		if (
+			(check([0x49, 0x49, 0x2A, 0x0]) || check([0x4D, 0x4D, 0x0, 0x2A])) &&
+			check([0x43, 0x52], {offset: 8})
+		) {
+			return {
+				ext: 'cr2',
+				mime: 'image/x-canon-cr2'
+			};
+		}
+
+		if (
+			check([0x49, 0x49, 0x2A, 0x0]) ||
+			check([0x4D, 0x4D, 0x0, 0x2A])
+		) {
+			return {
+				ext: 'tif',
+				mime: 'image/tiff'
+			};
+		}
+
+		if (check([0x42, 0x4D])) {
+			return {
+				ext: 'bmp',
+				mime: 'image/bmp'
+			};
+		}
+
+		if (check([0x49, 0x49, 0xBC])) {
+			return {
+				ext: 'jxr',
+				mime: 'image/vnd.ms-photo'
+			};
+		}
+
+		if (check([0x38, 0x42, 0x50, 0x53])) {
+			return {
+				ext: 'psd',
+				mime: 'image/vnd.adobe.photoshop'
+			};
+		}
+
+		// Zip-based file formats
+		// Need to be before the `zip` check
+		if (check([0x50, 0x4B, 0x3, 0x4])) {
+			if (
+				check([0x6D, 0x69, 0x6D, 0x65, 0x74, 0x79, 0x70, 0x65, 0x61, 0x70, 0x70, 0x6C, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6F, 0x6E, 0x2F, 0x65, 0x70, 0x75, 0x62, 0x2B, 0x7A, 0x69, 0x70], {offset: 30})
+			) {
+				return {
+					ext: 'epub',
+					mime: 'application/epub+zip'
+				};
+			}
+
+			// Assumes signed `.xpi` from addons.mozilla.org
+			if (check(xpiZipFilename, {offset: 30})) {
+				return {
+					ext: 'xpi',
+					mime: 'application/x-xpinstall'
+				};
+			}
+
+			// https://github.com/file/file/blob/master/magic/Magdir/msooxml
+			if (check(oxmlContentTypes, {offset: 30}) || check(oxmlRels, {offset: 30})) {
+				const sliced = buf.subarray(4, 4 + 2000);
+				const nextZipHeaderIndex = arr => arr.findIndex((el, i, arr) => arr[i] === 0x50 && arr[i + 1] === 0x4B && arr[i + 2] === 0x3 && arr[i + 3] === 0x4);
+				const header2Pos = nextZipHeaderIndex(sliced);
+
+				if (header2Pos !== -1) {
+					const slicedAgain = buf.subarray(header2Pos + 8, header2Pos + 8 + 1000);
+					const header3Pos = nextZipHeaderIndex(slicedAgain);
+
+					if (header3Pos !== -1) {
+						const offset = 8 + header2Pos + header3Pos + 30;
+
+						if (check(toBytes('word/'), {offset})) {
+							return {
+								ext: 'docx',
+								mime: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+							};
+						}
+
+						if (check(toBytes('ppt/'), {offset})) {
+							return {
+								ext: 'pptx',
+								mime: 'application/vnd.openxmlformats-officedocument.presentationml.presentation'
+							};
+						}
+
+						if (check(toBytes('xl/'), {offset})) {
+							return {
+								ext: 'xlsx',
+								mime: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+							};
+						}
+					}
+				}
+			}
+		}
+
+		if (
+			check([0x50, 0x4B]) &&
+			(buf[2] === 0x3 || buf[2] === 0x5 || buf[2] === 0x7) &&
+			(buf[3] === 0x4 || buf[3] === 0x6 || buf[3] === 0x8)
+		) {
+			return {
+				ext: 'zip',
+				mime: 'application/zip'
+			};
+		}
+
+		if (check([0x75, 0x73, 0x74, 0x61, 0x72], {offset: 257})) {
+			return {
+				ext: 'tar',
+				mime: 'application/x-tar'
+			};
+		}
+
+		if (
+			check([0x52, 0x61, 0x72, 0x21, 0x1A, 0x7]) &&
+			(buf[6] === 0x0 || buf[6] === 0x1)
+		) {
+			return {
+				ext: 'rar',
+				mime: 'application/x-rar-compressed'
+			};
+		}
+
+		if (check([0x1F, 0x8B, 0x8])) {
+			return {
+				ext: 'gz',
+				mime: 'application/gzip'
+			};
+		}
+
+		if (check([0x42, 0x5A, 0x68])) {
+			return {
+				ext: 'bz2',
+				mime: 'application/x-bzip2'
+			};
+		}
+
+		if (check([0x37, 0x7A, 0xBC, 0xAF, 0x27, 0x1C])) {
+			return {
+				ext: '7z',
+				mime: 'application/x-7z-compressed'
+			};
+		}
+
+		if (check([0x78, 0x01])) {
+			return {
+				ext: 'dmg',
+				mime: 'application/x-apple-diskimage'
+			};
+		}
+
+		if (check([0x33, 0x67, 0x70, 0x35]) || // 3gp5
+			(
+				check([0x0, 0x0, 0x0]) && check([0x66, 0x74, 0x79, 0x70], {offset: 4}) &&
+					(
+						check([0x6D, 0x70, 0x34, 0x31], {offset: 8}) || // MP41
+						check([0x6D, 0x70, 0x34, 0x32], {offset: 8}) || // MP42
+						check([0x69, 0x73, 0x6F, 0x6D], {offset: 8}) || // ISOM
+						check([0x69, 0x73, 0x6F, 0x32], {offset: 8}) || // ISO2
+						check([0x6D, 0x6D, 0x70, 0x34], {offset: 8}) || // MMP4
+						check([0x4D, 0x34, 0x56], {offset: 8}) || // M4V
+						check([0x64, 0x61, 0x73, 0x68], {offset: 8}) // DASH
+					)
+			)) {
+			return {
+				ext: 'mp4',
+				mime: 'video/mp4'
+			};
+		}
+
+		if (check([0x4D, 0x54, 0x68, 0x64])) {
+			return {
+				ext: 'mid',
+				mime: 'audio/midi'
+			};
+		}
+
+		// https://github.com/threatstack/libmagic/blob/master/magic/Magdir/matroska
+		if (check([0x1A, 0x45, 0xDF, 0xA3])) {
+			const sliced = buf.subarray(4, 4 + 4096);
+			const idPos = sliced.findIndex((el, i, arr) => arr[i] === 0x42 && arr[i + 1] === 0x82);
+
+			if (idPos !== -1) {
+				const docTypePos = idPos + 3;
+				const findDocType = type => Array.from(type).every((c, i) => sliced[docTypePos + i] === c.charCodeAt(0));
+
+				if (findDocType('matroska')) {
+					return {
+						ext: 'mkv',
+						mime: 'video/x-matroska'
+					};
+				}
+
+				if (findDocType('webm')) {
+					return {
+						ext: 'webm',
+						mime: 'video/webm'
+					};
+				}
+			}
+		}
+
+		if (check([0x0, 0x0, 0x0, 0x14, 0x66, 0x74, 0x79, 0x70, 0x71, 0x74, 0x20, 0x20]) ||
+			check([0x66, 0x72, 0x65, 0x65], {offset: 4}) ||
+			check([0x66, 0x74, 0x79, 0x70, 0x71, 0x74, 0x20, 0x20], {offset: 4}) ||
+			check([0x6D, 0x64, 0x61, 0x74], {offset: 4}) || // MJPEG
+			check([0x77, 0x69, 0x64, 0x65], {offset: 4})) {
+			return {
+				ext: 'mov',
+				mime: 'video/quicktime'
+			};
+		}
+
+		if (
+			check([0x52, 0x49, 0x46, 0x46]) &&
+			check([0x41, 0x56, 0x49], {offset: 8})
+		) {
+			return {
+				ext: 'avi',
+				mime: 'video/x-msvideo'
+			};
+		}
+
+		if (check([0x30, 0x26, 0xB2, 0x75, 0x8E, 0x66, 0xCF, 0x11, 0xA6, 0xD9])) {
+			return {
+				ext: 'wmv',
+				mime: 'video/x-ms-wmv'
+			};
+		}
+
+		if (check([0x0, 0x0, 0x1, 0xBA])) {
+			return {
+				ext: 'mpg',
+				mime: 'video/mpeg'
+			};
+		}
+
+		// Check for MP3 header at different starting offsets
+		for (let start = 0; start < 2 && start < (buf.length - 16); start++) {
+			if (
+				check([0x49, 0x44, 0x33], {offset: start}) || // ID3 header
+				check([0xFF, 0xE2], {offset: start, mask: [0xFF, 0xE2]}) // MPEG 1 or 2 Layer 3 header
+			) {
+				return {
+					ext: 'mp3',
+					mime: 'audio/mpeg'
+				};
+			}
+		}
+
+		if (
+			check([0x66, 0x74, 0x79, 0x70, 0x4D, 0x34, 0x41], {offset: 4}) ||
+			check([0x4D, 0x34, 0x41, 0x20])
+		) {
+			return {
+				ext: 'm4a',
+				mime: 'audio/m4a'
+			};
+		}
+
+		// Needs to be before `ogg` check
+		if (check([0x4F, 0x70, 0x75, 0x73, 0x48, 0x65, 0x61, 0x64], {offset: 28})) {
+			return {
+				ext: 'opus',
+				mime: 'audio/opus'
+			};
+		}
+
+		if (check([0x4F, 0x67, 0x67, 0x53])) {
+			return {
+				ext: 'ogg',
+				mime: 'audio/ogg'
+			};
+		}
+
+		if (check([0x66, 0x4C, 0x61, 0x43])) {
+			return {
+				ext: 'flac',
+				mime: 'audio/x-flac'
+			};
+		}
+
+		if (
+			check([0x52, 0x49, 0x46, 0x46]) &&
+			check([0x57, 0x41, 0x56, 0x45], {offset: 8})
+		) {
+			return {
+				ext: 'wav',
+				mime: 'audio/x-wav'
+			};
+		}
+
+		if (check([0x23, 0x21, 0x41, 0x4D, 0x52, 0x0A])) {
+			return {
+				ext: 'amr',
+				mime: 'audio/amr'
+			};
+		}
+
+		if (check([0x25, 0x50, 0x44, 0x46])) {
+			return {
+				ext: 'pdf',
+				mime: 'application/pdf'
+			};
+		}
+
+		if (check([0x4D, 0x5A])) {
+			return {
+				ext: 'exe',
+				mime: 'application/x-msdownload'
+			};
+		}
+
+		if (
+			(buf[0] === 0x43 || buf[0] === 0x46) &&
+			check([0x57, 0x53], {offset: 1})
+		) {
+			return {
+				ext: 'swf',
+				mime: 'application/x-shockwave-flash'
+			};
+		}
+
+		if (check([0x7B, 0x5C, 0x72, 0x74, 0x66])) {
+			return {
+				ext: 'rtf',
+				mime: 'application/rtf'
+			};
+		}
+
+		if (check([0x00, 0x61, 0x73, 0x6D])) {
+			return {
+				ext: 'wasm',
+				mime: 'application/wasm'
+			};
+		}
+
+		if (
+			check([0x77, 0x4F, 0x46, 0x46]) &&
+			(
+				check([0x00, 0x01, 0x00, 0x00], {offset: 4}) ||
+				check([0x4F, 0x54, 0x54, 0x4F], {offset: 4})
+			)
+		) {
+			return {
+				ext: 'woff',
+				mime: 'font/woff'
+			};
+		}
+
+		if (
+			check([0x77, 0x4F, 0x46, 0x32]) &&
+			(
+				check([0x00, 0x01, 0x00, 0x00], {offset: 4}) ||
+				check([0x4F, 0x54, 0x54, 0x4F], {offset: 4})
+			)
+		) {
+			return {
+				ext: 'woff2',
+				mime: 'font/woff2'
+			};
+		}
+
+		if (
+			check([0x4C, 0x50], {offset: 34}) &&
+			(
+				check([0x00, 0x00, 0x01], {offset: 8}) ||
+				check([0x01, 0x00, 0x02], {offset: 8}) ||
+				check([0x02, 0x00, 0x02], {offset: 8})
+			)
+		) {
+			return {
+				ext: 'eot',
+				mime: 'application/octet-stream'
+			};
+		}
+
+		if (check([0x00, 0x01, 0x00, 0x00, 0x00])) {
+			return {
+				ext: 'ttf',
+				mime: 'font/ttf'
+			};
+		}
+
+		if (check([0x4F, 0x54, 0x54, 0x4F, 0x00])) {
+			return {
+				ext: 'otf',
+				mime: 'font/otf'
+			};
+		}
+
+		if (check([0x00, 0x00, 0x01, 0x00])) {
+			return {
+				ext: 'ico',
+				mime: 'image/x-icon'
+			};
+		}
+
+		if (check([0x46, 0x4C, 0x56, 0x01])) {
+			return {
+				ext: 'flv',
+				mime: 'video/x-flv'
+			};
+		}
+
+		if (check([0x25, 0x21])) {
+			return {
+				ext: 'ps',
+				mime: 'application/postscript'
+			};
+		}
+
+		if (check([0xFD, 0x37, 0x7A, 0x58, 0x5A, 0x00])) {
+			return {
+				ext: 'xz',
+				mime: 'application/x-xz'
+			};
+		}
+
+		if (check([0x53, 0x51, 0x4C, 0x69])) {
+			return {
+				ext: 'sqlite',
+				mime: 'application/x-sqlite3'
+			};
+		}
+
+		if (check([0x4E, 0x45, 0x53, 0x1A])) {
+			return {
+				ext: 'nes',
+				mime: 'application/x-nintendo-nes-rom'
+			};
+		}
+
+		if (check([0x43, 0x72, 0x32, 0x34])) {
+			return {
+				ext: 'crx',
+				mime: 'application/x-google-chrome-extension'
+			};
+		}
+
+		if (
+			check([0x4D, 0x53, 0x43, 0x46]) ||
+			check([0x49, 0x53, 0x63, 0x28])
+		) {
+			return {
+				ext: 'cab',
+				mime: 'application/vnd.ms-cab-compressed'
+			};
+		}
+
+		// Needs to be before `ar` check
+		if (check([0x21, 0x3C, 0x61, 0x72, 0x63, 0x68, 0x3E, 0x0A, 0x64, 0x65, 0x62, 0x69, 0x61, 0x6E, 0x2D, 0x62, 0x69, 0x6E, 0x61, 0x72, 0x79])) {
+			return {
+				ext: 'deb',
+				mime: 'application/x-deb'
+			};
+		}
+
+		if (check([0x21, 0x3C, 0x61, 0x72, 0x63, 0x68, 0x3E])) {
+			return {
+				ext: 'ar',
+				mime: 'application/x-unix-archive'
+			};
+		}
+
+		if (check([0xED, 0xAB, 0xEE, 0xDB])) {
+			return {
+				ext: 'rpm',
+				mime: 'application/x-rpm'
+			};
+		}
+
+		if (
+			check([0x1F, 0xA0]) ||
+			check([0x1F, 0x9D])
+		) {
+			return {
+				ext: 'Z',
+				mime: 'application/x-compress'
+			};
+		}
+
+		if (check([0x4C, 0x5A, 0x49, 0x50])) {
+			return {
+				ext: 'lz',
+				mime: 'application/x-lzip'
+			};
+		}
+
+		if (check([0xD0, 0xCF, 0x11, 0xE0, 0xA1, 0xB1, 0x1A, 0xE1])) {
+			return {
+				ext: 'msi',
+				mime: 'application/x-msi'
+			};
+		}
+
+		if (check([0x06, 0x0E, 0x2B, 0x34, 0x02, 0x05, 0x01, 0x01, 0x0D, 0x01, 0x02, 0x01, 0x01, 0x02])) {
+			return {
+				ext: 'mxf',
+				mime: 'application/mxf'
+			};
+		}
+
+		if (check([0x47], {offset: 4}) && (check([0x47], {offset: 192}) || check([0x47], {offset: 196}))) {
+			return {
+				ext: 'mts',
+				mime: 'video/mp2t'
+			};
+		}
+
+		if (check([0x42, 0x4C, 0x45, 0x4E, 0x44, 0x45, 0x52])) {
+			return {
+				ext: 'blend',
+				mime: 'application/x-blender'
+			};
+		}
+
+		if (check([0x42, 0x50, 0x47, 0xFB])) {
+			return {
+				ext: 'bpg',
+				mime: 'image/bpg'
+			};
+		}
+
+		return null;
+	};
+	return fileType$1;
+}
+
+var isStream$1 = {exports: {}};
+
+var hasRequiredIsStream$1;
+
+function requireIsStream$1 () {
+	if (hasRequiredIsStream$1) return isStream$1.exports;
+	hasRequiredIsStream$1 = 1;
+
+	var isStream = isStream$1.exports = function (stream) {
+		return stream !== null && typeof stream === 'object' && typeof stream.pipe === 'function';
+	};
+
+	isStream.writable = function (stream) {
+		return isStream(stream) && stream.writable !== false && typeof stream._write === 'function' && typeof stream._writableState === 'object';
+	};
+
+	isStream.readable = function (stream) {
+		return isStream(stream) && stream.readable !== false && typeof stream._read === 'function' && typeof stream._readableState === 'object';
+	};
+
+	isStream.duplex = function (stream) {
+		return isStream.writable(stream) && isStream.readable(stream);
+	};
+
+	isStream.transform = function (stream) {
+		return isStream.duplex(stream) && typeof stream._transform === 'function' && typeof stream._transformState === 'object';
+	};
+	return isStream$1.exports;
+}
+
+/*
+node-bzip - a pure-javascript Node.JS module for decoding bzip2 data
+
+Copyright (C) 2012 Eli Skeggs
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+Adapted from bzip2.js, copyright 2011 antimatter15 (antimatter15@gmail.com).
+
+Based on micro-bunzip by Rob Landley (rob@landley.net).
+
+Based on bzip2 decompression code by Julian R Seward (jseward@acm.org),
+which also acknowledges contributions by Mike Burrows, David Wheeler,
+Peter Fenwick, Alistair Moffat, Radford Neal, Ian H. Witten,
+Robert Sedgewick, and Jon L. Bentley.
+*/
+
+var bitreader;
+var hasRequiredBitreader;
+
+function requireBitreader () {
+	if (hasRequiredBitreader) return bitreader;
+	hasRequiredBitreader = 1;
+	var BITMASK = [0x00, 0x01, 0x03, 0x07, 0x0F, 0x1F, 0x3F, 0x7F, 0xFF];
+
+	// offset in bytes
+	var BitReader = function(stream) {
+	  this.stream = stream;
+	  this.bitOffset = 0;
+	  this.curByte = 0;
+	  this.hasByte = false;
+	};
+
+	BitReader.prototype._ensureByte = function() {
+	  if (!this.hasByte) {
+	    this.curByte = this.stream.readByte();
+	    this.hasByte = true;
+	  }
+	};
+
+	// reads bits from the buffer
+	BitReader.prototype.read = function(bits) {
+	  var result = 0;
+	  while (bits > 0) {
+	    this._ensureByte();
+	    var remaining = 8 - this.bitOffset;
+	    // if we're in a byte
+	    if (bits >= remaining) {
+	      result <<= remaining;
+	      result |= BITMASK[remaining] & this.curByte;
+	      this.hasByte = false;
+	      this.bitOffset = 0;
+	      bits -= remaining;
+	    } else {
+	      result <<= bits;
+	      var shift = remaining - bits;
+	      result |= (this.curByte & (BITMASK[bits] << shift)) >> shift;
+	      this.bitOffset += bits;
+	      bits = 0;
+	    }
+	  }
+	  return result;
+	};
+
+	// seek to an arbitrary point in the buffer (expressed in bits)
+	BitReader.prototype.seek = function(pos) {
+	  var n_bit = pos % 8;
+	  var n_byte = (pos - n_bit) / 8;
+	  this.bitOffset = n_bit;
+	  this.stream.seek(n_byte);
+	  this.hasByte = false;
+	};
+
+	// reads 6 bytes worth of data using the read method
+	BitReader.prototype.pi = function() {
+	  var buf = new Buffer(6), i;
+	  for (i = 0; i < buf.length; i++) {
+	    buf[i] = this.read(8);
+	  }
+	  return buf.toString('hex');
+	};
+
+	bitreader = BitReader;
+	return bitreader;
+}
+
+/* very simple input/output stream interface */
+
+var stream;
+var hasRequiredStream;
+
+function requireStream () {
+	if (hasRequiredStream) return stream;
+	hasRequiredStream = 1;
+	var Stream = function() {
+	};
+
+	// input streams //////////////
+	/** Returns the next byte, or -1 for EOF. */
+	Stream.prototype.readByte = function() {
+	  throw new Error("abstract method readByte() not implemented");
+	};
+	/** Attempts to fill the buffer; returns number of bytes read, or
+	 *  -1 for EOF. */
+	Stream.prototype.read = function(buffer, bufOffset, length) {
+	  var bytesRead = 0;
+	  while (bytesRead < length) {
+	    var c = this.readByte();
+	    if (c < 0) { // EOF
+	      return (bytesRead===0) ? -1 : bytesRead;
+	    }
+	    buffer[bufOffset++] = c;
+	    bytesRead++;
+	  }
+	  return bytesRead;
+	};
+	Stream.prototype.seek = function(new_pos) {
+	  throw new Error("abstract method seek() not implemented");
+	};
+
+	// output streams ///////////
+	Stream.prototype.writeByte = function(_byte) {
+	  throw new Error("abstract method readByte() not implemented");
+	};
+	Stream.prototype.write = function(buffer, bufOffset, length) {
+	  var i;
+	  for (i=0; i<length; i++) {
+	    this.writeByte(buffer[bufOffset++]);
+	  }
+	  return length;
+	};
+	Stream.prototype.flush = function() {
+	};
+
+	stream = Stream;
+	return stream;
+}
+
+/* CRC32, used in Bzip2 implementation.
+ * This is a port of CRC32.java from the jbzip2 implementation at
+ *   https://code.google.com/p/jbzip2
+ * which is:
+ *   Copyright (c) 2011 Matthew Francis
+ *
+ *   Permission is hereby granted, free of charge, to any person
+ *   obtaining a copy of this software and associated documentation
+ *   files (the "Software"), to deal in the Software without
+ *   restriction, including without limitation the rights to use,
+ *   copy, modify, merge, publish, distribute, sublicense, and/or sell
+ *   copies of the Software, and to permit persons to whom the
+ *   Software is furnished to do so, subject to the following
+ *   conditions:
+ *
+ *   The above copyright notice and this permission notice shall be
+ *   included in all copies or substantial portions of the Software.
+ *
+ *   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ *   EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+ *   OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ *   NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ *   HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ *   WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ *   FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+ *   OTHER DEALINGS IN THE SOFTWARE.
+ * This JavaScript implementation is:
+ *   Copyright (c) 2013 C. Scott Ananian
+ * with the same licensing terms as Matthew Francis' original implementation.
+ */
+
+var crc32;
+var hasRequiredCrc32;
+
+function requireCrc32 () {
+	if (hasRequiredCrc32) return crc32;
+	hasRequiredCrc32 = 1;
+	crc32 = (function() {
+
+	  /**
+	   * A static CRC lookup table
+	   */
+	  var crc32Lookup = new Uint32Array([
+	    0x00000000, 0x04c11db7, 0x09823b6e, 0x0d4326d9, 0x130476dc, 0x17c56b6b, 0x1a864db2, 0x1e475005,
+	    0x2608edb8, 0x22c9f00f, 0x2f8ad6d6, 0x2b4bcb61, 0x350c9b64, 0x31cd86d3, 0x3c8ea00a, 0x384fbdbd,
+	    0x4c11db70, 0x48d0c6c7, 0x4593e01e, 0x4152fda9, 0x5f15adac, 0x5bd4b01b, 0x569796c2, 0x52568b75,
+	    0x6a1936c8, 0x6ed82b7f, 0x639b0da6, 0x675a1011, 0x791d4014, 0x7ddc5da3, 0x709f7b7a, 0x745e66cd,
+	    0x9823b6e0, 0x9ce2ab57, 0x91a18d8e, 0x95609039, 0x8b27c03c, 0x8fe6dd8b, 0x82a5fb52, 0x8664e6e5,
+	    0xbe2b5b58, 0xbaea46ef, 0xb7a96036, 0xb3687d81, 0xad2f2d84, 0xa9ee3033, 0xa4ad16ea, 0xa06c0b5d,
+	    0xd4326d90, 0xd0f37027, 0xddb056fe, 0xd9714b49, 0xc7361b4c, 0xc3f706fb, 0xceb42022, 0xca753d95,
+	    0xf23a8028, 0xf6fb9d9f, 0xfbb8bb46, 0xff79a6f1, 0xe13ef6f4, 0xe5ffeb43, 0xe8bccd9a, 0xec7dd02d,
+	    0x34867077, 0x30476dc0, 0x3d044b19, 0x39c556ae, 0x278206ab, 0x23431b1c, 0x2e003dc5, 0x2ac12072,
+	    0x128e9dcf, 0x164f8078, 0x1b0ca6a1, 0x1fcdbb16, 0x018aeb13, 0x054bf6a4, 0x0808d07d, 0x0cc9cdca,
+	    0x7897ab07, 0x7c56b6b0, 0x71159069, 0x75d48dde, 0x6b93dddb, 0x6f52c06c, 0x6211e6b5, 0x66d0fb02,
+	    0x5e9f46bf, 0x5a5e5b08, 0x571d7dd1, 0x53dc6066, 0x4d9b3063, 0x495a2dd4, 0x44190b0d, 0x40d816ba,
+	    0xaca5c697, 0xa864db20, 0xa527fdf9, 0xa1e6e04e, 0xbfa1b04b, 0xbb60adfc, 0xb6238b25, 0xb2e29692,
+	    0x8aad2b2f, 0x8e6c3698, 0x832f1041, 0x87ee0df6, 0x99a95df3, 0x9d684044, 0x902b669d, 0x94ea7b2a,
+	    0xe0b41de7, 0xe4750050, 0xe9362689, 0xedf73b3e, 0xf3b06b3b, 0xf771768c, 0xfa325055, 0xfef34de2,
+	    0xc6bcf05f, 0xc27dede8, 0xcf3ecb31, 0xcbffd686, 0xd5b88683, 0xd1799b34, 0xdc3abded, 0xd8fba05a,
+	    0x690ce0ee, 0x6dcdfd59, 0x608edb80, 0x644fc637, 0x7a089632, 0x7ec98b85, 0x738aad5c, 0x774bb0eb,
+	    0x4f040d56, 0x4bc510e1, 0x46863638, 0x42472b8f, 0x5c007b8a, 0x58c1663d, 0x558240e4, 0x51435d53,
+	    0x251d3b9e, 0x21dc2629, 0x2c9f00f0, 0x285e1d47, 0x36194d42, 0x32d850f5, 0x3f9b762c, 0x3b5a6b9b,
+	    0x0315d626, 0x07d4cb91, 0x0a97ed48, 0x0e56f0ff, 0x1011a0fa, 0x14d0bd4d, 0x19939b94, 0x1d528623,
+	    0xf12f560e, 0xf5ee4bb9, 0xf8ad6d60, 0xfc6c70d7, 0xe22b20d2, 0xe6ea3d65, 0xeba91bbc, 0xef68060b,
+	    0xd727bbb6, 0xd3e6a601, 0xdea580d8, 0xda649d6f, 0xc423cd6a, 0xc0e2d0dd, 0xcda1f604, 0xc960ebb3,
+	    0xbd3e8d7e, 0xb9ff90c9, 0xb4bcb610, 0xb07daba7, 0xae3afba2, 0xaafbe615, 0xa7b8c0cc, 0xa379dd7b,
+	    0x9b3660c6, 0x9ff77d71, 0x92b45ba8, 0x9675461f, 0x8832161a, 0x8cf30bad, 0x81b02d74, 0x857130c3,
+	    0x5d8a9099, 0x594b8d2e, 0x5408abf7, 0x50c9b640, 0x4e8ee645, 0x4a4ffbf2, 0x470cdd2b, 0x43cdc09c,
+	    0x7b827d21, 0x7f436096, 0x7200464f, 0x76c15bf8, 0x68860bfd, 0x6c47164a, 0x61043093, 0x65c52d24,
+	    0x119b4be9, 0x155a565e, 0x18197087, 0x1cd86d30, 0x029f3d35, 0x065e2082, 0x0b1d065b, 0x0fdc1bec,
+	    0x3793a651, 0x3352bbe6, 0x3e119d3f, 0x3ad08088, 0x2497d08d, 0x2056cd3a, 0x2d15ebe3, 0x29d4f654,
+	    0xc5a92679, 0xc1683bce, 0xcc2b1d17, 0xc8ea00a0, 0xd6ad50a5, 0xd26c4d12, 0xdf2f6bcb, 0xdbee767c,
+	    0xe3a1cbc1, 0xe760d676, 0xea23f0af, 0xeee2ed18, 0xf0a5bd1d, 0xf464a0aa, 0xf9278673, 0xfde69bc4,
+	    0x89b8fd09, 0x8d79e0be, 0x803ac667, 0x84fbdbd0, 0x9abc8bd5, 0x9e7d9662, 0x933eb0bb, 0x97ffad0c,
+	    0xafb010b1, 0xab710d06, 0xa6322bdf, 0xa2f33668, 0xbcb4666d, 0xb8757bda, 0xb5365d03, 0xb1f740b4
+	  ]);
+
+	  var CRC32 = function() {
+	    /**
+	     * The current CRC
+	     */
+	    var crc = 0xffffffff;
+
+	    /**
+	     * @return The current CRC
+	     */
+	    this.getCRC = function() {
+	      return (~crc) >>> 0; // return an unsigned value
+	    };
+
+	    /**
+	     * Update the CRC with a single byte
+	     * @param value The value to update the CRC with
+	     */
+	    this.updateCRC = function(value) {
+	      crc = (crc << 8) ^ crc32Lookup[((crc >>> 24) ^ value) & 0xff];
+	    };
+
+	    /**
+	     * Update the CRC with a sequence of identical bytes
+	     * @param value The value to update the CRC with
+	     * @param count The number of bytes
+	     */
+	    this.updateCRCRun = function(value, count) {
+	      while (count-- > 0) {
+	        crc = (crc << 8) ^ crc32Lookup[((crc >>> 24) ^ value) & 0xff];
+	      }
+	    };
+	  };
+	  return CRC32;
+	})();
+	return crc32;
+}
+
+var version = "1.0.6";
+var license = "MIT";
+var require$$3 = {
+	version: version,
+	license: license};
+
+/*
+seek-bzip - a pure-javascript module for seeking within bzip2 data
+
+Copyright (C) 2013 C. Scott Ananian
+Copyright (C) 2012 Eli Skeggs
+Copyright (C) 2011 Kevin Kwok
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+Adapted from node-bzip, copyright 2012 Eli Skeggs.
+Adapted from bzip2.js, copyright 2011 Kevin Kwok (antimatter15@gmail.com).
+
+Based on micro-bunzip by Rob Landley (rob@landley.net).
+
+Based on bzip2 decompression code by Julian R Seward (jseward@acm.org),
+which also acknowledges contributions by Mike Burrows, David Wheeler,
+Peter Fenwick, Alistair Moffat, Radford Neal, Ian H. Witten,
+Robert Sedgewick, and Jon L. Bentley.
+*/
+
+var lib;
+var hasRequiredLib;
+
+function requireLib () {
+	if (hasRequiredLib) return lib;
+	hasRequiredLib = 1;
+	var BitReader = requireBitreader();
+	var Stream = requireStream();
+	var CRC32 = requireCrc32();
+	var pjson = require$$3;
+
+	var MAX_HUFCODE_BITS = 20;
+	var MAX_SYMBOLS = 258;
+	var SYMBOL_RUNA = 0;
+	var SYMBOL_RUNB = 1;
+	var MIN_GROUPS = 2;
+	var MAX_GROUPS = 6;
+	var GROUP_SIZE = 50;
+
+	var WHOLEPI = "314159265359";
+	var SQRTPI = "177245385090";
+
+	var mtf = function(array, index) {
+	  var src = array[index], i;
+	  for (i = index; i > 0; i--) {
+	    array[i] = array[i-1];
+	  }
+	  array[0] = src;
+	  return src;
+	};
+
+	var Err = {
+	  OK: 0,
+	  LAST_BLOCK: -1,
+	  NOT_BZIP_DATA: -2,
+	  UNEXPECTED_INPUT_EOF: -3,
+	  UNEXPECTED_OUTPUT_EOF: -4,
+	  DATA_ERROR: -5,
+	  OUT_OF_MEMORY: -6,
+	  OBSOLETE_INPUT: -7,
+	  END_OF_BLOCK: -8
+	};
+	var ErrorMessages = {};
+	ErrorMessages[Err.LAST_BLOCK] =            "Bad file checksum";
+	ErrorMessages[Err.NOT_BZIP_DATA] =         "Not bzip data";
+	ErrorMessages[Err.UNEXPECTED_INPUT_EOF] =  "Unexpected input EOF";
+	ErrorMessages[Err.UNEXPECTED_OUTPUT_EOF] = "Unexpected output EOF";
+	ErrorMessages[Err.DATA_ERROR] =            "Data error";
+	ErrorMessages[Err.OUT_OF_MEMORY] =         "Out of memory";
+	ErrorMessages[Err.OBSOLETE_INPUT] = "Obsolete (pre 0.9.5) bzip format not supported.";
+
+	var _throw = function(status, optDetail) {
+	  var msg = ErrorMessages[status] || 'unknown error';
+	  if (optDetail) { msg += ': '+optDetail; }
+	  var e = new TypeError(msg);
+	  e.errorCode = status;
+	  throw e;
+	};
+
+	var Bunzip = function(inputStream, outputStream) {
+	  this.writePos = this.writeCurrent = this.writeCount = 0;
+
+	  this._start_bunzip(inputStream, outputStream);
+	};
+	Bunzip.prototype._init_block = function() {
+	  var moreBlocks = this._get_next_block();
+	  if ( !moreBlocks ) {
+	    this.writeCount = -1;
+	    return false; /* no more blocks */
+	  }
+	  this.blockCRC = new CRC32();
+	  return true;
+	};
+	/* XXX micro-bunzip uses (inputStream, inputBuffer, len) as arguments */
+	Bunzip.prototype._start_bunzip = function(inputStream, outputStream) {
+	  /* Ensure that file starts with "BZh['1'-'9']." */
+	  var buf = new Buffer(4);
+	  if (inputStream.read(buf, 0, 4) !== 4 ||
+	      String.fromCharCode(buf[0], buf[1], buf[2]) !== 'BZh')
+	    _throw(Err.NOT_BZIP_DATA, 'bad magic');
+
+	  var level = buf[3] - 0x30;
+	  if (level < 1 || level > 9)
+	    _throw(Err.NOT_BZIP_DATA, 'level out of range');
+
+	  this.reader = new BitReader(inputStream);
+
+	  /* Fourth byte (ascii '1'-'9'), indicates block size in units of 100k of
+	     uncompressed data.  Allocate intermediate buffer for block. */
+	  this.dbufSize = 100000 * level;
+	  this.nextoutput = 0;
+	  this.outputStream = outputStream;
+	  this.streamCRC = 0;
+	};
+	Bunzip.prototype._get_next_block = function() {
+	  var i, j, k;
+	  var reader = this.reader;
+	  // this is get_next_block() function from micro-bunzip:
+	  /* Read in header signature and CRC, then validate signature.
+	     (last block signature means CRC is for whole file, return now) */
+	  var h = reader.pi();
+	  if (h === SQRTPI) { // last block
+	    return false; /* no more blocks */
+	  }
+	  if (h !== WHOLEPI)
+	    _throw(Err.NOT_BZIP_DATA);
+	  this.targetBlockCRC = reader.read(32) >>> 0; // (convert to unsigned)
+	  this.streamCRC = (this.targetBlockCRC ^
+	                    ((this.streamCRC << 1) | (this.streamCRC>>>31))) >>> 0;
+	  /* We can add support for blockRandomised if anybody complains.  There was
+	     some code for this in busybox 1.0.0-pre3, but nobody ever noticed that
+	     it didn't actually work. */
+	  if (reader.read(1))
+	    _throw(Err.OBSOLETE_INPUT);
+	  var origPointer = reader.read(24);
+	  if (origPointer > this.dbufSize)
+	    _throw(Err.DATA_ERROR, 'initial position out of bounds');
+	  /* mapping table: if some byte values are never used (encoding things
+	     like ascii text), the compression code removes the gaps to have fewer
+	     symbols to deal with, and writes a sparse bitfield indicating which
+	     values were present.  We make a translation table to convert the symbols
+	     back to the corresponding bytes. */
+	  var t = reader.read(16);
+	  var symToByte = new Buffer(256), symTotal = 0;
+	  for (i = 0; i < 16; i++) {
+	    if (t & (1 << (0xF - i))) {
+	      var o = i * 16;
+	      k = reader.read(16);
+	      for (j = 0; j < 16; j++)
+	        if (k & (1 << (0xF - j)))
+	          symToByte[symTotal++] = o + j;
+	    }
+	  }
+
+	  /* How many different huffman coding groups does this block use? */
+	  var groupCount = reader.read(3);
+	  if (groupCount < MIN_GROUPS || groupCount > MAX_GROUPS)
+	    _throw(Err.DATA_ERROR);
+	  /* nSelectors: Every GROUP_SIZE many symbols we select a new huffman coding
+	     group.  Read in the group selector list, which is stored as MTF encoded
+	     bit runs.  (MTF=Move To Front, as each value is used it's moved to the
+	     start of the list.) */
+	  var nSelectors = reader.read(15);
+	  if (nSelectors === 0)
+	    _throw(Err.DATA_ERROR);
+
+	  var mtfSymbol = new Buffer(256);
+	  for (i = 0; i < groupCount; i++)
+	    mtfSymbol[i] = i;
+
+	  var selectors = new Buffer(nSelectors); // was 32768...
+
+	  for (i = 0; i < nSelectors; i++) {
+	    /* Get next value */
+	    for (j = 0; reader.read(1); j++)
+	      if (j >= groupCount) _throw(Err.DATA_ERROR);
+	    /* Decode MTF to get the next selector */
+	    selectors[i] = mtf(mtfSymbol, j);
+	  }
+
+	  /* Read the huffman coding tables for each group, which code for symTotal
+	     literal symbols, plus two run symbols (RUNA, RUNB) */
+	  var symCount = symTotal + 2;
+	  var groups = [], hufGroup;
+	  for (j = 0; j < groupCount; j++) {
+	    var length = new Buffer(symCount), temp = new Uint16Array(MAX_HUFCODE_BITS + 1);
+	    /* Read huffman code lengths for each symbol.  They're stored in
+	       a way similar to mtf; record a starting value for the first symbol,
+	       and an offset from the previous value for everys symbol after that. */
+	    t = reader.read(5); // lengths
+	    for (i = 0; i < symCount; i++) {
+	      for (;;) {
+	        if (t < 1 || t > MAX_HUFCODE_BITS) _throw(Err.DATA_ERROR);
+	        /* If first bit is 0, stop.  Else second bit indicates whether
+	           to increment or decrement the value. */
+	        if(!reader.read(1))
+	          break;
+	        if(!reader.read(1))
+	          t++;
+	        else
+	          t--;
+	      }
+	      length[i] = t;
+	    }
+
+	    /* Find largest and smallest lengths in this group */
+	    var minLen,  maxLen;
+	    minLen = maxLen = length[0];
+	    for (i = 1; i < symCount; i++) {
+	      if (length[i] > maxLen)
+	        maxLen = length[i];
+	      else if (length[i] < minLen)
+	        minLen = length[i];
+	    }
+
+	    /* Calculate permute[], base[], and limit[] tables from length[].
+	     *
+	     * permute[] is the lookup table for converting huffman coded symbols
+	     * into decoded symbols.  base[] is the amount to subtract from the
+	     * value of a huffman symbol of a given length when using permute[].
+	     *
+	     * limit[] indicates the largest numerical value a symbol with a given
+	     * number of bits can have.  This is how the huffman codes can vary in
+	     * length: each code with a value>limit[length] needs another bit.
+	     */
+	    hufGroup = {};
+	    groups.push(hufGroup);
+	    hufGroup.permute = new Uint16Array(MAX_SYMBOLS);
+	    hufGroup.limit = new Uint32Array(MAX_HUFCODE_BITS + 2);
+	    hufGroup.base = new Uint32Array(MAX_HUFCODE_BITS + 1);
+	    hufGroup.minLen = minLen;
+	    hufGroup.maxLen = maxLen;
+	    /* Calculate permute[].  Concurently, initialize temp[] and limit[]. */
+	    var pp = 0;
+	    for (i = minLen; i <= maxLen; i++) {
+	      temp[i] = hufGroup.limit[i] = 0;
+	      for (t = 0; t < symCount; t++)
+	        if (length[t] === i)
+	          hufGroup.permute[pp++] = t;
+	    }
+	    /* Count symbols coded for at each bit length */
+	    for (i = 0; i < symCount; i++)
+	      temp[length[i]]++;
+	    /* Calculate limit[] (the largest symbol-coding value at each bit
+	     * length, which is (previous limit<<1)+symbols at this level), and
+	     * base[] (number of symbols to ignore at each bit length, which is
+	     * limit minus the cumulative count of symbols coded for already). */
+	    pp = t = 0;
+	    for (i = minLen; i < maxLen; i++) {
+	      pp += temp[i];
+	      /* We read the largest possible symbol size and then unget bits
+	         after determining how many we need, and those extra bits could
+	         be set to anything.  (They're noise from future symbols.)  At
+	         each level we're really only interested in the first few bits,
+	         so here we set all the trailing to-be-ignored bits to 1 so they
+	         don't affect the value>limit[length] comparison. */
+	      hufGroup.limit[i] = pp - 1;
+	      pp <<= 1;
+	      t += temp[i];
+	      hufGroup.base[i + 1] = pp - t;
+	    }
+	    hufGroup.limit[maxLen + 1] = Number.MAX_VALUE; /* Sentinal value for reading next sym. */
+	    hufGroup.limit[maxLen] = pp + temp[maxLen] - 1;
+	    hufGroup.base[minLen] = 0;
+	  }
+	  /* We've finished reading and digesting the block header.  Now read this
+	     block's huffman coded symbols from the file and undo the huffman coding
+	     and run length encoding, saving the result into dbuf[dbufCount++]=uc */
+
+	  /* Initialize symbol occurrence counters and symbol Move To Front table */
+	  var byteCount = new Uint32Array(256);
+	  for (i = 0; i < 256; i++)
+	    mtfSymbol[i] = i;
+	  /* Loop through compressed symbols. */
+	  var runPos = 0, dbufCount = 0, selector = 0, uc;
+	  var dbuf = this.dbuf = new Uint32Array(this.dbufSize);
+	  symCount = 0;
+	  for (;;) {
+	    /* Determine which huffman coding group to use. */
+	    if (!(symCount--)) {
+	      symCount = GROUP_SIZE - 1;
+	      if (selector >= nSelectors) { _throw(Err.DATA_ERROR); }
+	      hufGroup = groups[selectors[selector++]];
+	    }
+	    /* Read next huffman-coded symbol. */
+	    i = hufGroup.minLen;
+	    j = reader.read(i);
+	    for (;;i++) {
+	      if (i > hufGroup.maxLen) { _throw(Err.DATA_ERROR); }
+	      if (j <= hufGroup.limit[i])
+	        break;
+	      j = (j << 1) | reader.read(1);
+	    }
+	    /* Huffman decode value to get nextSym (with bounds checking) */
+	    j -= hufGroup.base[i];
+	    if (j < 0 || j >= MAX_SYMBOLS) { _throw(Err.DATA_ERROR); }
+	    var nextSym = hufGroup.permute[j];
+	    /* We have now decoded the symbol, which indicates either a new literal
+	       byte, or a repeated run of the most recent literal byte.  First,
+	       check if nextSym indicates a repeated run, and if so loop collecting
+	       how many times to repeat the last literal. */
+	    if (nextSym === SYMBOL_RUNA || nextSym === SYMBOL_RUNB) {
+	      /* If this is the start of a new run, zero out counter */
+	      if (!runPos){
+	        runPos = 1;
+	        t = 0;
+	      }
+	      /* Neat trick that saves 1 symbol: instead of or-ing 0 or 1 at
+	         each bit position, add 1 or 2 instead.  For example,
+	         1011 is 1<<0 + 1<<1 + 2<<2.  1010 is 2<<0 + 2<<1 + 1<<2.
+	         You can make any bit pattern that way using 1 less symbol than
+	         the basic or 0/1 method (except all bits 0, which would use no
+	         symbols, but a run of length 0 doesn't mean anything in this
+	         context).  Thus space is saved. */
+	      if (nextSym === SYMBOL_RUNA)
+	        t += runPos;
+	      else
+	        t += 2 * runPos;
+	      runPos <<= 1;
+	      continue;
+	    }
+	    /* When we hit the first non-run symbol after a run, we now know
+	       how many times to repeat the last literal, so append that many
+	       copies to our buffer of decoded symbols (dbuf) now.  (The last
+	       literal used is the one at the head of the mtfSymbol array.) */
+	    if (runPos){
+	      runPos = 0;
+	      if (dbufCount + t > this.dbufSize) { _throw(Err.DATA_ERROR); }
+	      uc = symToByte[mtfSymbol[0]];
+	      byteCount[uc] += t;
+	      while (t--)
+	        dbuf[dbufCount++] = uc;
+	    }
+	    /* Is this the terminating symbol? */
+	    if (nextSym > symTotal)
+	      break;
+	    /* At this point, nextSym indicates a new literal character.  Subtract
+	       one to get the position in the MTF array at which this literal is
+	       currently to be found.  (Note that the result can't be -1 or 0,
+	       because 0 and 1 are RUNA and RUNB.  But another instance of the
+	       first symbol in the mtf array, position 0, would have been handled
+	       as part of a run above.  Therefore 1 unused mtf position minus
+	       2 non-literal nextSym values equals -1.) */
+	    if (dbufCount >= this.dbufSize) { _throw(Err.DATA_ERROR); }
+	    i = nextSym - 1;
+	    uc = mtf(mtfSymbol, i);
+	    uc = symToByte[uc];
+	    /* We have our literal byte.  Save it into dbuf. */
+	    byteCount[uc]++;
+	    dbuf[dbufCount++] = uc;
+	  }
+	  /* At this point, we've read all the huffman-coded symbols (and repeated
+	     runs) for this block from the input stream, and decoded them into the
+	     intermediate buffer.  There are dbufCount many decoded bytes in dbuf[].
+	     Now undo the Burrows-Wheeler transform on dbuf.
+	     See http://dogma.net/markn/articles/bwt/bwt.htm
+	  */
+	  if (origPointer < 0 || origPointer >= dbufCount) { _throw(Err.DATA_ERROR); }
+	  /* Turn byteCount into cumulative occurrence counts of 0 to n-1. */
+	  j = 0;
+	  for (i = 0; i < 256; i++) {
+	    k = j + byteCount[i];
+	    byteCount[i] = j;
+	    j = k;
+	  }
+	  /* Figure out what order dbuf would be in if we sorted it. */
+	  for (i = 0; i < dbufCount; i++) {
+	    uc = dbuf[i] & 0xff;
+	    dbuf[byteCount[uc]] |= (i << 8);
+	    byteCount[uc]++;
+	  }
+	  /* Decode first byte by hand to initialize "previous" byte.  Note that it
+	     doesn't get output, and if the first three characters are identical
+	     it doesn't qualify as a run (hence writeRunCountdown=5). */
+	  var pos = 0, current = 0, run = 0;
+	  if (dbufCount) {
+	    pos = dbuf[origPointer];
+	    current = (pos & 0xff);
+	    pos >>= 8;
+	    run = -1;
+	  }
+	  this.writePos = pos;
+	  this.writeCurrent = current;
+	  this.writeCount = dbufCount;
+	  this.writeRun = run;
+
+	  return true; /* more blocks to come */
+	};
+	/* Undo burrows-wheeler transform on intermediate buffer to produce output.
+	   If start_bunzip was initialized with out_fd=-1, then up to len bytes of
+	   data are written to outbuf.  Return value is number of bytes written or
+	   error (all errors are negative numbers).  If out_fd!=-1, outbuf and len
+	   are ignored, data is written to out_fd and return is RETVAL_OK or error.
+	*/
+	Bunzip.prototype._read_bunzip = function(outputBuffer, len) {
+	    var copies, previous, outbyte;
+	    /* james@jamestaylor.org: writeCount goes to -1 when the buffer is fully
+	       decoded, which results in this returning RETVAL_LAST_BLOCK, also
+	       equal to -1... Confusing, I'm returning 0 here to indicate no
+	       bytes written into the buffer */
+	  if (this.writeCount < 0) { return 0; }
+	  var dbuf = this.dbuf, pos = this.writePos, current = this.writeCurrent;
+	  var dbufCount = this.writeCount; this.outputsize;
+	  var run = this.writeRun;
+
+	  while (dbufCount) {
+	    dbufCount--;
+	    previous = current;
+	    pos = dbuf[pos];
+	    current = pos & 0xff;
+	    pos >>= 8;
+	    if (run++ === 3){
+	      copies = current;
+	      outbyte = previous;
+	      current = -1;
+	    } else {
+	      copies = 1;
+	      outbyte = current;
+	    }
+	    this.blockCRC.updateCRCRun(outbyte, copies);
+	    while (copies--) {
+	      this.outputStream.writeByte(outbyte);
+	      this.nextoutput++;
+	    }
+	    if (current != previous)
+	      run = 0;
+	  }
+	  this.writeCount = dbufCount;
+	  // check CRC
+	  if (this.blockCRC.getCRC() !== this.targetBlockCRC) {
+	    _throw(Err.DATA_ERROR, "Bad block CRC "+
+	           "(got "+this.blockCRC.getCRC().toString(16)+
+	           " expected "+this.targetBlockCRC.toString(16)+")");
+	  }
+	  return this.nextoutput;
+	};
+
+	var coerceInputStream = function(input) {
+	  if ('readByte' in input) { return input; }
+	  var inputStream = new Stream();
+	  inputStream.pos = 0;
+	  inputStream.readByte = function() { return input[this.pos++]; };
+	  inputStream.seek = function(pos) { this.pos = pos; };
+	  inputStream.eof = function() { return this.pos >= input.length; };
+	  return inputStream;
+	};
+	var coerceOutputStream = function(output) {
+	  var outputStream = new Stream();
+	  var resizeOk = true;
+	  if (output) {
+	    if (typeof(output)==='number') {
+	      outputStream.buffer = new Buffer(output);
+	      resizeOk = false;
+	    } else if ('writeByte' in output) {
+	      return output;
+	    } else {
+	      outputStream.buffer = output;
+	      resizeOk = false;
+	    }
+	  } else {
+	    outputStream.buffer = new Buffer(16384);
+	  }
+	  outputStream.pos = 0;
+	  outputStream.writeByte = function(_byte) {
+	    if (resizeOk && this.pos >= this.buffer.length) {
+	      var newBuffer = new Buffer(this.buffer.length*2);
+	      this.buffer.copy(newBuffer);
+	      this.buffer = newBuffer;
+	    }
+	    this.buffer[this.pos++] = _byte;
+	  };
+	  outputStream.getBuffer = function() {
+	    // trim buffer
+	    if (this.pos !== this.buffer.length) {
+	      if (!resizeOk)
+	        throw new TypeError('outputsize does not match decoded input');
+	      var newBuffer = new Buffer(this.pos);
+	      this.buffer.copy(newBuffer, 0, 0, this.pos);
+	      this.buffer = newBuffer;
+	    }
+	    return this.buffer;
+	  };
+	  outputStream._coerced = true;
+	  return outputStream;
+	};
+
+	/* Static helper functions */
+	Bunzip.Err = Err;
+	// 'input' can be a stream or a buffer
+	// 'output' can be a stream or a buffer or a number (buffer size)
+	Bunzip.decode = function(input, output, multistream) {
+	  // make a stream from a buffer, if necessary
+	  var inputStream = coerceInputStream(input);
+	  var outputStream = coerceOutputStream(output);
+
+	  var bz = new Bunzip(inputStream, outputStream);
+	  while (true) {
+	    if ('eof' in inputStream && inputStream.eof()) break;
+	    if (bz._init_block()) {
+	      bz._read_bunzip();
+	    } else {
+	      var targetStreamCRC = bz.reader.read(32) >>> 0; // (convert to unsigned)
+	      if (targetStreamCRC !== bz.streamCRC) {
+	        _throw(Err.DATA_ERROR, "Bad stream CRC "+
+	               "(got "+bz.streamCRC.toString(16)+
+	               " expected "+targetStreamCRC.toString(16)+")");
+	      }
+	      if (multistream &&
+	          'eof' in inputStream &&
+	          !inputStream.eof()) {
+	        // note that start_bunzip will also resync the bit reader to next byte
+	        bz._start_bunzip(inputStream, outputStream);
+	      } else break;
+	    }
+	  }
+	  if ('getBuffer' in outputStream)
+	    return outputStream.getBuffer();
+	};
+	Bunzip.decodeBlock = function(input, pos, output) {
+	  // make a stream from a buffer, if necessary
+	  var inputStream = coerceInputStream(input);
+	  var outputStream = coerceOutputStream(output);
+	  var bz = new Bunzip(inputStream, outputStream);
+	  bz.reader.seek(pos);
+	  /* Fill the decode buffer for the block */
+	  var moreBlocks = bz._get_next_block();
+	  if (moreBlocks) {
+	    /* Init the CRC for writing */
+	    bz.blockCRC = new CRC32();
+
+	    /* Zero this so the current byte from before the seek is not written */
+	    bz.writeCopies = 0;
+
+	    /* Decompress the block and write to stdout */
+	    bz._read_bunzip();
+	    // XXX keep writing?
+	  }
+	  if ('getBuffer' in outputStream)
+	    return outputStream.getBuffer();
+	};
+	/* Reads bzip2 file from stream or buffer `input`, and invoke
+	 * `callback(position, size)` once for each bzip2 block,
+	 * where position gives the starting position (in *bits*)
+	 * and size gives uncompressed size of the block (in *bytes*). */
+	Bunzip.table = function(input, callback, multistream) {
+	  // make a stream from a buffer, if necessary
+	  var inputStream = new Stream();
+	  inputStream.delegate = coerceInputStream(input);
+	  inputStream.pos = 0;
+	  inputStream.readByte = function() {
+	    this.pos++;
+	    return this.delegate.readByte();
+	  };
+	  if (inputStream.delegate.eof) {
+	    inputStream.eof = inputStream.delegate.eof.bind(inputStream.delegate);
+	  }
+	  var outputStream = new Stream();
+	  outputStream.pos = 0;
+	  outputStream.writeByte = function() { this.pos++; };
+
+	  var bz = new Bunzip(inputStream, outputStream);
+	  var blockSize = bz.dbufSize;
+	  while (true) {
+	    if ('eof' in inputStream && inputStream.eof()) break;
+
+	    var position = inputStream.pos*8 + bz.reader.bitOffset;
+	    if (bz.reader.hasByte) { position -= 8; }
+
+	    if (bz._init_block()) {
+	      var start = outputStream.pos;
+	      bz._read_bunzip();
+	      callback(position, outputStream.pos - start);
+	    } else {
+	      bz.reader.read(32); // (but we ignore the crc)
+	      if (multistream &&
+	          'eof' in inputStream &&
+	          !inputStream.eof()) {
+	        // note that start_bunzip will also resync the bit reader to next byte
+	        bz._start_bunzip(inputStream, outputStream);
+	        console.assert(bz.dbufSize === blockSize,
+	                       "shouldn't change block size within multistream file");
+	      } else break;
+	    }
+	  }
+	};
+
+	Bunzip.Stream = Stream;
+
+	Bunzip.version = pjson.version;
+	Bunzip.license = pjson.license;
+
+	lib = Bunzip;
+	return lib;
+}
+
+var through = {exports: {}};
+
+var hasRequiredThrough;
+
+function requireThrough () {
+	if (hasRequiredThrough) return through.exports;
+	hasRequiredThrough = 1;
+	(function (module, exports) {
+		var Stream = require$$0$5;
+
+		// through
+		//
+		// a stream that does nothing but re-emit the input.
+		// useful for aggregating a series of changing but not ending streams into one stream)
+
+		module.exports = through;
+		through.through = through;
+
+		//create a readable writable stream.
+
+		function through (write, end, opts) {
+		  write = write || function (data) { this.queue(data); };
+		  end = end || function () { this.queue(null); };
+
+		  var ended = false, destroyed = false, buffer = [], _ended = false;
+		  var stream = new Stream();
+		  stream.readable = stream.writable = true;
+		  stream.paused = false;
+
+		//  stream.autoPause   = !(opts && opts.autoPause   === false)
+		  stream.autoDestroy = !(opts && opts.autoDestroy === false);
+
+		  stream.write = function (data) {
+		    write.call(this, data);
+		    return !stream.paused
+		  };
+
+		  function drain() {
+		    while(buffer.length && !stream.paused) {
+		      var data = buffer.shift();
+		      if(null === data)
+		        return stream.emit('end')
+		      else
+		        stream.emit('data', data);
+		    }
+		  }
+
+		  stream.queue = stream.push = function (data) {
+		//    console.error(ended)
+		    if(_ended) return stream
+		    if(data === null) _ended = true;
+		    buffer.push(data);
+		    drain();
+		    return stream
+		  };
+
+		  //this will be registered as the first 'end' listener
+		  //must call destroy next tick, to make sure we're after any
+		  //stream piped from here.
+		  //this is only a problem if end is not emitted synchronously.
+		  //a nicer way to do this is to make sure this is the last listener for 'end'
+
+		  stream.on('end', function () {
+		    stream.readable = false;
+		    if(!stream.writable && stream.autoDestroy)
+		      process.nextTick(function () {
+		        stream.destroy();
+		      });
+		  });
+
+		  function _end () {
+		    stream.writable = false;
+		    end.call(stream);
+		    if(!stream.readable && stream.autoDestroy)
+		      stream.destroy();
+		  }
+
+		  stream.end = function (data) {
+		    if(ended) return
+		    ended = true;
+		    if(arguments.length) stream.write(data);
+		    _end(); // will emit or queue
+		    return stream
+		  };
+
+		  stream.destroy = function () {
+		    if(destroyed) return
+		    destroyed = true;
+		    ended = true;
+		    buffer.length = 0;
+		    stream.writable = stream.readable = false;
+		    stream.emit('close');
+		    return stream
+		  };
+
+		  stream.pause = function () {
+		    if(stream.paused) return
+		    stream.paused = true;
+		    return stream
+		  };
+
+		  stream.resume = function () {
+		    if(stream.paused) {
+		      stream.paused = false;
+		      stream.emit('resume');
+		    }
+		    drain();
+		    //may have become paused again,
+		    //as drain emits 'data'.
+		    if(!stream.paused)
+		      stream.emit('drain');
+		    return stream
+		  };
+		  return stream
+		} 
+	} (through));
+	return through.exports;
+}
+
+/* 
+  bzip2.js - a small bzip2 decompression implementation
+  
+  Copyright 2011 by antimatter15 (antimatter15@gmail.com)
+  
+  Based on micro-bunzip by Rob Landley (rob@landley.net).
+
+  Copyright (c) 2011 by antimatter15 (antimatter15@gmail.com).
+
+  Permission is hereby granted, free of charge, to any person obtaining a
+  copy of this software and associated documentation files (the "Software"),
+  to deal in the Software without restriction, including without limitation
+  the rights to use, copy, modify, merge, publish, distribute, sublicense,
+  and/or sell copies of the Software, and to permit persons to whom the
+  Software is furnished to do so, subject to the following conditions:
+  
+  The above copyright notice and this permission notice shall be included
+  in all copies or substantial portions of the Software.
+  
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+  IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+  DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+  TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH
+  THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
+
+var bzip2_1;
+var hasRequiredBzip2;
+
+function requireBzip2 () {
+	if (hasRequiredBzip2) return bzip2_1;
+	hasRequiredBzip2 = 1;
+	function Bzip2Error(message) {
+	    this.name = 'Bzip2Error';
+	    this.message = message;
+	    this.stack = (new Error()).stack;
+	}
+	Bzip2Error.prototype = new Error;
+	 
+	var message = {
+	    Error: function(message) {throw new Bzip2Error(message);}
+	};
+
+	var bzip2 = {};
+	bzip2.Bzip2Error = Bzip2Error;
+
+	bzip2.crcTable =
+	[
+	   0x00000000, 0x04c11db7, 0x09823b6e, 0x0d4326d9,
+	   0x130476dc, 0x17c56b6b, 0x1a864db2, 0x1e475005,
+	   0x2608edb8, 0x22c9f00f, 0x2f8ad6d6, 0x2b4bcb61,
+	   0x350c9b64, 0x31cd86d3, 0x3c8ea00a, 0x384fbdbd,
+	   0x4c11db70, 0x48d0c6c7, 0x4593e01e, 0x4152fda9,
+	   0x5f15adac, 0x5bd4b01b, 0x569796c2, 0x52568b75,
+	   0x6a1936c8, 0x6ed82b7f, 0x639b0da6, 0x675a1011,
+	   0x791d4014, 0x7ddc5da3, 0x709f7b7a, 0x745e66cd,
+	   0x9823b6e0, 0x9ce2ab57, 0x91a18d8e, 0x95609039,
+	   0x8b27c03c, 0x8fe6dd8b, 0x82a5fb52, 0x8664e6e5,
+	   0xbe2b5b58, 0xbaea46ef, 0xb7a96036, 0xb3687d81,
+	   0xad2f2d84, 0xa9ee3033, 0xa4ad16ea, 0xa06c0b5d,
+	   0xd4326d90, 0xd0f37027, 0xddb056fe, 0xd9714b49,
+	   0xc7361b4c, 0xc3f706fb, 0xceb42022, 0xca753d95,
+	   0xf23a8028, 0xf6fb9d9f, 0xfbb8bb46, 0xff79a6f1,
+	   0xe13ef6f4, 0xe5ffeb43, 0xe8bccd9a, 0xec7dd02d,
+	   0x34867077, 0x30476dc0, 0x3d044b19, 0x39c556ae,
+	   0x278206ab, 0x23431b1c, 0x2e003dc5, 0x2ac12072,
+	   0x128e9dcf, 0x164f8078, 0x1b0ca6a1, 0x1fcdbb16,
+	   0x018aeb13, 0x054bf6a4, 0x0808d07d, 0x0cc9cdca,
+	   0x7897ab07, 0x7c56b6b0, 0x71159069, 0x75d48dde,
+	   0x6b93dddb, 0x6f52c06c, 0x6211e6b5, 0x66d0fb02,
+	   0x5e9f46bf, 0x5a5e5b08, 0x571d7dd1, 0x53dc6066,
+	   0x4d9b3063, 0x495a2dd4, 0x44190b0d, 0x40d816ba,
+	   0xaca5c697, 0xa864db20, 0xa527fdf9, 0xa1e6e04e,
+	   0xbfa1b04b, 0xbb60adfc, 0xb6238b25, 0xb2e29692,
+	   0x8aad2b2f, 0x8e6c3698, 0x832f1041, 0x87ee0df6,
+	   0x99a95df3, 0x9d684044, 0x902b669d, 0x94ea7b2a,
+	   0xe0b41de7, 0xe4750050, 0xe9362689, 0xedf73b3e,
+	   0xf3b06b3b, 0xf771768c, 0xfa325055, 0xfef34de2,
+	   0xc6bcf05f, 0xc27dede8, 0xcf3ecb31, 0xcbffd686,
+	   0xd5b88683, 0xd1799b34, 0xdc3abded, 0xd8fba05a,
+	   0x690ce0ee, 0x6dcdfd59, 0x608edb80, 0x644fc637,
+	   0x7a089632, 0x7ec98b85, 0x738aad5c, 0x774bb0eb,
+	   0x4f040d56, 0x4bc510e1, 0x46863638, 0x42472b8f,
+	   0x5c007b8a, 0x58c1663d, 0x558240e4, 0x51435d53,
+	   0x251d3b9e, 0x21dc2629, 0x2c9f00f0, 0x285e1d47,
+	   0x36194d42, 0x32d850f5, 0x3f9b762c, 0x3b5a6b9b,
+	   0x0315d626, 0x07d4cb91, 0x0a97ed48, 0x0e56f0ff,
+	   0x1011a0fa, 0x14d0bd4d, 0x19939b94, 0x1d528623,
+	   0xf12f560e, 0xf5ee4bb9, 0xf8ad6d60, 0xfc6c70d7,
+	   0xe22b20d2, 0xe6ea3d65, 0xeba91bbc, 0xef68060b,
+	   0xd727bbb6, 0xd3e6a601, 0xdea580d8, 0xda649d6f,
+	   0xc423cd6a, 0xc0e2d0dd, 0xcda1f604, 0xc960ebb3,
+	   0xbd3e8d7e, 0xb9ff90c9, 0xb4bcb610, 0xb07daba7,
+	   0xae3afba2, 0xaafbe615, 0xa7b8c0cc, 0xa379dd7b,
+	   0x9b3660c6, 0x9ff77d71, 0x92b45ba8, 0x9675461f,
+	   0x8832161a, 0x8cf30bad, 0x81b02d74, 0x857130c3,
+	   0x5d8a9099, 0x594b8d2e, 0x5408abf7, 0x50c9b640,
+	   0x4e8ee645, 0x4a4ffbf2, 0x470cdd2b, 0x43cdc09c,
+	   0x7b827d21, 0x7f436096, 0x7200464f, 0x76c15bf8,
+	   0x68860bfd, 0x6c47164a, 0x61043093, 0x65c52d24,
+	   0x119b4be9, 0x155a565e, 0x18197087, 0x1cd86d30,
+	   0x029f3d35, 0x065e2082, 0x0b1d065b, 0x0fdc1bec,
+	   0x3793a651, 0x3352bbe6, 0x3e119d3f, 0x3ad08088,
+	   0x2497d08d, 0x2056cd3a, 0x2d15ebe3, 0x29d4f654,
+	   0xc5a92679, 0xc1683bce, 0xcc2b1d17, 0xc8ea00a0,
+	   0xd6ad50a5, 0xd26c4d12, 0xdf2f6bcb, 0xdbee767c,
+	   0xe3a1cbc1, 0xe760d676, 0xea23f0af, 0xeee2ed18,
+	   0xf0a5bd1d, 0xf464a0aa, 0xf9278673, 0xfde69bc4,
+	   0x89b8fd09, 0x8d79e0be, 0x803ac667, 0x84fbdbd0,
+	   0x9abc8bd5, 0x9e7d9662, 0x933eb0bb, 0x97ffad0c,
+	   0xafb010b1, 0xab710d06, 0xa6322bdf, 0xa2f33668,
+	   0xbcb4666d, 0xb8757bda, 0xb5365d03, 0xb1f740b4
+	];
+
+	bzip2.array = function(bytes) {
+	    var bit = 0, byte = 0;
+	    var BITMASK = [0, 0x01, 0x03, 0x07, 0x0F, 0x1F, 0x3F, 0x7F, 0xFF ];
+	    return function(n) {
+	        var result = 0;
+	        while(n > 0) {
+	            var left = 8 - bit;
+	            if (n >= left) {
+	                result <<= left;
+	                result |= (BITMASK[left] & bytes[byte++]);
+	                bit = 0;
+	                n -= left;
+	            } else {
+	                result <<= n;
+	                result |= ((bytes[byte] & (BITMASK[n] << (8 - n - bit))) >> (8 - n - bit));
+	                bit += n;
+	                n = 0;
+	            }
+	        }
+	        return result;
+	    }
+	};
+
+	    
+	bzip2.simple = function(srcbuffer, stream) {
+	    var bits = bzip2.array(srcbuffer);
+	    var size = bzip2.header(bits);
+	    var ret = false;
+	    var bufsize = 100000 * size;
+	    var buf = new Int32Array(bufsize);
+	    
+	    do {
+	        ret = bzip2.decompress(bits, stream, buf, bufsize);        
+	    } while(!ret);
+	};
+
+	bzip2.header = function(bits) {
+	    this.byteCount = new Int32Array(256);
+	    this.symToByte = new Uint8Array(256);
+	    this.mtfSymbol = new Int32Array(256);
+	    this.selectors = new Uint8Array(0x8000);
+
+	    if (bits(8*3) != 4348520) message.Error("No magic number found");
+
+	    var i = bits(8) - 48;
+	    if (i < 1 || i > 9) message.Error("Not a BZIP archive");
+	    return i;
+	};
+
+
+	//takes a function for reading the block data (starting with 0x314159265359)
+	//a block size (0-9) (optional, defaults to 9)
+	//a length at which to stop decompressing and return the output
+	bzip2.decompress = function(bits, stream, buf, bufsize, streamCRC) {
+	    var MAX_HUFCODE_BITS = 20;
+	    var MAX_SYMBOLS = 258;
+	    var SYMBOL_RUNA = 0;
+	    var SYMBOL_RUNB = 1;
+	    var GROUP_SIZE = 50;
+	    var crc = 0 ^ (-1);
+	    
+	    for(var h = '', i = 0; i < 6; i++) h += bits(8).toString(16);
+	    if (h == "177245385090") {
+	      var finalCRC = bits(32)|0;
+	      if (finalCRC !== streamCRC) message.Error("Error in bzip2: crc32 do not match");
+	      // align stream to byte
+	      bits(null);
+	      return null; // reset streamCRC for next call
+	    }
+	    if (h != "314159265359") message.Error("eek not valid bzip data");
+	    var crcblock = bits(32)|0; // CRC code
+	    if (bits(1)) message.Error("unsupported obsolete version");
+	    var origPtr = bits(24);
+	    if (origPtr > bufsize) message.Error("Initial position larger than buffer size");
+	    var t = bits(16);
+	    var symTotal = 0;
+	    for (i = 0; i < 16; i++) {
+	        if (t & (1 << (15 - i))) {
+	            var k = bits(16);
+	            for(j = 0; j < 16; j++) {
+	                if (k & (1 << (15 - j))) {
+	                    this.symToByte[symTotal++] = (16 * i) + j;
+	                }
+	            }
+	        }
+	    }
+
+	    var groupCount = bits(3);
+	    if (groupCount < 2 || groupCount > 6) message.Error("another error");
+	    var nSelectors = bits(15);
+	    if (nSelectors == 0) message.Error("meh");
+	    for(var i = 0; i < groupCount; i++) this.mtfSymbol[i] = i;
+
+	    for(var i = 0; i < nSelectors; i++) {
+	        for(var j = 0; bits(1); j++) if (j >= groupCount) message.Error("whoops another error");
+	        var uc = this.mtfSymbol[j];
+	        for(var k = j-1; k>=0; k--) {
+	            this.mtfSymbol[k+1] = this.mtfSymbol[k];
+	        }
+	        this.mtfSymbol[0] = uc;
+	        this.selectors[i] = uc;
+	    }
+
+	    var symCount = symTotal + 2;
+	    var groups = [];
+	    var length = new Uint8Array(MAX_SYMBOLS),
+	    temp = new Uint16Array(MAX_HUFCODE_BITS+1);
+
+	    var hufGroup;
+
+	    for(var j = 0; j < groupCount; j++) {
+	        t = bits(5); //lengths
+	        for(var i = 0; i < symCount; i++) {
+	            while(true){
+	                if (t < 1 || t > MAX_HUFCODE_BITS) message.Error("I gave up a while ago on writing error messages");
+	                if (!bits(1)) break;
+	                if (!bits(1)) t++;
+	                else t--;
+	            }
+	            length[i] = t;
+	        }
+	        var  minLen,  maxLen;
+	        minLen = maxLen = length[0];
+	        for(var i = 1; i < symCount; i++) {
+	            if (length[i] > maxLen) maxLen = length[i];
+	            else if (length[i] < minLen) minLen = length[i];
+	        }
+	        hufGroup = groups[j] = {};
+	        hufGroup.permute = new Int32Array(MAX_SYMBOLS);
+	        hufGroup.limit = new Int32Array(MAX_HUFCODE_BITS + 1);
+	        hufGroup.base = new Int32Array(MAX_HUFCODE_BITS + 1);
+
+	        hufGroup.minLen = minLen;
+	        hufGroup.maxLen = maxLen;
+	        var base = hufGroup.base;
+	        var limit = hufGroup.limit;
+	        var pp = 0;
+	        for(var i = minLen; i <= maxLen; i++)
+	        for(var t = 0; t < symCount; t++)
+	        if (length[t] == i) hufGroup.permute[pp++] = t;
+	        for(i = minLen; i <= maxLen; i++) temp[i] = limit[i] = 0;
+	        for(i = 0; i < symCount; i++) temp[length[i]]++;
+	        pp = t = 0;
+	        for(i = minLen; i < maxLen; i++) {
+	            pp += temp[i];
+	            limit[i] = pp - 1;
+	            pp <<= 1;
+	            base[i+1] = pp - (t += temp[i]);
+	        }
+	        limit[maxLen] = pp + temp[maxLen] - 1;
+	        base[minLen] = 0;
+	    }
+
+	    for(var i = 0; i < 256; i++) { 
+	        this.mtfSymbol[i] = i;
+	        this.byteCount[i] = 0;
+	    }
+	    var runPos, count, symCount, selector;
+	    runPos = count = symCount = selector = 0;    
+	    while(true) {
+	        if (!(symCount--)) {
+	            symCount = GROUP_SIZE - 1;
+	            if (selector >= nSelectors) message.Error("meow i'm a kitty, that's an error");
+	            hufGroup = groups[this.selectors[selector++]];
+	            base = hufGroup.base;
+	            limit = hufGroup.limit;
+	        }
+	        i = hufGroup.minLen;
+	        j = bits(i);
+	        while(true) {
+	            if (i > hufGroup.maxLen) message.Error("rawr i'm a dinosaur");
+	            if (j <= limit[i]) break;
+	            i++;
+	            j = (j << 1) | bits(1);
+	        }
+	        j -= base[i];
+	        if (j < 0 || j >= MAX_SYMBOLS) message.Error("moo i'm a cow");
+	        var nextSym = hufGroup.permute[j];
+	        if (nextSym == SYMBOL_RUNA || nextSym == SYMBOL_RUNB) {
+	            if (!runPos){
+	                runPos = 1;
+	                t = 0;
+	            }
+	            if (nextSym == SYMBOL_RUNA) t += runPos;
+	            else t += 2 * runPos;
+	            runPos <<= 1;
+	            continue;
+	        }
+	        if (runPos) {
+	            runPos = 0;
+	            if (count + t > bufsize) message.Error("Boom.");
+	            uc = this.symToByte[this.mtfSymbol[0]];
+	            this.byteCount[uc] += t;
+	            while(t--) buf[count++] = uc;
+	        }
+	        if (nextSym > symTotal) break;
+	        if (count >= bufsize) message.Error("I can't think of anything. Error");
+	        i = nextSym - 1;
+	        uc = this.mtfSymbol[i];
+	        for(var k = i-1; k>=0; k--) {
+	            this.mtfSymbol[k+1] = this.mtfSymbol[k];
+	        }
+	        this.mtfSymbol[0] = uc;
+	        uc = this.symToByte[uc];
+	        this.byteCount[uc]++;
+	        buf[count++] = uc;
+	    }
+	    if (origPtr < 0 || origPtr >= count) message.Error("I'm a monkey and I'm throwing something at someone, namely you");
+	    var j = 0;
+	    for(var i = 0; i < 256; i++) {
+	        k = j + this.byteCount[i];
+	        this.byteCount[i] = j;
+	        j = k;
+	    }
+	    for(var i = 0; i < count; i++) {
+	        uc = buf[i] & 0xff;
+	        buf[this.byteCount[uc]] |= (i << 8);
+	        this.byteCount[uc]++;
+	    }
+	    var pos = 0, current = 0, run = 0;
+	    if (count) {
+	        pos = buf[origPtr];
+	        current = (pos & 0xff);
+	        pos >>= 8;
+	        run = -1;
+	    }
+	    count = count;
+	    var copies, previous, outbyte;
+	    while(count) {
+	        count--;
+	        previous = current;
+	        pos = buf[pos];
+	        current = pos & 0xff;
+	        pos >>= 8;
+	        if (run++ == 3) {
+	            copies = current;
+	            outbyte = previous;
+	            current = -1;
+	        } else {
+	            copies = 1;
+	            outbyte = current;
+	        }
+	        while(copies--) {
+	            crc = ((crc << 8) ^ this.crcTable[((crc>>24) ^ outbyte) & 0xFF])&0xFFFFFFFF; // crc32
+	            stream(outbyte);
+	        }
+	        if (current != previous) run = 0;
+	    }
+
+	    crc = (crc ^ (-1)) >>> 0;
+	    if ((crc|0) != (crcblock|0)) message.Error("Error in bzip2: crc32 do not match");
+	    streamCRC = (crc ^ ((streamCRC << 1) | (streamCRC >>> 31))) & 0xFFFFFFFF;
+	    return streamCRC;
+	};
+
+	bzip2_1 = bzip2;
+	return bzip2_1;
+}
+
+var bit_iterator;
+var hasRequiredBit_iterator;
+
+function requireBit_iterator () {
+	if (hasRequiredBit_iterator) return bit_iterator;
+	hasRequiredBit_iterator = 1;
+	var BITMASK = [0, 0x01, 0x03, 0x07, 0x0F, 0x1F, 0x3F, 0x7F, 0xFF];
+
+	// returns a function that reads bits.
+	// takes a buffer iterator as input
+	bit_iterator = function bitIterator(nextBuffer) {
+	    var bit = 0, byte = 0;
+	    var bytes = nextBuffer();
+	    var f = function(n) {
+	        if (n === null && bit != 0) {  // align to byte boundary
+	            bit = 0;
+	            byte++;
+	            return;
+	        }
+	        var result = 0;
+	        while(n > 0) {
+	            if (byte >= bytes.length) {
+	                byte = 0;
+	                bytes = nextBuffer();
+	            }
+	            var left = 8 - bit;
+	            if (bit === 0 && n > 0)
+	                f.bytesRead++;
+	            if (n >= left) {
+	                result <<= left;
+	                result |= (BITMASK[left] & bytes[byte++]);
+	                bit = 0;
+	                n -= left;
+	            } else {
+	                result <<= n;
+	                result |= ((bytes[byte] & (BITMASK[n] << (8 - n - bit))) >> (8 - n - bit));
+	                bit += n;
+	                n = 0;
+	            }
+	        }
+	        return result;
+	    };
+	    f.bytesRead = 0;
+	    return f;
+	};
+	return bit_iterator;
+}
+
+var unbzip2Stream_1;
+var hasRequiredUnbzip2Stream;
+
+function requireUnbzip2Stream () {
+	if (hasRequiredUnbzip2Stream) return unbzip2Stream_1;
+	hasRequiredUnbzip2Stream = 1;
+	var through = requireThrough();
+	var bz2 = requireBzip2();
+	var bitIterator = requireBit_iterator();
+
+	unbzip2Stream_1 = unbzip2Stream;
+
+	function unbzip2Stream() {
+	    var bufferQueue = [];
+	    var hasBytes = 0;
+	    var blockSize = 0;
+	    var broken = false;
+	    var bitReader = null;
+	    var streamCRC = null;
+
+	    function decompressBlock(push){
+	        if(!blockSize){
+	            blockSize = bz2.header(bitReader);
+	            //console.error("got header of", blockSize);
+	            streamCRC = 0;
+	            return true;
+	        }else {
+	            var bufsize = 100000 * blockSize;
+	            var buf = new Int32Array(bufsize);
+	            
+	            var chunk = [];
+	            var f = function(b) {
+	                chunk.push(b);
+	            };
+
+	            streamCRC = bz2.decompress(bitReader, f, buf, bufsize, streamCRC);
+	            if (streamCRC === null) {
+	                // reset for next bzip2 header
+	                blockSize = 0;
+	                return false;
+	            }else {
+	                //console.error('decompressed', chunk.length,'bytes');
+	                push(Buffer.from(chunk));
+	                return true;
+	            }
+	        }
+	    }
+
+	    var outlength = 0;
+	    function decompressAndQueue(stream) {
+	        if (broken) return;
+	        try {
+	            return decompressBlock(function(d) {
+	                stream.queue(d);
+	                if (d !== null) {
+	                    //console.error('write at', outlength.toString(16));
+	                    outlength += d.length;
+	                } else {
+	                    //console.error('written EOS');
+	                }
+	            });
+	        } catch(e) {
+	            //console.error(e);
+	            stream.emit('error', e);
+	            broken = true;
+	            return false;
+	        }
+	    }
+
+	    return through(
+	        function write(data) {
+	            //console.error('received', data.length,'bytes in', typeof data);
+	            bufferQueue.push(data);
+	            hasBytes += data.length;
+	            if (bitReader === null) {
+	                bitReader = bitIterator(function() {
+	                    return bufferQueue.shift();
+	                });
+	            }
+	            while (!broken && hasBytes - bitReader.bytesRead + 1 >= ((25000 + 100000 * blockSize) || 4)){
+	                //console.error('decompressing with', hasBytes - bitReader.bytesRead + 1, 'bytes in buffer');
+	                decompressAndQueue(this);
+	            }
+	        },
+	        function end(x) {
+	            //console.error(x,'last compressing with', hasBytes, 'bytes in buffer');
+	            while (!broken && bitReader && hasBytes > bitReader.bytesRead){
+	                decompressAndQueue(this);
+	            }
+	            if (!broken) {
+	                if (streamCRC !== null)
+	                    this.emit('error', new Error("input stream ended prematurely"));
+	                this.queue(null);
+	            }
+	        }
+	    );
+	}
+	return unbzip2Stream_1;
+}
+
+var decompressTarbz2;
+var hasRequiredDecompressTarbz2;
+
+function requireDecompressTarbz2 () {
+	if (hasRequiredDecompressTarbz2) return decompressTarbz2;
+	hasRequiredDecompressTarbz2 = 1;
+	const decompressTar = requireDecompressTar();
+	const fileType = requireFileType$1();
+	const isStream = requireIsStream$1();
+	const seekBzip = requireLib();
+	const unbzip2Stream = requireUnbzip2Stream();
+
+	decompressTarbz2 = () => input => {
+		if (!Buffer.isBuffer(input) && !isStream(input)) {
+			return Promise.reject(new TypeError(`Expected a Buffer or Stream, got ${typeof input}`));
+		}
+
+		if (Buffer.isBuffer(input) && (!fileType(input) || fileType(input).ext !== 'bz2')) {
+			return Promise.resolve([]);
+		}
+
+		if (Buffer.isBuffer(input)) {
+			return decompressTar()(seekBzip.decode(input));
+		}
+
+		return decompressTar()(input.pipe(unbzip2Stream()));
+	};
+	return decompressTarbz2;
+}
+
+var isStream = {exports: {}};
+
+var hasRequiredIsStream;
+
+function requireIsStream () {
+	if (hasRequiredIsStream) return isStream.exports;
+	hasRequiredIsStream = 1;
+
+	var isStream$1 = isStream.exports = function (stream) {
+		return stream !== null && typeof stream === 'object' && typeof stream.pipe === 'function';
+	};
+
+	isStream$1.writable = function (stream) {
+		return isStream$1(stream) && stream.writable !== false && typeof stream._write === 'function' && typeof stream._writableState === 'object';
+	};
+
+	isStream$1.readable = function (stream) {
+		return isStream$1(stream) && stream.readable !== false && typeof stream._read === 'function' && typeof stream._readableState === 'object';
+	};
+
+	isStream$1.duplex = function (stream) {
+		return isStream$1.writable(stream) && isStream$1.readable(stream);
+	};
+
+	isStream$1.transform = function (stream) {
+		return isStream$1.duplex(stream) && typeof stream._transform === 'function' && typeof stream._transformState === 'object';
+	};
+	return isStream.exports;
+}
+
+var decompressTargz;
+var hasRequiredDecompressTargz;
+
+function requireDecompressTargz () {
+	if (hasRequiredDecompressTargz) return decompressTargz;
+	hasRequiredDecompressTargz = 1;
+	const zlib = require$$3$2;
+	const decompressTar = requireDecompressTar();
+	const fileType = requireFileType$2();
+	const isStream = requireIsStream();
+
+	decompressTargz = () => input => {
+		if (!Buffer.isBuffer(input) && !isStream(input)) {
+			return Promise.reject(new TypeError(`Expected a Buffer or Stream, got ${typeof input}`));
+		}
+
+		if (Buffer.isBuffer(input) && (!fileType(input) || fileType(input).ext !== 'gz')) {
+			return Promise.resolve([]);
+		}
+
+		const unzip = zlib.createGunzip();
+		const result = decompressTar()(unzip);
+
+		if (Buffer.isBuffer(input)) {
+			unzip.end(input);
+		} else {
+			input.pipe(unzip);
+		}
+
+		return result;
+	};
+	return decompressTargz;
+}
+
+var fileType;
+var hasRequiredFileType;
+
+function requireFileType () {
+	if (hasRequiredFileType) return fileType;
+	hasRequiredFileType = 1;
+	fileType = function (buf) {
+		if (!(buf && buf.length > 1)) {
+			return null;
+		}
+
+		if (buf[0] === 0xFF && buf[1] === 0xD8 && buf[2] === 0xFF) {
+			return {
+				ext: 'jpg',
+				mime: 'image/jpeg'
+			};
+		}
+
+		if (buf[0] === 0x89 && buf[1] === 0x50 && buf[2] === 0x4E && buf[3] === 0x47) {
+			return {
+				ext: 'png',
+				mime: 'image/png'
+			};
+		}
+
+		if (buf[0] === 0x47 && buf[1] === 0x49 && buf[2] === 0x46) {
+			return {
+				ext: 'gif',
+				mime: 'image/gif'
+			};
+		}
+
+		if (buf[8] === 0x57 && buf[9] === 0x45 && buf[10] === 0x42 && buf[11] === 0x50) {
+			return {
+				ext: 'webp',
+				mime: 'image/webp'
+			};
+		}
+
+		if (buf[0] === 0x46 && buf[1] === 0x4C && buf[2] === 0x49 && buf[3] === 0x46) {
+			return {
+				ext: 'flif',
+				mime: 'image/flif'
+			};
+		}
+
+		// needs to be before `tif` check
+		if (((buf[0] === 0x49 && buf[1] === 0x49 && buf[2] === 0x2A && buf[3] === 0x0) || (buf[0] === 0x4D && buf[1] === 0x4D && buf[2] === 0x0 && buf[3] === 0x2A)) && buf[8] === 0x43 && buf[9] === 0x52) {
+			return {
+				ext: 'cr2',
+				mime: 'image/x-canon-cr2'
+			};
+		}
+
+		if ((buf[0] === 0x49 && buf[1] === 0x49 && buf[2] === 0x2A && buf[3] === 0x0) || (buf[0] === 0x4D && buf[1] === 0x4D && buf[2] === 0x0 && buf[3] === 0x2A)) {
+			return {
+				ext: 'tif',
+				mime: 'image/tiff'
+			};
+		}
+
+		if (buf[0] === 0x42 && buf[1] === 0x4D) {
+			return {
+				ext: 'bmp',
+				mime: 'image/bmp'
+			};
+		}
+
+		if (buf[0] === 0x49 && buf[1] === 0x49 && buf[2] === 0xBC) {
+			return {
+				ext: 'jxr',
+				mime: 'image/vnd.ms-photo'
+			};
+		}
+
+		if (buf[0] === 0x38 && buf[1] === 0x42 && buf[2] === 0x50 && buf[3] === 0x53) {
+			return {
+				ext: 'psd',
+				mime: 'image/vnd.adobe.photoshop'
+			};
+		}
+
+		// needs to be before `zip` check
+		if (buf[0] === 0x50 && buf[1] === 0x4B && buf[2] === 0x3 && buf[3] === 0x4 && buf[30] === 0x6D && buf[31] === 0x69 && buf[32] === 0x6D && buf[33] === 0x65 && buf[34] === 0x74 && buf[35] === 0x79 && buf[36] === 0x70 && buf[37] === 0x65 && buf[38] === 0x61 && buf[39] === 0x70 && buf[40] === 0x70 && buf[41] === 0x6C && buf[42] === 0x69 && buf[43] === 0x63 && buf[44] === 0x61 && buf[45] === 0x74 && buf[46] === 0x69 && buf[47] === 0x6F && buf[48] === 0x6E && buf[49] === 0x2F && buf[50] === 0x65 && buf[51] === 0x70 && buf[52] === 0x75 && buf[53] === 0x62 && buf[54] === 0x2B && buf[55] === 0x7A && buf[56] === 0x69 && buf[57] === 0x70) {
+			return {
+				ext: 'epub',
+				mime: 'application/epub+zip'
+			};
+		}
+
+		// needs to be before `zip` check
+		// assumes signed .xpi from addons.mozilla.org
+		if (buf[0] === 0x50 && buf[1] === 0x4B && buf[2] === 0x3 && buf[3] === 0x4 && buf[30] === 0x4D && buf[31] === 0x45 && buf[32] === 0x54 && buf[33] === 0x41 && buf[34] === 0x2D && buf[35] === 0x49 && buf[36] === 0x4E && buf[37] === 0x46 && buf[38] === 0x2F && buf[39] === 0x6D && buf[40] === 0x6F && buf[41] === 0x7A && buf[42] === 0x69 && buf[43] === 0x6C && buf[44] === 0x6C && buf[45] === 0x61 && buf[46] === 0x2E && buf[47] === 0x72 && buf[48] === 0x73 && buf[49] === 0x61) {
+			return {
+				ext: 'xpi',
+				mime: 'application/x-xpinstall'
+			};
+		}
+
+		if (buf[0] === 0x50 && buf[1] === 0x4B && (buf[2] === 0x3 || buf[2] === 0x5 || buf[2] === 0x7) && (buf[3] === 0x4 || buf[3] === 0x6 || buf[3] === 0x8)) {
+			return {
+				ext: 'zip',
+				mime: 'application/zip'
+			};
+		}
+
+		if (buf[257] === 0x75 && buf[258] === 0x73 && buf[259] === 0x74 && buf[260] === 0x61 && buf[261] === 0x72) {
+			return {
+				ext: 'tar',
+				mime: 'application/x-tar'
+			};
+		}
+
+		if (buf[0] === 0x52 && buf[1] === 0x61 && buf[2] === 0x72 && buf[3] === 0x21 && buf[4] === 0x1A && buf[5] === 0x7 && (buf[6] === 0x0 || buf[6] === 0x1)) {
+			return {
+				ext: 'rar',
+				mime: 'application/x-rar-compressed'
+			};
+		}
+
+		if (buf[0] === 0x1F && buf[1] === 0x8B && buf[2] === 0x8) {
+			return {
+				ext: 'gz',
+				mime: 'application/gzip'
+			};
+		}
+
+		if (buf[0] === 0x42 && buf[1] === 0x5A && buf[2] === 0x68) {
+			return {
+				ext: 'bz2',
+				mime: 'application/x-bzip2'
+			};
+		}
+
+		if (buf[0] === 0x37 && buf[1] === 0x7A && buf[2] === 0xBC && buf[3] === 0xAF && buf[4] === 0x27 && buf[5] === 0x1C) {
+			return {
+				ext: '7z',
+				mime: 'application/x-7z-compressed'
+			};
+		}
+
+		if (buf[0] === 0x78 && buf[1] === 0x01) {
+			return {
+				ext: 'dmg',
+				mime: 'application/x-apple-diskimage'
+			};
+		}
+
+		if (
+			(buf[0] === 0x0 && buf[1] === 0x0 && buf[2] === 0x0 && (buf[3] === 0x18 || buf[3] === 0x20) && buf[4] === 0x66 && buf[5] === 0x74 && buf[6] === 0x79 && buf[7] === 0x70) ||
+			(buf[0] === 0x33 && buf[1] === 0x67 && buf[2] === 0x70 && buf[3] === 0x35) ||
+			(buf[0] === 0x0 && buf[1] === 0x0 && buf[2] === 0x0 && buf[3] === 0x1C && buf[4] === 0x66 && buf[5] === 0x74 && buf[6] === 0x79 && buf[7] === 0x70 && buf[8] === 0x6D && buf[9] === 0x70 && buf[10] === 0x34 && buf[11] === 0x32 && buf[16] === 0x6D && buf[17] === 0x70 && buf[18] === 0x34 && buf[19] === 0x31 && buf[20] === 0x6D && buf[21] === 0x70 && buf[22] === 0x34 && buf[23] === 0x32 && buf[24] === 0x69 && buf[25] === 0x73 && buf[26] === 0x6F && buf[27] === 0x6D) ||
+			(buf[0] === 0x0 && buf[1] === 0x0 && buf[2] === 0x0 && buf[3] === 0x1C && buf[4] === 0x66 && buf[5] === 0x74 && buf[6] === 0x79 && buf[7] === 0x70 && buf[8] === 0x69 && buf[9] === 0x73 && buf[10] === 0x6F && buf[11] === 0x6D) ||
+			(buf[0] === 0x0 && buf[1] === 0x0 && buf[2] === 0x0 && buf[3] === 0x1c && buf[4] === 0x66 && buf[5] === 0x74 && buf[6] === 0x79 && buf[7] === 0x70 && buf[8] === 0x6D && buf[9] === 0x70 && buf[10] === 0x34 && buf[11] === 0x32 && buf[12] === 0x0 && buf[13] === 0x0 && buf[14] === 0x0 && buf[15] === 0x0)
+		) {
+			return {
+				ext: 'mp4',
+				mime: 'video/mp4'
+			};
+		}
+
+		if ((buf[0] === 0x0 && buf[1] === 0x0 && buf[2] === 0x0 && buf[3] === 0x1C && buf[4] === 0x66 && buf[5] === 0x74 && buf[6] === 0x79 && buf[7] === 0x70 && buf[8] === 0x4D && buf[9] === 0x34 && buf[10] === 0x56)) {
+			return {
+				ext: 'm4v',
+				mime: 'video/x-m4v'
+			};
+		}
+
+		if (buf[0] === 0x4D && buf[1] === 0x54 && buf[2] === 0x68 && buf[3] === 0x64) {
+			return {
+				ext: 'mid',
+				mime: 'audio/midi'
+			};
+		}
+
+		// needs to be before the `webm` check
+		if (buf[31] === 0x6D && buf[32] === 0x61 && buf[33] === 0x74 && buf[34] === 0x72 && buf[35] === 0x6f && buf[36] === 0x73 && buf[37] === 0x6B && buf[38] === 0x61) {
+			return {
+				ext: 'mkv',
+				mime: 'video/x-matroska'
+			};
+		}
+
+		if (buf[0] === 0x1A && buf[1] === 0x45 && buf[2] === 0xDF && buf[3] === 0xA3) {
+			return {
+				ext: 'webm',
+				mime: 'video/webm'
+			};
+		}
+
+		if (buf[0] === 0x0 && buf[1] === 0x0 && buf[2] === 0x0 && buf[3] === 0x14 && buf[4] === 0x66 && buf[5] === 0x74 && buf[6] === 0x79 && buf[7] === 0x70) {
+			return {
+				ext: 'mov',
+				mime: 'video/quicktime'
+			};
+		}
+
+		if (buf[0] === 0x52 && buf[1] === 0x49 && buf[2] === 0x46 && buf[3] === 0x46 && buf[8] === 0x41 && buf[9] === 0x56 && buf[10] === 0x49) {
+			return {
+				ext: 'avi',
+				mime: 'video/x-msvideo'
+			};
+		}
+
+		if (buf[0] === 0x30 && buf[1] === 0x26 && buf[2] === 0xB2 && buf[3] === 0x75 && buf[4] === 0x8E && buf[5] === 0x66 && buf[6] === 0xCF && buf[7] === 0x11 && buf[8] === 0xA6 && buf[9] === 0xD9) {
+			return {
+				ext: 'wmv',
+				mime: 'video/x-ms-wmv'
+			};
+		}
+
+		if (buf[0] === 0x0 && buf[1] === 0x0 && buf[2] === 0x1 && buf[3].toString(16)[0] === 'b') {
+			return {
+				ext: 'mpg',
+				mime: 'video/mpeg'
+			};
+		}
+
+		if ((buf[0] === 0x49 && buf[1] === 0x44 && buf[2] === 0x33) || (buf[0] === 0xFF && buf[1] === 0xfb)) {
+			return {
+				ext: 'mp3',
+				mime: 'audio/mpeg'
+			};
+		}
+
+		if ((buf[4] === 0x66 && buf[5] === 0x74 && buf[6] === 0x79 && buf[7] === 0x70 && buf[8] === 0x4D && buf[9] === 0x34 && buf[10] === 0x41) || (buf[0] === 0x4D && buf[1] === 0x34 && buf[2] === 0x41 && buf[3] === 0x20)) {
+			return {
+				ext: 'm4a',
+				mime: 'audio/m4a'
+			};
+		}
+
+		// needs to be before `ogg` check
+		if (buf[28] === 0x4F && buf[29] === 0x70 && buf[30] === 0x75 && buf[31] === 0x73 && buf[32] === 0x48 && buf[33] === 0x65 && buf[34] === 0x61 && buf[35] === 0x64) {
+			return {
+				ext: 'opus',
+				mime: 'audio/opus'
+			};
+		}
+
+		if (buf[0] === 0x4F && buf[1] === 0x67 && buf[2] === 0x67 && buf[3] === 0x53) {
+			return {
+				ext: 'ogg',
+				mime: 'audio/ogg'
+			};
+		}
+
+		if (buf[0] === 0x66 && buf[1] === 0x4C && buf[2] === 0x61 && buf[3] === 0x43) {
+			return {
+				ext: 'flac',
+				mime: 'audio/x-flac'
+			};
+		}
+
+		if (buf[0] === 0x52 && buf[1] === 0x49 && buf[2] === 0x46 && buf[3] === 0x46 && buf[8] === 0x57 && buf[9] === 0x41 && buf[10] === 0x56 && buf[11] === 0x45) {
+			return {
+				ext: 'wav',
+				mime: 'audio/x-wav'
+			};
+		}
+
+		if (buf[0] === 0x23 && buf[1] === 0x21 && buf[2] === 0x41 && buf[3] === 0x4D && buf[4] === 0x52 && buf[5] === 0x0A) {
+			return {
+				ext: 'amr',
+				mime: 'audio/amr'
+			};
+		}
+
+		if (buf[0] === 0x25 && buf[1] === 0x50 && buf[2] === 0x44 && buf[3] === 0x46) {
+			return {
+				ext: 'pdf',
+				mime: 'application/pdf'
+			};
+		}
+
+		if (buf[0] === 0x4D && buf[1] === 0x5A) {
+			return {
+				ext: 'exe',
+				mime: 'application/x-msdownload'
+			};
+		}
+
+		if ((buf[0] === 0x43 || buf[0] === 0x46) && buf[1] === 0x57 && buf[2] === 0x53) {
+			return {
+				ext: 'swf',
+				mime: 'application/x-shockwave-flash'
+			};
+		}
+
+		if (buf[0] === 0x7B && buf[1] === 0x5C && buf[2] === 0x72 && buf[3] === 0x74 && buf[4] === 0x66) {
+			return {
+				ext: 'rtf',
+				mime: 'application/rtf'
+			};
+		}
+
+		if (
+			(buf[0] === 0x77 && buf[1] === 0x4F && buf[2] === 0x46 && buf[3] === 0x46) &&
+			(
+				(buf[4] === 0x00 && buf[5] === 0x01 && buf[6] === 0x00 && buf[7] === 0x00) ||
+				(buf[4] === 0x4F && buf[5] === 0x54 && buf[6] === 0x54 && buf[7] === 0x4F)
+			)
+		) {
+			return {
+				ext: 'woff',
+				mime: 'application/font-woff'
+			};
+		}
+
+		if (
+			(buf[0] === 0x77 && buf[1] === 0x4F && buf[2] === 0x46 && buf[3] === 0x32) &&
+			(
+				(buf[4] === 0x00 && buf[5] === 0x01 && buf[6] === 0x00 && buf[7] === 0x00) ||
+				(buf[4] === 0x4F && buf[5] === 0x54 && buf[6] === 0x54 && buf[7] === 0x4F)
+			)
+		) {
+			return {
+				ext: 'woff2',
+				mime: 'application/font-woff'
+			};
+		}
+
+		if (
+			(buf[34] === 0x4C && buf[35] === 0x50) &&
+			(
+				(buf[8] === 0x00 && buf[9] === 0x00 && buf[10] === 0x01) ||
+				(buf[8] === 0x01 && buf[9] === 0x00 && buf[10] === 0x02) ||
+				(buf[8] === 0x02 && buf[9] === 0x00 && buf[10] === 0x02)
+			)
+		) {
+			return {
+				ext: 'eot',
+				mime: 'application/octet-stream'
+			};
+		}
+
+		if (buf[0] === 0x00 && buf[1] === 0x01 && buf[2] === 0x00 && buf[3] === 0x00 && buf[4] === 0x00) {
+			return {
+				ext: 'ttf',
+				mime: 'application/font-sfnt'
+			};
+		}
+
+		if (buf[0] === 0x4F && buf[1] === 0x54 && buf[2] === 0x54 && buf[3] === 0x4F && buf[4] === 0x00) {
+			return {
+				ext: 'otf',
+				mime: 'application/font-sfnt'
+			};
+		}
+
+		if (buf[0] === 0x00 && buf[1] === 0x00 && buf[2] === 0x01 && buf[3] === 0x00) {
+			return {
+				ext: 'ico',
+				mime: 'image/x-icon'
+			};
+		}
+
+		if (buf[0] === 0x46 && buf[1] === 0x4C && buf[2] === 0x56 && buf[3] === 0x01) {
+			return {
+				ext: 'flv',
+				mime: 'video/x-flv'
+			};
+		}
+
+		if (buf[0] === 0x25 && buf[1] === 0x21) {
+			return {
+				ext: 'ps',
+				mime: 'application/postscript'
+			};
+		}
+
+		if (buf[0] === 0xFD && buf[1] === 0x37 && buf[2] === 0x7A && buf[3] === 0x58 && buf[4] === 0x5A && buf[5] === 0x00) {
+			return {
+				ext: 'xz',
+				mime: 'application/x-xz'
+			};
+		}
+
+		if (buf[0] === 0x53 && buf[1] === 0x51 && buf[2] === 0x4C && buf[3] === 0x69) {
+			return {
+				ext: 'sqlite',
+				mime: 'application/x-sqlite3'
+			};
+		}
+
+		if (buf[0] === 0x4E && buf[1] === 0x45 && buf[2] === 0x53 && buf[3] === 0x1A) {
+			return {
+				ext: 'nes',
+				mime: 'application/x-nintendo-nes-rom'
+			};
+		}
+
+		if (buf[0] === 0x43 && buf[1] === 0x72 && buf[2] === 0x32 && buf[3] === 0x34) {
+			return {
+				ext: 'crx',
+				mime: 'application/x-google-chrome-extension'
+			};
+		}
+
+		if (
+			(buf[0] === 0x4D && buf[1] === 0x53 && buf[2] === 0x43 && buf[3] === 0x46) ||
+			(buf[0] === 0x49 && buf[1] === 0x53 && buf[2] === 0x63 && buf[3] === 0x28)
+		) {
+			return {
+				ext: 'cab',
+				mime: 'application/vnd.ms-cab-compressed'
+			};
+		}
+
+		// needs to be before `ar` check
+		if (buf[0] === 0x21 && buf[1] === 0x3C && buf[2] === 0x61 && buf[3] === 0x72 && buf[4] === 0x63 && buf[5] === 0x68 && buf[6] === 0x3E && buf[7] === 0x0A && buf[8] === 0x64 && buf[9] === 0x65 && buf[10] === 0x62 && buf[11] === 0x69 && buf[12] === 0x61 && buf[13] === 0x6E && buf[14] === 0x2D && buf[15] === 0x62 && buf[16] === 0x69 && buf[17] === 0x6E && buf[18] === 0x61 && buf[19] === 0x72 && buf[20] === 0x79) {
+			return {
+				ext: 'deb',
+				mime: 'application/x-deb'
+			};
+		}
+
+		if (buf[0] === 0x21 && buf[1] === 0x3C && buf[2] === 0x61 && buf[3] === 0x72 && buf[4] === 0x63 && buf[5] === 0x68 && buf[6] === 0x3E) {
+			return {
+				ext: 'ar',
+				mime: 'application/x-unix-archive'
+			};
+		}
+
+		if (buf[0] === 0xED && buf[1] === 0xAB && buf[2] === 0xEE && buf[3] === 0xDB) {
+			return {
+				ext: 'rpm',
+				mime: 'application/x-rpm'
+			};
+		}
+
+		if (
+			(buf[0] === 0x1F && buf[1] === 0xA0) ||
+			(buf[0] === 0x1F && buf[1] === 0x9D)
+		) {
+			return {
+				ext: 'Z',
+				mime: 'application/x-compress'
+			};
+		}
+
+		if (buf[0] === 0x4C && buf[1] === 0x5A && buf[2] === 0x49 && buf[3] === 0x50) {
+			return {
+				ext: 'lz',
+				mime: 'application/x-lzip'
+			};
+		}
+
+		if (buf[0] === 0xD0 && buf[1] === 0xCF && buf[2] === 0x11 && buf[3] === 0xE0 && buf[4] === 0xA1 && buf[5] === 0xB1 && buf[6] === 0x1A && buf[7] === 0xE1) {
+			return {
+				ext: 'msi',
+				mime: 'application/x-msi'
+			};
+		}
+
+		return null;
+	};
+	return fileType;
+}
+
+var getStream = {exports: {}};
+
+var pinkie;
+var hasRequiredPinkie;
+
+function requirePinkie () {
+	if (hasRequiredPinkie) return pinkie;
+	hasRequiredPinkie = 1;
+
+	var PENDING = 'pending';
+	var SETTLED = 'settled';
+	var FULFILLED = 'fulfilled';
+	var REJECTED = 'rejected';
+	var NOOP = function () {};
+	var isNode = typeof commonjsGlobal !== 'undefined' && typeof commonjsGlobal.process !== 'undefined' && typeof commonjsGlobal.process.emit === 'function';
+
+	var asyncSetTimer = typeof setImmediate === 'undefined' ? setTimeout : setImmediate;
+	var asyncQueue = [];
+	var asyncTimer;
+
+	function asyncFlush() {
+		// run promise callbacks
+		for (var i = 0; i < asyncQueue.length; i++) {
+			asyncQueue[i][0](asyncQueue[i][1]);
+		}
+
+		// reset async asyncQueue
+		asyncQueue = [];
+		asyncTimer = false;
+	}
+
+	function asyncCall(callback, arg) {
+		asyncQueue.push([callback, arg]);
+
+		if (!asyncTimer) {
+			asyncTimer = true;
+			asyncSetTimer(asyncFlush, 0);
+		}
+	}
+
+	function invokeResolver(resolver, promise) {
+		function resolvePromise(value) {
+			resolve(promise, value);
+		}
+
+		function rejectPromise(reason) {
+			reject(promise, reason);
+		}
+
+		try {
+			resolver(resolvePromise, rejectPromise);
+		} catch (e) {
+			rejectPromise(e);
+		}
+	}
+
+	function invokeCallback(subscriber) {
+		var owner = subscriber.owner;
+		var settled = owner._state;
+		var value = owner._data;
+		var callback = subscriber[settled];
+		var promise = subscriber.then;
+
+		if (typeof callback === 'function') {
+			settled = FULFILLED;
+			try {
+				value = callback(value);
+			} catch (e) {
+				reject(promise, e);
+			}
+		}
+
+		if (!handleThenable(promise, value)) {
+			if (settled === FULFILLED) {
+				resolve(promise, value);
+			}
+
+			if (settled === REJECTED) {
+				reject(promise, value);
+			}
+		}
+	}
+
+	function handleThenable(promise, value) {
+		var resolved;
+
+		try {
+			if (promise === value) {
+				throw new TypeError('A promises callback cannot return that same promise.');
+			}
+
+			if (value && (typeof value === 'function' || typeof value === 'object')) {
+				// then should be retrieved only once
+				var then = value.then;
+
+				if (typeof then === 'function') {
+					then.call(value, function (val) {
+						if (!resolved) {
+							resolved = true;
+
+							if (value === val) {
+								fulfill(promise, val);
+							} else {
+								resolve(promise, val);
+							}
+						}
+					}, function (reason) {
+						if (!resolved) {
+							resolved = true;
+
+							reject(promise, reason);
+						}
+					});
+
+					return true;
+				}
+			}
+		} catch (e) {
+			if (!resolved) {
+				reject(promise, e);
+			}
+
+			return true;
+		}
+
+		return false;
+	}
+
+	function resolve(promise, value) {
+		if (promise === value || !handleThenable(promise, value)) {
+			fulfill(promise, value);
+		}
+	}
+
+	function fulfill(promise, value) {
+		if (promise._state === PENDING) {
+			promise._state = SETTLED;
+			promise._data = value;
+
+			asyncCall(publishFulfillment, promise);
+		}
+	}
+
+	function reject(promise, reason) {
+		if (promise._state === PENDING) {
+			promise._state = SETTLED;
+			promise._data = reason;
+
+			asyncCall(publishRejection, promise);
+		}
+	}
+
+	function publish(promise) {
+		promise._then = promise._then.forEach(invokeCallback);
+	}
+
+	function publishFulfillment(promise) {
+		promise._state = FULFILLED;
+		publish(promise);
+	}
+
+	function publishRejection(promise) {
+		promise._state = REJECTED;
+		publish(promise);
+		if (!promise._handled && isNode) {
+			commonjsGlobal.process.emit('unhandledRejection', promise._data, promise);
+		}
+	}
+
+	function notifyRejectionHandled(promise) {
+		commonjsGlobal.process.emit('rejectionHandled', promise);
+	}
+
+	/**
+	 * @class
+	 */
+	function Promise(resolver) {
+		if (typeof resolver !== 'function') {
+			throw new TypeError('Promise resolver ' + resolver + ' is not a function');
+		}
+
+		if (this instanceof Promise === false) {
+			throw new TypeError('Failed to construct \'Promise\': Please use the \'new\' operator, this object constructor cannot be called as a function.');
+		}
+
+		this._then = [];
+
+		invokeResolver(resolver, this);
+	}
+
+	Promise.prototype = {
+		constructor: Promise,
+
+		_state: PENDING,
+		_then: null,
+		_data: undefined,
+		_handled: false,
+
+		then: function (onFulfillment, onRejection) {
+			var subscriber = {
+				owner: this,
+				then: new this.constructor(NOOP),
+				fulfilled: onFulfillment,
+				rejected: onRejection
+			};
+
+			if ((onRejection || onFulfillment) && !this._handled) {
+				this._handled = true;
+				if (this._state === REJECTED && isNode) {
+					asyncCall(notifyRejectionHandled, this);
+				}
+			}
+
+			if (this._state === FULFILLED || this._state === REJECTED) {
+				// already resolved, call callback async
+				asyncCall(invokeCallback, subscriber);
+			} else {
+				// subscribe
+				this._then.push(subscriber);
+			}
+
+			return subscriber.then;
+		},
+
+		catch: function (onRejection) {
+			return this.then(null, onRejection);
+		}
+	};
+
+	Promise.all = function (promises) {
+		if (!Array.isArray(promises)) {
+			throw new TypeError('You must pass an array to Promise.all().');
+		}
+
+		return new Promise(function (resolve, reject) {
+			var results = [];
+			var remaining = 0;
+
+			function resolver(index) {
+				remaining++;
+				return function (value) {
+					results[index] = value;
+					if (!--remaining) {
+						resolve(results);
+					}
+				};
+			}
+
+			for (var i = 0, promise; i < promises.length; i++) {
+				promise = promises[i];
+
+				if (promise && typeof promise.then === 'function') {
+					promise.then(resolver(i), reject);
+				} else {
+					results[i] = promise;
+				}
+			}
+
+			if (!remaining) {
+				resolve(results);
+			}
+		});
+	};
+
+	Promise.race = function (promises) {
+		if (!Array.isArray(promises)) {
+			throw new TypeError('You must pass an array to Promise.race().');
+		}
+
+		return new Promise(function (resolve, reject) {
+			for (var i = 0, promise; i < promises.length; i++) {
+				promise = promises[i];
+
+				if (promise && typeof promise.then === 'function') {
+					promise.then(resolve, reject);
+				} else {
+					resolve(promise);
+				}
+			}
+		});
+	};
+
+	Promise.resolve = function (value) {
+		if (value && typeof value === 'object' && value.constructor === Promise) {
+			return value;
+		}
+
+		return new Promise(function (resolve) {
+			resolve(value);
+		});
+	};
+
+	Promise.reject = function (reason) {
+		return new Promise(function (resolve, reject) {
+			reject(reason);
+		});
+	};
+
+	pinkie = Promise;
+	return pinkie;
+}
+
+var pinkiePromise;
+var hasRequiredPinkiePromise;
+
+function requirePinkiePromise () {
+	if (hasRequiredPinkiePromise) return pinkiePromise;
+	hasRequiredPinkiePromise = 1;
+
+	pinkiePromise = typeof Promise === 'function' ? Promise : requirePinkie();
+	return pinkiePromise;
+}
+
+/*
+object-assign
+(c) Sindre Sorhus
+@license MIT
+*/
+
+var objectAssign;
+var hasRequiredObjectAssign;
+
+function requireObjectAssign () {
+	if (hasRequiredObjectAssign) return objectAssign;
+	hasRequiredObjectAssign = 1;
+	/* eslint-disable no-unused-vars */
+	var getOwnPropertySymbols = Object.getOwnPropertySymbols;
+	var hasOwnProperty = Object.prototype.hasOwnProperty;
+	var propIsEnumerable = Object.prototype.propertyIsEnumerable;
+
+	function toObject(val) {
+		if (val === null || val === undefined) {
+			throw new TypeError('Object.assign cannot be called with null or undefined');
+		}
+
+		return Object(val);
+	}
+
+	function shouldUseNative() {
+		try {
+			if (!Object.assign) {
+				return false;
+			}
+
+			// Detect buggy property enumeration order in older V8 versions.
+
+			// https://bugs.chromium.org/p/v8/issues/detail?id=4118
+			var test1 = new String('abc');  // eslint-disable-line no-new-wrappers
+			test1[5] = 'de';
+			if (Object.getOwnPropertyNames(test1)[0] === '5') {
+				return false;
+			}
+
+			// https://bugs.chromium.org/p/v8/issues/detail?id=3056
+			var test2 = {};
+			for (var i = 0; i < 10; i++) {
+				test2['_' + String.fromCharCode(i)] = i;
+			}
+			var order2 = Object.getOwnPropertyNames(test2).map(function (n) {
+				return test2[n];
+			});
+			if (order2.join('') !== '0123456789') {
+				return false;
+			}
+
+			// https://bugs.chromium.org/p/v8/issues/detail?id=3056
+			var test3 = {};
+			'abcdefghijklmnopqrst'.split('').forEach(function (letter) {
+				test3[letter] = letter;
+			});
+			if (Object.keys(Object.assign({}, test3)).join('') !==
+					'abcdefghijklmnopqrst') {
+				return false;
+			}
+
+			return true;
+		} catch (err) {
+			// We don't expect any of the above to throw, but better to be safe.
+			return false;
+		}
+	}
+
+	objectAssign = shouldUseNative() ? Object.assign : function (target, source) {
+		var from;
+		var to = toObject(target);
+		var symbols;
+
+		for (var s = 1; s < arguments.length; s++) {
+			from = Object(arguments[s]);
+
+			for (var key in from) {
+				if (hasOwnProperty.call(from, key)) {
+					to[key] = from[key];
+				}
+			}
+
+			if (getOwnPropertySymbols) {
+				symbols = getOwnPropertySymbols(from);
+				for (var i = 0; i < symbols.length; i++) {
+					if (propIsEnumerable.call(from, symbols[i])) {
+						to[symbols[i]] = from[symbols[i]];
+					}
+				}
+			}
+		}
+
+		return to;
+	};
+	return objectAssign;
+}
+
+var bufferStream;
+var hasRequiredBufferStream;
+
+function requireBufferStream () {
+	if (hasRequiredBufferStream) return bufferStream;
+	hasRequiredBufferStream = 1;
+	var PassThrough = require$$0$5.PassThrough;
+	var objectAssign = requireObjectAssign();
+
+	bufferStream = function (opts) {
+		opts = objectAssign({}, opts);
+
+		var array = opts.array;
+		var encoding = opts.encoding;
+
+		var buffer = encoding === 'buffer';
+		var objectMode = false;
+
+		if (array) {
+			objectMode = !(encoding || buffer);
+		} else {
+			encoding = encoding || 'utf8';
+		}
+
+		if (buffer) {
+			encoding = null;
+		}
+
+		var len = 0;
+		var ret = [];
+
+		var stream = new PassThrough({objectMode: objectMode});
+
+		if (encoding) {
+			stream.setEncoding(encoding);
+		}
+
+		stream.on('data', function (chunk) {
+			ret.push(chunk);
+
+			if (objectMode) {
+				len = ret.length;
+			} else {
+				len += chunk.length;
+			}
+		});
+
+		stream.getBufferedValue = function () {
+			if (array) {
+				return ret;
+			}
+			return buffer ? Buffer.concat(ret, len) : ret.join('');
+		};
+
+		stream.getBufferedLength = function () {
+			return len;
+		};
+
+		return stream;
+	};
+	return bufferStream;
+}
+
+var hasRequiredGetStream;
+
+function requireGetStream () {
+	if (hasRequiredGetStream) return getStream.exports;
+	hasRequiredGetStream = 1;
+	var Promise = requirePinkiePromise();
+	var objectAssign = requireObjectAssign();
+	var bufferStream = requireBufferStream();
+
+	function getStream$1(inputStream, opts) {
+		if (!inputStream) {
+			return Promise.reject(new Error('Expected a stream'));
+		}
+
+		opts = objectAssign({maxBuffer: Infinity}, opts);
+		var maxBuffer = opts.maxBuffer;
+		var stream;
+		var clean;
+
+		var p = new Promise(function (resolve, reject) {
+			stream = bufferStream(opts);
+			inputStream.once('error', error);
+			inputStream.pipe(stream);
+
+			stream.on('data', function () {
+				if (stream.getBufferedLength() > maxBuffer) {
+					reject(new Error('maxBuffer exceeded'));
+				}
+			});
+			stream.once('error', error);
+			stream.on('end', resolve);
+
+			clean = function () {
+				// some streams doesn't implement the stream.Readable interface correctly
+				if (inputStream.unpipe) {
+					inputStream.unpipe(stream);
+				}
+			};
+
+			function error(err) {
+				if (err) { // null check
+					err.bufferedData = stream.getBufferedValue();
+				}
+				reject(err);
+			}
+		});
+
+		p.then(clean, clean);
+
+		return p.then(function () {
+			return stream.getBufferedValue();
+		});
+	}
+
+	getStream.exports = getStream$1;
+
+	getStream.exports.buffer = function (stream, opts) {
+		return getStream$1(stream, objectAssign({}, opts, {encoding: 'buffer'}));
+	};
+
+	getStream.exports.array = function (stream, opts) {
+		return getStream$1(stream, objectAssign({}, opts, {array: true}));
+	};
+	return getStream.exports;
+}
+
+var pify$1 = {exports: {}};
+
+var hasRequiredPify$1;
+
+function requirePify$1 () {
+	if (hasRequiredPify$1) return pify$1.exports;
+	hasRequiredPify$1 = 1;
+
+	var processFn = function (fn, P, opts) {
+		return function () {
+			var that = this;
+			var args = new Array(arguments.length);
+
+			for (var i = 0; i < arguments.length; i++) {
+				args[i] = arguments[i];
+			}
+
+			return new P(function (resolve, reject) {
+				args.push(function (err, result) {
+					if (err) {
+						reject(err);
+					} else if (opts.multiArgs) {
+						var results = new Array(arguments.length - 1);
+
+						for (var i = 1; i < arguments.length; i++) {
+							results[i - 1] = arguments[i];
+						}
+
+						resolve(results);
+					} else {
+						resolve(result);
+					}
+				});
+
+				fn.apply(that, args);
+			});
+		};
+	};
+
+	var pify = pify$1.exports = function (obj, P, opts) {
+		if (typeof P !== 'function') {
+			opts = P;
+			P = Promise;
+		}
+
+		opts = opts || {};
+		opts.exclude = opts.exclude || [/.+Sync$/];
+
+		var filter = function (key) {
+			var match = function (pattern) {
+				return typeof pattern === 'string' ? key === pattern : pattern.test(key);
+			};
+
+			return opts.include ? opts.include.some(match) : !opts.exclude.some(match);
+		};
+
+		var ret = typeof obj === 'function' ? function () {
+			if (opts.excludeMain) {
+				return obj.apply(this, arguments);
+			}
+
+			return processFn(obj, P, opts).apply(this, arguments);
+		} : {};
+
+		return Object.keys(obj).reduce(function (ret, key) {
+			var x = obj[key];
+
+			ret[key] = typeof x === 'function' && filter(key) ? processFn(x, P, opts) : x;
+
+			return ret;
+		}, ret);
+	};
+
+	pify.all = pify;
+	return pify$1.exports;
+}
+
+var yauzl = {};
+
+var fdSlicer = {};
+
+var pend;
+var hasRequiredPend;
+
+function requirePend () {
+	if (hasRequiredPend) return pend;
+	hasRequiredPend = 1;
+	pend = Pend;
+
+	function Pend() {
+	  this.pending = 0;
+	  this.max = Infinity;
+	  this.listeners = [];
+	  this.waiting = [];
+	  this.error = null;
+	}
+
+	Pend.prototype.go = function(fn) {
+	  if (this.pending < this.max) {
+	    pendGo(this, fn);
+	  } else {
+	    this.waiting.push(fn);
+	  }
+	};
+
+	Pend.prototype.wait = function(cb) {
+	  if (this.pending === 0) {
+	    cb(this.error);
+	  } else {
+	    this.listeners.push(cb);
+	  }
+	};
+
+	Pend.prototype.hold = function() {
+	  return pendHold(this);
+	};
+
+	function pendHold(self) {
+	  self.pending += 1;
+	  var called = false;
+	  return onCb;
+	  function onCb(err) {
+	    if (called) throw new Error("callback called twice");
+	    called = true;
+	    self.error = self.error || err;
+	    self.pending -= 1;
+	    if (self.waiting.length > 0 && self.pending < self.max) {
+	      pendGo(self, self.waiting.shift());
+	    } else if (self.pending === 0) {
+	      var listeners = self.listeners;
+	      self.listeners = [];
+	      listeners.forEach(cbListener);
+	    }
+	  }
+	  function cbListener(listener) {
+	    listener(self.error);
+	  }
+	}
+
+	function pendGo(self, fn) {
+	  fn(pendHold(self));
+	}
+	return pend;
+}
+
+var hasRequiredFdSlicer;
+
+function requireFdSlicer () {
+	if (hasRequiredFdSlicer) return fdSlicer;
+	hasRequiredFdSlicer = 1;
+	var fs$1 = fs;
+	var util = require$$1;
+	var stream = require$$0$5;
+	var Readable = stream.Readable;
+	var Writable = stream.Writable;
+	var PassThrough = stream.PassThrough;
+	var Pend = requirePend();
+	var EventEmitter = require$$4.EventEmitter;
+
+	fdSlicer.createFromBuffer = createFromBuffer;
+	fdSlicer.createFromFd = createFromFd;
+	fdSlicer.BufferSlicer = BufferSlicer;
+	fdSlicer.FdSlicer = FdSlicer;
+
+	util.inherits(FdSlicer, EventEmitter);
+	function FdSlicer(fd, options) {
+	  options = options || {};
+	  EventEmitter.call(this);
+
+	  this.fd = fd;
+	  this.pend = new Pend();
+	  this.pend.max = 1;
+	  this.refCount = 0;
+	  this.autoClose = !!options.autoClose;
+	}
+
+	FdSlicer.prototype.read = function(buffer, offset, length, position, callback) {
+	  var self = this;
+	  self.pend.go(function(cb) {
+	    fs$1.read(self.fd, buffer, offset, length, position, function(err, bytesRead, buffer) {
+	      cb();
+	      callback(err, bytesRead, buffer);
+	    });
+	  });
+	};
+
+	FdSlicer.prototype.write = function(buffer, offset, length, position, callback) {
+	  var self = this;
+	  self.pend.go(function(cb) {
+	    fs$1.write(self.fd, buffer, offset, length, position, function(err, written, buffer) {
+	      cb();
+	      callback(err, written, buffer);
+	    });
+	  });
+	};
+
+	FdSlicer.prototype.createReadStream = function(options) {
+	  return new ReadStream(this, options);
+	};
+
+	FdSlicer.prototype.createWriteStream = function(options) {
+	  return new WriteStream(this, options);
+	};
+
+	FdSlicer.prototype.ref = function() {
+	  this.refCount += 1;
+	};
+
+	FdSlicer.prototype.unref = function() {
+	  var self = this;
+	  self.refCount -= 1;
+
+	  if (self.refCount > 0) return;
+	  if (self.refCount < 0) throw new Error("invalid unref");
+
+	  if (self.autoClose) {
+	    fs$1.close(self.fd, onCloseDone);
+	  }
+
+	  function onCloseDone(err) {
+	    if (err) {
+	      self.emit('error', err);
+	    } else {
+	      self.emit('close');
+	    }
+	  }
+	};
+
+	util.inherits(ReadStream, Readable);
+	function ReadStream(context, options) {
+	  options = options || {};
+	  Readable.call(this, options);
+
+	  this.context = context;
+	  this.context.ref();
+
+	  this.start = options.start || 0;
+	  this.endOffset = options.end;
+	  this.pos = this.start;
+	  this.destroyed = false;
+	}
+
+	ReadStream.prototype._read = function(n) {
+	  var self = this;
+	  if (self.destroyed) return;
+
+	  var toRead = Math.min(self._readableState.highWaterMark, n);
+	  if (self.endOffset != null) {
+	    toRead = Math.min(toRead, self.endOffset - self.pos);
+	  }
+	  if (toRead <= 0) {
+	    self.destroyed = true;
+	    self.push(null);
+	    self.context.unref();
+	    return;
+	  }
+	  self.context.pend.go(function(cb) {
+	    if (self.destroyed) return cb();
+	    var buffer = new Buffer(toRead);
+	    fs$1.read(self.context.fd, buffer, 0, toRead, self.pos, function(err, bytesRead) {
+	      if (err) {
+	        self.destroy(err);
+	      } else if (bytesRead === 0) {
+	        self.destroyed = true;
+	        self.push(null);
+	        self.context.unref();
+	      } else {
+	        self.pos += bytesRead;
+	        self.push(buffer.slice(0, bytesRead));
+	      }
+	      cb();
+	    });
+	  });
+	};
+
+	ReadStream.prototype.destroy = function(err) {
+	  if (this.destroyed) return;
+	  err = err || new Error("stream destroyed");
+	  this.destroyed = true;
+	  this.emit('error', err);
+	  this.context.unref();
+	};
+
+	util.inherits(WriteStream, Writable);
+	function WriteStream(context, options) {
+	  options = options || {};
+	  Writable.call(this, options);
+
+	  this.context = context;
+	  this.context.ref();
+
+	  this.start = options.start || 0;
+	  this.endOffset = (options.end == null) ? Infinity : +options.end;
+	  this.bytesWritten = 0;
+	  this.pos = this.start;
+	  this.destroyed = false;
+
+	  this.on('finish', this.destroy.bind(this));
+	}
+
+	WriteStream.prototype._write = function(buffer, encoding, callback) {
+	  var self = this;
+	  if (self.destroyed) return;
+
+	  if (self.pos + buffer.length > self.endOffset) {
+	    var err = new Error("maximum file length exceeded");
+	    err.code = 'ETOOBIG';
+	    self.destroy();
+	    callback(err);
+	    return;
+	  }
+	  self.context.pend.go(function(cb) {
+	    if (self.destroyed) return cb();
+	    fs$1.write(self.context.fd, buffer, 0, buffer.length, self.pos, function(err, bytes) {
+	      if (err) {
+	        self.destroy();
+	        cb();
+	        callback(err);
+	      } else {
+	        self.bytesWritten += bytes;
+	        self.pos += bytes;
+	        self.emit('progress');
+	        cb();
+	        callback();
+	      }
+	    });
+	  });
+	};
+
+	WriteStream.prototype.destroy = function() {
+	  if (this.destroyed) return;
+	  this.destroyed = true;
+	  this.context.unref();
+	};
+
+	util.inherits(BufferSlicer, EventEmitter);
+	function BufferSlicer(buffer, options) {
+	  EventEmitter.call(this);
+
+	  options = options || {};
+	  this.refCount = 0;
+	  this.buffer = buffer;
+	  this.maxChunkSize = options.maxChunkSize || Number.MAX_SAFE_INTEGER;
+	}
+
+	BufferSlicer.prototype.read = function(buffer, offset, length, position, callback) {
+	  var end = position + length;
+	  var delta = end - this.buffer.length;
+	  var written = (delta > 0) ? delta : length;
+	  this.buffer.copy(buffer, offset, position, end);
+	  setImmediate(function() {
+	    callback(null, written);
+	  });
+	};
+
+	BufferSlicer.prototype.write = function(buffer, offset, length, position, callback) {
+	  buffer.copy(this.buffer, position, offset, offset + length);
+	  setImmediate(function() {
+	    callback(null, length, buffer);
+	  });
+	};
+
+	BufferSlicer.prototype.createReadStream = function(options) {
+	  options = options || {};
+	  var readStream = new PassThrough(options);
+	  readStream.destroyed = false;
+	  readStream.start = options.start || 0;
+	  readStream.endOffset = options.end;
+	  // by the time this function returns, we'll be done.
+	  readStream.pos = readStream.endOffset || this.buffer.length;
+
+	  // respect the maxChunkSize option to slice up the chunk into smaller pieces.
+	  var entireSlice = this.buffer.slice(readStream.start, readStream.pos);
+	  var offset = 0;
+	  while (true) {
+	    var nextOffset = offset + this.maxChunkSize;
+	    if (nextOffset >= entireSlice.length) {
+	      // last chunk
+	      if (offset < entireSlice.length) {
+	        readStream.write(entireSlice.slice(offset, entireSlice.length));
+	      }
+	      break;
+	    }
+	    readStream.write(entireSlice.slice(offset, nextOffset));
+	    offset = nextOffset;
+	  }
+
+	  readStream.end();
+	  readStream.destroy = function() {
+	    readStream.destroyed = true;
+	  };
+	  return readStream;
+	};
+
+	BufferSlicer.prototype.createWriteStream = function(options) {
+	  var bufferSlicer = this;
+	  options = options || {};
+	  var writeStream = new Writable(options);
+	  writeStream.start = options.start || 0;
+	  writeStream.endOffset = (options.end == null) ? this.buffer.length : +options.end;
+	  writeStream.bytesWritten = 0;
+	  writeStream.pos = writeStream.start;
+	  writeStream.destroyed = false;
+	  writeStream._write = function(buffer, encoding, callback) {
+	    if (writeStream.destroyed) return;
+
+	    var end = writeStream.pos + buffer.length;
+	    if (end > writeStream.endOffset) {
+	      var err = new Error("maximum file length exceeded");
+	      err.code = 'ETOOBIG';
+	      writeStream.destroyed = true;
+	      callback(err);
+	      return;
+	    }
+	    buffer.copy(bufferSlicer.buffer, writeStream.pos, 0, buffer.length);
+
+	    writeStream.bytesWritten += buffer.length;
+	    writeStream.pos = end;
+	    writeStream.emit('progress');
+	    callback();
+	  };
+	  writeStream.destroy = function() {
+	    writeStream.destroyed = true;
+	  };
+	  return writeStream;
+	};
+
+	BufferSlicer.prototype.ref = function() {
+	  this.refCount += 1;
+	};
+
+	BufferSlicer.prototype.unref = function() {
+	  this.refCount -= 1;
+
+	  if (this.refCount < 0) {
+	    throw new Error("invalid unref");
+	  }
+	};
+
+	function createFromBuffer(buffer, options) {
+	  return new BufferSlicer(buffer, options);
+	}
+
+	function createFromFd(fd, options) {
+	  return new FdSlicer(fd, options);
+	}
+	return fdSlicer;
+}
+
+var bufferCrc32;
+var hasRequiredBufferCrc32;
+
+function requireBufferCrc32 () {
+	if (hasRequiredBufferCrc32) return bufferCrc32;
+	hasRequiredBufferCrc32 = 1;
+	var Buffer = require$$0$2.Buffer;
+
+	var CRC_TABLE = [
+	  0x00000000, 0x77073096, 0xee0e612c, 0x990951ba, 0x076dc419,
+	  0x706af48f, 0xe963a535, 0x9e6495a3, 0x0edb8832, 0x79dcb8a4,
+	  0xe0d5e91e, 0x97d2d988, 0x09b64c2b, 0x7eb17cbd, 0xe7b82d07,
+	  0x90bf1d91, 0x1db71064, 0x6ab020f2, 0xf3b97148, 0x84be41de,
+	  0x1adad47d, 0x6ddde4eb, 0xf4d4b551, 0x83d385c7, 0x136c9856,
+	  0x646ba8c0, 0xfd62f97a, 0x8a65c9ec, 0x14015c4f, 0x63066cd9,
+	  0xfa0f3d63, 0x8d080df5, 0x3b6e20c8, 0x4c69105e, 0xd56041e4,
+	  0xa2677172, 0x3c03e4d1, 0x4b04d447, 0xd20d85fd, 0xa50ab56b,
+	  0x35b5a8fa, 0x42b2986c, 0xdbbbc9d6, 0xacbcf940, 0x32d86ce3,
+	  0x45df5c75, 0xdcd60dcf, 0xabd13d59, 0x26d930ac, 0x51de003a,
+	  0xc8d75180, 0xbfd06116, 0x21b4f4b5, 0x56b3c423, 0xcfba9599,
+	  0xb8bda50f, 0x2802b89e, 0x5f058808, 0xc60cd9b2, 0xb10be924,
+	  0x2f6f7c87, 0x58684c11, 0xc1611dab, 0xb6662d3d, 0x76dc4190,
+	  0x01db7106, 0x98d220bc, 0xefd5102a, 0x71b18589, 0x06b6b51f,
+	  0x9fbfe4a5, 0xe8b8d433, 0x7807c9a2, 0x0f00f934, 0x9609a88e,
+	  0xe10e9818, 0x7f6a0dbb, 0x086d3d2d, 0x91646c97, 0xe6635c01,
+	  0x6b6b51f4, 0x1c6c6162, 0x856530d8, 0xf262004e, 0x6c0695ed,
+	  0x1b01a57b, 0x8208f4c1, 0xf50fc457, 0x65b0d9c6, 0x12b7e950,
+	  0x8bbeb8ea, 0xfcb9887c, 0x62dd1ddf, 0x15da2d49, 0x8cd37cf3,
+	  0xfbd44c65, 0x4db26158, 0x3ab551ce, 0xa3bc0074, 0xd4bb30e2,
+	  0x4adfa541, 0x3dd895d7, 0xa4d1c46d, 0xd3d6f4fb, 0x4369e96a,
+	  0x346ed9fc, 0xad678846, 0xda60b8d0, 0x44042d73, 0x33031de5,
+	  0xaa0a4c5f, 0xdd0d7cc9, 0x5005713c, 0x270241aa, 0xbe0b1010,
+	  0xc90c2086, 0x5768b525, 0x206f85b3, 0xb966d409, 0xce61e49f,
+	  0x5edef90e, 0x29d9c998, 0xb0d09822, 0xc7d7a8b4, 0x59b33d17,
+	  0x2eb40d81, 0xb7bd5c3b, 0xc0ba6cad, 0xedb88320, 0x9abfb3b6,
+	  0x03b6e20c, 0x74b1d29a, 0xead54739, 0x9dd277af, 0x04db2615,
+	  0x73dc1683, 0xe3630b12, 0x94643b84, 0x0d6d6a3e, 0x7a6a5aa8,
+	  0xe40ecf0b, 0x9309ff9d, 0x0a00ae27, 0x7d079eb1, 0xf00f9344,
+	  0x8708a3d2, 0x1e01f268, 0x6906c2fe, 0xf762575d, 0x806567cb,
+	  0x196c3671, 0x6e6b06e7, 0xfed41b76, 0x89d32be0, 0x10da7a5a,
+	  0x67dd4acc, 0xf9b9df6f, 0x8ebeeff9, 0x17b7be43, 0x60b08ed5,
+	  0xd6d6a3e8, 0xa1d1937e, 0x38d8c2c4, 0x4fdff252, 0xd1bb67f1,
+	  0xa6bc5767, 0x3fb506dd, 0x48b2364b, 0xd80d2bda, 0xaf0a1b4c,
+	  0x36034af6, 0x41047a60, 0xdf60efc3, 0xa867df55, 0x316e8eef,
+	  0x4669be79, 0xcb61b38c, 0xbc66831a, 0x256fd2a0, 0x5268e236,
+	  0xcc0c7795, 0xbb0b4703, 0x220216b9, 0x5505262f, 0xc5ba3bbe,
+	  0xb2bd0b28, 0x2bb45a92, 0x5cb36a04, 0xc2d7ffa7, 0xb5d0cf31,
+	  0x2cd99e8b, 0x5bdeae1d, 0x9b64c2b0, 0xec63f226, 0x756aa39c,
+	  0x026d930a, 0x9c0906a9, 0xeb0e363f, 0x72076785, 0x05005713,
+	  0x95bf4a82, 0xe2b87a14, 0x7bb12bae, 0x0cb61b38, 0x92d28e9b,
+	  0xe5d5be0d, 0x7cdcefb7, 0x0bdbdf21, 0x86d3d2d4, 0xf1d4e242,
+	  0x68ddb3f8, 0x1fda836e, 0x81be16cd, 0xf6b9265b, 0x6fb077e1,
+	  0x18b74777, 0x88085ae6, 0xff0f6a70, 0x66063bca, 0x11010b5c,
+	  0x8f659eff, 0xf862ae69, 0x616bffd3, 0x166ccf45, 0xa00ae278,
+	  0xd70dd2ee, 0x4e048354, 0x3903b3c2, 0xa7672661, 0xd06016f7,
+	  0x4969474d, 0x3e6e77db, 0xaed16a4a, 0xd9d65adc, 0x40df0b66,
+	  0x37d83bf0, 0xa9bcae53, 0xdebb9ec5, 0x47b2cf7f, 0x30b5ffe9,
+	  0xbdbdf21c, 0xcabac28a, 0x53b39330, 0x24b4a3a6, 0xbad03605,
+	  0xcdd70693, 0x54de5729, 0x23d967bf, 0xb3667a2e, 0xc4614ab8,
+	  0x5d681b02, 0x2a6f2b94, 0xb40bbe37, 0xc30c8ea1, 0x5a05df1b,
+	  0x2d02ef8d
+	];
+
+	if (typeof Int32Array !== 'undefined') {
+	  CRC_TABLE = new Int32Array(CRC_TABLE);
+	}
+
+	function ensureBuffer(input) {
+	  if (Buffer.isBuffer(input)) {
+	    return input;
+	  }
+
+	  var hasNewBufferAPI =
+	      typeof Buffer.alloc === "function" &&
+	      typeof Buffer.from === "function";
+
+	  if (typeof input === "number") {
+	    return hasNewBufferAPI ? Buffer.alloc(input) : new Buffer(input);
+	  }
+	  else if (typeof input === "string") {
+	    return hasNewBufferAPI ? Buffer.from(input) : new Buffer(input);
+	  }
+	  else {
+	    throw new Error("input must be buffer, number, or string, received " +
+	                    typeof input);
+	  }
+	}
+
+	function bufferizeInt(num) {
+	  var tmp = ensureBuffer(4);
+	  tmp.writeInt32BE(num, 0);
+	  return tmp;
+	}
+
+	function _crc32(buf, previous) {
+	  buf = ensureBuffer(buf);
+	  if (Buffer.isBuffer(previous)) {
+	    previous = previous.readUInt32BE(0);
+	  }
+	  var crc = ~~previous ^ -1;
+	  for (var n = 0; n < buf.length; n++) {
+	    crc = CRC_TABLE[(crc ^ buf[n]) & 0xff] ^ (crc >>> 8);
+	  }
+	  return (crc ^ -1);
+	}
+
+	function crc32() {
+	  return bufferizeInt(_crc32.apply(null, arguments));
+	}
+	crc32.signed = function () {
+	  return _crc32.apply(null, arguments);
+	};
+	crc32.unsigned = function () {
+	  return _crc32.apply(null, arguments) >>> 0;
+	};
+
+	bufferCrc32 = crc32;
+	return bufferCrc32;
+}
+
+var hasRequiredYauzl;
+
+function requireYauzl () {
+	if (hasRequiredYauzl) return yauzl;
+	hasRequiredYauzl = 1;
+	var fs$1 = fs;
+	var zlib = require$$3$2;
+	var fd_slicer = requireFdSlicer();
+	var crc32 = requireBufferCrc32();
+	var util = require$$1;
+	var EventEmitter = require$$4.EventEmitter;
+	var Transform = require$$0$5.Transform;
+	var PassThrough = require$$0$5.PassThrough;
+	var Writable = require$$0$5.Writable;
+
+	yauzl.open = open;
+	yauzl.fromFd = fromFd;
+	yauzl.fromBuffer = fromBuffer;
+	yauzl.fromRandomAccessReader = fromRandomAccessReader;
+	yauzl.dosDateTimeToDate = dosDateTimeToDate;
+	yauzl.validateFileName = validateFileName;
+	yauzl.ZipFile = ZipFile;
+	yauzl.Entry = Entry;
+	yauzl.RandomAccessReader = RandomAccessReader;
+
+	function open(path, options, callback) {
+	  if (typeof options === "function") {
+	    callback = options;
+	    options = null;
+	  }
+	  if (options == null) options = {};
+	  if (options.autoClose == null) options.autoClose = true;
+	  if (options.lazyEntries == null) options.lazyEntries = false;
+	  if (options.decodeStrings == null) options.decodeStrings = true;
+	  if (options.validateEntrySizes == null) options.validateEntrySizes = true;
+	  if (options.strictFileNames == null) options.strictFileNames = false;
+	  if (callback == null) callback = defaultCallback;
+	  fs$1.open(path, "r", function(err, fd) {
+	    if (err) return callback(err);
+	    fromFd(fd, options, function(err, zipfile) {
+	      if (err) fs$1.close(fd, defaultCallback);
+	      callback(err, zipfile);
+	    });
+	  });
+	}
+
+	function fromFd(fd, options, callback) {
+	  if (typeof options === "function") {
+	    callback = options;
+	    options = null;
+	  }
+	  if (options == null) options = {};
+	  if (options.autoClose == null) options.autoClose = false;
+	  if (options.lazyEntries == null) options.lazyEntries = false;
+	  if (options.decodeStrings == null) options.decodeStrings = true;
+	  if (options.validateEntrySizes == null) options.validateEntrySizes = true;
+	  if (options.strictFileNames == null) options.strictFileNames = false;
+	  if (callback == null) callback = defaultCallback;
+	  fs$1.fstat(fd, function(err, stats) {
+	    if (err) return callback(err);
+	    var reader = fd_slicer.createFromFd(fd, {autoClose: true});
+	    fromRandomAccessReader(reader, stats.size, options, callback);
+	  });
+	}
+
+	function fromBuffer(buffer, options, callback) {
+	  if (typeof options === "function") {
+	    callback = options;
+	    options = null;
+	  }
+	  if (options == null) options = {};
+	  options.autoClose = false;
+	  if (options.lazyEntries == null) options.lazyEntries = false;
+	  if (options.decodeStrings == null) options.decodeStrings = true;
+	  if (options.validateEntrySizes == null) options.validateEntrySizes = true;
+	  if (options.strictFileNames == null) options.strictFileNames = false;
+	  // limit the max chunk size. see https://github.com/thejoshwolfe/yauzl/issues/87
+	  var reader = fd_slicer.createFromBuffer(buffer, {maxChunkSize: 0x10000});
+	  fromRandomAccessReader(reader, buffer.length, options, callback);
+	}
+
+	function fromRandomAccessReader(reader, totalSize, options, callback) {
+	  if (typeof options === "function") {
+	    callback = options;
+	    options = null;
+	  }
+	  if (options == null) options = {};
+	  if (options.autoClose == null) options.autoClose = true;
+	  if (options.lazyEntries == null) options.lazyEntries = false;
+	  if (options.decodeStrings == null) options.decodeStrings = true;
+	  var decodeStrings = !!options.decodeStrings;
+	  if (options.validateEntrySizes == null) options.validateEntrySizes = true;
+	  if (options.strictFileNames == null) options.strictFileNames = false;
+	  if (callback == null) callback = defaultCallback;
+	  if (typeof totalSize !== "number") throw new Error("expected totalSize parameter to be a number");
+	  if (totalSize > Number.MAX_SAFE_INTEGER) {
+	    throw new Error("zip file too large. only file sizes up to 2^52 are supported due to JavaScript's Number type being an IEEE 754 double.");
+	  }
+
+	  // the matching unref() call is in zipfile.close()
+	  reader.ref();
+
+	  // eocdr means End of Central Directory Record.
+	  // search backwards for the eocdr signature.
+	  // the last field of the eocdr is a variable-length comment.
+	  // the comment size is encoded in a 2-byte field in the eocdr, which we can't find without trudging backwards through the comment to find it.
+	  // as a consequence of this design decision, it's possible to have ambiguous zip file metadata if a coherent eocdr was in the comment.
+	  // we search backwards for a eocdr signature, and hope that whoever made the zip file was smart enough to forbid the eocdr signature in the comment.
+	  var eocdrWithoutCommentSize = 22;
+	  var maxCommentSize = 0xffff; // 2-byte size
+	  var bufferSize = Math.min(eocdrWithoutCommentSize + maxCommentSize, totalSize);
+	  var buffer = newBuffer(bufferSize);
+	  var bufferReadStart = totalSize - buffer.length;
+	  readAndAssertNoEof(reader, buffer, 0, bufferSize, bufferReadStart, function(err) {
+	    if (err) return callback(err);
+	    for (var i = bufferSize - eocdrWithoutCommentSize; i >= 0; i -= 1) {
+	      if (buffer.readUInt32LE(i) !== 0x06054b50) continue;
+	      // found eocdr
+	      var eocdrBuffer = buffer.slice(i);
+
+	      // 0 - End of central directory signature = 0x06054b50
+	      // 4 - Number of this disk
+	      var diskNumber = eocdrBuffer.readUInt16LE(4);
+	      if (diskNumber !== 0) {
+	        return callback(new Error("multi-disk zip files are not supported: found disk number: " + diskNumber));
+	      }
+	      // 6 - Disk where central directory starts
+	      // 8 - Number of central directory records on this disk
+	      // 10 - Total number of central directory records
+	      var entryCount = eocdrBuffer.readUInt16LE(10);
+	      // 12 - Size of central directory (bytes)
+	      // 16 - Offset of start of central directory, relative to start of archive
+	      var centralDirectoryOffset = eocdrBuffer.readUInt32LE(16);
+	      // 20 - Comment length
+	      var commentLength = eocdrBuffer.readUInt16LE(20);
+	      var expectedCommentLength = eocdrBuffer.length - eocdrWithoutCommentSize;
+	      if (commentLength !== expectedCommentLength) {
+	        return callback(new Error("invalid comment length. expected: " + expectedCommentLength + ". found: " + commentLength));
+	      }
+	      // 22 - Comment
+	      // the encoding is always cp437.
+	      var comment = decodeStrings ? decodeBuffer(eocdrBuffer, 22, eocdrBuffer.length, false)
+	                                  : eocdrBuffer.slice(22);
+
+	      if (!(entryCount === 0xffff || centralDirectoryOffset === 0xffffffff)) {
+	        return callback(null, new ZipFile(reader, centralDirectoryOffset, totalSize, entryCount, comment, options.autoClose, options.lazyEntries, decodeStrings, options.validateEntrySizes, options.strictFileNames));
+	      }
+
+	      // ZIP64 format
+
+	      // ZIP64 Zip64 end of central directory locator
+	      var zip64EocdlBuffer = newBuffer(20);
+	      var zip64EocdlOffset = bufferReadStart + i - zip64EocdlBuffer.length;
+	      readAndAssertNoEof(reader, zip64EocdlBuffer, 0, zip64EocdlBuffer.length, zip64EocdlOffset, function(err) {
+	        if (err) return callback(err);
+
+	        // 0 - zip64 end of central dir locator signature = 0x07064b50
+	        if (zip64EocdlBuffer.readUInt32LE(0) !== 0x07064b50) {
+	          return callback(new Error("invalid zip64 end of central directory locator signature"));
+	        }
+	        // 4 - number of the disk with the start of the zip64 end of central directory
+	        // 8 - relative offset of the zip64 end of central directory record
+	        var zip64EocdrOffset = readUInt64LE(zip64EocdlBuffer, 8);
+	        // 16 - total number of disks
+
+	        // ZIP64 end of central directory record
+	        var zip64EocdrBuffer = newBuffer(56);
+	        readAndAssertNoEof(reader, zip64EocdrBuffer, 0, zip64EocdrBuffer.length, zip64EocdrOffset, function(err) {
+	          if (err) return callback(err);
+
+	          // 0 - zip64 end of central dir signature                           4 bytes  (0x06064b50)
+	          if (zip64EocdrBuffer.readUInt32LE(0) !== 0x06064b50) {
+	            return callback(new Error("invalid zip64 end of central directory record signature"));
+	          }
+	          // 4 - size of zip64 end of central directory record                8 bytes
+	          // 12 - version made by                                             2 bytes
+	          // 14 - version needed to extract                                   2 bytes
+	          // 16 - number of this disk                                         4 bytes
+	          // 20 - number of the disk with the start of the central directory  4 bytes
+	          // 24 - total number of entries in the central directory on this disk         8 bytes
+	          // 32 - total number of entries in the central directory            8 bytes
+	          entryCount = readUInt64LE(zip64EocdrBuffer, 32);
+	          // 40 - size of the central directory                               8 bytes
+	          // 48 - offset of start of central directory with respect to the starting disk number     8 bytes
+	          centralDirectoryOffset = readUInt64LE(zip64EocdrBuffer, 48);
+	          // 56 - zip64 extensible data sector                                (variable size)
+	          return callback(null, new ZipFile(reader, centralDirectoryOffset, totalSize, entryCount, comment, options.autoClose, options.lazyEntries, decodeStrings, options.validateEntrySizes, options.strictFileNames));
+	        });
+	      });
+	      return;
+	    }
+	    callback(new Error("end of central directory record signature not found"));
+	  });
+	}
+
+	util.inherits(ZipFile, EventEmitter);
+	function ZipFile(reader, centralDirectoryOffset, fileSize, entryCount, comment, autoClose, lazyEntries, decodeStrings, validateEntrySizes, strictFileNames) {
+	  var self = this;
+	  EventEmitter.call(self);
+	  self.reader = reader;
+	  // forward close events
+	  self.reader.on("error", function(err) {
+	    // error closing the fd
+	    emitError(self, err);
+	  });
+	  self.reader.once("close", function() {
+	    self.emit("close");
+	  });
+	  self.readEntryCursor = centralDirectoryOffset;
+	  self.fileSize = fileSize;
+	  self.entryCount = entryCount;
+	  self.comment = comment;
+	  self.entriesRead = 0;
+	  self.autoClose = !!autoClose;
+	  self.lazyEntries = !!lazyEntries;
+	  self.decodeStrings = !!decodeStrings;
+	  self.validateEntrySizes = !!validateEntrySizes;
+	  self.strictFileNames = !!strictFileNames;
+	  self.isOpen = true;
+	  self.emittedError = false;
+
+	  if (!self.lazyEntries) self._readEntry();
+	}
+	ZipFile.prototype.close = function() {
+	  if (!this.isOpen) return;
+	  this.isOpen = false;
+	  this.reader.unref();
+	};
+
+	function emitErrorAndAutoClose(self, err) {
+	  if (self.autoClose) self.close();
+	  emitError(self, err);
+	}
+	function emitError(self, err) {
+	  if (self.emittedError) return;
+	  self.emittedError = true;
+	  self.emit("error", err);
+	}
+
+	ZipFile.prototype.readEntry = function() {
+	  if (!this.lazyEntries) throw new Error("readEntry() called without lazyEntries:true");
+	  this._readEntry();
+	};
+	ZipFile.prototype._readEntry = function() {
+	  var self = this;
+	  if (self.entryCount === self.entriesRead) {
+	    // done with metadata
+	    setImmediate(function() {
+	      if (self.autoClose) self.close();
+	      if (self.emittedError) return;
+	      self.emit("end");
+	    });
+	    return;
+	  }
+	  if (self.emittedError) return;
+	  var buffer = newBuffer(46);
+	  readAndAssertNoEof(self.reader, buffer, 0, buffer.length, self.readEntryCursor, function(err) {
+	    if (err) return emitErrorAndAutoClose(self, err);
+	    if (self.emittedError) return;
+	    var entry = new Entry();
+	    // 0 - Central directory file header signature
+	    var signature = buffer.readUInt32LE(0);
+	    if (signature !== 0x02014b50) return emitErrorAndAutoClose(self, new Error("invalid central directory file header signature: 0x" + signature.toString(16)));
+	    // 4 - Version made by
+	    entry.versionMadeBy = buffer.readUInt16LE(4);
+	    // 6 - Version needed to extract (minimum)
+	    entry.versionNeededToExtract = buffer.readUInt16LE(6);
+	    // 8 - General purpose bit flag
+	    entry.generalPurposeBitFlag = buffer.readUInt16LE(8);
+	    // 10 - Compression method
+	    entry.compressionMethod = buffer.readUInt16LE(10);
+	    // 12 - File last modification time
+	    entry.lastModFileTime = buffer.readUInt16LE(12);
+	    // 14 - File last modification date
+	    entry.lastModFileDate = buffer.readUInt16LE(14);
+	    // 16 - CRC-32
+	    entry.crc32 = buffer.readUInt32LE(16);
+	    // 20 - Compressed size
+	    entry.compressedSize = buffer.readUInt32LE(20);
+	    // 24 - Uncompressed size
+	    entry.uncompressedSize = buffer.readUInt32LE(24);
+	    // 28 - File name length (n)
+	    entry.fileNameLength = buffer.readUInt16LE(28);
+	    // 30 - Extra field length (m)
+	    entry.extraFieldLength = buffer.readUInt16LE(30);
+	    // 32 - File comment length (k)
+	    entry.fileCommentLength = buffer.readUInt16LE(32);
+	    // 34 - Disk number where file starts
+	    // 36 - Internal file attributes
+	    entry.internalFileAttributes = buffer.readUInt16LE(36);
+	    // 38 - External file attributes
+	    entry.externalFileAttributes = buffer.readUInt32LE(38);
+	    // 42 - Relative offset of local file header
+	    entry.relativeOffsetOfLocalHeader = buffer.readUInt32LE(42);
+
+	    if (entry.generalPurposeBitFlag & 0x40) return emitErrorAndAutoClose(self, new Error("strong encryption is not supported"));
+
+	    self.readEntryCursor += 46;
+
+	    buffer = newBuffer(entry.fileNameLength + entry.extraFieldLength + entry.fileCommentLength);
+	    readAndAssertNoEof(self.reader, buffer, 0, buffer.length, self.readEntryCursor, function(err) {
+	      if (err) return emitErrorAndAutoClose(self, err);
+	      if (self.emittedError) return;
+	      // 46 - File name
+	      var isUtf8 = (entry.generalPurposeBitFlag & 0x800) !== 0;
+	      entry.fileName = self.decodeStrings ? decodeBuffer(buffer, 0, entry.fileNameLength, isUtf8)
+	                                          : buffer.slice(0, entry.fileNameLength);
+
+	      // 46+n - Extra field
+	      var fileCommentStart = entry.fileNameLength + entry.extraFieldLength;
+	      var extraFieldBuffer = buffer.slice(entry.fileNameLength, fileCommentStart);
+	      entry.extraFields = [];
+	      var i = 0;
+	      while (i < extraFieldBuffer.length - 3) {
+	        var headerId = extraFieldBuffer.readUInt16LE(i + 0);
+	        var dataSize = extraFieldBuffer.readUInt16LE(i + 2);
+	        var dataStart = i + 4;
+	        var dataEnd = dataStart + dataSize;
+	        if (dataEnd > extraFieldBuffer.length) return emitErrorAndAutoClose(self, new Error("extra field length exceeds extra field buffer size"));
+	        var dataBuffer = newBuffer(dataSize);
+	        extraFieldBuffer.copy(dataBuffer, 0, dataStart, dataEnd);
+	        entry.extraFields.push({
+	          id: headerId,
+	          data: dataBuffer,
+	        });
+	        i = dataEnd;
+	      }
+
+	      // 46+n+m - File comment
+	      entry.fileComment = self.decodeStrings ? decodeBuffer(buffer, fileCommentStart, fileCommentStart + entry.fileCommentLength, isUtf8)
+	                                             : buffer.slice(fileCommentStart, fileCommentStart + entry.fileCommentLength);
+	      // compatibility hack for https://github.com/thejoshwolfe/yauzl/issues/47
+	      entry.comment = entry.fileComment;
+
+	      self.readEntryCursor += buffer.length;
+	      self.entriesRead += 1;
+
+	      if (entry.uncompressedSize            === 0xffffffff ||
+	          entry.compressedSize              === 0xffffffff ||
+	          entry.relativeOffsetOfLocalHeader === 0xffffffff) {
+	        // ZIP64 format
+	        // find the Zip64 Extended Information Extra Field
+	        var zip64EiefBuffer = null;
+	        for (var i = 0; i < entry.extraFields.length; i++) {
+	          var extraField = entry.extraFields[i];
+	          if (extraField.id === 0x0001) {
+	            zip64EiefBuffer = extraField.data;
+	            break;
+	          }
+	        }
+	        if (zip64EiefBuffer == null) {
+	          return emitErrorAndAutoClose(self, new Error("expected zip64 extended information extra field"));
+	        }
+	        var index = 0;
+	        // 0 - Original Size          8 bytes
+	        if (entry.uncompressedSize === 0xffffffff) {
+	          if (index + 8 > zip64EiefBuffer.length) {
+	            return emitErrorAndAutoClose(self, new Error("zip64 extended information extra field does not include uncompressed size"));
+	          }
+	          entry.uncompressedSize = readUInt64LE(zip64EiefBuffer, index);
+	          index += 8;
+	        }
+	        // 8 - Compressed Size        8 bytes
+	        if (entry.compressedSize === 0xffffffff) {
+	          if (index + 8 > zip64EiefBuffer.length) {
+	            return emitErrorAndAutoClose(self, new Error("zip64 extended information extra field does not include compressed size"));
+	          }
+	          entry.compressedSize = readUInt64LE(zip64EiefBuffer, index);
+	          index += 8;
+	        }
+	        // 16 - Relative Header Offset 8 bytes
+	        if (entry.relativeOffsetOfLocalHeader === 0xffffffff) {
+	          if (index + 8 > zip64EiefBuffer.length) {
+	            return emitErrorAndAutoClose(self, new Error("zip64 extended information extra field does not include relative header offset"));
+	          }
+	          entry.relativeOffsetOfLocalHeader = readUInt64LE(zip64EiefBuffer, index);
+	          index += 8;
+	        }
+	        // 24 - Disk Start Number      4 bytes
+	      }
+
+	      // check for Info-ZIP Unicode Path Extra Field (0x7075)
+	      // see https://github.com/thejoshwolfe/yauzl/issues/33
+	      if (self.decodeStrings) {
+	        for (var i = 0; i < entry.extraFields.length; i++) {
+	          var extraField = entry.extraFields[i];
+	          if (extraField.id === 0x7075) {
+	            if (extraField.data.length < 6) {
+	              // too short to be meaningful
+	              continue;
+	            }
+	            // Version       1 byte      version of this extra field, currently 1
+	            if (extraField.data.readUInt8(0) !== 1) {
+	              // > Changes may not be backward compatible so this extra
+	              // > field should not be used if the version is not recognized.
+	              continue;
+	            }
+	            // NameCRC32     4 bytes     File Name Field CRC32 Checksum
+	            var oldNameCrc32 = extraField.data.readUInt32LE(1);
+	            if (crc32.unsigned(buffer.slice(0, entry.fileNameLength)) !== oldNameCrc32) {
+	              // > If the CRC check fails, this UTF-8 Path Extra Field should be
+	              // > ignored and the File Name field in the header should be used instead.
+	              continue;
+	            }
+	            // UnicodeName   Variable    UTF-8 version of the entry File Name
+	            entry.fileName = decodeBuffer(extraField.data, 5, extraField.data.length, true);
+	            break;
+	          }
+	        }
+	      }
+
+	      // validate file size
+	      if (self.validateEntrySizes && entry.compressionMethod === 0) {
+	        var expectedCompressedSize = entry.uncompressedSize;
+	        if (entry.isEncrypted()) {
+	          // traditional encryption prefixes the file data with a header
+	          expectedCompressedSize += 12;
+	        }
+	        if (entry.compressedSize !== expectedCompressedSize) {
+	          var msg = "compressed/uncompressed size mismatch for stored file: " + entry.compressedSize + " != " + entry.uncompressedSize;
+	          return emitErrorAndAutoClose(self, new Error(msg));
+	        }
+	      }
+
+	      if (self.decodeStrings) {
+	        if (!self.strictFileNames) {
+	          // allow backslash
+	          entry.fileName = entry.fileName.replace(/\\/g, "/");
+	        }
+	        var errorMessage = validateFileName(entry.fileName, self.validateFileNameOptions);
+	        if (errorMessage != null) return emitErrorAndAutoClose(self, new Error(errorMessage));
+	      }
+	      self.emit("entry", entry);
+
+	      if (!self.lazyEntries) self._readEntry();
+	    });
+	  });
+	};
+
+	ZipFile.prototype.openReadStream = function(entry, options, callback) {
+	  var self = this;
+	  // parameter validation
+	  var relativeStart = 0;
+	  var relativeEnd = entry.compressedSize;
+	  if (callback == null) {
+	    callback = options;
+	    options = {};
+	  } else {
+	    // validate options that the caller has no excuse to get wrong
+	    if (options.decrypt != null) {
+	      if (!entry.isEncrypted()) {
+	        throw new Error("options.decrypt can only be specified for encrypted entries");
+	      }
+	      if (options.decrypt !== false) throw new Error("invalid options.decrypt value: " + options.decrypt);
+	      if (entry.isCompressed()) {
+	        if (options.decompress !== false) throw new Error("entry is encrypted and compressed, and options.decompress !== false");
+	      }
+	    }
+	    if (options.decompress != null) {
+	      if (!entry.isCompressed()) {
+	        throw new Error("options.decompress can only be specified for compressed entries");
+	      }
+	      if (!(options.decompress === false || options.decompress === true)) {
+	        throw new Error("invalid options.decompress value: " + options.decompress);
+	      }
+	    }
+	    if (options.start != null || options.end != null) {
+	      if (entry.isCompressed() && options.decompress !== false) {
+	        throw new Error("start/end range not allowed for compressed entry without options.decompress === false");
+	      }
+	      if (entry.isEncrypted() && options.decrypt !== false) {
+	        throw new Error("start/end range not allowed for encrypted entry without options.decrypt === false");
+	      }
+	    }
+	    if (options.start != null) {
+	      relativeStart = options.start;
+	      if (relativeStart < 0) throw new Error("options.start < 0");
+	      if (relativeStart > entry.compressedSize) throw new Error("options.start > entry.compressedSize");
+	    }
+	    if (options.end != null) {
+	      relativeEnd = options.end;
+	      if (relativeEnd < 0) throw new Error("options.end < 0");
+	      if (relativeEnd > entry.compressedSize) throw new Error("options.end > entry.compressedSize");
+	      if (relativeEnd < relativeStart) throw new Error("options.end < options.start");
+	    }
+	  }
+	  // any further errors can either be caused by the zipfile,
+	  // or were introduced in a minor version of yauzl,
+	  // so should be passed to the client rather than thrown.
+	  if (!self.isOpen) return callback(new Error("closed"));
+	  if (entry.isEncrypted()) {
+	    if (options.decrypt !== false) return callback(new Error("entry is encrypted, and options.decrypt !== false"));
+	  }
+	  // make sure we don't lose the fd before we open the actual read stream
+	  self.reader.ref();
+	  var buffer = newBuffer(30);
+	  readAndAssertNoEof(self.reader, buffer, 0, buffer.length, entry.relativeOffsetOfLocalHeader, function(err) {
+	    try {
+	      if (err) return callback(err);
+	      // 0 - Local file header signature = 0x04034b50
+	      var signature = buffer.readUInt32LE(0);
+	      if (signature !== 0x04034b50) {
+	        return callback(new Error("invalid local file header signature: 0x" + signature.toString(16)));
+	      }
+	      // all this should be redundant
+	      // 4 - Version needed to extract (minimum)
+	      // 6 - General purpose bit flag
+	      // 8 - Compression method
+	      // 10 - File last modification time
+	      // 12 - File last modification date
+	      // 14 - CRC-32
+	      // 18 - Compressed size
+	      // 22 - Uncompressed size
+	      // 26 - File name length (n)
+	      var fileNameLength = buffer.readUInt16LE(26);
+	      // 28 - Extra field length (m)
+	      var extraFieldLength = buffer.readUInt16LE(28);
+	      // 30 - File name
+	      // 30+n - Extra field
+	      var localFileHeaderEnd = entry.relativeOffsetOfLocalHeader + buffer.length + fileNameLength + extraFieldLength;
+	      var decompress;
+	      if (entry.compressionMethod === 0) {
+	        // 0 - The file is stored (no compression)
+	        decompress = false;
+	      } else if (entry.compressionMethod === 8) {
+	        // 8 - The file is Deflated
+	        decompress = options.decompress != null ? options.decompress : true;
+	      } else {
+	        return callback(new Error("unsupported compression method: " + entry.compressionMethod));
+	      }
+	      var fileDataStart = localFileHeaderEnd;
+	      var fileDataEnd = fileDataStart + entry.compressedSize;
+	      if (entry.compressedSize !== 0) {
+	        // bounds check now, because the read streams will probably not complain loud enough.
+	        // since we're dealing with an unsigned offset plus an unsigned size,
+	        // we only have 1 thing to check for.
+	        if (fileDataEnd > self.fileSize) {
+	          return callback(new Error("file data overflows file bounds: " +
+	              fileDataStart + " + " + entry.compressedSize + " > " + self.fileSize));
+	        }
+	      }
+	      var readStream = self.reader.createReadStream({
+	        start: fileDataStart + relativeStart,
+	        end: fileDataStart + relativeEnd,
+	      });
+	      var endpointStream = readStream;
+	      if (decompress) {
+	        var destroyed = false;
+	        var inflateFilter = zlib.createInflateRaw();
+	        readStream.on("error", function(err) {
+	          // setImmediate here because errors can be emitted during the first call to pipe()
+	          setImmediate(function() {
+	            if (!destroyed) inflateFilter.emit("error", err);
+	          });
+	        });
+	        readStream.pipe(inflateFilter);
+
+	        if (self.validateEntrySizes) {
+	          endpointStream = new AssertByteCountStream(entry.uncompressedSize);
+	          inflateFilter.on("error", function(err) {
+	            // forward zlib errors to the client-visible stream
+	            setImmediate(function() {
+	              if (!destroyed) endpointStream.emit("error", err);
+	            });
+	          });
+	          inflateFilter.pipe(endpointStream);
+	        } else {
+	          // the zlib filter is the client-visible stream
+	          endpointStream = inflateFilter;
+	        }
+	        // this is part of yauzl's API, so implement this function on the client-visible stream
+	        endpointStream.destroy = function() {
+	          destroyed = true;
+	          if (inflateFilter !== endpointStream) inflateFilter.unpipe(endpointStream);
+	          readStream.unpipe(inflateFilter);
+	          // TODO: the inflateFilter may cause a memory leak. see Issue #27.
+	          readStream.destroy();
+	        };
+	      }
+	      callback(null, endpointStream);
+	    } finally {
+	      self.reader.unref();
+	    }
+	  });
+	};
+
+	function Entry() {
+	}
+	Entry.prototype.getLastModDate = function() {
+	  return dosDateTimeToDate(this.lastModFileDate, this.lastModFileTime);
+	};
+	Entry.prototype.isEncrypted = function() {
+	  return (this.generalPurposeBitFlag & 0x1) !== 0;
+	};
+	Entry.prototype.isCompressed = function() {
+	  return this.compressionMethod === 8;
+	};
+
+	function dosDateTimeToDate(date, time) {
+	  var day = date & 0x1f; // 1-31
+	  var month = (date >> 5 & 0xf) - 1; // 1-12, 0-11
+	  var year = (date >> 9 & 0x7f) + 1980; // 0-128, 1980-2108
+
+	  var millisecond = 0;
+	  var second = (time & 0x1f) * 2; // 0-29, 0-58 (even numbers)
+	  var minute = time >> 5 & 0x3f; // 0-59
+	  var hour = time >> 11 & 0x1f; // 0-23
+
+	  return new Date(year, month, day, hour, minute, second, millisecond);
+	}
+
+	function validateFileName(fileName) {
+	  if (fileName.indexOf("\\") !== -1) {
+	    return "invalid characters in fileName: " + fileName;
+	  }
+	  if (/^[a-zA-Z]:/.test(fileName) || /^\//.test(fileName)) {
+	    return "absolute path: " + fileName;
+	  }
+	  if (fileName.split("/").indexOf("..") !== -1) {
+	    return "invalid relative path: " + fileName;
+	  }
+	  // all good
+	  return null;
+	}
+
+	function readAndAssertNoEof(reader, buffer, offset, length, position, callback) {
+	  if (length === 0) {
+	    // fs.read will throw an out-of-bounds error if you try to read 0 bytes from a 0 byte file
+	    return setImmediate(function() { callback(null, newBuffer(0)); });
+	  }
+	  reader.read(buffer, offset, length, position, function(err, bytesRead) {
+	    if (err) return callback(err);
+	    if (bytesRead < length) {
+	      return callback(new Error("unexpected EOF"));
+	    }
+	    callback();
+	  });
+	}
+
+	util.inherits(AssertByteCountStream, Transform);
+	function AssertByteCountStream(byteCount) {
+	  Transform.call(this);
+	  this.actualByteCount = 0;
+	  this.expectedByteCount = byteCount;
+	}
+	AssertByteCountStream.prototype._transform = function(chunk, encoding, cb) {
+	  this.actualByteCount += chunk.length;
+	  if (this.actualByteCount > this.expectedByteCount) {
+	    var msg = "too many bytes in the stream. expected " + this.expectedByteCount + ". got at least " + this.actualByteCount;
+	    return cb(new Error(msg));
+	  }
+	  cb(null, chunk);
+	};
+	AssertByteCountStream.prototype._flush = function(cb) {
+	  if (this.actualByteCount < this.expectedByteCount) {
+	    var msg = "not enough bytes in the stream. expected " + this.expectedByteCount + ". got only " + this.actualByteCount;
+	    return cb(new Error(msg));
+	  }
+	  cb();
+	};
+
+	util.inherits(RandomAccessReader, EventEmitter);
+	function RandomAccessReader() {
+	  EventEmitter.call(this);
+	  this.refCount = 0;
+	}
+	RandomAccessReader.prototype.ref = function() {
+	  this.refCount += 1;
+	};
+	RandomAccessReader.prototype.unref = function() {
+	  var self = this;
+	  self.refCount -= 1;
+
+	  if (self.refCount > 0) return;
+	  if (self.refCount < 0) throw new Error("invalid unref");
+
+	  self.close(onCloseDone);
+
+	  function onCloseDone(err) {
+	    if (err) return self.emit('error', err);
+	    self.emit('close');
+	  }
+	};
+	RandomAccessReader.prototype.createReadStream = function(options) {
+	  var start = options.start;
+	  var end = options.end;
+	  if (start === end) {
+	    var emptyStream = new PassThrough();
+	    setImmediate(function() {
+	      emptyStream.end();
+	    });
+	    return emptyStream;
+	  }
+	  var stream = this._readStreamForRange(start, end);
+
+	  var destroyed = false;
+	  var refUnrefFilter = new RefUnrefFilter(this);
+	  stream.on("error", function(err) {
+	    setImmediate(function() {
+	      if (!destroyed) refUnrefFilter.emit("error", err);
+	    });
+	  });
+	  refUnrefFilter.destroy = function() {
+	    stream.unpipe(refUnrefFilter);
+	    refUnrefFilter.unref();
+	    stream.destroy();
+	  };
+
+	  var byteCounter = new AssertByteCountStream(end - start);
+	  refUnrefFilter.on("error", function(err) {
+	    setImmediate(function() {
+	      if (!destroyed) byteCounter.emit("error", err);
+	    });
+	  });
+	  byteCounter.destroy = function() {
+	    destroyed = true;
+	    refUnrefFilter.unpipe(byteCounter);
+	    refUnrefFilter.destroy();
+	  };
+
+	  return stream.pipe(refUnrefFilter).pipe(byteCounter);
+	};
+	RandomAccessReader.prototype._readStreamForRange = function(start, end) {
+	  throw new Error("not implemented");
+	};
+	RandomAccessReader.prototype.read = function(buffer, offset, length, position, callback) {
+	  var readStream = this.createReadStream({start: position, end: position + length});
+	  var writeStream = new Writable();
+	  var written = 0;
+	  writeStream._write = function(chunk, encoding, cb) {
+	    chunk.copy(buffer, offset + written, 0, chunk.length);
+	    written += chunk.length;
+	    cb();
+	  };
+	  writeStream.on("finish", callback);
+	  readStream.on("error", function(error) {
+	    callback(error);
+	  });
+	  readStream.pipe(writeStream);
+	};
+	RandomAccessReader.prototype.close = function(callback) {
+	  setImmediate(callback);
+	};
+
+	util.inherits(RefUnrefFilter, PassThrough);
+	function RefUnrefFilter(context) {
+	  PassThrough.call(this);
+	  this.context = context;
+	  this.context.ref();
+	  this.unreffedYet = false;
+	}
+	RefUnrefFilter.prototype._flush = function(cb) {
+	  this.unref();
+	  cb();
+	};
+	RefUnrefFilter.prototype.unref = function(cb) {
+	  if (this.unreffedYet) return;
+	  this.unreffedYet = true;
+	  this.context.unref();
+	};
+
+	var cp437 = '\u0000☺☻♥♦♣♠•◘○◙♂♀♪♫☼►◄↕‼¶§▬↨↑↓→←∟↔▲▼ !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~⌂ÇüéâäàåçêëèïîìÄÅÉæÆôöòûùÿÖÜ¢£¥₧ƒáíóúñÑªº¿⌐¬½¼¡«»░▒▓│┤╡╢╖╕╣║╗╝╜╛┐└┴┬├─┼╞╟╚╔╩╦╠═╬╧╨╤╥╙╘╒╓╫╪┘┌█▄▌▐▀αßΓπΣσµτΦΘΩδ∞φε∩≡±≥≤⌠⌡÷≈°∙·√ⁿ²■ ';
+	function decodeBuffer(buffer, start, end, isUtf8) {
+	  if (isUtf8) {
+	    return buffer.toString("utf8", start, end);
+	  } else {
+	    var result = "";
+	    for (var i = start; i < end; i++) {
+	      result += cp437[buffer[i]];
+	    }
+	    return result;
+	  }
+	}
+
+	function readUInt64LE(buffer, offset) {
+	  // there is no native function for this, because we can't actually store 64-bit integers precisely.
+	  // after 53 bits, JavaScript's Number type (IEEE 754 double) can't store individual integers anymore.
+	  // but since 53 bits is a whole lot more than 32 bits, we do our best anyway.
+	  var lower32 = buffer.readUInt32LE(offset);
+	  var upper32 = buffer.readUInt32LE(offset + 4);
+	  // we can't use bitshifting here, because JavaScript bitshifting only works on 32-bit integers.
+	  return upper32 * 0x100000000 + lower32;
+	  // as long as we're bounds checking the result of this function against the total file size,
+	  // we'll catch any overflow errors, because we already made sure the total file size was within reason.
+	}
+
+	// Node 10 deprecated new Buffer().
+	var newBuffer;
+	if (typeof Buffer.allocUnsafe === "function") {
+	  newBuffer = function(len) {
+	    return Buffer.allocUnsafe(len);
+	  };
+	} else {
+	  newBuffer = function(len) {
+	    return new Buffer(len);
+	  };
+	}
+
+	function defaultCallback(err) {
+	  if (err) throw err;
+	}
+	return yauzl;
+}
+
+var decompressUnzip;
+var hasRequiredDecompressUnzip;
+
+function requireDecompressUnzip () {
+	if (hasRequiredDecompressUnzip) return decompressUnzip;
+	hasRequiredDecompressUnzip = 1;
+	const fileType = requireFileType();
+	const getStream = requireGetStream();
+	const pify = requirePify$1();
+	const yauzl = requireYauzl();
+
+	const getType = (entry, mode) => {
+		const IFMT = 61440;
+		const IFDIR = 16384;
+		const IFLNK = 40960;
+		const madeBy = entry.versionMadeBy >> 8;
+
+		if ((mode & IFMT) === IFLNK) {
+			return 'symlink';
+		}
+
+		if ((mode & IFMT) === IFDIR || (madeBy === 0 && entry.externalFileAttributes === 16)) {
+			return 'directory';
+		}
+
+		return 'file';
+	};
+
+	const extractEntry = (entry, zip) => {
+		const file = {
+			mode: (entry.externalFileAttributes >> 16) & 0xFFFF,
+			mtime: entry.getLastModDate(),
+			path: entry.fileName
+		};
+
+		file.type = getType(entry, file.mode);
+
+		if (file.mode === 0 && file.type === 'directory') {
+			file.mode = 493;
+		}
+
+		if (file.mode === 0) {
+			file.mode = 420;
+		}
+
+		return pify(zip.openReadStream.bind(zip))(entry)
+			.then(getStream.buffer)
+			.then(buf => {
+				file.data = buf;
+
+				if (file.type === 'symlink') {
+					file.linkname = buf.toString();
+				}
+
+				return file;
+			})
+			.catch(err => {
+				zip.close();
+				throw err;
+			});
+	};
+
+	const extractFile = zip => new Promise((resolve, reject) => {
+		const files = [];
+
+		zip.readEntry();
+
+		zip.on('entry', entry => {
+			extractEntry(entry, zip)
+				.catch(reject)
+				.then(file => {
+					files.push(file);
+					zip.readEntry();
+				});
+		});
+
+		zip.on('error', reject);
+		zip.on('end', () => resolve(files));
+	});
+
+	decompressUnzip = () => buf => {
+		if (!Buffer.isBuffer(buf)) {
+			return Promise.reject(new TypeError(`Expected a Buffer, got ${typeof buf}`));
+		}
+
+		if (!fileType(buf) || fileType(buf).ext !== 'zip') {
+			return Promise.resolve([]);
+		}
+
+		return pify(yauzl.fromBuffer)(buf, {lazyEntries: true}).then(extractFile);
+	};
+	return decompressUnzip;
+}
+
+var makeDir = {exports: {}};
+
+var pify;
+var hasRequiredPify;
+
+function requirePify () {
+	if (hasRequiredPify) return pify;
+	hasRequiredPify = 1;
+
+	const processFn = (fn, opts) => function () {
+		const P = opts.promiseModule;
+		const args = new Array(arguments.length);
+
+		for (let i = 0; i < arguments.length; i++) {
+			args[i] = arguments[i];
+		}
+
+		return new P((resolve, reject) => {
+			if (opts.errorFirst) {
+				args.push(function (err, result) {
+					if (opts.multiArgs) {
+						const results = new Array(arguments.length - 1);
+
+						for (let i = 1; i < arguments.length; i++) {
+							results[i - 1] = arguments[i];
+						}
+
+						if (err) {
+							results.unshift(err);
+							reject(results);
+						} else {
+							resolve(results);
+						}
+					} else if (err) {
+						reject(err);
+					} else {
+						resolve(result);
+					}
+				});
+			} else {
+				args.push(function (result) {
+					if (opts.multiArgs) {
+						const results = new Array(arguments.length - 1);
+
+						for (let i = 0; i < arguments.length; i++) {
+							results[i] = arguments[i];
+						}
+
+						resolve(results);
+					} else {
+						resolve(result);
+					}
+				});
+			}
+
+			fn.apply(this, args);
+		});
+	};
+
+	pify = (obj, opts) => {
+		opts = Object.assign({
+			exclude: [/.+(Sync|Stream)$/],
+			errorFirst: true,
+			promiseModule: Promise
+		}, opts);
+
+		const filter = key => {
+			const match = pattern => typeof pattern === 'string' ? key === pattern : pattern.test(key);
+			return opts.include ? opts.include.some(match) : !opts.exclude.some(match);
+		};
+
+		let ret;
+		if (typeof obj === 'function') {
+			ret = function () {
+				if (opts.excludeMain) {
+					return obj.apply(this, arguments);
+				}
+
+				return processFn(obj, opts).apply(this, arguments);
+			};
+		} else {
+			ret = Object.create(Object.getPrototypeOf(obj));
+		}
+
+		for (const key in obj) { // eslint-disable-line guard-for-in
+			const x = obj[key];
+			ret[key] = typeof x === 'function' && filter(key) ? processFn(x, opts) : x;
+		}
+
+		return ret;
+	};
+	return pify;
+}
+
+var hasRequiredMakeDir;
+
+function requireMakeDir () {
+	if (hasRequiredMakeDir) return makeDir.exports;
+	hasRequiredMakeDir = 1;
+	const fs$1 = fs;
+	const path$1 = path;
+	const pify = requirePify();
+
+	const defaults = {
+		mode: 0o777 & (~process.umask()),
+		fs: fs$1
+	};
+
+	// https://github.com/nodejs/node/issues/8987
+	// https://github.com/libuv/libuv/pull/1088
+	const checkPath = pth => {
+		if (process.platform === 'win32') {
+			const pathHasInvalidWinCharacters = /[<>:"|?*]/.test(pth.replace(path$1.parse(pth).root, ''));
+
+			if (pathHasInvalidWinCharacters) {
+				const err = new Error(`Path contains invalid characters: ${pth}`);
+				err.code = 'EINVAL';
+				throw err;
+			}
+		}
+	};
+
+	makeDir.exports = (input, opts) => Promise.resolve().then(() => {
+		checkPath(input);
+		opts = Object.assign({}, defaults, opts);
+
+		const mkdir = pify(opts.fs.mkdir);
+		const stat = pify(opts.fs.stat);
+
+		const make = pth => {
+			return mkdir(pth, opts.mode)
+				.then(() => pth)
+				.catch(err => {
+					if (err.code === 'ENOENT') {
+						if (err.message.includes('null bytes') || path$1.dirname(pth) === pth) {
+							throw err;
+						}
+
+						return make(path$1.dirname(pth)).then(() => make(pth));
+					}
+
+					return stat(pth)
+						.then(stats => stats.isDirectory() ? pth : Promise.reject())
+						.catch(() => {
+							throw err;
+						});
+				});
+		};
+
+		return make(path$1.resolve(input));
+	});
+
+	makeDir.exports.sync = (input, opts) => {
+		checkPath(input);
+		opts = Object.assign({}, defaults, opts);
+
+		const make = pth => {
+			try {
+				opts.fs.mkdirSync(pth, opts.mode);
+			} catch (err) {
+				if (err.code === 'ENOENT') {
+					if (err.message.includes('null bytes') || path$1.dirname(pth) === pth) {
+						throw err;
+					}
+
+					make(path$1.dirname(pth));
+					return make(pth);
+				}
+
+				try {
+					if (!opts.fs.statSync(pth).isDirectory()) {
+						throw new Error('The path is not a directory');
+					}
+				} catch (_) {
+					throw err;
+				}
+			}
+
+			return pth;
+		};
+
+		return make(path$1.resolve(input));
+	};
+	return makeDir.exports;
+}
+
+/*!
+ * is-natural-number.js | MIT (c) Shinnosuke Watanabe
+ * https://github.com/shinnn/is-natural-number.js
+*/
+
+var isNaturalNumber;
+var hasRequiredIsNaturalNumber;
+
+function requireIsNaturalNumber () {
+	if (hasRequiredIsNaturalNumber) return isNaturalNumber;
+	hasRequiredIsNaturalNumber = 1;
+
+	isNaturalNumber = function isNaturalNumber(val, option) {
+	  if (option) {
+	    if (typeof option !== 'object') {
+	      throw new TypeError(
+	        String(option) +
+	        ' is not an object. Expected an object that has boolean `includeZero` property.'
+	      );
+	    }
+
+	    if ('includeZero' in option) {
+	      if (typeof option.includeZero !== 'boolean') {
+	        throw new TypeError(
+	          String(option.includeZero) +
+	          ' is neither true nor false. `includeZero` option must be a Boolean value.'
+	        );
+	      }
+
+	      if (option.includeZero && val === 0) {
+	        return true;
+	      }
+	    }
+	  }
+
+	  return Number.isSafeInteger(val) && val >= 1;
+	};
+	return isNaturalNumber;
+}
+
+/*!
+ * strip-dirs | MIT (c) Shinnosuke Watanabe
+ * https://github.com/shinnn/node-strip-dirs
+*/
+
+var stripDirs;
+var hasRequiredStripDirs;
+
+function requireStripDirs () {
+	if (hasRequiredStripDirs) return stripDirs;
+	hasRequiredStripDirs = 1;
+
+	const path$1 = path;
+	const util = require$$1;
+
+	const isNaturalNumber = requireIsNaturalNumber();
+
+	stripDirs = function stripDirs(pathStr, count, option) {
+	  if (typeof pathStr !== 'string') {
+	    throw new TypeError(
+	      util.inspect(pathStr) +
+	      ' is not a string. First argument to strip-dirs must be a path string.'
+	    );
+	  }
+
+	  if (path$1.posix.isAbsolute(pathStr) || path$1.win32.isAbsolute(pathStr)) {
+	    throw new Error(`${pathStr} is an absolute path. strip-dirs requires a relative path.`);
+	  }
+
+	  if (!isNaturalNumber(count, {includeZero: true})) {
+	    throw new Error(
+	      'The Second argument of strip-dirs must be a natural number or 0, but received ' +
+	      util.inspect(count) +
+	      '.'
+	    );
+	  }
+
+	  if (option) {
+	    if (typeof option !== 'object') {
+	      throw new TypeError(
+	        util.inspect(option) +
+	        ' is not an object. Expected an object with a boolean `disallowOverflow` property.'
+	      );
+	    }
+
+	    if (Array.isArray(option)) {
+	      throw new TypeError(
+	        util.inspect(option) +
+	        ' is an array. Expected an object with a boolean `disallowOverflow` property.'
+	      );
+	    }
+
+	    if ('disallowOverflow' in option && typeof option.disallowOverflow !== 'boolean') {
+	      throw new TypeError(
+	        util.inspect(option.disallowOverflow) +
+	        ' is neither true nor false. `disallowOverflow` option must be a Boolean value.'
+	      );
+	    }
+	  } else {
+	    option = {disallowOverflow: false};
+	  }
+
+	  const pathComponents = path$1.normalize(pathStr).split(path$1.sep);
+
+	  if (pathComponents.length > 1 && pathComponents[0] === '.') {
+	    pathComponents.shift();
+	  }
+
+	  if (count > pathComponents.length - 1) {
+	    if (option.disallowOverflow) {
+	      throw new RangeError('Cannot strip more directories than there are.');
+	    }
+
+	    count = pathComponents.length - 1;
+	  }
+
+	  return path$1.join.apply(null, pathComponents.slice(count));
+	};
+	return stripDirs;
+}
+
+var decompress$1;
+var hasRequiredDecompress;
+
+function requireDecompress () {
+	if (hasRequiredDecompress) return decompress$1;
+	hasRequiredDecompress = 1;
+	const path$1 = path;
+	const fs = requireGracefulFs();
+	const decompressTar = requireDecompressTar();
+	const decompressTarbz2 = requireDecompressTarbz2();
+	const decompressTargz = requireDecompressTargz();
+	const decompressUnzip = requireDecompressUnzip();
+	const makeDir = requireMakeDir();
+	const pify = requirePify$1();
+	const stripDirs = requireStripDirs();
+
+	const fsP = pify(fs);
+
+	const runPlugins = (input, opts) => {
+		if (opts.plugins.length === 0) {
+			return Promise.resolve([]);
+		}
+
+		return Promise.all(opts.plugins.map(x => x(input, opts))).then(files => files.reduce((a, b) => a.concat(b)));
+	};
+
+	const safeMakeDir = (dir, realOutputPath) => {
+		return fsP.realpath(dir)
+			.catch(_ => {
+				const parent = path$1.dirname(dir);
+				return safeMakeDir(parent, realOutputPath);
+			})
+			.then(realParentPath => {
+				if (realParentPath.indexOf(realOutputPath) !== 0) {
+					throw (new Error('Refusing to create a directory outside the output path.'));
+				}
+
+				return makeDir(dir).then(fsP.realpath);
+			});
+	};
+
+	const preventWritingThroughSymlink = (destination, realOutputPath) => {
+		return fsP.readlink(destination)
+			.catch(_ => {
+				// Either no file exists, or it's not a symlink. In either case, this is
+				// not an escape we need to worry about in this phase.
+				return null;
+			})
+			.then(symlinkPointsTo => {
+				if (symlinkPointsTo) {
+					throw new Error('Refusing to write into a symlink');
+				}
+
+				// No symlink exists at `destination`, so we can continue
+				return realOutputPath;
+			});
+	};
+
+	const extractFile = (input, output, opts) => runPlugins(input, opts).then(files => {
+		if (opts.strip > 0) {
+			files = files
+				.map(x => {
+					x.path = stripDirs(x.path, opts.strip);
+					return x;
+				})
+				.filter(x => x.path !== '.');
+		}
+
+		if (typeof opts.filter === 'function') {
+			files = files.filter(opts.filter);
+		}
+
+		if (typeof opts.map === 'function') {
+			files = files.map(opts.map);
+		}
+
+		if (!output) {
+			return files;
+		}
+
+		return Promise.all(files.map(x => {
+			const dest = path$1.join(output, x.path);
+			const mode = x.mode & ~process.umask();
+			const now = new Date();
+
+			if (x.type === 'directory') {
+				return makeDir(output)
+					.then(outputPath => fsP.realpath(outputPath))
+					.then(realOutputPath => safeMakeDir(dest, realOutputPath))
+					.then(() => fsP.utimes(dest, now, x.mtime))
+					.then(() => x);
+			}
+
+			return makeDir(output)
+				.then(outputPath => fsP.realpath(outputPath))
+				.then(realOutputPath => {
+					// Attempt to ensure parent directory exists (failing if it's outside the output dir)
+					return safeMakeDir(path$1.dirname(dest), realOutputPath)
+						.then(() => realOutputPath);
+				})
+				.then(realOutputPath => {
+					if (x.type === 'file') {
+						return preventWritingThroughSymlink(dest, realOutputPath);
+					}
+
+					return realOutputPath;
+				})
+				.then(realOutputPath => {
+					return fsP.realpath(path$1.dirname(dest))
+						.then(realDestinationDir => {
+							if (realDestinationDir.indexOf(realOutputPath) !== 0) {
+								throw (new Error('Refusing to write outside output directory: ' + realDestinationDir));
+							}
+						});
+				})
+				.then(() => {
+					if (x.type === 'link') {
+						return fsP.link(x.linkname, dest);
+					}
+
+					if (x.type === 'symlink' && process.platform === 'win32') {
+						return fsP.link(x.linkname, dest);
+					}
+
+					if (x.type === 'symlink') {
+						return fsP.symlink(x.linkname, dest);
+					}
+
+					return fsP.writeFile(dest, x.data, {mode});
+				})
+				.then(() => x.type === 'file' && fsP.utimes(dest, now, x.mtime))
+				.then(() => x);
+		}));
+	});
+
+	decompress$1 = (input, output, opts) => {
+		if (typeof input !== 'string' && !Buffer.isBuffer(input)) {
+			return Promise.reject(new TypeError('Input file required'));
+		}
+
+		if (typeof output === 'object') {
+			opts = output;
+			output = null;
+		}
+
+		opts = Object.assign({plugins: [
+			decompressTar(),
+			decompressTarbz2(),
+			decompressTargz(),
+			decompressUnzip()
+		]}, opts);
+
+		const read = typeof input === 'string' ? fsP.readFile(input) : Promise.resolve(input);
+
+		return read.then(buf => extractFile(buf, output, opts));
+	};
+	return decompress$1;
+}
+
+var decompressExports = requireDecompress();
+var decompress = /*@__PURE__*/getDefaultExportFromCjs(decompressExports);
+
+var re = {exports: {}};
+
+var constants;
+var hasRequiredConstants;
+
+function requireConstants () {
+	if (hasRequiredConstants) return constants;
+	hasRequiredConstants = 1;
+	// Note: this is the semver.org version of the spec that it implements
+	// Not necessarily the package version of this code.
+	const SEMVER_SPEC_VERSION = '2.0.0';
+
+	const MAX_LENGTH = 256;
+	const MAX_SAFE_INTEGER = Number.MAX_SAFE_INTEGER ||
+	/* istanbul ignore next */ 9007199254740991;
+
+	// Max safe segment length for coercion.
+	const MAX_SAFE_COMPONENT_LENGTH = 16;
+
+	// Max safe length for a build identifier. The max length minus 6 characters for
+	// the shortest version with a build 0.0.0+BUILD.
+	const MAX_SAFE_BUILD_LENGTH = MAX_LENGTH - 6;
+
+	const RELEASE_TYPES = [
+	  'major',
+	  'premajor',
+	  'minor',
+	  'preminor',
+	  'patch',
+	  'prepatch',
+	  'prerelease',
+	];
+
+	constants = {
+	  MAX_LENGTH,
+	  MAX_SAFE_COMPONENT_LENGTH,
+	  MAX_SAFE_BUILD_LENGTH,
+	  MAX_SAFE_INTEGER,
+	  RELEASE_TYPES,
+	  SEMVER_SPEC_VERSION,
+	  FLAG_INCLUDE_PRERELEASE: 0b001,
+	  FLAG_LOOSE: 0b010,
+	};
+	return constants;
+}
+
+var debug_1;
+var hasRequiredDebug;
+
+function requireDebug () {
+	if (hasRequiredDebug) return debug_1;
+	hasRequiredDebug = 1;
+	const debug = (
+	  typeof process === 'object' &&
+	  process.env &&
+	  process.env.NODE_DEBUG &&
+	  /\bsemver\b/i.test(process.env.NODE_DEBUG)
+	) ? (...args) => console.error('SEMVER', ...args)
+	  : () => {};
+
+	debug_1 = debug;
+	return debug_1;
+}
+
+var hasRequiredRe;
+
+function requireRe () {
+	if (hasRequiredRe) return re.exports;
+	hasRequiredRe = 1;
+	(function (module, exports) {
+		const {
+		  MAX_SAFE_COMPONENT_LENGTH,
+		  MAX_SAFE_BUILD_LENGTH,
+		  MAX_LENGTH,
+		} = requireConstants();
+		const debug = requireDebug();
+		exports = module.exports = {};
+
+		// The actual regexps go on exports.re
+		const re = exports.re = [];
+		const safeRe = exports.safeRe = [];
+		const src = exports.src = [];
+		const safeSrc = exports.safeSrc = [];
+		const t = exports.t = {};
+		let R = 0;
+
+		const LETTERDASHNUMBER = '[a-zA-Z0-9-]';
+
+		// Replace some greedy regex tokens to prevent regex dos issues. These regex are
+		// used internally via the safeRe object since all inputs in this library get
+		// normalized first to trim and collapse all extra whitespace. The original
+		// regexes are exported for userland consumption and lower level usage. A
+		// future breaking change could export the safer regex only with a note that
+		// all input should have extra whitespace removed.
+		const safeRegexReplacements = [
+		  ['\\s', 1],
+		  ['\\d', MAX_LENGTH],
+		  [LETTERDASHNUMBER, MAX_SAFE_BUILD_LENGTH],
+		];
+
+		const makeSafeRegex = (value) => {
+		  for (const [token, max] of safeRegexReplacements) {
+		    value = value
+		      .split(`${token}*`).join(`${token}{0,${max}}`)
+		      .split(`${token}+`).join(`${token}{1,${max}}`);
+		  }
+		  return value
+		};
+
+		const createToken = (name, value, isGlobal) => {
+		  const safe = makeSafeRegex(value);
+		  const index = R++;
+		  debug(name, index, value);
+		  t[name] = index;
+		  src[index] = value;
+		  safeSrc[index] = safe;
+		  re[index] = new RegExp(value, isGlobal ? 'g' : undefined);
+		  safeRe[index] = new RegExp(safe, isGlobal ? 'g' : undefined);
+		};
+
+		// The following Regular Expressions can be used for tokenizing,
+		// validating, and parsing SemVer version strings.
+
+		// ## Numeric Identifier
+		// A single `0`, or a non-zero digit followed by zero or more digits.
+
+		createToken('NUMERICIDENTIFIER', '0|[1-9]\\d*');
+		createToken('NUMERICIDENTIFIERLOOSE', '\\d+');
+
+		// ## Non-numeric Identifier
+		// Zero or more digits, followed by a letter or hyphen, and then zero or
+		// more letters, digits, or hyphens.
+
+		createToken('NONNUMERICIDENTIFIER', `\\d*[a-zA-Z-]${LETTERDASHNUMBER}*`);
+
+		// ## Main Version
+		// Three dot-separated numeric identifiers.
+
+		createToken('MAINVERSION', `(${src[t.NUMERICIDENTIFIER]})\\.` +
+		                   `(${src[t.NUMERICIDENTIFIER]})\\.` +
+		                   `(${src[t.NUMERICIDENTIFIER]})`);
+
+		createToken('MAINVERSIONLOOSE', `(${src[t.NUMERICIDENTIFIERLOOSE]})\\.` +
+		                        `(${src[t.NUMERICIDENTIFIERLOOSE]})\\.` +
+		                        `(${src[t.NUMERICIDENTIFIERLOOSE]})`);
+
+		// ## Pre-release Version Identifier
+		// A numeric identifier, or a non-numeric identifier.
+
+		createToken('PRERELEASEIDENTIFIER', `(?:${src[t.NUMERICIDENTIFIER]
+		}|${src[t.NONNUMERICIDENTIFIER]})`);
+
+		createToken('PRERELEASEIDENTIFIERLOOSE', `(?:${src[t.NUMERICIDENTIFIERLOOSE]
+		}|${src[t.NONNUMERICIDENTIFIER]})`);
+
+		// ## Pre-release Version
+		// Hyphen, followed by one or more dot-separated pre-release version
+		// identifiers.
+
+		createToken('PRERELEASE', `(?:-(${src[t.PRERELEASEIDENTIFIER]
+		}(?:\\.${src[t.PRERELEASEIDENTIFIER]})*))`);
+
+		createToken('PRERELEASELOOSE', `(?:-?(${src[t.PRERELEASEIDENTIFIERLOOSE]
+		}(?:\\.${src[t.PRERELEASEIDENTIFIERLOOSE]})*))`);
+
+		// ## Build Metadata Identifier
+		// Any combination of digits, letters, or hyphens.
+
+		createToken('BUILDIDENTIFIER', `${LETTERDASHNUMBER}+`);
+
+		// ## Build Metadata
+		// Plus sign, followed by one or more period-separated build metadata
+		// identifiers.
+
+		createToken('BUILD', `(?:\\+(${src[t.BUILDIDENTIFIER]
+		}(?:\\.${src[t.BUILDIDENTIFIER]})*))`);
+
+		// ## Full Version String
+		// A main version, followed optionally by a pre-release version and
+		// build metadata.
+
+		// Note that the only major, minor, patch, and pre-release sections of
+		// the version string are capturing groups.  The build metadata is not a
+		// capturing group, because it should not ever be used in version
+		// comparison.
+
+		createToken('FULLPLAIN', `v?${src[t.MAINVERSION]
+		}${src[t.PRERELEASE]}?${
+		  src[t.BUILD]}?`);
+
+		createToken('FULL', `^${src[t.FULLPLAIN]}$`);
+
+		// like full, but allows v1.2.3 and =1.2.3, which people do sometimes.
+		// also, 1.0.0alpha1 (prerelease without the hyphen) which is pretty
+		// common in the npm registry.
+		createToken('LOOSEPLAIN', `[v=\\s]*${src[t.MAINVERSIONLOOSE]
+		}${src[t.PRERELEASELOOSE]}?${
+		  src[t.BUILD]}?`);
+
+		createToken('LOOSE', `^${src[t.LOOSEPLAIN]}$`);
+
+		createToken('GTLT', '((?:<|>)?=?)');
+
+		// Something like "2.*" or "1.2.x".
+		// Note that "x.x" is a valid xRange identifer, meaning "any version"
+		// Only the first item is strictly required.
+		createToken('XRANGEIDENTIFIERLOOSE', `${src[t.NUMERICIDENTIFIERLOOSE]}|x|X|\\*`);
+		createToken('XRANGEIDENTIFIER', `${src[t.NUMERICIDENTIFIER]}|x|X|\\*`);
+
+		createToken('XRANGEPLAIN', `[v=\\s]*(${src[t.XRANGEIDENTIFIER]})` +
+		                   `(?:\\.(${src[t.XRANGEIDENTIFIER]})` +
+		                   `(?:\\.(${src[t.XRANGEIDENTIFIER]})` +
+		                   `(?:${src[t.PRERELEASE]})?${
+		                     src[t.BUILD]}?` +
+		                   `)?)?`);
+
+		createToken('XRANGEPLAINLOOSE', `[v=\\s]*(${src[t.XRANGEIDENTIFIERLOOSE]})` +
+		                        `(?:\\.(${src[t.XRANGEIDENTIFIERLOOSE]})` +
+		                        `(?:\\.(${src[t.XRANGEIDENTIFIERLOOSE]})` +
+		                        `(?:${src[t.PRERELEASELOOSE]})?${
+		                          src[t.BUILD]}?` +
+		                        `)?)?`);
+
+		createToken('XRANGE', `^${src[t.GTLT]}\\s*${src[t.XRANGEPLAIN]}$`);
+		createToken('XRANGELOOSE', `^${src[t.GTLT]}\\s*${src[t.XRANGEPLAINLOOSE]}$`);
+
+		// Coercion.
+		// Extract anything that could conceivably be a part of a valid semver
+		createToken('COERCEPLAIN', `${'(^|[^\\d])' +
+		              '(\\d{1,'}${MAX_SAFE_COMPONENT_LENGTH}})` +
+		              `(?:\\.(\\d{1,${MAX_SAFE_COMPONENT_LENGTH}}))?` +
+		              `(?:\\.(\\d{1,${MAX_SAFE_COMPONENT_LENGTH}}))?`);
+		createToken('COERCE', `${src[t.COERCEPLAIN]}(?:$|[^\\d])`);
+		createToken('COERCEFULL', src[t.COERCEPLAIN] +
+		              `(?:${src[t.PRERELEASE]})?` +
+		              `(?:${src[t.BUILD]})?` +
+		              `(?:$|[^\\d])`);
+		createToken('COERCERTL', src[t.COERCE], true);
+		createToken('COERCERTLFULL', src[t.COERCEFULL], true);
+
+		// Tilde ranges.
+		// Meaning is "reasonably at or greater than"
+		createToken('LONETILDE', '(?:~>?)');
+
+		createToken('TILDETRIM', `(\\s*)${src[t.LONETILDE]}\\s+`, true);
+		exports.tildeTrimReplace = '$1~';
+
+		createToken('TILDE', `^${src[t.LONETILDE]}${src[t.XRANGEPLAIN]}$`);
+		createToken('TILDELOOSE', `^${src[t.LONETILDE]}${src[t.XRANGEPLAINLOOSE]}$`);
+
+		// Caret ranges.
+		// Meaning is "at least and backwards compatible with"
+		createToken('LONECARET', '(?:\\^)');
+
+		createToken('CARETTRIM', `(\\s*)${src[t.LONECARET]}\\s+`, true);
+		exports.caretTrimReplace = '$1^';
+
+		createToken('CARET', `^${src[t.LONECARET]}${src[t.XRANGEPLAIN]}$`);
+		createToken('CARETLOOSE', `^${src[t.LONECARET]}${src[t.XRANGEPLAINLOOSE]}$`);
+
+		// A simple gt/lt/eq thing, or just "" to indicate "any version"
+		createToken('COMPARATORLOOSE', `^${src[t.GTLT]}\\s*(${src[t.LOOSEPLAIN]})$|^$`);
+		createToken('COMPARATOR', `^${src[t.GTLT]}\\s*(${src[t.FULLPLAIN]})$|^$`);
+
+		// An expression to strip any whitespace between the gtlt and the thing
+		// it modifies, so that `> 1.2.3` ==> `>1.2.3`
+		createToken('COMPARATORTRIM', `(\\s*)${src[t.GTLT]
+		}\\s*(${src[t.LOOSEPLAIN]}|${src[t.XRANGEPLAIN]})`, true);
+		exports.comparatorTrimReplace = '$1$2$3';
+
+		// Something like `1.2.3 - 1.2.4`
+		// Note that these all use the loose form, because they'll be
+		// checked against either the strict or loose comparator form
+		// later.
+		createToken('HYPHENRANGE', `^\\s*(${src[t.XRANGEPLAIN]})` +
+		                   `\\s+-\\s+` +
+		                   `(${src[t.XRANGEPLAIN]})` +
+		                   `\\s*$`);
+
+		createToken('HYPHENRANGELOOSE', `^\\s*(${src[t.XRANGEPLAINLOOSE]})` +
+		                        `\\s+-\\s+` +
+		                        `(${src[t.XRANGEPLAINLOOSE]})` +
+		                        `\\s*$`);
+
+		// Star ranges basically just allow anything at all.
+		createToken('STAR', '(<|>)?=?\\s*\\*');
+		// >=0.0.0 is like a star
+		createToken('GTE0', '^\\s*>=\\s*0\\.0\\.0\\s*$');
+		createToken('GTE0PRE', '^\\s*>=\\s*0\\.0\\.0-0\\s*$'); 
+	} (re, re.exports));
+	return re.exports;
+}
+
+var parseOptions_1;
+var hasRequiredParseOptions;
+
+function requireParseOptions () {
+	if (hasRequiredParseOptions) return parseOptions_1;
+	hasRequiredParseOptions = 1;
+	// parse out just the options we care about
+	const looseOption = Object.freeze({ loose: true });
+	const emptyOpts = Object.freeze({ });
+	const parseOptions = options => {
+	  if (!options) {
+	    return emptyOpts
+	  }
+
+	  if (typeof options !== 'object') {
+	    return looseOption
+	  }
+
+	  return options
+	};
+	parseOptions_1 = parseOptions;
+	return parseOptions_1;
+}
+
+var identifiers;
+var hasRequiredIdentifiers;
+
+function requireIdentifiers () {
+	if (hasRequiredIdentifiers) return identifiers;
+	hasRequiredIdentifiers = 1;
+	const numeric = /^[0-9]+$/;
+	const compareIdentifiers = (a, b) => {
+	  const anum = numeric.test(a);
+	  const bnum = numeric.test(b);
+
+	  if (anum && bnum) {
+	    a = +a;
+	    b = +b;
+	  }
+
+	  return a === b ? 0
+	    : (anum && !bnum) ? -1
+	    : (bnum && !anum) ? 1
+	    : a < b ? -1
+	    : 1
+	};
+
+	const rcompareIdentifiers = (a, b) => compareIdentifiers(b, a);
+
+	identifiers = {
+	  compareIdentifiers,
+	  rcompareIdentifiers,
+	};
+	return identifiers;
+}
+
+var semver$1;
+var hasRequiredSemver$1;
+
+function requireSemver$1 () {
+	if (hasRequiredSemver$1) return semver$1;
+	hasRequiredSemver$1 = 1;
+	const debug = requireDebug();
+	const { MAX_LENGTH, MAX_SAFE_INTEGER } = requireConstants();
+	const { safeRe: re, safeSrc: src, t } = requireRe();
+
+	const parseOptions = requireParseOptions();
+	const { compareIdentifiers } = requireIdentifiers();
+	class SemVer {
+	  constructor (version, options) {
+	    options = parseOptions(options);
+
+	    if (version instanceof SemVer) {
+	      if (version.loose === !!options.loose &&
+	        version.includePrerelease === !!options.includePrerelease) {
+	        return version
+	      } else {
+	        version = version.version;
+	      }
+	    } else if (typeof version !== 'string') {
+	      throw new TypeError(`Invalid version. Must be a string. Got type "${typeof version}".`)
+	    }
+
+	    if (version.length > MAX_LENGTH) {
+	      throw new TypeError(
+	        `version is longer than ${MAX_LENGTH} characters`
+	      )
+	    }
+
+	    debug('SemVer', version, options);
+	    this.options = options;
+	    this.loose = !!options.loose;
+	    // this isn't actually relevant for versions, but keep it so that we
+	    // don't run into trouble passing this.options around.
+	    this.includePrerelease = !!options.includePrerelease;
+
+	    const m = version.trim().match(options.loose ? re[t.LOOSE] : re[t.FULL]);
+
+	    if (!m) {
+	      throw new TypeError(`Invalid Version: ${version}`)
+	    }
+
+	    this.raw = version;
+
+	    // these are actually numbers
+	    this.major = +m[1];
+	    this.minor = +m[2];
+	    this.patch = +m[3];
+
+	    if (this.major > MAX_SAFE_INTEGER || this.major < 0) {
+	      throw new TypeError('Invalid major version')
+	    }
+
+	    if (this.minor > MAX_SAFE_INTEGER || this.minor < 0) {
+	      throw new TypeError('Invalid minor version')
+	    }
+
+	    if (this.patch > MAX_SAFE_INTEGER || this.patch < 0) {
+	      throw new TypeError('Invalid patch version')
+	    }
+
+	    // numberify any prerelease numeric ids
+	    if (!m[4]) {
+	      this.prerelease = [];
+	    } else {
+	      this.prerelease = m[4].split('.').map((id) => {
+	        if (/^[0-9]+$/.test(id)) {
+	          const num = +id;
+	          if (num >= 0 && num < MAX_SAFE_INTEGER) {
+	            return num
+	          }
+	        }
+	        return id
+	      });
+	    }
+
+	    this.build = m[5] ? m[5].split('.') : [];
+	    this.format();
+	  }
+
+	  format () {
+	    this.version = `${this.major}.${this.minor}.${this.patch}`;
+	    if (this.prerelease.length) {
+	      this.version += `-${this.prerelease.join('.')}`;
+	    }
+	    return this.version
+	  }
+
+	  toString () {
+	    return this.version
+	  }
+
+	  compare (other) {
+	    debug('SemVer.compare', this.version, this.options, other);
+	    if (!(other instanceof SemVer)) {
+	      if (typeof other === 'string' && other === this.version) {
+	        return 0
+	      }
+	      other = new SemVer(other, this.options);
+	    }
+
+	    if (other.version === this.version) {
+	      return 0
+	    }
+
+	    return this.compareMain(other) || this.comparePre(other)
+	  }
+
+	  compareMain (other) {
+	    if (!(other instanceof SemVer)) {
+	      other = new SemVer(other, this.options);
+	    }
+
+	    return (
+	      compareIdentifiers(this.major, other.major) ||
+	      compareIdentifiers(this.minor, other.minor) ||
+	      compareIdentifiers(this.patch, other.patch)
+	    )
+	  }
+
+	  comparePre (other) {
+	    if (!(other instanceof SemVer)) {
+	      other = new SemVer(other, this.options);
+	    }
+
+	    // NOT having a prerelease is > having one
+	    if (this.prerelease.length && !other.prerelease.length) {
+	      return -1
+	    } else if (!this.prerelease.length && other.prerelease.length) {
+	      return 1
+	    } else if (!this.prerelease.length && !other.prerelease.length) {
+	      return 0
+	    }
+
+	    let i = 0;
+	    do {
+	      const a = this.prerelease[i];
+	      const b = other.prerelease[i];
+	      debug('prerelease compare', i, a, b);
+	      if (a === undefined && b === undefined) {
+	        return 0
+	      } else if (b === undefined) {
+	        return 1
+	      } else if (a === undefined) {
+	        return -1
+	      } else if (a === b) {
+	        continue
+	      } else {
+	        return compareIdentifiers(a, b)
+	      }
+	    } while (++i)
+	  }
+
+	  compareBuild (other) {
+	    if (!(other instanceof SemVer)) {
+	      other = new SemVer(other, this.options);
+	    }
+
+	    let i = 0;
+	    do {
+	      const a = this.build[i];
+	      const b = other.build[i];
+	      debug('build compare', i, a, b);
+	      if (a === undefined && b === undefined) {
+	        return 0
+	      } else if (b === undefined) {
+	        return 1
+	      } else if (a === undefined) {
+	        return -1
+	      } else if (a === b) {
+	        continue
+	      } else {
+	        return compareIdentifiers(a, b)
+	      }
+	    } while (++i)
+	  }
+
+	  // preminor will bump the version up to the next minor release, and immediately
+	  // down to pre-release. premajor and prepatch work the same way.
+	  inc (release, identifier, identifierBase) {
+	    if (release.startsWith('pre')) {
+	      if (!identifier && identifierBase === false) {
+	        throw new Error('invalid increment argument: identifier is empty')
+	      }
+	      // Avoid an invalid semver results
+	      if (identifier) {
+	        const r = new RegExp(`^${this.options.loose ? src[t.PRERELEASELOOSE] : src[t.PRERELEASE]}$`);
+	        const match = `-${identifier}`.match(r);
+	        if (!match || match[1] !== identifier) {
+	          throw new Error(`invalid identifier: ${identifier}`)
+	        }
+	      }
+	    }
+
+	    switch (release) {
+	      case 'premajor':
+	        this.prerelease.length = 0;
+	        this.patch = 0;
+	        this.minor = 0;
+	        this.major++;
+	        this.inc('pre', identifier, identifierBase);
+	        break
+	      case 'preminor':
+	        this.prerelease.length = 0;
+	        this.patch = 0;
+	        this.minor++;
+	        this.inc('pre', identifier, identifierBase);
+	        break
+	      case 'prepatch':
+	        // If this is already a prerelease, it will bump to the next version
+	        // drop any prereleases that might already exist, since they are not
+	        // relevant at this point.
+	        this.prerelease.length = 0;
+	        this.inc('patch', identifier, identifierBase);
+	        this.inc('pre', identifier, identifierBase);
+	        break
+	      // If the input is a non-prerelease version, this acts the same as
+	      // prepatch.
+	      case 'prerelease':
+	        if (this.prerelease.length === 0) {
+	          this.inc('patch', identifier, identifierBase);
+	        }
+	        this.inc('pre', identifier, identifierBase);
+	        break
+	      case 'release':
+	        if (this.prerelease.length === 0) {
+	          throw new Error(`version ${this.raw} is not a prerelease`)
+	        }
+	        this.prerelease.length = 0;
+	        break
+
+	      case 'major':
+	        // If this is a pre-major version, bump up to the same major version.
+	        // Otherwise increment major.
+	        // 1.0.0-5 bumps to 1.0.0
+	        // 1.1.0 bumps to 2.0.0
+	        if (
+	          this.minor !== 0 ||
+	          this.patch !== 0 ||
+	          this.prerelease.length === 0
+	        ) {
+	          this.major++;
+	        }
+	        this.minor = 0;
+	        this.patch = 0;
+	        this.prerelease = [];
+	        break
+	      case 'minor':
+	        // If this is a pre-minor version, bump up to the same minor version.
+	        // Otherwise increment minor.
+	        // 1.2.0-5 bumps to 1.2.0
+	        // 1.2.1 bumps to 1.3.0
+	        if (this.patch !== 0 || this.prerelease.length === 0) {
+	          this.minor++;
+	        }
+	        this.patch = 0;
+	        this.prerelease = [];
+	        break
+	      case 'patch':
+	        // If this is not a pre-release version, it will increment the patch.
+	        // If it is a pre-release it will bump up to the same patch version.
+	        // 1.2.0-5 patches to 1.2.0
+	        // 1.2.0 patches to 1.2.1
+	        if (this.prerelease.length === 0) {
+	          this.patch++;
+	        }
+	        this.prerelease = [];
+	        break
+	      // This probably shouldn't be used publicly.
+	      // 1.0.0 'pre' would become 1.0.0-0 which is the wrong direction.
+	      case 'pre': {
+	        const base = Number(identifierBase) ? 1 : 0;
+
+	        if (this.prerelease.length === 0) {
+	          this.prerelease = [base];
+	        } else {
+	          let i = this.prerelease.length;
+	          while (--i >= 0) {
+	            if (typeof this.prerelease[i] === 'number') {
+	              this.prerelease[i]++;
+	              i = -2;
+	            }
+	          }
+	          if (i === -1) {
+	            // didn't increment anything
+	            if (identifier === this.prerelease.join('.') && identifierBase === false) {
+	              throw new Error('invalid increment argument: identifier already exists')
+	            }
+	            this.prerelease.push(base);
+	          }
+	        }
+	        if (identifier) {
+	          // 1.2.0-beta.1 bumps to 1.2.0-beta.2,
+	          // 1.2.0-beta.fooblz or 1.2.0-beta bumps to 1.2.0-beta.0
+	          let prerelease = [identifier, base];
+	          if (identifierBase === false) {
+	            prerelease = [identifier];
+	          }
+	          if (compareIdentifiers(this.prerelease[0], identifier) === 0) {
+	            if (isNaN(this.prerelease[1])) {
+	              this.prerelease = prerelease;
+	            }
+	          } else {
+	            this.prerelease = prerelease;
+	          }
+	        }
+	        break
+	      }
+	      default:
+	        throw new Error(`invalid increment argument: ${release}`)
+	    }
+	    this.raw = this.format();
+	    if (this.build.length) {
+	      this.raw += `+${this.build.join('.')}`;
+	    }
+	    return this
+	  }
+	}
+
+	semver$1 = SemVer;
+	return semver$1;
+}
+
+var parse_1;
+var hasRequiredParse;
+
+function requireParse () {
+	if (hasRequiredParse) return parse_1;
+	hasRequiredParse = 1;
+	const SemVer = requireSemver$1();
+	const parse = (version, options, throwErrors = false) => {
+	  if (version instanceof SemVer) {
+	    return version
+	  }
+	  try {
+	    return new SemVer(version, options)
+	  } catch (er) {
+	    if (!throwErrors) {
+	      return null
+	    }
+	    throw er
+	  }
+	};
+
+	parse_1 = parse;
+	return parse_1;
+}
+
+var valid_1;
+var hasRequiredValid$1;
+
+function requireValid$1 () {
+	if (hasRequiredValid$1) return valid_1;
+	hasRequiredValid$1 = 1;
+	const parse = requireParse();
+	const valid = (version, options) => {
+	  const v = parse(version, options);
+	  return v ? v.version : null
+	};
+	valid_1 = valid;
+	return valid_1;
+}
+
+var clean_1;
+var hasRequiredClean;
+
+function requireClean () {
+	if (hasRequiredClean) return clean_1;
+	hasRequiredClean = 1;
+	const parse = requireParse();
+	const clean = (version, options) => {
+	  const s = parse(version.trim().replace(/^[=v]+/, ''), options);
+	  return s ? s.version : null
+	};
+	clean_1 = clean;
+	return clean_1;
+}
+
+var inc_1;
+var hasRequiredInc;
+
+function requireInc () {
+	if (hasRequiredInc) return inc_1;
+	hasRequiredInc = 1;
+	const SemVer = requireSemver$1();
+
+	const inc = (version, release, options, identifier, identifierBase) => {
+	  if (typeof (options) === 'string') {
+	    identifierBase = identifier;
+	    identifier = options;
+	    options = undefined;
+	  }
+
+	  try {
+	    return new SemVer(
+	      version instanceof SemVer ? version.version : version,
+	      options
+	    ).inc(release, identifier, identifierBase).version
+	  } catch (er) {
+	    return null
+	  }
+	};
+	inc_1 = inc;
+	return inc_1;
+}
+
+var diff_1;
+var hasRequiredDiff;
+
+function requireDiff () {
+	if (hasRequiredDiff) return diff_1;
+	hasRequiredDiff = 1;
+	const parse = requireParse();
+
+	const diff = (version1, version2) => {
+	  const v1 = parse(version1, null, true);
+	  const v2 = parse(version2, null, true);
+	  const comparison = v1.compare(v2);
+
+	  if (comparison === 0) {
+	    return null
+	  }
+
+	  const v1Higher = comparison > 0;
+	  const highVersion = v1Higher ? v1 : v2;
+	  const lowVersion = v1Higher ? v2 : v1;
+	  const highHasPre = !!highVersion.prerelease.length;
+	  const lowHasPre = !!lowVersion.prerelease.length;
+
+	  if (lowHasPre && !highHasPre) {
+	    // Going from prerelease -> no prerelease requires some special casing
+
+	    // If the low version has only a major, then it will always be a major
+	    // Some examples:
+	    // 1.0.0-1 -> 1.0.0
+	    // 1.0.0-1 -> 1.1.1
+	    // 1.0.0-1 -> 2.0.0
+	    if (!lowVersion.patch && !lowVersion.minor) {
+	      return 'major'
+	    }
+
+	    // If the main part has no difference
+	    if (lowVersion.compareMain(highVersion) === 0) {
+	      if (lowVersion.minor && !lowVersion.patch) {
+	        return 'minor'
+	      }
+	      return 'patch'
+	    }
+	  }
+
+	  // add the `pre` prefix if we are going to a prerelease version
+	  const prefix = highHasPre ? 'pre' : '';
+
+	  if (v1.major !== v2.major) {
+	    return prefix + 'major'
+	  }
+
+	  if (v1.minor !== v2.minor) {
+	    return prefix + 'minor'
+	  }
+
+	  if (v1.patch !== v2.patch) {
+	    return prefix + 'patch'
+	  }
+
+	  // high and low are preleases
+	  return 'prerelease'
+	};
+
+	diff_1 = diff;
+	return diff_1;
+}
+
+var major_1;
+var hasRequiredMajor;
+
+function requireMajor () {
+	if (hasRequiredMajor) return major_1;
+	hasRequiredMajor = 1;
+	const SemVer = requireSemver$1();
+	const major = (a, loose) => new SemVer(a, loose).major;
+	major_1 = major;
+	return major_1;
+}
+
+var minor_1;
+var hasRequiredMinor;
+
+function requireMinor () {
+	if (hasRequiredMinor) return minor_1;
+	hasRequiredMinor = 1;
+	const SemVer = requireSemver$1();
+	const minor = (a, loose) => new SemVer(a, loose).minor;
+	minor_1 = minor;
+	return minor_1;
+}
+
+var patch_1;
+var hasRequiredPatch;
+
+function requirePatch () {
+	if (hasRequiredPatch) return patch_1;
+	hasRequiredPatch = 1;
+	const SemVer = requireSemver$1();
+	const patch = (a, loose) => new SemVer(a, loose).patch;
+	patch_1 = patch;
+	return patch_1;
+}
+
+var prerelease_1;
+var hasRequiredPrerelease;
+
+function requirePrerelease () {
+	if (hasRequiredPrerelease) return prerelease_1;
+	hasRequiredPrerelease = 1;
+	const parse = requireParse();
+	const prerelease = (version, options) => {
+	  const parsed = parse(version, options);
+	  return (parsed && parsed.prerelease.length) ? parsed.prerelease : null
+	};
+	prerelease_1 = prerelease;
+	return prerelease_1;
+}
+
+var compare_1;
+var hasRequiredCompare;
+
+function requireCompare () {
+	if (hasRequiredCompare) return compare_1;
+	hasRequiredCompare = 1;
+	const SemVer = requireSemver$1();
+	const compare = (a, b, loose) =>
+	  new SemVer(a, loose).compare(new SemVer(b, loose));
+
+	compare_1 = compare;
+	return compare_1;
+}
+
+var rcompare_1;
+var hasRequiredRcompare;
+
+function requireRcompare () {
+	if (hasRequiredRcompare) return rcompare_1;
+	hasRequiredRcompare = 1;
+	const compare = requireCompare();
+	const rcompare = (a, b, loose) => compare(b, a, loose);
+	rcompare_1 = rcompare;
+	return rcompare_1;
+}
+
+var compareLoose_1;
+var hasRequiredCompareLoose;
+
+function requireCompareLoose () {
+	if (hasRequiredCompareLoose) return compareLoose_1;
+	hasRequiredCompareLoose = 1;
+	const compare = requireCompare();
+	const compareLoose = (a, b) => compare(a, b, true);
+	compareLoose_1 = compareLoose;
+	return compareLoose_1;
+}
+
+var compareBuild_1;
+var hasRequiredCompareBuild;
+
+function requireCompareBuild () {
+	if (hasRequiredCompareBuild) return compareBuild_1;
+	hasRequiredCompareBuild = 1;
+	const SemVer = requireSemver$1();
+	const compareBuild = (a, b, loose) => {
+	  const versionA = new SemVer(a, loose);
+	  const versionB = new SemVer(b, loose);
+	  return versionA.compare(versionB) || versionA.compareBuild(versionB)
+	};
+	compareBuild_1 = compareBuild;
+	return compareBuild_1;
+}
+
+var sort_1;
+var hasRequiredSort;
+
+function requireSort () {
+	if (hasRequiredSort) return sort_1;
+	hasRequiredSort = 1;
+	const compareBuild = requireCompareBuild();
+	const sort = (list, loose) => list.sort((a, b) => compareBuild(a, b, loose));
+	sort_1 = sort;
+	return sort_1;
+}
+
+var rsort_1;
+var hasRequiredRsort;
+
+function requireRsort () {
+	if (hasRequiredRsort) return rsort_1;
+	hasRequiredRsort = 1;
+	const compareBuild = requireCompareBuild();
+	const rsort = (list, loose) => list.sort((a, b) => compareBuild(b, a, loose));
+	rsort_1 = rsort;
+	return rsort_1;
+}
+
+var gt_1;
+var hasRequiredGt;
+
+function requireGt () {
+	if (hasRequiredGt) return gt_1;
+	hasRequiredGt = 1;
+	const compare = requireCompare();
+	const gt = (a, b, loose) => compare(a, b, loose) > 0;
+	gt_1 = gt;
+	return gt_1;
+}
+
+var lt_1;
+var hasRequiredLt;
+
+function requireLt () {
+	if (hasRequiredLt) return lt_1;
+	hasRequiredLt = 1;
+	const compare = requireCompare();
+	const lt = (a, b, loose) => compare(a, b, loose) < 0;
+	lt_1 = lt;
+	return lt_1;
+}
+
+var eq_1;
+var hasRequiredEq;
+
+function requireEq () {
+	if (hasRequiredEq) return eq_1;
+	hasRequiredEq = 1;
+	const compare = requireCompare();
+	const eq = (a, b, loose) => compare(a, b, loose) === 0;
+	eq_1 = eq;
+	return eq_1;
+}
+
+var neq_1;
+var hasRequiredNeq;
+
+function requireNeq () {
+	if (hasRequiredNeq) return neq_1;
+	hasRequiredNeq = 1;
+	const compare = requireCompare();
+	const neq = (a, b, loose) => compare(a, b, loose) !== 0;
+	neq_1 = neq;
+	return neq_1;
+}
+
+var gte_1;
+var hasRequiredGte;
+
+function requireGte () {
+	if (hasRequiredGte) return gte_1;
+	hasRequiredGte = 1;
+	const compare = requireCompare();
+	const gte = (a, b, loose) => compare(a, b, loose) >= 0;
+	gte_1 = gte;
+	return gte_1;
+}
+
+var lte_1;
+var hasRequiredLte;
+
+function requireLte () {
+	if (hasRequiredLte) return lte_1;
+	hasRequiredLte = 1;
+	const compare = requireCompare();
+	const lte = (a, b, loose) => compare(a, b, loose) <= 0;
+	lte_1 = lte;
+	return lte_1;
+}
+
+var cmp_1;
+var hasRequiredCmp;
+
+function requireCmp () {
+	if (hasRequiredCmp) return cmp_1;
+	hasRequiredCmp = 1;
+	const eq = requireEq();
+	const neq = requireNeq();
+	const gt = requireGt();
+	const gte = requireGte();
+	const lt = requireLt();
+	const lte = requireLte();
+
+	const cmp = (a, op, b, loose) => {
+	  switch (op) {
+	    case '===':
+	      if (typeof a === 'object') {
+	        a = a.version;
+	      }
+	      if (typeof b === 'object') {
+	        b = b.version;
+	      }
+	      return a === b
+
+	    case '!==':
+	      if (typeof a === 'object') {
+	        a = a.version;
+	      }
+	      if (typeof b === 'object') {
+	        b = b.version;
+	      }
+	      return a !== b
+
+	    case '':
+	    case '=':
+	    case '==':
+	      return eq(a, b, loose)
+
+	    case '!=':
+	      return neq(a, b, loose)
+
+	    case '>':
+	      return gt(a, b, loose)
+
+	    case '>=':
+	      return gte(a, b, loose)
+
+	    case '<':
+	      return lt(a, b, loose)
+
+	    case '<=':
+	      return lte(a, b, loose)
+
+	    default:
+	      throw new TypeError(`Invalid operator: ${op}`)
+	  }
+	};
+	cmp_1 = cmp;
+	return cmp_1;
+}
+
+var coerce_1;
+var hasRequiredCoerce;
+
+function requireCoerce () {
+	if (hasRequiredCoerce) return coerce_1;
+	hasRequiredCoerce = 1;
+	const SemVer = requireSemver$1();
+	const parse = requireParse();
+	const { safeRe: re, t } = requireRe();
+
+	const coerce = (version, options) => {
+	  if (version instanceof SemVer) {
+	    return version
+	  }
+
+	  if (typeof version === 'number') {
+	    version = String(version);
+	  }
+
+	  if (typeof version !== 'string') {
+	    return null
+	  }
+
+	  options = options || {};
+
+	  let match = null;
+	  if (!options.rtl) {
+	    match = version.match(options.includePrerelease ? re[t.COERCEFULL] : re[t.COERCE]);
+	  } else {
+	    // Find the right-most coercible string that does not share
+	    // a terminus with a more left-ward coercible string.
+	    // Eg, '1.2.3.4' wants to coerce '2.3.4', not '3.4' or '4'
+	    // With includePrerelease option set, '1.2.3.4-rc' wants to coerce '2.3.4-rc', not '2.3.4'
+	    //
+	    // Walk through the string checking with a /g regexp
+	    // Manually set the index so as to pick up overlapping matches.
+	    // Stop when we get a match that ends at the string end, since no
+	    // coercible string can be more right-ward without the same terminus.
+	    const coerceRtlRegex = options.includePrerelease ? re[t.COERCERTLFULL] : re[t.COERCERTL];
+	    let next;
+	    while ((next = coerceRtlRegex.exec(version)) &&
+	        (!match || match.index + match[0].length !== version.length)
+	    ) {
+	      if (!match ||
+	            next.index + next[0].length !== match.index + match[0].length) {
+	        match = next;
+	      }
+	      coerceRtlRegex.lastIndex = next.index + next[1].length + next[2].length;
+	    }
+	    // leave it in a clean state
+	    coerceRtlRegex.lastIndex = -1;
+	  }
+
+	  if (match === null) {
+	    return null
+	  }
+
+	  const major = match[2];
+	  const minor = match[3] || '0';
+	  const patch = match[4] || '0';
+	  const prerelease = options.includePrerelease && match[5] ? `-${match[5]}` : '';
+	  const build = options.includePrerelease && match[6] ? `+${match[6]}` : '';
+
+	  return parse(`${major}.${minor}.${patch}${prerelease}${build}`, options)
+	};
+	coerce_1 = coerce;
+	return coerce_1;
+}
+
+var lrucache;
+var hasRequiredLrucache;
+
+function requireLrucache () {
+	if (hasRequiredLrucache) return lrucache;
+	hasRequiredLrucache = 1;
+	class LRUCache {
+	  constructor () {
+	    this.max = 1000;
+	    this.map = new Map();
+	  }
+
+	  get (key) {
+	    const value = this.map.get(key);
+	    if (value === undefined) {
+	      return undefined
+	    } else {
+	      // Remove the key from the map and add it to the end
+	      this.map.delete(key);
+	      this.map.set(key, value);
+	      return value
+	    }
+	  }
+
+	  delete (key) {
+	    return this.map.delete(key)
+	  }
+
+	  set (key, value) {
+	    const deleted = this.delete(key);
+
+	    if (!deleted && value !== undefined) {
+	      // If cache is full, delete the least recently used item
+	      if (this.map.size >= this.max) {
+	        const firstKey = this.map.keys().next().value;
+	        this.delete(firstKey);
+	      }
+
+	      this.map.set(key, value);
+	    }
+
+	    return this
+	  }
+	}
+
+	lrucache = LRUCache;
+	return lrucache;
+}
+
+var range;
+var hasRequiredRange;
+
+function requireRange () {
+	if (hasRequiredRange) return range;
+	hasRequiredRange = 1;
+	const SPACE_CHARACTERS = /\s+/g;
+
+	// hoisted class for cyclic dependency
+	class Range {
+	  constructor (range, options) {
+	    options = parseOptions(options);
+
+	    if (range instanceof Range) {
+	      if (
+	        range.loose === !!options.loose &&
+	        range.includePrerelease === !!options.includePrerelease
+	      ) {
+	        return range
+	      } else {
+	        return new Range(range.raw, options)
+	      }
+	    }
+
+	    if (range instanceof Comparator) {
+	      // just put it in the set and return
+	      this.raw = range.value;
+	      this.set = [[range]];
+	      this.formatted = undefined;
+	      return this
+	    }
+
+	    this.options = options;
+	    this.loose = !!options.loose;
+	    this.includePrerelease = !!options.includePrerelease;
+
+	    // First reduce all whitespace as much as possible so we do not have to rely
+	    // on potentially slow regexes like \s*. This is then stored and used for
+	    // future error messages as well.
+	    this.raw = range.trim().replace(SPACE_CHARACTERS, ' ');
+
+	    // First, split on ||
+	    this.set = this.raw
+	      .split('||')
+	      // map the range to a 2d array of comparators
+	      .map(r => this.parseRange(r.trim()))
+	      // throw out any comparator lists that are empty
+	      // this generally means that it was not a valid range, which is allowed
+	      // in loose mode, but will still throw if the WHOLE range is invalid.
+	      .filter(c => c.length);
+
+	    if (!this.set.length) {
+	      throw new TypeError(`Invalid SemVer Range: ${this.raw}`)
+	    }
+
+	    // if we have any that are not the null set, throw out null sets.
+	    if (this.set.length > 1) {
+	      // keep the first one, in case they're all null sets
+	      const first = this.set[0];
+	      this.set = this.set.filter(c => !isNullSet(c[0]));
+	      if (this.set.length === 0) {
+	        this.set = [first];
+	      } else if (this.set.length > 1) {
+	        // if we have any that are *, then the range is just *
+	        for (const c of this.set) {
+	          if (c.length === 1 && isAny(c[0])) {
+	            this.set = [c];
+	            break
+	          }
+	        }
+	      }
+	    }
+
+	    this.formatted = undefined;
+	  }
+
+	  get range () {
+	    if (this.formatted === undefined) {
+	      this.formatted = '';
+	      for (let i = 0; i < this.set.length; i++) {
+	        if (i > 0) {
+	          this.formatted += '||';
+	        }
+	        const comps = this.set[i];
+	        for (let k = 0; k < comps.length; k++) {
+	          if (k > 0) {
+	            this.formatted += ' ';
+	          }
+	          this.formatted += comps[k].toString().trim();
+	        }
+	      }
+	    }
+	    return this.formatted
+	  }
+
+	  format () {
+	    return this.range
+	  }
+
+	  toString () {
+	    return this.range
+	  }
+
+	  parseRange (range) {
+	    // memoize range parsing for performance.
+	    // this is a very hot path, and fully deterministic.
+	    const memoOpts =
+	      (this.options.includePrerelease && FLAG_INCLUDE_PRERELEASE) |
+	      (this.options.loose && FLAG_LOOSE);
+	    const memoKey = memoOpts + ':' + range;
+	    const cached = cache.get(memoKey);
+	    if (cached) {
+	      return cached
+	    }
+
+	    const loose = this.options.loose;
+	    // `1.2.3 - 1.2.4` => `>=1.2.3 <=1.2.4`
+	    const hr = loose ? re[t.HYPHENRANGELOOSE] : re[t.HYPHENRANGE];
+	    range = range.replace(hr, hyphenReplace(this.options.includePrerelease));
+	    debug('hyphen replace', range);
+
+	    // `> 1.2.3 < 1.2.5` => `>1.2.3 <1.2.5`
+	    range = range.replace(re[t.COMPARATORTRIM], comparatorTrimReplace);
+	    debug('comparator trim', range);
+
+	    // `~ 1.2.3` => `~1.2.3`
+	    range = range.replace(re[t.TILDETRIM], tildeTrimReplace);
+	    debug('tilde trim', range);
+
+	    // `^ 1.2.3` => `^1.2.3`
+	    range = range.replace(re[t.CARETTRIM], caretTrimReplace);
+	    debug('caret trim', range);
+
+	    // At this point, the range is completely trimmed and
+	    // ready to be split into comparators.
+
+	    let rangeList = range
+	      .split(' ')
+	      .map(comp => parseComparator(comp, this.options))
+	      .join(' ')
+	      .split(/\s+/)
+	      // >=0.0.0 is equivalent to *
+	      .map(comp => replaceGTE0(comp, this.options));
+
+	    if (loose) {
+	      // in loose mode, throw out any that are not valid comparators
+	      rangeList = rangeList.filter(comp => {
+	        debug('loose invalid filter', comp, this.options);
+	        return !!comp.match(re[t.COMPARATORLOOSE])
+	      });
+	    }
+	    debug('range list', rangeList);
+
+	    // if any comparators are the null set, then replace with JUST null set
+	    // if more than one comparator, remove any * comparators
+	    // also, don't include the same comparator more than once
+	    const rangeMap = new Map();
+	    const comparators = rangeList.map(comp => new Comparator(comp, this.options));
+	    for (const comp of comparators) {
+	      if (isNullSet(comp)) {
+	        return [comp]
+	      }
+	      rangeMap.set(comp.value, comp);
+	    }
+	    if (rangeMap.size > 1 && rangeMap.has('')) {
+	      rangeMap.delete('');
+	    }
+
+	    const result = [...rangeMap.values()];
+	    cache.set(memoKey, result);
+	    return result
+	  }
+
+	  intersects (range, options) {
+	    if (!(range instanceof Range)) {
+	      throw new TypeError('a Range is required')
+	    }
+
+	    return this.set.some((thisComparators) => {
+	      return (
+	        isSatisfiable(thisComparators, options) &&
+	        range.set.some((rangeComparators) => {
+	          return (
+	            isSatisfiable(rangeComparators, options) &&
+	            thisComparators.every((thisComparator) => {
+	              return rangeComparators.every((rangeComparator) => {
+	                return thisComparator.intersects(rangeComparator, options)
+	              })
+	            })
+	          )
+	        })
+	      )
+	    })
+	  }
+
+	  // if ANY of the sets match ALL of its comparators, then pass
+	  test (version) {
+	    if (!version) {
+	      return false
+	    }
+
+	    if (typeof version === 'string') {
+	      try {
+	        version = new SemVer(version, this.options);
+	      } catch (er) {
+	        return false
+	      }
+	    }
+
+	    for (let i = 0; i < this.set.length; i++) {
+	      if (testSet(this.set[i], version, this.options)) {
+	        return true
+	      }
+	    }
+	    return false
+	  }
+	}
+
+	range = Range;
+
+	const LRU = requireLrucache();
+	const cache = new LRU();
+
+	const parseOptions = requireParseOptions();
+	const Comparator = requireComparator();
+	const debug = requireDebug();
+	const SemVer = requireSemver$1();
+	const {
+	  safeRe: re,
+	  t,
+	  comparatorTrimReplace,
+	  tildeTrimReplace,
+	  caretTrimReplace,
+	} = requireRe();
+	const { FLAG_INCLUDE_PRERELEASE, FLAG_LOOSE } = requireConstants();
+
+	const isNullSet = c => c.value === '<0.0.0-0';
+	const isAny = c => c.value === '';
+
+	// take a set of comparators and determine whether there
+	// exists a version which can satisfy it
+	const isSatisfiable = (comparators, options) => {
+	  let result = true;
+	  const remainingComparators = comparators.slice();
+	  let testComparator = remainingComparators.pop();
+
+	  while (result && remainingComparators.length) {
+	    result = remainingComparators.every((otherComparator) => {
+	      return testComparator.intersects(otherComparator, options)
+	    });
+
+	    testComparator = remainingComparators.pop();
+	  }
+
+	  return result
+	};
+
+	// comprised of xranges, tildes, stars, and gtlt's at this point.
+	// already replaced the hyphen ranges
+	// turn into a set of JUST comparators.
+	const parseComparator = (comp, options) => {
+	  debug('comp', comp, options);
+	  comp = replaceCarets(comp, options);
+	  debug('caret', comp);
+	  comp = replaceTildes(comp, options);
+	  debug('tildes', comp);
+	  comp = replaceXRanges(comp, options);
+	  debug('xrange', comp);
+	  comp = replaceStars(comp, options);
+	  debug('stars', comp);
+	  return comp
+	};
+
+	const isX = id => !id || id.toLowerCase() === 'x' || id === '*';
+
+	// ~, ~> --> * (any, kinda silly)
+	// ~2, ~2.x, ~2.x.x, ~>2, ~>2.x ~>2.x.x --> >=2.0.0 <3.0.0-0
+	// ~2.0, ~2.0.x, ~>2.0, ~>2.0.x --> >=2.0.0 <2.1.0-0
+	// ~1.2, ~1.2.x, ~>1.2, ~>1.2.x --> >=1.2.0 <1.3.0-0
+	// ~1.2.3, ~>1.2.3 --> >=1.2.3 <1.3.0-0
+	// ~1.2.0, ~>1.2.0 --> >=1.2.0 <1.3.0-0
+	// ~0.0.1 --> >=0.0.1 <0.1.0-0
+	const replaceTildes = (comp, options) => {
+	  return comp
+	    .trim()
+	    .split(/\s+/)
+	    .map((c) => replaceTilde(c, options))
+	    .join(' ')
+	};
+
+	const replaceTilde = (comp, options) => {
+	  const r = options.loose ? re[t.TILDELOOSE] : re[t.TILDE];
+	  return comp.replace(r, (_, M, m, p, pr) => {
+	    debug('tilde', comp, _, M, m, p, pr);
+	    let ret;
+
+	    if (isX(M)) {
+	      ret = '';
+	    } else if (isX(m)) {
+	      ret = `>=${M}.0.0 <${+M + 1}.0.0-0`;
+	    } else if (isX(p)) {
+	      // ~1.2 == >=1.2.0 <1.3.0-0
+	      ret = `>=${M}.${m}.0 <${M}.${+m + 1}.0-0`;
+	    } else if (pr) {
+	      debug('replaceTilde pr', pr);
+	      ret = `>=${M}.${m}.${p}-${pr
+	      } <${M}.${+m + 1}.0-0`;
+	    } else {
+	      // ~1.2.3 == >=1.2.3 <1.3.0-0
+	      ret = `>=${M}.${m}.${p
+	      } <${M}.${+m + 1}.0-0`;
+	    }
+
+	    debug('tilde return', ret);
+	    return ret
+	  })
+	};
+
+	// ^ --> * (any, kinda silly)
+	// ^2, ^2.x, ^2.x.x --> >=2.0.0 <3.0.0-0
+	// ^2.0, ^2.0.x --> >=2.0.0 <3.0.0-0
+	// ^1.2, ^1.2.x --> >=1.2.0 <2.0.0-0
+	// ^1.2.3 --> >=1.2.3 <2.0.0-0
+	// ^1.2.0 --> >=1.2.0 <2.0.0-0
+	// ^0.0.1 --> >=0.0.1 <0.0.2-0
+	// ^0.1.0 --> >=0.1.0 <0.2.0-0
+	const replaceCarets = (comp, options) => {
+	  return comp
+	    .trim()
+	    .split(/\s+/)
+	    .map((c) => replaceCaret(c, options))
+	    .join(' ')
+	};
+
+	const replaceCaret = (comp, options) => {
+	  debug('caret', comp, options);
+	  const r = options.loose ? re[t.CARETLOOSE] : re[t.CARET];
+	  const z = options.includePrerelease ? '-0' : '';
+	  return comp.replace(r, (_, M, m, p, pr) => {
+	    debug('caret', comp, _, M, m, p, pr);
+	    let ret;
+
+	    if (isX(M)) {
+	      ret = '';
+	    } else if (isX(m)) {
+	      ret = `>=${M}.0.0${z} <${+M + 1}.0.0-0`;
+	    } else if (isX(p)) {
+	      if (M === '0') {
+	        ret = `>=${M}.${m}.0${z} <${M}.${+m + 1}.0-0`;
+	      } else {
+	        ret = `>=${M}.${m}.0${z} <${+M + 1}.0.0-0`;
+	      }
+	    } else if (pr) {
+	      debug('replaceCaret pr', pr);
+	      if (M === '0') {
+	        if (m === '0') {
+	          ret = `>=${M}.${m}.${p}-${pr
+	          } <${M}.${m}.${+p + 1}-0`;
+	        } else {
+	          ret = `>=${M}.${m}.${p}-${pr
+	          } <${M}.${+m + 1}.0-0`;
+	        }
+	      } else {
+	        ret = `>=${M}.${m}.${p}-${pr
+	        } <${+M + 1}.0.0-0`;
+	      }
+	    } else {
+	      debug('no pr');
+	      if (M === '0') {
+	        if (m === '0') {
+	          ret = `>=${M}.${m}.${p
+	          }${z} <${M}.${m}.${+p + 1}-0`;
+	        } else {
+	          ret = `>=${M}.${m}.${p
+	          }${z} <${M}.${+m + 1}.0-0`;
+	        }
+	      } else {
+	        ret = `>=${M}.${m}.${p
+	        } <${+M + 1}.0.0-0`;
+	      }
+	    }
+
+	    debug('caret return', ret);
+	    return ret
+	  })
+	};
+
+	const replaceXRanges = (comp, options) => {
+	  debug('replaceXRanges', comp, options);
+	  return comp
+	    .split(/\s+/)
+	    .map((c) => replaceXRange(c, options))
+	    .join(' ')
+	};
+
+	const replaceXRange = (comp, options) => {
+	  comp = comp.trim();
+	  const r = options.loose ? re[t.XRANGELOOSE] : re[t.XRANGE];
+	  return comp.replace(r, (ret, gtlt, M, m, p, pr) => {
+	    debug('xRange', comp, ret, gtlt, M, m, p, pr);
+	    const xM = isX(M);
+	    const xm = xM || isX(m);
+	    const xp = xm || isX(p);
+	    const anyX = xp;
+
+	    if (gtlt === '=' && anyX) {
+	      gtlt = '';
+	    }
+
+	    // if we're including prereleases in the match, then we need
+	    // to fix this to -0, the lowest possible prerelease value
+	    pr = options.includePrerelease ? '-0' : '';
+
+	    if (xM) {
+	      if (gtlt === '>' || gtlt === '<') {
+	        // nothing is allowed
+	        ret = '<0.0.0-0';
+	      } else {
+	        // nothing is forbidden
+	        ret = '*';
+	      }
+	    } else if (gtlt && anyX) {
+	      // we know patch is an x, because we have any x at all.
+	      // replace X with 0
+	      if (xm) {
+	        m = 0;
+	      }
+	      p = 0;
+
+	      if (gtlt === '>') {
+	        // >1 => >=2.0.0
+	        // >1.2 => >=1.3.0
+	        gtlt = '>=';
+	        if (xm) {
+	          M = +M + 1;
+	          m = 0;
+	          p = 0;
+	        } else {
+	          m = +m + 1;
+	          p = 0;
+	        }
+	      } else if (gtlt === '<=') {
+	        // <=0.7.x is actually <0.8.0, since any 0.7.x should
+	        // pass.  Similarly, <=7.x is actually <8.0.0, etc.
+	        gtlt = '<';
+	        if (xm) {
+	          M = +M + 1;
+	        } else {
+	          m = +m + 1;
+	        }
+	      }
+
+	      if (gtlt === '<') {
+	        pr = '-0';
+	      }
+
+	      ret = `${gtlt + M}.${m}.${p}${pr}`;
+	    } else if (xm) {
+	      ret = `>=${M}.0.0${pr} <${+M + 1}.0.0-0`;
+	    } else if (xp) {
+	      ret = `>=${M}.${m}.0${pr
+	      } <${M}.${+m + 1}.0-0`;
+	    }
+
+	    debug('xRange return', ret);
+
+	    return ret
+	  })
+	};
+
+	// Because * is AND-ed with everything else in the comparator,
+	// and '' means "any version", just remove the *s entirely.
+	const replaceStars = (comp, options) => {
+	  debug('replaceStars', comp, options);
+	  // Looseness is ignored here.  star is always as loose as it gets!
+	  return comp
+	    .trim()
+	    .replace(re[t.STAR], '')
+	};
+
+	const replaceGTE0 = (comp, options) => {
+	  debug('replaceGTE0', comp, options);
+	  return comp
+	    .trim()
+	    .replace(re[options.includePrerelease ? t.GTE0PRE : t.GTE0], '')
+	};
+
+	// This function is passed to string.replace(re[t.HYPHENRANGE])
+	// M, m, patch, prerelease, build
+	// 1.2 - 3.4.5 => >=1.2.0 <=3.4.5
+	// 1.2.3 - 3.4 => >=1.2.0 <3.5.0-0 Any 3.4.x will do
+	// 1.2 - 3.4 => >=1.2.0 <3.5.0-0
+	// TODO build?
+	const hyphenReplace = incPr => ($0,
+	  from, fM, fm, fp, fpr, fb,
+	  to, tM, tm, tp, tpr) => {
+	  if (isX(fM)) {
+	    from = '';
+	  } else if (isX(fm)) {
+	    from = `>=${fM}.0.0${incPr ? '-0' : ''}`;
+	  } else if (isX(fp)) {
+	    from = `>=${fM}.${fm}.0${incPr ? '-0' : ''}`;
+	  } else if (fpr) {
+	    from = `>=${from}`;
+	  } else {
+	    from = `>=${from}${incPr ? '-0' : ''}`;
+	  }
+
+	  if (isX(tM)) {
+	    to = '';
+	  } else if (isX(tm)) {
+	    to = `<${+tM + 1}.0.0-0`;
+	  } else if (isX(tp)) {
+	    to = `<${tM}.${+tm + 1}.0-0`;
+	  } else if (tpr) {
+	    to = `<=${tM}.${tm}.${tp}-${tpr}`;
+	  } else if (incPr) {
+	    to = `<${tM}.${tm}.${+tp + 1}-0`;
+	  } else {
+	    to = `<=${to}`;
+	  }
+
+	  return `${from} ${to}`.trim()
+	};
+
+	const testSet = (set, version, options) => {
+	  for (let i = 0; i < set.length; i++) {
+	    if (!set[i].test(version)) {
+	      return false
+	    }
+	  }
+
+	  if (version.prerelease.length && !options.includePrerelease) {
+	    // Find the set of versions that are allowed to have prereleases
+	    // For example, ^1.2.3-pr.1 desugars to >=1.2.3-pr.1 <2.0.0
+	    // That should allow `1.2.3-pr.2` to pass.
+	    // However, `1.2.4-alpha.notready` should NOT be allowed,
+	    // even though it's within the range set by the comparators.
+	    for (let i = 0; i < set.length; i++) {
+	      debug(set[i].semver);
+	      if (set[i].semver === Comparator.ANY) {
+	        continue
+	      }
+
+	      if (set[i].semver.prerelease.length > 0) {
+	        const allowed = set[i].semver;
+	        if (allowed.major === version.major &&
+	            allowed.minor === version.minor &&
+	            allowed.patch === version.patch) {
+	          return true
+	        }
+	      }
+	    }
+
+	    // Version has a -pre, but it's not one of the ones we like.
+	    return false
+	  }
+
+	  return true
+	};
+	return range;
+}
+
+var comparator;
+var hasRequiredComparator;
+
+function requireComparator () {
+	if (hasRequiredComparator) return comparator;
+	hasRequiredComparator = 1;
+	const ANY = Symbol('SemVer ANY');
+	// hoisted class for cyclic dependency
+	class Comparator {
+	  static get ANY () {
+	    return ANY
+	  }
+
+	  constructor (comp, options) {
+	    options = parseOptions(options);
+
+	    if (comp instanceof Comparator) {
+	      if (comp.loose === !!options.loose) {
+	        return comp
+	      } else {
+	        comp = comp.value;
+	      }
+	    }
+
+	    comp = comp.trim().split(/\s+/).join(' ');
+	    debug('comparator', comp, options);
+	    this.options = options;
+	    this.loose = !!options.loose;
+	    this.parse(comp);
+
+	    if (this.semver === ANY) {
+	      this.value = '';
+	    } else {
+	      this.value = this.operator + this.semver.version;
+	    }
+
+	    debug('comp', this);
+	  }
+
+	  parse (comp) {
+	    const r = this.options.loose ? re[t.COMPARATORLOOSE] : re[t.COMPARATOR];
+	    const m = comp.match(r);
+
+	    if (!m) {
+	      throw new TypeError(`Invalid comparator: ${comp}`)
+	    }
+
+	    this.operator = m[1] !== undefined ? m[1] : '';
+	    if (this.operator === '=') {
+	      this.operator = '';
+	    }
+
+	    // if it literally is just '>' or '' then allow anything.
+	    if (!m[2]) {
+	      this.semver = ANY;
+	    } else {
+	      this.semver = new SemVer(m[2], this.options.loose);
+	    }
+	  }
+
+	  toString () {
+	    return this.value
+	  }
+
+	  test (version) {
+	    debug('Comparator.test', version, this.options.loose);
+
+	    if (this.semver === ANY || version === ANY) {
+	      return true
+	    }
+
+	    if (typeof version === 'string') {
+	      try {
+	        version = new SemVer(version, this.options);
+	      } catch (er) {
+	        return false
+	      }
+	    }
+
+	    return cmp(version, this.operator, this.semver, this.options)
+	  }
+
+	  intersects (comp, options) {
+	    if (!(comp instanceof Comparator)) {
+	      throw new TypeError('a Comparator is required')
+	    }
+
+	    if (this.operator === '') {
+	      if (this.value === '') {
+	        return true
+	      }
+	      return new Range(comp.value, options).test(this.value)
+	    } else if (comp.operator === '') {
+	      if (comp.value === '') {
+	        return true
+	      }
+	      return new Range(this.value, options).test(comp.semver)
+	    }
+
+	    options = parseOptions(options);
+
+	    // Special cases where nothing can possibly be lower
+	    if (options.includePrerelease &&
+	      (this.value === '<0.0.0-0' || comp.value === '<0.0.0-0')) {
+	      return false
+	    }
+	    if (!options.includePrerelease &&
+	      (this.value.startsWith('<0.0.0') || comp.value.startsWith('<0.0.0'))) {
+	      return false
+	    }
+
+	    // Same direction increasing (> or >=)
+	    if (this.operator.startsWith('>') && comp.operator.startsWith('>')) {
+	      return true
+	    }
+	    // Same direction decreasing (< or <=)
+	    if (this.operator.startsWith('<') && comp.operator.startsWith('<')) {
+	      return true
+	    }
+	    // same SemVer and both sides are inclusive (<= or >=)
+	    if (
+	      (this.semver.version === comp.semver.version) &&
+	      this.operator.includes('=') && comp.operator.includes('=')) {
+	      return true
+	    }
+	    // opposite directions less than
+	    if (cmp(this.semver, '<', comp.semver, options) &&
+	      this.operator.startsWith('>') && comp.operator.startsWith('<')) {
+	      return true
+	    }
+	    // opposite directions greater than
+	    if (cmp(this.semver, '>', comp.semver, options) &&
+	      this.operator.startsWith('<') && comp.operator.startsWith('>')) {
+	      return true
+	    }
+	    return false
+	  }
+	}
+
+	comparator = Comparator;
+
+	const parseOptions = requireParseOptions();
+	const { safeRe: re, t } = requireRe();
+	const cmp = requireCmp();
+	const debug = requireDebug();
+	const SemVer = requireSemver$1();
+	const Range = requireRange();
+	return comparator;
+}
+
+var satisfies_1;
+var hasRequiredSatisfies;
+
+function requireSatisfies () {
+	if (hasRequiredSatisfies) return satisfies_1;
+	hasRequiredSatisfies = 1;
+	const Range = requireRange();
+	const satisfies = (version, range, options) => {
+	  try {
+	    range = new Range(range, options);
+	  } catch (er) {
+	    return false
+	  }
+	  return range.test(version)
+	};
+	satisfies_1 = satisfies;
+	return satisfies_1;
+}
+
+var toComparators_1;
+var hasRequiredToComparators;
+
+function requireToComparators () {
+	if (hasRequiredToComparators) return toComparators_1;
+	hasRequiredToComparators = 1;
+	const Range = requireRange();
+
+	// Mostly just for testing and legacy API reasons
+	const toComparators = (range, options) =>
+	  new Range(range, options).set
+	    .map(comp => comp.map(c => c.value).join(' ').trim().split(' '));
+
+	toComparators_1 = toComparators;
+	return toComparators_1;
+}
+
+var maxSatisfying_1;
+var hasRequiredMaxSatisfying;
+
+function requireMaxSatisfying () {
+	if (hasRequiredMaxSatisfying) return maxSatisfying_1;
+	hasRequiredMaxSatisfying = 1;
+	const SemVer = requireSemver$1();
+	const Range = requireRange();
+
+	const maxSatisfying = (versions, range, options) => {
+	  let max = null;
+	  let maxSV = null;
+	  let rangeObj = null;
+	  try {
+	    rangeObj = new Range(range, options);
+	  } catch (er) {
+	    return null
+	  }
+	  versions.forEach((v) => {
+	    if (rangeObj.test(v)) {
+	      // satisfies(v, range, options)
+	      if (!max || maxSV.compare(v) === -1) {
+	        // compare(max, v, true)
+	        max = v;
+	        maxSV = new SemVer(max, options);
+	      }
+	    }
+	  });
+	  return max
+	};
+	maxSatisfying_1 = maxSatisfying;
+	return maxSatisfying_1;
+}
+
+var minSatisfying_1;
+var hasRequiredMinSatisfying;
+
+function requireMinSatisfying () {
+	if (hasRequiredMinSatisfying) return minSatisfying_1;
+	hasRequiredMinSatisfying = 1;
+	const SemVer = requireSemver$1();
+	const Range = requireRange();
+	const minSatisfying = (versions, range, options) => {
+	  let min = null;
+	  let minSV = null;
+	  let rangeObj = null;
+	  try {
+	    rangeObj = new Range(range, options);
+	  } catch (er) {
+	    return null
+	  }
+	  versions.forEach((v) => {
+	    if (rangeObj.test(v)) {
+	      // satisfies(v, range, options)
+	      if (!min || minSV.compare(v) === 1) {
+	        // compare(min, v, true)
+	        min = v;
+	        minSV = new SemVer(min, options);
+	      }
+	    }
+	  });
+	  return min
+	};
+	minSatisfying_1 = minSatisfying;
+	return minSatisfying_1;
+}
+
+var minVersion_1;
+var hasRequiredMinVersion;
+
+function requireMinVersion () {
+	if (hasRequiredMinVersion) return minVersion_1;
+	hasRequiredMinVersion = 1;
+	const SemVer = requireSemver$1();
+	const Range = requireRange();
+	const gt = requireGt();
+
+	const minVersion = (range, loose) => {
+	  range = new Range(range, loose);
+
+	  let minver = new SemVer('0.0.0');
+	  if (range.test(minver)) {
+	    return minver
+	  }
+
+	  minver = new SemVer('0.0.0-0');
+	  if (range.test(minver)) {
+	    return minver
+	  }
+
+	  minver = null;
+	  for (let i = 0; i < range.set.length; ++i) {
+	    const comparators = range.set[i];
+
+	    let setMin = null;
+	    comparators.forEach((comparator) => {
+	      // Clone to avoid manipulating the comparator's semver object.
+	      const compver = new SemVer(comparator.semver.version);
+	      switch (comparator.operator) {
+	        case '>':
+	          if (compver.prerelease.length === 0) {
+	            compver.patch++;
+	          } else {
+	            compver.prerelease.push(0);
+	          }
+	          compver.raw = compver.format();
+	          /* fallthrough */
+	        case '':
+	        case '>=':
+	          if (!setMin || gt(compver, setMin)) {
+	            setMin = compver;
+	          }
+	          break
+	        case '<':
+	        case '<=':
+	          /* Ignore maximum versions */
+	          break
+	        /* istanbul ignore next */
+	        default:
+	          throw new Error(`Unexpected operation: ${comparator.operator}`)
+	      }
+	    });
+	    if (setMin && (!minver || gt(minver, setMin))) {
+	      minver = setMin;
+	    }
+	  }
+
+	  if (minver && range.test(minver)) {
+	    return minver
+	  }
+
+	  return null
+	};
+	minVersion_1 = minVersion;
+	return minVersion_1;
+}
+
+var valid;
+var hasRequiredValid;
+
+function requireValid () {
+	if (hasRequiredValid) return valid;
+	hasRequiredValid = 1;
+	const Range = requireRange();
+	const validRange = (range, options) => {
+	  try {
+	    // Return '*' instead of '' so that truthiness works.
+	    // This will throw if it's invalid anyway
+	    return new Range(range, options).range || '*'
+	  } catch (er) {
+	    return null
+	  }
+	};
+	valid = validRange;
+	return valid;
+}
+
+var outside_1;
+var hasRequiredOutside;
+
+function requireOutside () {
+	if (hasRequiredOutside) return outside_1;
+	hasRequiredOutside = 1;
+	const SemVer = requireSemver$1();
+	const Comparator = requireComparator();
+	const { ANY } = Comparator;
+	const Range = requireRange();
+	const satisfies = requireSatisfies();
+	const gt = requireGt();
+	const lt = requireLt();
+	const lte = requireLte();
+	const gte = requireGte();
+
+	const outside = (version, range, hilo, options) => {
+	  version = new SemVer(version, options);
+	  range = new Range(range, options);
+
+	  let gtfn, ltefn, ltfn, comp, ecomp;
+	  switch (hilo) {
+	    case '>':
+	      gtfn = gt;
+	      ltefn = lte;
+	      ltfn = lt;
+	      comp = '>';
+	      ecomp = '>=';
+	      break
+	    case '<':
+	      gtfn = lt;
+	      ltefn = gte;
+	      ltfn = gt;
+	      comp = '<';
+	      ecomp = '<=';
+	      break
+	    default:
+	      throw new TypeError('Must provide a hilo val of "<" or ">"')
+	  }
+
+	  // If it satisfies the range it is not outside
+	  if (satisfies(version, range, options)) {
+	    return false
+	  }
+
+	  // From now on, variable terms are as if we're in "gtr" mode.
+	  // but note that everything is flipped for the "ltr" function.
+
+	  for (let i = 0; i < range.set.length; ++i) {
+	    const comparators = range.set[i];
+
+	    let high = null;
+	    let low = null;
+
+	    comparators.forEach((comparator) => {
+	      if (comparator.semver === ANY) {
+	        comparator = new Comparator('>=0.0.0');
+	      }
+	      high = high || comparator;
+	      low = low || comparator;
+	      if (gtfn(comparator.semver, high.semver, options)) {
+	        high = comparator;
+	      } else if (ltfn(comparator.semver, low.semver, options)) {
+	        low = comparator;
+	      }
+	    });
+
+	    // If the edge version comparator has a operator then our version
+	    // isn't outside it
+	    if (high.operator === comp || high.operator === ecomp) {
+	      return false
+	    }
+
+	    // If the lowest version comparator has an operator and our version
+	    // is less than it then it isn't higher than the range
+	    if ((!low.operator || low.operator === comp) &&
+	        ltefn(version, low.semver)) {
+	      return false
+	    } else if (low.operator === ecomp && ltfn(version, low.semver)) {
+	      return false
+	    }
+	  }
+	  return true
+	};
+
+	outside_1 = outside;
+	return outside_1;
+}
+
+var gtr_1;
+var hasRequiredGtr;
+
+function requireGtr () {
+	if (hasRequiredGtr) return gtr_1;
+	hasRequiredGtr = 1;
+	// Determine if version is greater than all the versions possible in the range.
+	const outside = requireOutside();
+	const gtr = (version, range, options) => outside(version, range, '>', options);
+	gtr_1 = gtr;
+	return gtr_1;
+}
+
+var ltr_1;
+var hasRequiredLtr;
+
+function requireLtr () {
+	if (hasRequiredLtr) return ltr_1;
+	hasRequiredLtr = 1;
+	const outside = requireOutside();
+	// Determine if version is less than all the versions possible in the range
+	const ltr = (version, range, options) => outside(version, range, '<', options);
+	ltr_1 = ltr;
+	return ltr_1;
+}
+
+var intersects_1;
+var hasRequiredIntersects;
+
+function requireIntersects () {
+	if (hasRequiredIntersects) return intersects_1;
+	hasRequiredIntersects = 1;
+	const Range = requireRange();
+	const intersects = (r1, r2, options) => {
+	  r1 = new Range(r1, options);
+	  r2 = new Range(r2, options);
+	  return r1.intersects(r2, options)
+	};
+	intersects_1 = intersects;
+	return intersects_1;
+}
+
+var simplify;
+var hasRequiredSimplify;
+
+function requireSimplify () {
+	if (hasRequiredSimplify) return simplify;
+	hasRequiredSimplify = 1;
+	// given a set of versions and a range, create a "simplified" range
+	// that includes the same versions that the original range does
+	// If the original range is shorter than the simplified one, return that.
+	const satisfies = requireSatisfies();
+	const compare = requireCompare();
+	simplify = (versions, range, options) => {
+	  const set = [];
+	  let first = null;
+	  let prev = null;
+	  const v = versions.sort((a, b) => compare(a, b, options));
+	  for (const version of v) {
+	    const included = satisfies(version, range, options);
+	    if (included) {
+	      prev = version;
+	      if (!first) {
+	        first = version;
+	      }
+	    } else {
+	      if (prev) {
+	        set.push([first, prev]);
+	      }
+	      prev = null;
+	      first = null;
+	    }
+	  }
+	  if (first) {
+	    set.push([first, null]);
+	  }
+
+	  const ranges = [];
+	  for (const [min, max] of set) {
+	    if (min === max) {
+	      ranges.push(min);
+	    } else if (!max && min === v[0]) {
+	      ranges.push('*');
+	    } else if (!max) {
+	      ranges.push(`>=${min}`);
+	    } else if (min === v[0]) {
+	      ranges.push(`<=${max}`);
+	    } else {
+	      ranges.push(`${min} - ${max}`);
+	    }
+	  }
+	  const simplified = ranges.join(' || ');
+	  const original = typeof range.raw === 'string' ? range.raw : String(range);
+	  return simplified.length < original.length ? simplified : range
+	};
+	return simplify;
+}
+
+var subset_1;
+var hasRequiredSubset;
+
+function requireSubset () {
+	if (hasRequiredSubset) return subset_1;
+	hasRequiredSubset = 1;
+	const Range = requireRange();
+	const Comparator = requireComparator();
+	const { ANY } = Comparator;
+	const satisfies = requireSatisfies();
+	const compare = requireCompare();
+
+	// Complex range `r1 || r2 || ...` is a subset of `R1 || R2 || ...` iff:
+	// - Every simple range `r1, r2, ...` is a null set, OR
+	// - Every simple range `r1, r2, ...` which is not a null set is a subset of
+	//   some `R1, R2, ...`
+	//
+	// Simple range `c1 c2 ...` is a subset of simple range `C1 C2 ...` iff:
+	// - If c is only the ANY comparator
+	//   - If C is only the ANY comparator, return true
+	//   - Else if in prerelease mode, return false
+	//   - else replace c with `[>=0.0.0]`
+	// - If C is only the ANY comparator
+	//   - if in prerelease mode, return true
+	//   - else replace C with `[>=0.0.0]`
+	// - Let EQ be the set of = comparators in c
+	// - If EQ is more than one, return true (null set)
+	// - Let GT be the highest > or >= comparator in c
+	// - Let LT be the lowest < or <= comparator in c
+	// - If GT and LT, and GT.semver > LT.semver, return true (null set)
+	// - If any C is a = range, and GT or LT are set, return false
+	// - If EQ
+	//   - If GT, and EQ does not satisfy GT, return true (null set)
+	//   - If LT, and EQ does not satisfy LT, return true (null set)
+	//   - If EQ satisfies every C, return true
+	//   - Else return false
+	// - If GT
+	//   - If GT.semver is lower than any > or >= comp in C, return false
+	//   - If GT is >=, and GT.semver does not satisfy every C, return false
+	//   - If GT.semver has a prerelease, and not in prerelease mode
+	//     - If no C has a prerelease and the GT.semver tuple, return false
+	// - If LT
+	//   - If LT.semver is greater than any < or <= comp in C, return false
+	//   - If LT is <=, and LT.semver does not satisfy every C, return false
+	//   - If GT.semver has a prerelease, and not in prerelease mode
+	//     - If no C has a prerelease and the LT.semver tuple, return false
+	// - Else return true
+
+	const subset = (sub, dom, options = {}) => {
+	  if (sub === dom) {
+	    return true
+	  }
+
+	  sub = new Range(sub, options);
+	  dom = new Range(dom, options);
+	  let sawNonNull = false;
+
+	  OUTER: for (const simpleSub of sub.set) {
+	    for (const simpleDom of dom.set) {
+	      const isSub = simpleSubset(simpleSub, simpleDom, options);
+	      sawNonNull = sawNonNull || isSub !== null;
+	      if (isSub) {
+	        continue OUTER
+	      }
+	    }
+	    // the null set is a subset of everything, but null simple ranges in
+	    // a complex range should be ignored.  so if we saw a non-null range,
+	    // then we know this isn't a subset, but if EVERY simple range was null,
+	    // then it is a subset.
+	    if (sawNonNull) {
+	      return false
+	    }
+	  }
+	  return true
+	};
+
+	const minimumVersionWithPreRelease = [new Comparator('>=0.0.0-0')];
+	const minimumVersion = [new Comparator('>=0.0.0')];
+
+	const simpleSubset = (sub, dom, options) => {
+	  if (sub === dom) {
+	    return true
+	  }
+
+	  if (sub.length === 1 && sub[0].semver === ANY) {
+	    if (dom.length === 1 && dom[0].semver === ANY) {
+	      return true
+	    } else if (options.includePrerelease) {
+	      sub = minimumVersionWithPreRelease;
+	    } else {
+	      sub = minimumVersion;
+	    }
+	  }
+
+	  if (dom.length === 1 && dom[0].semver === ANY) {
+	    if (options.includePrerelease) {
+	      return true
+	    } else {
+	      dom = minimumVersion;
+	    }
+	  }
+
+	  const eqSet = new Set();
+	  let gt, lt;
+	  for (const c of sub) {
+	    if (c.operator === '>' || c.operator === '>=') {
+	      gt = higherGT(gt, c, options);
+	    } else if (c.operator === '<' || c.operator === '<=') {
+	      lt = lowerLT(lt, c, options);
+	    } else {
+	      eqSet.add(c.semver);
+	    }
+	  }
+
+	  if (eqSet.size > 1) {
+	    return null
+	  }
+
+	  let gtltComp;
+	  if (gt && lt) {
+	    gtltComp = compare(gt.semver, lt.semver, options);
+	    if (gtltComp > 0) {
+	      return null
+	    } else if (gtltComp === 0 && (gt.operator !== '>=' || lt.operator !== '<=')) {
+	      return null
+	    }
+	  }
+
+	  // will iterate one or zero times
+	  for (const eq of eqSet) {
+	    if (gt && !satisfies(eq, String(gt), options)) {
+	      return null
+	    }
+
+	    if (lt && !satisfies(eq, String(lt), options)) {
+	      return null
+	    }
+
+	    for (const c of dom) {
+	      if (!satisfies(eq, String(c), options)) {
+	        return false
+	      }
+	    }
+
+	    return true
+	  }
+
+	  let higher, lower;
+	  let hasDomLT, hasDomGT;
+	  // if the subset has a prerelease, we need a comparator in the superset
+	  // with the same tuple and a prerelease, or it's not a subset
+	  let needDomLTPre = lt &&
+	    !options.includePrerelease &&
+	    lt.semver.prerelease.length ? lt.semver : false;
+	  let needDomGTPre = gt &&
+	    !options.includePrerelease &&
+	    gt.semver.prerelease.length ? gt.semver : false;
+	  // exception: <1.2.3-0 is the same as <1.2.3
+	  if (needDomLTPre && needDomLTPre.prerelease.length === 1 &&
+	      lt.operator === '<' && needDomLTPre.prerelease[0] === 0) {
+	    needDomLTPre = false;
+	  }
+
+	  for (const c of dom) {
+	    hasDomGT = hasDomGT || c.operator === '>' || c.operator === '>=';
+	    hasDomLT = hasDomLT || c.operator === '<' || c.operator === '<=';
+	    if (gt) {
+	      if (needDomGTPre) {
+	        if (c.semver.prerelease && c.semver.prerelease.length &&
+	            c.semver.major === needDomGTPre.major &&
+	            c.semver.minor === needDomGTPre.minor &&
+	            c.semver.patch === needDomGTPre.patch) {
+	          needDomGTPre = false;
+	        }
+	      }
+	      if (c.operator === '>' || c.operator === '>=') {
+	        higher = higherGT(gt, c, options);
+	        if (higher === c && higher !== gt) {
+	          return false
+	        }
+	      } else if (gt.operator === '>=' && !satisfies(gt.semver, String(c), options)) {
+	        return false
+	      }
+	    }
+	    if (lt) {
+	      if (needDomLTPre) {
+	        if (c.semver.prerelease && c.semver.prerelease.length &&
+	            c.semver.major === needDomLTPre.major &&
+	            c.semver.minor === needDomLTPre.minor &&
+	            c.semver.patch === needDomLTPre.patch) {
+	          needDomLTPre = false;
+	        }
+	      }
+	      if (c.operator === '<' || c.operator === '<=') {
+	        lower = lowerLT(lt, c, options);
+	        if (lower === c && lower !== lt) {
+	          return false
+	        }
+	      } else if (lt.operator === '<=' && !satisfies(lt.semver, String(c), options)) {
+	        return false
+	      }
+	    }
+	    if (!c.operator && (lt || gt) && gtltComp !== 0) {
+	      return false
+	    }
+	  }
+
+	  // if there was a < or >, and nothing in the dom, then must be false
+	  // UNLESS it was limited by another range in the other direction.
+	  // Eg, >1.0.0 <1.0.1 is still a subset of <2.0.0
+	  if (gt && hasDomLT && !lt && gtltComp !== 0) {
+	    return false
+	  }
+
+	  if (lt && hasDomGT && !gt && gtltComp !== 0) {
+	    return false
+	  }
+
+	  // we needed a prerelease range in a specific tuple, but didn't get one
+	  // then this isn't a subset.  eg >=1.2.3-pre is not a subset of >=1.0.0,
+	  // because it includes prereleases in the 1.2.3 tuple
+	  if (needDomGTPre || needDomLTPre) {
+	    return false
+	  }
+
+	  return true
+	};
+
+	// >=1.2.3 is lower than >1.2.3
+	const higherGT = (a, b, options) => {
+	  if (!a) {
+	    return b
+	  }
+	  const comp = compare(a.semver, b.semver, options);
+	  return comp > 0 ? a
+	    : comp < 0 ? b
+	    : b.operator === '>' && a.operator === '>=' ? b
+	    : a
+	};
+
+	// <=1.2.3 is higher than <1.2.3
+	const lowerLT = (a, b, options) => {
+	  if (!a) {
+	    return b
+	  }
+	  const comp = compare(a.semver, b.semver, options);
+	  return comp < 0 ? a
+	    : comp > 0 ? b
+	    : b.operator === '<' && a.operator === '<=' ? b
+	    : a
+	};
+
+	subset_1 = subset;
+	return subset_1;
+}
+
+var semver;
+var hasRequiredSemver;
+
+function requireSemver () {
+	if (hasRequiredSemver) return semver;
+	hasRequiredSemver = 1;
+	// just pre-load all the stuff that index.js lazily exports
+	const internalRe = requireRe();
+	const constants = requireConstants();
+	const SemVer = requireSemver$1();
+	const identifiers = requireIdentifiers();
+	const parse = requireParse();
+	const valid = requireValid$1();
+	const clean = requireClean();
+	const inc = requireInc();
+	const diff = requireDiff();
+	const major = requireMajor();
+	const minor = requireMinor();
+	const patch = requirePatch();
+	const prerelease = requirePrerelease();
+	const compare = requireCompare();
+	const rcompare = requireRcompare();
+	const compareLoose = requireCompareLoose();
+	const compareBuild = requireCompareBuild();
+	const sort = requireSort();
+	const rsort = requireRsort();
+	const gt = requireGt();
+	const lt = requireLt();
+	const eq = requireEq();
+	const neq = requireNeq();
+	const gte = requireGte();
+	const lte = requireLte();
+	const cmp = requireCmp();
+	const coerce = requireCoerce();
+	const Comparator = requireComparator();
+	const Range = requireRange();
+	const satisfies = requireSatisfies();
+	const toComparators = requireToComparators();
+	const maxSatisfying = requireMaxSatisfying();
+	const minSatisfying = requireMinSatisfying();
+	const minVersion = requireMinVersion();
+	const validRange = requireValid();
+	const outside = requireOutside();
+	const gtr = requireGtr();
+	const ltr = requireLtr();
+	const intersects = requireIntersects();
+	const simplifyRange = requireSimplify();
+	const subset = requireSubset();
+	semver = {
+	  parse,
+	  valid,
+	  clean,
+	  inc,
+	  diff,
+	  major,
+	  minor,
+	  patch,
+	  prerelease,
+	  compare,
+	  rcompare,
+	  compareLoose,
+	  compareBuild,
+	  sort,
+	  rsort,
+	  gt,
+	  lt,
+	  eq,
+	  neq,
+	  gte,
+	  lte,
+	  cmp,
+	  coerce,
+	  Comparator,
+	  Range,
+	  satisfies,
+	  toComparators,
+	  maxSatisfying,
+	  minSatisfying,
+	  minVersion,
+	  validRange,
+	  outside,
+	  gtr,
+	  ltr,
+	  intersects,
+	  simplifyRange,
+	  subset,
+	  SemVer,
+	  re: internalRe.re,
+	  src: internalRe.src,
+	  tokens: internalRe.t,
+	  SEMVER_SPEC_VERSION: constants.SEMVER_SPEC_VERSION,
+	  RELEASE_TYPES: constants.RELEASE_TYPES,
+	  compareIdentifiers: identifiers.compareIdentifiers,
+	  rcompareIdentifiers: identifiers.rcompareIdentifiers,
+	};
+	return semver;
+}
+
+var semverExports = requireSemver();
+
+/**
+ * @description
+ * Takes an Array<V>, and a grouping function,
+ * and returns a Map of the array grouped by the grouping function.
+ *
+ * @param list An array of type V.
+ * @param keyGetter A Function that takes the the Array type V as an input, and returns a value of type K.
+ *                  K is generally intended to be a property key of V.
+ *
+ * @returns Map of the array grouped by the grouping function.
+ */
+function groupBy(list, keyGetter) {
+    const map = new Map();
+    list.forEach((item) => {
+        const key = keyGetter(item);
+        const collection = map.get(key);
+        if (!collection) {
+            map.set(key, [item]);
+        }
+        else {
+            collection.push(item);
+        }
+    });
+    return map;
 }
 
 /**
@@ -27265,24 +47172,199 @@ async function wait(milliseconds) {
  *
  * @returns Resolves when the action is complete.
  */
-async function run() {
+const run = async () => {
+    const tmpDir = fs.mkdtempSync(path.join(require$$0.tmpdir(), 'beatmods-'));
     try {
-        const ms = coreExports.getInput('milliseconds');
-        // Debug logs are only output if the `ACTIONS_STEP_DEBUG` secret is true
-        coreExports.debug(`Waiting ${ms} milliseconds ...`);
-        // Log the current timestamp, wait, then log the new timestamp
-        coreExports.debug(new Date().toTimeString());
-        await wait(parseInt(ms, 10));
-        coreExports.debug(new Date().toTimeString());
-        // Set outputs for other workflow steps to use
-        coreExports.setOutput('time', new Date().toTimeString());
+        const gameVersions = await getVersions();
+        const modMap = JSON.parse(coreExports.getInput('mods'));
+        let beatmodsModsById = {};
+        const beatmodsModsByVersion = {};
+        const modsToUpload = {};
+        const files = await fs.promises.readdir(coreExports.getInput('path'), {
+            withFileTypes: true
+        });
+        await Promise.all(files.map(async (file) => {
+            const fileName = file.name;
+            const fullZipName = path.join(file.parentPath, file.name);
+            if (!fileName.endsWith('.zip')) {
+                coreExports.info(`Skipping "${fileName}"...`);
+                return;
+            }
+            const noExt = fileName.slice(0, fileName.lastIndexOf('.'));
+            const subDir = path.join(tmpDir, noExt);
+            await fs.promises.mkdir(subDir);
+            const data = await fs.promises.readFile(fullZipName);
+            await decompress(data, subDir);
+            let assembly;
+            const pluginsDir = path.join(subDir, 'Plugins');
+            if (fs.existsSync(pluginsDir)) {
+                assembly = (await fs.promises.readdir(pluginsDir, {
+                    withFileTypes: true
+                })).find((m) => m.name.endsWith('.dll'));
+            }
+            if (!assembly) {
+                coreExports.warning(`Could not find dll for "${fileName}", skipping...`);
+                return;
+            }
+            const assemblyData = fs.readFileSync(path.join(assembly.parentPath, assembly.name));
+            const manifest = getManifest(assemblyData);
+            coreExports.debug(`Found manifest for "${fileName}"`);
+            if (!(manifest.id in modMap)) {
+                coreExports.warning(`No Beatmods id provided for "${manifest.id}", skipping...`);
+                return;
+            }
+            const id = modMap[manifest.id];
+            let remoteMod;
+            if (id in beatmodsModsById) {
+                remoteMod = await beatmodsModsById[id];
+            }
+            else {
+                const modPromise = getMod(id.toString());
+                beatmodsModsById[id] = modPromise;
+                remoteMod = await modPromise;
+                coreExports.debug(`Found "${manifest.id}" on BeatMods`);
+            }
+            if (manifest.id != remoteMod.info.name) {
+                coreExports.warning(`Id mismatch, expected: "${manifest.id}", found: "${remoteMod.info.name}", skipping...`);
+                return;
+            }
+            if (remoteMod.versions.some((version) => version.modVersion == manifest.version)) {
+                coreExports.warning(`Version ${manifest.id}@${manifest.version} already exists on Beatmods, skipping...`);
+                return;
+            }
+            const gameVersion = gameVersions.find((n) => n.version == manifest.gameVersion);
+            if (!gameVersion) {
+                coreExports.warning(`Game version ${manifest.gameVersion} not found on Beatmods, skipping...`);
+                return;
+            }
+            if (!(gameVersion.id in modsToUpload)) {
+                modsToUpload[gameVersion.id] = [];
+            }
+            modsToUpload[gameVersion.id].push({
+                id: id,
+                order: 0,
+                data: data,
+                file: file,
+                manifest: manifest,
+                gameVersion: gameVersion
+            });
+        }));
+        for (const gameVersionId in modsToUpload) {
+            const mods = modsToUpload[gameVersionId];
+            for (let changed = true; changed;) {
+                changed = false;
+                mods.forEach((mod) => {
+                    const orders = Object.keys(mod.manifest.dependsOn)
+                        .map((depend) => {
+                        const dependMod = mods.find((n) => n.manifest.id == depend);
+                        if (dependMod) {
+                            return dependMod.order + 1;
+                        }
+                    })
+                        .filter((n) => n != null);
+                    let newOrder;
+                    if (!orders || orders.length == 0) {
+                        newOrder = 0;
+                    }
+                    else {
+                        newOrder = Math.max(...orders);
+                    }
+                    if (mod.order != newOrder) {
+                        mod.order = newOrder;
+                        changed = true;
+                    }
+                });
+            }
+            const modGroups = Array.from(groupBy(mods.sort((a, b) => a.order - b.order), (n) => n.order));
+            for (const group of modGroups) {
+                await Promise.all(group[1].map(async (mod) => {
+                    const manifest = mod.manifest;
+                    const fileName = mod.file.name;
+                    const gameVersion = mod.gameVersion;
+                    const dependencies = [];
+                    for (const depend in manifest.dependsOn) {
+                        const dependRange = manifest.dependsOn[depend];
+                        // if we know the mod's id, use that instead
+                        if (depend in modMap) {
+                            const id = modMap[depend];
+                            let beatmodDepend;
+                            if (id in beatmodsModsById) {
+                                beatmodDepend = await beatmodsModsById[id];
+                            }
+                            else {
+                                const modPromise = getMod(id);
+                                beatmodsModsById[id] = modPromise;
+                                beatmodDepend = await modPromise;
+                                coreExports.debug(`Found "${depend}" on BeatMods`);
+                            }
+                            const dependVersion = beatmodDepend.versions.find((n) => n.supportedGameVersions.some((m) => m.id == gameVersion.id) && semverExports.satisfies(n.modVersion, dependRange));
+                            if (!dependVersion) {
+                                coreExports.warning(`No valid version found for "${depend}" for "${fileName}", skipping...`);
+                                return;
+                            }
+                            dependencies.push(dependVersion.id);
+                        }
+                        else {
+                            const version = gameVersion.version;
+                            let remoteMods;
+                            if (version in beatmodsModsByVersion) {
+                                remoteMods = await beatmodsModsByVersion[version];
+                            }
+                            else {
+                                coreExports.debug(`Getting Beatmods mods for ${version}`);
+                                const modPromise = getModsForVersion(version);
+                                beatmodsModsByVersion[version] = modPromise;
+                                remoteMods = await modPromise;
+                            }
+                            const result = remoteMods.find((remote) => remote.mod.name == depend);
+                            if (!result) {
+                                coreExports.warning(`Unable to resolve dependency "${depend}" for "${fileName}", skipping...`);
+                                return;
+                            }
+                            // Would prefer being able to just use the mod id instead of having to fetch individual mod versions
+                            // Obviously not a problem for most people... but extremely frustrating for me
+                            if (!semverExports.satisfies(result.latest.modVersion, dependRange)) {
+                                coreExports.warning(`Invalid semver for "${depend}" for "${fileName}", skipping...`);
+                                return;
+                            }
+                            dependencies.push(result.latest.id);
+                        }
+                    }
+                    const json = {
+                        file: mod.data,
+                        fileName: fileName,
+                        modVersion: manifest.version,
+                        platform: 'universalpc',
+                        dependencies: dependencies,
+                        supportedGameVersionIds: [gameVersion.id]
+                    };
+                    coreExports.debug(`Uploading "${fileName}": ${JSON.stringify(json)}`);
+                    await uploadMod(mod.id.toString(), json);
+                }));
+                // Clear cache so we can re-fetch new depends
+                beatmodsModsById = {};
+            }
+        }
     }
     catch (error) {
         // Fail the workflow run if an error occurs
-        if (error instanceof Error)
+        if (error instanceof Error) {
             coreExports.setFailed(error.message);
+        }
+        throw error;
     }
-}
+    finally {
+        try {
+            if (tmpDir) {
+                fs.rmSync(tmpDir, { recursive: true, force: true });
+            }
+        }
+        catch (e) {
+            /* istanbul ignore next */
+            console.error(`An error has occurred while removing the temp folder at ${tmpDir}: ${e}`);
+        }
+    }
+};
 
 /**
  * The entrypoint for the action. This file simply imports and runs the action's

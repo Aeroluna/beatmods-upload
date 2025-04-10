@@ -1,5 +1,5 @@
 /**
- * Unit tests for src/manifest.ts
+ * Unit tests for src/beatmods.ts
  */
 import { jest } from '@jest/globals';
 import {

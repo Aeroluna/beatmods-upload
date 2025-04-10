@@ -232,7 +232,7 @@ export const run = async () => {
 
                 dependencies.push(dependVersion.id);
               } else {
-                let version = gameVersion.version;
+                const version = gameVersion.version;
 
                 let remoteMods;
                 if (version in beatmodsModsByVersion) {

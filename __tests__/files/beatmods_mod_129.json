@@ -53,9 +53,7 @@
         "platform": "universalpc",
         "zipHash": "f4c25c80b33c66c3b4f19d79c74b6b39",
         "status": "unverified",
-        "dependencies": [
-          1992
-        ],
+        "dependencies": [1992],
         "contentHashes": [
           {
             "path": "Plugins/CustomJSONData.dll",
@@ -96,9 +94,7 @@
         "platform": "universalpc",
         "zipHash": "69de63f3470883f773134666f6e3013d",
         "status": "unverified",
-        "dependencies": [
-          2062
-        ],
+        "dependencies": [2062],
         "contentHashes": [
           {
             "path": "Plugins/CustomJSONData.dll",

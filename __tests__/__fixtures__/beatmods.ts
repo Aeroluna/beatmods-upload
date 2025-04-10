@@ -11,4 +11,4 @@ export const implement = () => {
   getMod.mockImplementation(beatmods.getMod);
   getModsForVersion.mockImplementation(beatmods.getModsForVersion);
   uploadMod.mockImplementation(beatmods.uploadMod);
-}
+};

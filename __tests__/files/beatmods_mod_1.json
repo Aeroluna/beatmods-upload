@@ -17,9 +17,7 @@
           "roles": {
             "sitewide": [],
             "perGame": {
-              "BeatSaber": [
-                "approver"
-              ]
+              "BeatSaber": ["approver"]
             }
           },
           "bio": "null",

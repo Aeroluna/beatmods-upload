@@ -11,6 +11,7 @@ const fetchMock = jest.fn(global.fetch);
 global.fetch = fetchMock;
 
 interface ModData {
+  // eslint-disable-next-line  @typescript-eslint/no-explicit-any
   [key: string]: any;
 }
 
@@ -96,8 +97,7 @@ export const mockFetchBeatmods = () => {
                   status: 200
                 })
               );
-            }
-            else {
+            } else {
               return Promise.resolve(
                 new Response(null, {
                   status: 404

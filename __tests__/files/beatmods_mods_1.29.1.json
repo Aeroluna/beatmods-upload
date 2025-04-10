@@ -18,9 +18,7 @@
             "roles": {
               "sitewide": [],
               "perGame": {
-                "BeatSaber": [
-                  "approver"
-                ]
+                "BeatSaber": ["approver"]
               }
             },
             "bio": "null",
@@ -574,9 +572,7 @@
             "roles": {
               "sitewide": [],
               "perGame": {
-                "BeatSaber": [
-                  "approver"
-                ]
+                "BeatSaber": ["approver"]
               }
             },
             "bio": "null",
@@ -613,10 +609,7 @@
         "platform": "universalpc",
         "zipHash": "0e19fb5a18ed1107e3c6c5b9d02211d9",
         "status": "verified",
-        "dependencies": [
-          1352,
-          1405
-        ],
+        "dependencies": [1352, 1405],
         "contentHashes": [
           {
             "path": "Plugins/BS_Utils.dll",
@@ -671,9 +664,7 @@
             "roles": {
               "sitewide": [],
               "perGame": {
-                "BeatSaber": [
-                  "approver"
-                ]
+                "BeatSaber": ["approver"]
               }
             },
             "bio": "null",
@@ -710,11 +701,7 @@
         "platform": "universalpc",
         "zipHash": "b9133aa79e80804f66b8b40d0d7f4b8c",
         "status": "verified",
-        "dependencies": [
-          1719,
-          1663,
-          1405
-        ],
+        "dependencies": [1719, 1663, 1405],
         "contentHashes": [
           {
             "path": "Plugins/SongCore.dll",
@@ -798,9 +785,7 @@
         "platform": "universalpc",
         "zipHash": "03a7c1a58f42a07b37d6486b05c95bbc",
         "status": "verified",
-        "dependencies": [
-          1405
-        ],
+        "dependencies": [1405],
         "contentHashes": [
           {
             "path": "Plugins/CustomJSONData.dll",
@@ -845,9 +830,7 @@
             "roles": {
               "sitewide": [],
               "perGame": {
-                "BeatSaber": [
-                  "approver"
-                ]
+                "BeatSaber": ["approver"]
               }
             },
             "bio": "null ",
@@ -884,9 +867,7 @@
         "platform": "universalpc",
         "zipHash": "d2eca700e097152ca29afefc6800ac01",
         "status": "verified",
-        "dependencies": [
-          1405
-        ],
+        "dependencies": [1405],
         "contentHashes": [
           {
             "path": "Plugins/SiraUtil.dll",
@@ -1018,13 +999,7 @@
         "platform": "universalpc",
         "zipHash": "dd929c6b169c1f0f1f7183de3f7d4d40",
         "status": "verified",
-        "dependencies": [
-          1722,
-          1405,
-          1504,
-          1719,
-          1709
-        ],
+        "dependencies": [1722, 1405, 1504, 1719, 1709],
         "contentHashes": [
           {
             "path": "Plugins/Technicolor.dll",
@@ -1104,15 +1079,7 @@
         "platform": "universalpc",
         "zipHash": "55800116e0e61288bc5c50f5c4cd2734",
         "status": "verified",
-        "dependencies": [
-          1709,
-          1713,
-          1678,
-          1405,
-          1527,
-          1504,
-          1719
-        ],
+        "dependencies": [1709, 1713, 1678, 1405, 1527, 1504, 1719],
         "contentHashes": [
           {
             "path": "Plugins/Chroma.dll",
@@ -1196,13 +1163,7 @@
         "platform": "universalpc",
         "zipHash": "98ddbd0c264d533d014282c281db8c00",
         "status": "verified",
-        "dependencies": [
-          1709,
-          1504,
-          1405,
-          1678,
-          1713
-        ],
+        "dependencies": [1709, 1504, 1405, 1678, 1713],
         "contentHashes": [
           {
             "path": "Plugins/NoodleExtensions.dll",
@@ -1568,9 +1529,7 @@
         "platform": "universalpc",
         "zipHash": "86458fd18e32fad79c39abe1ce4d729a",
         "status": "verified",
-        "dependencies": [
-          1405
-        ],
+        "dependencies": [1405],
         "contentHashes": [
           {
             "path": "Plugins/AudioLink.dll",
@@ -1650,9 +1609,7 @@
         "platform": "universalpc",
         "zipHash": "048fb78570e9cdf91869c35defea37cc",
         "status": "verified",
-        "dependencies": [
-          1405
-        ],
+        "dependencies": [1405],
         "contentHashes": [
           {
             "path": "Plugins/CameraUtils.dll",
@@ -1697,9 +1654,7 @@
             "roles": {
               "sitewide": [],
               "perGame": {
-                "BeatSaber": [
-                  "approver"
-                ]
+                "BeatSaber": ["approver"]
               }
             },
             "bio": "null ",
@@ -1736,9 +1691,7 @@
         "platform": "universalpc",
         "zipHash": "3fb90c7ff875f544db92bd9a724e6838",
         "status": "verified",
-        "dependencies": [
-          1405
-        ],
+        "dependencies": [1405],
         "contentHashes": [
           {
             "path": "Plugins/BSML.dll",

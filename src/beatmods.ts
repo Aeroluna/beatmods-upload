@@ -101,7 +101,10 @@ export const uploadMod = async (
   formData.append('modVersion', request.modVersion);
   formData.append('platform', request.platform);
   formData.append('dependencies', JSON.stringify(request.dependencies));
-  formData.append('supportedGameVersionIds', JSON.stringify(request.supportedGameVersionIds));
+  formData.append(
+    'supportedGameVersionIds',
+    JSON.stringify(request.supportedGameVersionIds)
+  );
   const response = await fetch(
     'https://beatmods.com/api/mods/' + id + '/upload',
     {
