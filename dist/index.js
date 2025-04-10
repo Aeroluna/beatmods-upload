@@ -27252,9 +27252,10 @@ function requireCore () {
 var coreExports = requireCore();
 
 const userAgent = 'beatmods-upload/0.1';
+const token = coreExports.getInput('token');
 const getVersions = async () => {
     const response = await fetch('https://beatmods.com/api/versions?gameName=beatsaber', {
-        headers: { 'User-Agent': userAgent }
+        headers: { 'User-Agent': userAgent, Authorization: 'Bearer ' + token }
     });
     if (!response.ok) {
         throw new Error(`Beatmods did not return ok response [${response.status}]`);
@@ -27264,7 +27265,7 @@ const getVersions = async () => {
 };
 const getMod = async (id) => {
     const response = await fetch('https://beatmods.com/api/mods/' + id, {
-        headers: { 'User-Agent': userAgent }
+        headers: { 'User-Agent': userAgent, Authorization: 'Bearer ' + token }
     });
     if (!response.ok) {
         throw new Error(`Beatmods did not return ok response [${response.status}]`);
@@ -27274,7 +27275,7 @@ const getMod = async (id) => {
 };
 const getModsForVersion = async (gameVersion) => {
     const response = await fetch('https://beatmods.com/api/mods?gameVersion=' + gameVersion, {
-        headers: { 'User-Agent': userAgent }
+        headers: { 'User-Agent': userAgent, Authorization: 'Bearer ' + token }
     });
     if (!response.ok) {
         throw new Error(`Beatmods did not return ok response [${response.status}]`);
@@ -27282,7 +27283,7 @@ const getModsForVersion = async (gameVersion) => {
     const json = (await response.json());
     return json.mods;
 };
-const uploadMod = async (token, id, request) => {
+const uploadMod = async (id, request) => {
     const formData = new FormData();
     formData.append('file', new File([request.file], request.fileName, { type: 'application/zip' }));
     formData.append('modVersion', request.modVersion);
@@ -47283,7 +47284,6 @@ const run = async () => {
                 });
             }
             const modGroups = Array.from(groupBy(mods.sort((a, b) => a.order - b.order), (n) => n.order));
-            const token = coreExports.getInput('token');
             for (const group of modGroups) {
                 await Promise.all(group[1].map(async (mod) => {
                     const manifest = mod.manifest;
@@ -47347,7 +47347,7 @@ const run = async () => {
                         supportedGameVersionIds: [gameVersion.id]
                     };
                     coreExports.debug(`Uploading "${fileName}"...`);
-                    await uploadMod(token, mod.id.toString(), json);
+                    await uploadMod(mod.id.toString(), json);
                     coreExports.info(`Uploaded ${manifest.id}@${manifest.version}`);
                 }));
                 // Clear cache so we can re-fetch new depends
