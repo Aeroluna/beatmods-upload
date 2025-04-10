@@ -2,7 +2,11 @@
  * Unit tests for src/manifest.ts
  */
 import { jest } from '@jest/globals';
-import { mockFetchBeatmods, mockFetchError } from './mockBeatmods.js';
+import {
+  mockFetchBeatmods,
+  mockFetchError,
+  resetBeatmodsMock
+} from './mockBeatmods.js';
 import { uploadMod } from '../src/beatmods.js';
 import { readTestFileSync } from './testFiles.js';
 
@@ -17,6 +21,7 @@ describe('beatmods.ts', () => {
 
   afterEach(() => {
     jest.resetAllMocks();
+    resetBeatmodsMock();
   });
 
   describe('getVersions', () => {

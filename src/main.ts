@@ -216,13 +216,6 @@ export const run = async () => {
                   core.debug(`Found "${depend}" on BeatMods`);
                 }
 
-                if (!beatmodDepend) {
-                  core.warning(
-                    `Unable to resolve dependency "${depend}" for "${fileName}", skipping...`
-                  );
-                  return;
-                }
-
                 const dependVersion = beatmodDepend.versions.find(
                   (n) =>
                     n.supportedGameVersions.some(
@@ -256,14 +249,13 @@ export const run = async () => {
                 );
                 if (!result) {
                   core.warning(
-                    // I really hate this...
-                    // Would prefer being able to just say which mod instead of the individual mod version
-                    // Obviously not a problem for most people... but extremely frustrating for me
                     `Unable to resolve dependency "${depend}" for "${fileName}", skipping...`
                   );
                   return;
                 }
 
+                // Would prefer being able to just use the mod id instead of having to fetch individual mod versions
+                // Obviously not a problem for most people... but extremely frustrating for me
                 if (!satisfies(result.latest.modVersion, dependRange)) {
                   core.warning(
                     `Invalid semver for "${depend}" for "${fileName}", skipping...`
@@ -295,7 +287,10 @@ export const run = async () => {
     }
   } catch (error) {
     // Fail the workflow run if an error occurs
-    if (error instanceof Error) core.setFailed(error.message);
+    if (error instanceof Error) {
+      core.setFailed(error.message);
+    }
+
     throw error;
   } finally {
     try {
@@ -303,6 +298,7 @@ export const run = async () => {
         fs.rmSync(tmpDir, { recursive: true, force: true });
       }
     } catch (e) {
+      /* istanbul ignore next */
       console.error(
         `An error has occurred while removing the temp folder at ${tmpDir}: ${e}`
       );

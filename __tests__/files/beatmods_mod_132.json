@@ -1,0 +1,36 @@
+{
+  "mod": {
+    "info": {
+      "id": 132,
+      "name": "Chroma",
+      "summary": "Welcome to Chroma 2.0, featuring a complete code rework that prioritizes performance to bring y...",
+      "description": "Welcome to Chroma 2.0, featuring a complete code rework that prioritizes performance to bring you amazing features like the RGB lights that you all know and love and a rainbow lights mode.\n\nThis mod was imported from BeatMods, and was originally uploaded by Aeroluna at 2020-07-30T06:04:49.733Z.",
+      "gameName": "BeatSaber",
+      "category": "lighting",
+      "authors": [
+        {
+          "id": 40,
+          "username": "Aeroluna",
+          "githubId": "40481393",
+          "sponsorUrl": "",
+          "displayName": "Aeroluna",
+          "roles": {
+            "sitewide": [],
+            "perGame": {}
+          },
+          "bio": "hi",
+          "createdAt": "2025-01-05T05:33:18.340Z",
+          "updatedAt": "2025-01-05T05:33:18.340Z"
+        }
+      ],
+      "status": "verified",
+      "iconFileName": "default.png",
+      "gitUrl": "https://github.com/Aeroluna/Chroma",
+      "lastApprovedById": 8,
+      "lastUpdatedById": 8,
+      "createdAt": "2020-07-30T06:04:49.733Z",
+      "updatedAt": "2025-01-22T05:09:46.774Z"
+    },
+    "versions": []
+  }
+}

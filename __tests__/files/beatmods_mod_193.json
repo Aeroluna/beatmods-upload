@@ -1,0 +1,36 @@
+{
+  "mod": {
+    "info": {
+      "id": 193,
+      "name": "NoodleExtensions",
+      "summary": "A spiritual successor to Mapping Extensions, this allows mappers to precisely control aspects o...",
+      "description": "A spiritual successor to Mapping Extensions, this allows mappers to precisely control aspects of map elements. Does not allow you to play Mapping Extensions maps!\n\nThis mod was imported from BeatMods, and was originally uploaded by Aeroluna at 2021-04-21T20:03:06.408Z.",
+      "gameName": "BeatSaber",
+      "category": "library",
+      "authors": [
+        {
+          "id": 40,
+          "username": "Aeroluna",
+          "githubId": "40481393",
+          "sponsorUrl": "",
+          "displayName": "Aeroluna",
+          "roles": {
+            "sitewide": [],
+            "perGame": {}
+          },
+          "bio": "hi",
+          "createdAt": "2025-01-05T05:33:18.340Z",
+          "updatedAt": "2025-01-05T05:33:18.340Z"
+        }
+      ],
+      "status": "verified",
+      "iconFileName": "default.png",
+      "gitUrl": "https://github.com/Aeroluna/NoodleExtensions",
+      "lastApprovedById": 8,
+      "lastUpdatedById": 8,
+      "createdAt": "2021-04-21T20:03:06.408Z",
+      "updatedAt": "2025-01-22T05:09:41.860Z"
+    },
+    "versions": []
+  }
+}

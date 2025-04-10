@@ -1235,95 +1235,6 @@
     },
     {
       "mod": {
-        "id": 205,
-        "name": "_Heck",
-        "summary": "Provides track support for other mods. Used by Chroma and NoodleExtensions.",
-        "description": "Provides track support for other mods. Used by Chroma and NoodleExtensions.\n\nThis mod was imported from BeatMods, and was originally uploaded by Aeroluna at 2021-06-18T12:01:53.814Z.",
-        "gameName": "BeatSaber",
-        "category": "library",
-        "authors": [
-          {
-            "id": 6,
-            "username": "BeatMods Import",
-            "githubId": null,
-            "sponsorUrl": "https://www.patreon.com/c/beatsabermods",
-            "displayName": "BeatMods Import",
-            "roles": {
-              "sitewide": [],
-              "perGame": {}
-            },
-            "bio": "Mods imported from BeatMods",
-            "createdAt": "2024-12-31T22:25:00.246Z",
-            "updatedAt": "2024-12-31T22:25:00.246Z"
-          }
-        ],
-        "status": "verified",
-        "iconFileName": "default.png",
-        "gitUrl": "https://github.com/Aeroluna/Heck",
-        "lastApprovedById": 6,
-        "lastUpdatedById": 6,
-        "createdAt": "2021-06-18T12:01:53.814Z",
-        "updatedAt": "2024-12-31T23:17:54.322Z"
-      },
-      "latest": {
-        "id": 1709,
-        "modId": 205,
-        "author": {
-          "id": 6,
-          "username": "BeatMods Import",
-          "githubId": null,
-          "sponsorUrl": "https://www.patreon.com/c/beatsabermods",
-          "displayName": "BeatMods Import",
-          "roles": {
-            "sitewide": [],
-            "perGame": {}
-          },
-          "bio": "Mods imported from BeatMods",
-          "createdAt": "2024-12-31T22:25:00.246Z",
-          "updatedAt": "2024-12-31T22:25:00.246Z"
-        },
-        "modVersion": "1.5.0",
-        "platform": "universalpc",
-        "zipHash": "5a3cd15c82ac3d15b73413044c9f7ec7",
-        "status": "verified",
-        "dependencies": [
-          1713,
-          1719,
-          1504,
-          1405
-        ],
-        "contentHashes": [
-          {
-            "path": "Plugins/Heck.dll",
-            "hash": "f5c9a6b3538f1b28b092af6efcd49452"
-          },
-          {
-            "path": "Plugins/Heck.pdb",
-            "hash": "f64823465d3ce6164668a2d45a4506bc"
-          }
-        ],
-        "downloadCount": 39,
-        "supportedGameVersions": [
-          {
-            "id": 26,
-            "gameName": "BeatSaber",
-            "version": "1.29.0",
-            "defaultVersion": false
-          },
-          {
-            "id": 78,
-            "gameName": "BeatSaber",
-            "version": "1.29.1",
-            "defaultVersion": false
-          }
-        ],
-        "fileSize": 89456,
-        "createdAt": "2024-03-24T23:28:11.263Z",
-        "updatedAt": "2025-02-23T00:08:29.422Z"
-      }
-    },
-    {
-      "mod": {
         "id": 231,
         "name": "LookupID",
         "summary": "A single method written in C++ for Chroma because regex in mono is unbelievably slow. Also beat...",
@@ -1852,6 +1763,25 @@
         "fileSize": 178734,
         "createdAt": "2023-04-03T22:13:41.704Z",
         "updatedAt": "2025-02-23T00:08:29.931Z"
+      }
+    },
+    {
+      "mod": {
+        "id": 205,
+        "name": "Heck"
+      },
+      "latest": {
+        "id": 1885,
+        "modId": 205,
+        "modVersion": "1.5.1",
+        "supportedGameVersions": [
+          {
+            "id": 35,
+            "gameName": "BeatSaber",
+            "version": "1.34.2",
+            "defaultVersion": false
+          }
+        ]
       }
     }
   ]

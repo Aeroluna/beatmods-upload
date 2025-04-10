@@ -2,7 +2,7 @@ import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
 
-const testFilesDirectory = path.join(
+export const testFilesDirectory = path.join(
   path.dirname(fileURLToPath(import.meta.url)),
   'files'
 );
