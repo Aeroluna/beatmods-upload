@@ -1,10 +1,9 @@
 {
   "name": "beatmods-upload",
-  "description": "GitHub Actions TypeScript template",
-  "version": "0.0.0",
-  "author": "",
+  "description": "Automatically upload zipped Beat Saber mods to BeatMods",
+  "version": "1.0.0",
+  "author": "Aeroluna",
   "type": "module",
-  "private": true,
   "homepage": "https://github.com/Aeroluna/beatmods-upload",
   "repository": {
     "type": "git",
