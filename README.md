@@ -10,7 +10,14 @@ Automatically upload zipped Beat Saber mods to BeatMods.
 
 ## Inputs
 
-| Name   | Description                                                  | Required | Default       |
-| ------ | ------------------------------------------------------------ | -------- | ------------- |
-| `path` | Path to get zips from.                                       | No       | `./artifacts` |
-| `mods` | JSON object with mod IDs as keys and BeatMods IDs as values. | Yes      | `{}`          |
+| Name                   | Description                                                                        | Required | Default       |
+| ---------------------- | ---------------------------------------------------------------------------------- | -------- | ------------- |
+| `path`                 | Path to get zips from.                                                             | No       | `./artifacts` |
+| `mods`                 | JSON object with mod IDs as keys and BeatMods IDs as values.                       | Yes      | `{}`          |
+| `extend-game-versions` | How to handle extending supported game versions. Allows 'latest', 'all', or 'none' | No       | `latest`      |
+
+### Secrets
+
+| Name    | Description                                     | Required |
+| ------- | ----------------------------------------------- | -------- |
+| `token` | A GitHub PAT. Does not require any permissions. | yes      |

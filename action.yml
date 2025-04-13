@@ -15,6 +15,10 @@ inputs:
     description: Mod ids mapped to Beatmods ids
     required: true
     default: '{}'
+  extend-game-versions:
+    description: How to handle extending supported game versions
+    required: false
+    default: 'latest'
   token:
     description: A Github PAT
     required: true

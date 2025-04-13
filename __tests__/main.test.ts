@@ -35,7 +35,8 @@ describe('main.ts', () => {
     inputs = {
       path: '__tests__/files/artifacts',
       mods: '{"CustomJSONData": 129}',
-      token: 'token'
+      token: 'token',
+      'extend-game-versions': 'none'
     };
 
     // Set the action's inputs as return values from core.getInput().
@@ -66,7 +67,10 @@ describe('main.ts', () => {
 
     await run();
 
-    expect(beatmods.uploadMod).toHaveBeenCalled();
+    expect(beatmods.uploadMod).toHaveBeenCalledWith(
+      '129',
+      expect.objectContaining({ supportedGameVersionIds: [78] })
+    );
   });
 
   it('uploads multiple artifacts of same mod', async () => {
@@ -93,6 +97,68 @@ describe('main.ts', () => {
     await run();
 
     expect(beatmods.uploadMod).toHaveBeenCalledTimes(5);
+  });
+
+  it('extends latest game versions', async () => {
+    addArtifact('CustomJSONData-2.6.8+1.29.1-bs1.29.1-7c2c32c.zip');
+    addArtifact('CustomJSONData-2.6.8+1.34.2-bs1.34.2-7c2c32c.zip');
+    setInput('extend-game-versions', 'latest');
+
+    await run();
+
+    expect(beatmods.uploadMod).toHaveBeenCalledWith(
+      '129',
+      expect.objectContaining({ supportedGameVersionIds: [78] })
+    );
+    expect(beatmods.uploadMod).toHaveBeenCalledWith(
+      '129',
+      expect.objectContaining({
+        supportedGameVersionIds: expect.arrayContaining([35, 47, 84])
+      })
+    );
+  });
+
+  it('extends all game versions', async () => {
+    addArtifact('CustomJSONData-2.6.8+1.29.1-bs1.29.1-7c2c32c.zip');
+    addArtifact('CustomJSONData-2.6.8+1.34.2-bs1.34.2-7c2c32c.zip');
+    setInput('extend-game-versions', 'all');
+
+    await run();
+
+    expect(beatmods.uploadMod).toHaveBeenCalledWith(
+      '129',
+      expect.objectContaining({
+        supportedGameVersionIds: expect.arrayContaining([34, 30, 78])
+      })
+    );
+    expect(beatmods.uploadMod).toHaveBeenCalledWith(
+      '129',
+      expect.objectContaining({
+        supportedGameVersionIds: expect.arrayContaining([35, 47, 84])
+      })
+    );
+  });
+
+  it('extends handles skipped game versions', async () => {
+    addArtifact('CustomJSONData-2.6.8+1.29.1-bs1.29.1-7c2c32c.zip');
+    addArtifact('CustomJSONData-2.6.8+1.34.2-bs1.34.2-7c2c32c.zip');
+    addArtifact('CustomJSONData-2.6.8+1.37.1-bs1.37.1-7c2c32c.zip');
+    setInput('extend-game-versions', 'all');
+
+    await run();
+
+    expect(beatmods.uploadMod).toHaveBeenCalledWith(
+      '129',
+      expect.objectContaining({
+        supportedGameVersionIds: expect.arrayContaining([34, 30, 78])
+      })
+    );
+    expect(beatmods.uploadMod).toHaveBeenCalledWith(
+      '129',
+      expect.objectContaining({
+        supportedGameVersionIds: expect.arrayContaining([35, 37, 40])
+      })
+    );
   });
 
   it('skips non-zips', async () => {

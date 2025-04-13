@@ -44843,11 +44843,11 @@ function requireIdentifiers () {
 	return identifiers;
 }
 
-var semver$1;
+var semver$2;
 var hasRequiredSemver$1;
 
 function requireSemver$1 () {
-	if (hasRequiredSemver$1) return semver$1;
+	if (hasRequiredSemver$1) return semver$2;
 	hasRequiredSemver$1 = 1;
 	const debug = requireDebug();
 	const { MAX_LENGTH, MAX_SAFE_INTEGER } = requireConstants();
@@ -45166,8 +45166,8 @@ function requireSemver$1 () {
 	  }
 	}
 
-	semver$1 = SemVer;
-	return semver$1;
+	semver$2 = SemVer;
+	return semver$2;
 }
 
 var parse_1;
@@ -47049,11 +47049,11 @@ function requireSubset () {
 	return subset_1;
 }
 
-var semver;
+var semver$1;
 var hasRequiredSemver;
 
 function requireSemver () {
-	if (hasRequiredSemver) return semver;
+	if (hasRequiredSemver) return semver$1;
 	hasRequiredSemver = 1;
 	// just pre-load all the stuff that index.js lazily exports
 	const internalRe = requireRe();
@@ -47097,7 +47097,7 @@ function requireSemver () {
 	const intersects = requireIntersects();
 	const simplifyRange = requireSimplify();
 	const subset = requireSubset();
-	semver = {
+	semver$1 = {
 	  parse,
 	  valid,
 	  clean,
@@ -47144,10 +47144,11 @@ function requireSemver () {
 	  compareIdentifiers: identifiers.compareIdentifiers,
 	  rcompareIdentifiers: identifiers.rcompareIdentifiers,
 	};
-	return semver;
+	return semver$1;
 }
 
 var semverExports = requireSemver();
+var semver = /*@__PURE__*/getDefaultExportFromCjs(semverExports);
 
 /**
  * @description
@@ -47187,7 +47188,8 @@ const run = async () => {
         const modMap = JSON.parse(coreExports.getInput('mods'));
         let beatmodsModsById = {};
         const beatmodsModsByVersion = {};
-        const modsToUpload = {};
+        const foundGameVersions = {};
+        const modsToUpload = [];
         const files = await fs.promises.readdir(coreExports.getInput('path'), {
             withFileTypes: true
         });
@@ -47217,6 +47219,8 @@ const run = async () => {
             const assemblyData = fs.readFileSync(path.join(assembly.parentPath, assembly.name));
             const manifest = getManifest(assemblyData);
             coreExports.debug(`Found manifest for "${fileName}"`);
+            foundGameVersions[manifest.id] ??= [];
+            foundGameVersions[manifest.id].push(manifest.gameVersion);
             if (!(manifest.id in modMap)) {
                 coreExports.warning(`No Beatmods id provided for "${manifest.id}", skipping...`);
                 return;
@@ -47245,10 +47249,7 @@ const run = async () => {
                 coreExports.warning(`Game version ${manifest.gameVersion} not found on Beatmods, skipping...`);
                 return;
             }
-            if (!(gameVersion.id in modsToUpload)) {
-                modsToUpload[gameVersion.id] = [];
-            }
-            modsToUpload[gameVersion.id].push({
+            modsToUpload.push({
                 id: id,
                 order: 0,
                 data: data,
@@ -47257,8 +47258,14 @@ const run = async () => {
                 gameVersion: gameVersion
             });
         }));
-        for (const gameVersionId in modsToUpload) {
-            const mods = modsToUpload[gameVersionId];
+        const extendGameVersions = coreExports.getInput('extend-game-versions');
+        const latestGameVersions = {};
+        for (const mod in foundGameVersions) {
+            foundGameVersions[mod].sort(semver.compare);
+            const modGameVersions = foundGameVersions[mod];
+            latestGameVersions[mod] = modGameVersions[modGameVersions.length - 1];
+        }
+        for (const mods of groupBy(modsToUpload, (mod) => mod.gameVersion.id).values()) {
             for (let changed = true; changed;) {
                 changed = false;
                 mods.forEach((mod) => {
@@ -47283,9 +47290,8 @@ const run = async () => {
                     }
                 });
             }
-            const modGroups = Array.from(groupBy(mods.sort((a, b) => a.order - b.order), (n) => n.order));
-            for (const group of modGroups) {
-                await Promise.all(group[1].map(async (mod) => {
+            for (const group of groupBy(mods.sort((a, b) => a.order - b.order), (n) => n.order).values()) {
+                await Promise.all(group.map(async (mod) => {
                     const manifest = mod.manifest;
                     const fileName = mod.file.name;
                     const gameVersion = mod.gameVersion;
@@ -47305,7 +47311,7 @@ const run = async () => {
                                 beatmodDepend = await modPromise;
                                 coreExports.debug(`Found "${depend}" on BeatMods`);
                             }
-                            const dependVersion = beatmodDepend.versions.find((n) => n.supportedGameVersions.some((m) => m.id == gameVersion.id) && semverExports.satisfies(n.modVersion, dependRange));
+                            const dependVersion = beatmodDepend.versions.find((n) => n.supportedGameVersions.some((m) => m.id == gameVersion.id) && semver.satisfies(n.modVersion, dependRange));
                             if (!dependVersion) {
                                 coreExports.warning(`No valid version found for "${depend}" for "${fileName}", skipping...`);
                                 return;
@@ -47331,12 +47337,46 @@ const run = async () => {
                             }
                             // Would prefer being able to just use the mod id instead of having to fetch individual mod versions
                             // Obviously not a problem for most people... but extremely frustrating for me
-                            if (!semverExports.satisfies(result.latest.modVersion, dependRange)) {
+                            if (!semver.satisfies(result.latest.modVersion, dependRange)) {
                                 coreExports.warning(`Invalid semver for "${depend}" for "${fileName}", skipping...`);
                                 return;
                             }
                             dependencies.push(result.latest.id);
                         }
+                    }
+                    let supportedGameVersionIds = [];
+                    switch (extendGameVersions) {
+                        case 'all':
+                            {
+                                const modGameVersions = foundGameVersions[manifest.id];
+                                const index = modGameVersions.findIndex((n) => n == gameVersion.version);
+                                if (index >= modGameVersions.length - 1) {
+                                    supportedGameVersionIds = gameVersions
+                                        .filter((n) => semver.gte(n.version, gameVersion.version))
+                                        .map((n) => n.id);
+                                }
+                                else {
+                                    const nextVersion = modGameVersions[index + 1];
+                                    supportedGameVersionIds = gameVersions
+                                        .filter((n) => semver.gte(n.version, gameVersion.version) &&
+                                        semver.lt(n.version, nextVersion))
+                                        .map((n) => n.id);
+                                }
+                            }
+                            break;
+                        case 'latest':
+                            if (latestGameVersions[manifest.id] == manifest.gameVersion) {
+                                supportedGameVersionIds = gameVersions
+                                    .filter((n) => semver.gte(n.version, gameVersion.version))
+                                    .map((n) => n.id);
+                            }
+                            else {
+                                supportedGameVersionIds = [gameVersion.id];
+                            }
+                            break;
+                        default:
+                            supportedGameVersionIds = [gameVersion.id];
+                            break;
                     }
                     const json = {
                         file: mod.data,
@@ -47344,7 +47384,7 @@ const run = async () => {
                         modVersion: manifest.version,
                         platform: 'universalpc',
                         dependencies: dependencies,
-                        supportedGameVersionIds: [gameVersion.id]
+                        supportedGameVersionIds: supportedGameVersionIds
                     };
                     coreExports.debug(`Uploading "${fileName}"...`);
                     await uploadMod(mod.id.toString(), json);
