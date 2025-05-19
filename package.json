@@ -41,7 +41,7 @@
     "@types/semver": "^7.7.0",
     "decompress": "^4.2.1",
     "pe-struct": "^0.9.4",
-    "semver": "^7.7.1"
+    "semver": "^7.7.2"
   },
   "devDependencies": {
     "@eslint/compat": "^1.2.8",
