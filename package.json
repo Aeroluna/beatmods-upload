@@ -38,10 +38,10 @@
     "@actions/artifact": "^2.3.2",
     "@actions/core": "^1.11.1",
     "@types/decompress": "^4.2.7",
-    "@types/semver": "^7.7.0",
+    "@types/semver": "^7.7.1",
     "decompress": "^4.2.1",
     "pe-struct": "^0.9.4",
-    "semver": "^7.7.1"
+    "semver": "^7.7.2"
   },
   "devDependencies": {
     "@eslint/compat": "^1.2.8",
