@@ -87,7 +87,7 @@ export const mockFetchBeatmods = () => {
           }
         } else {
           if (
-            input === 'https://beatmods.com/api/versions?gameName=beatsaber'
+            input === 'https://beatmods.com/api/versions?gameName=BeatSaber'
           ) {
             return Promise.resolve(
               new Response(JSON.stringify(versions), {

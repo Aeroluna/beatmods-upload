@@ -52,7 +52,7 @@ export interface BeatmodsModVersionUpload {
 
 export const getVersions = async () => {
   const response = await fetch(
-    'https://beatmods.com/api/versions?gameName=beatsaber',
+    'https://beatmods.com/api/versions?gameName=BeatSaber',
     {
       headers: { 'User-Agent': userAgent, Authorization: 'Bearer ' + token }
     }
