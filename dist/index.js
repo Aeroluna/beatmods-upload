@@ -27254,7 +27254,7 @@ var coreExports = requireCore();
 const userAgent = 'beatmods-upload/0.1';
 const token = coreExports.getInput('token');
 const getVersions = async () => {
-    const response = await fetch('https://beatmods.com/api/versions?gameName=beatsaber', {
+    const response = await fetch('https://beatmods.com/api/versions?gameName=BeatSaber', {
         headers: { 'User-Agent': userAgent, Authorization: 'Bearer ' + token }
     });
     if (!response.ok) {
@@ -47184,7 +47184,7 @@ function groupBy(list, keyGetter) {
 const run = async () => {
     const tmpDir = fs.mkdtempSync(path.join(require$$0.tmpdir(), 'beatmods-'));
     try {
-        const gameVersions = await getVersions();
+        const gameVersions = (await getVersions()).filter((n) => semver.valid(n.version));
         const modMap = JSON.parse(coreExports.getInput('mods'));
         let beatmodsModsById = {};
         const beatmodsModsByVersion = {};
