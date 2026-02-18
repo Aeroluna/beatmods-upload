@@ -25,7 +25,9 @@ import { groupBy } from './groupBy.js';
 export const run = async () => {
   const tmpDir: string = fs.mkdtempSync(path.join(os.tmpdir(), 'beatmods-'));
   try {
-    const gameVersions = await getVersions();
+    const gameVersions = (await getVersions()).filter((n) =>
+      semver.valid(n.version)
+    );
 
     const modMap = JSON.parse(core.getInput('mods'));
 

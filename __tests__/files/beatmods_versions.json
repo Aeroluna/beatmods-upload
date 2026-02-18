@@ -260,6 +260,16 @@
       "createdAt": "2023-10-10T17:25:07.181Z",
       "updatedAt": "2024-12-31T23:30:21.494Z",
       "deletedAt": null
+    },
+    {
+      "linkedVersionIds": [],
+      "id": 4,
+      "gameName": "BeatSaber",
+      "version": "1.1.0p1",
+      "defaultVersion": false,
+      "createdAt": "2019-07-27T00:46:40.407Z",
+      "updatedAt": "2024-12-31T22:37:55.728Z",
+      "deletedAt": null
     }
   ]
 }
