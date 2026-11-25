@@ -27251,11 +27251,11 @@ function requireCore () {
 
 var coreExports = requireCore();
 
-const userAgent = 'beatmods-upload/0.1';
+const userAgent = 'lunarrepo-upload/0.1';
 const token = coreExports.getInput('token');
 const getVersions = async () => {
-    const response = await fetch('https://beatmods.com/api/versions?gameName=BeatSaber', {
-        headers: { 'User-Agent': userAgent, Authorization: 'Bearer ' + token }
+    const response = await fetch('https://repo.totalbs.dev/api/v1/game', {
+        headers: { 'User-Agent': userAgent }
     });
     if (!response.ok) {
         throw new Error(`Beatmods did not return ok response [${response.status}]`);
@@ -27264,33 +27264,21 @@ const getVersions = async () => {
     return json.versions;
 };
 const getMod = async (id) => {
-    const response = await fetch('https://beatmods.com/api/mods/' + id, {
+    const response = await fetch('https://repo.totalbs.dev/api/v1/mods/' + id, {
         headers: { 'User-Agent': userAgent, Authorization: 'Bearer ' + token }
     });
     if (!response.ok) {
-        throw new Error(`Beatmods did not return ok response [${response.status}]`);
+        throw new Error(`LunarRepo did not return ok response [${response.status}]`);
     }
     const json = (await response.json());
-    return json.mod;
-};
-const getModsForVersion = async (gameVersion) => {
-    const response = await fetch('https://beatmods.com/api/mods?gameVersion=' + gameVersion, {
-        headers: { 'User-Agent': userAgent, Authorization: 'Bearer ' + token }
-    });
-    if (!response.ok) {
-        throw new Error(`Beatmods did not return ok response [${response.status}]`);
-    }
-    const json = (await response.json());
-    return json.mods;
+    return json;
 };
 const uploadMod = async (id, request) => {
     const formData = new FormData();
     formData.append('file', new File([request.file], request.fileName, { type: 'application/zip' }));
-    formData.append('modVersion', request.modVersion);
-    formData.append('platform', request.platform);
-    formData.append('dependencies', request.dependencies);
-    formData.append('supportedGameVersionIds', request.supportedGameVersionIds);
-    const url = 'https://beatmods.com/api/mods/' + id + '/upload';
+    formData.append('channel', request.channel);
+    formData.append('gameVersions', request.gameVersions);
+    const url = 'https://repo.lunarrepo.com/api/v1/mods/' + id + '/upload';
     const response = await fetch(url, {
         method: 'POST',
         headers: { 'User-Agent': userAgent, Authorization: 'Bearer ' + token },
@@ -27303,7 +27291,7 @@ const uploadMod = async (id, request) => {
         .catch(() => (json = 'null'));
     coreExports.debug(`POST ${url} (${response.status}) => ${json}`);
     if (!response.ok) {
-        throw new Error(`Beatmods did not return ok response [${response.status}]`);
+        throw new Error(`LunarRepo did not return ok response [${response.status}]`);
     }
 };
 
@@ -47182,12 +47170,11 @@ function groupBy(list, keyGetter) {
  * @returns Resolves when the action is complete.
  */
 const run = async () => {
-    const tmpDir = fs.mkdtempSync(path.join(require$$0.tmpdir(), 'beatmods-'));
+    const tmpDir = fs.mkdtempSync(path.join(require$$0.tmpdir(), 'lunarrepo-'));
     try {
-        const gameVersions = (await getVersions()).filter((n) => semver.valid(n.version));
+        const gameVersions = (await getVersions()).filter((n) => semver.valid(n));
         const modMap = JSON.parse(coreExports.getInput('mods'));
-        let beatmodsModsById = {};
-        const beatmodsModsByVersion = {};
+        let lunarRepoModsById = {};
         const foundGameVersions = {};
         const modsToUpload = [];
         const files = await fs.promises.readdir(coreExports.getInput('path'), {
@@ -47222,31 +47209,31 @@ const run = async () => {
             foundGameVersions[manifest.id] ??= [];
             foundGameVersions[manifest.id].push(manifest.gameVersion);
             if (!(manifest.id in modMap)) {
-                coreExports.warning(`No Beatmods id provided for "${manifest.id}", skipping...`);
+                coreExports.warning(`No LunarRepo id provided for "${manifest.id}", skipping...`);
                 return;
             }
             const id = modMap[manifest.id];
             let remoteMod;
-            if (id in beatmodsModsById) {
-                remoteMod = await beatmodsModsById[id];
+            if (id in lunarRepoModsById) {
+                remoteMod = await lunarRepoModsById[id];
             }
             else {
                 const modPromise = getMod(id.toString());
-                beatmodsModsById[id] = modPromise;
+                lunarRepoModsById[id] = modPromise;
                 remoteMod = await modPromise;
-                coreExports.debug(`Found "${manifest.id}" on BeatMods`);
+                coreExports.debug(`Found "${manifest.id}" on LunarRepo`);
             }
-            if (manifest.id != remoteMod.info.name) {
-                coreExports.warning(`Id mismatch, expected: "${manifest.id}", found: "${remoteMod.info.name}", skipping...`);
+            if (manifest.id != remoteMod.name) {
+                coreExports.warning(`Id mismatch, expected: "${manifest.id}", found: "${remoteMod.name}", skipping...`);
                 return;
             }
-            if (remoteMod.versions.some((version) => version.modVersion == manifest.version)) {
-                coreExports.warning(`Version ${manifest.id}@${manifest.version} already exists on Beatmods, skipping...`);
+            if (remoteMod.versions.some((version) => version.version == manifest.version)) {
+                coreExports.warning(`Version ${manifest.id}@${manifest.version} already exists on LunarRepo, skipping...`);
                 return;
             }
-            const gameVersion = gameVersions.find((n) => n.version == manifest.gameVersion);
+            const gameVersion = gameVersions.find((n) => n == manifest.gameVersion);
             if (!gameVersion) {
-                coreExports.warning(`Game version ${manifest.gameVersion} not found on Beatmods, skipping...`);
+                coreExports.warning(`Game version ${manifest.gameVersion} not found on LunarRepo, skipping...`);
                 return;
             }
             modsToUpload.push({
@@ -47265,7 +47252,7 @@ const run = async () => {
             const modGameVersions = foundGameVersions[mod];
             latestGameVersions[mod] = modGameVersions[modGameVersions.length - 1];
         }
-        for (const mods of groupBy(modsToUpload, (mod) => mod.gameVersion.id).values()) {
+        for (const mods of groupBy(modsToUpload, (mod) => mod.gameVersion).values()) {
             for (let changed = true; changed;) {
                 changed = false;
                 mods.forEach((mod) => {
@@ -47295,103 +47282,45 @@ const run = async () => {
                     const manifest = mod.manifest;
                     const fileName = mod.file.name;
                     const gameVersion = mod.gameVersion;
-                    const dependencies = [];
-                    for (const depend in manifest.dependsOn) {
-                        const dependRange = manifest.dependsOn[depend];
-                        // if we know the mod's id, use that instead
-                        if (depend in modMap) {
-                            const id = modMap[depend];
-                            let beatmodDepend;
-                            if (id in beatmodsModsById) {
-                                beatmodDepend = await beatmodsModsById[id];
-                            }
-                            else {
-                                const modPromise = getMod(id);
-                                beatmodsModsById[id] = modPromise;
-                                beatmodDepend = await modPromise;
-                                coreExports.debug(`Found "${depend}" on BeatMods`);
-                            }
-                            const dependVersion = beatmodDepend.versions.find((n) => n.supportedGameVersions.some((m) => m.id == gameVersion.id) && semver.satisfies(n.modVersion, dependRange));
-                            if (!dependVersion) {
-                                coreExports.warning(`No valid version found for "${depend}" for "${fileName}", skipping...`);
-                                return;
-                            }
-                            dependencies.push(dependVersion.id);
-                        }
-                        else {
-                            const version = gameVersion.version;
-                            let remoteMods;
-                            if (version in beatmodsModsByVersion) {
-                                remoteMods = await beatmodsModsByVersion[version];
-                            }
-                            else {
-                                coreExports.debug(`Getting Beatmods mods for ${version}`);
-                                const modPromise = getModsForVersion(version);
-                                beatmodsModsByVersion[version] = modPromise;
-                                remoteMods = await modPromise;
-                            }
-                            const result = remoteMods.find((remote) => remote.mod.name == depend);
-                            if (!result) {
-                                coreExports.warning(`Unable to resolve dependency "${depend}" for "${fileName}", skipping...`);
-                                return;
-                            }
-                            // Would prefer being able to just use the mod id instead of having to fetch individual mod versions
-                            // Obviously not a problem for most people... but extremely frustrating for me
-                            if (!semver.satisfies(result.latest.modVersion, dependRange)) {
-                                coreExports.warning(`Invalid semver for "${depend}" for "${fileName}", skipping...`);
-                                return;
-                            }
-                            dependencies.push(result.latest.id);
-                        }
-                    }
-                    let supportedGameVersionIds = [];
+                    let supportedGameVersions = [];
                     switch (extendGameVersions) {
                         case 'all':
                             {
                                 const modGameVersions = foundGameVersions[manifest.id];
-                                const index = modGameVersions.findIndex((n) => n == gameVersion.version);
+                                const index = modGameVersions.findIndex((n) => n == gameVersion);
                                 if (index >= modGameVersions.length - 1) {
-                                    supportedGameVersionIds = gameVersions
-                                        .filter((n) => semver.gte(n.version, gameVersion.version))
-                                        .map((n) => n.id);
+                                    supportedGameVersions = gameVersions.filter((n) => semver.gte(n, gameVersion));
                                 }
                                 else {
                                     const nextVersion = modGameVersions[index + 1];
-                                    supportedGameVersionIds = gameVersions
-                                        .filter((n) => semver.gte(n.version, gameVersion.version) &&
-                                        semver.lt(n.version, nextVersion))
-                                        .map((n) => n.id);
+                                    supportedGameVersions = gameVersions.filter((n) => semver.gte(n, gameVersion) && semver.lt(n, nextVersion));
                                 }
                             }
                             break;
                         case 'latest':
                             if (latestGameVersions[manifest.id] == manifest.gameVersion) {
-                                supportedGameVersionIds = gameVersions
-                                    .filter((n) => semver.gte(n.version, gameVersion.version))
-                                    .map((n) => n.id);
+                                supportedGameVersions = gameVersions.filter((n) => semver.gte(n, gameVersion));
                             }
                             else {
-                                supportedGameVersionIds = [gameVersion.id];
+                                supportedGameVersions = [gameVersion];
                             }
                             break;
                         default:
-                            supportedGameVersionIds = [gameVersion.id];
+                            supportedGameVersions = [gameVersion];
                             break;
                     }
                     const json = {
-                        file: mod.data,
                         fileName: fileName,
-                        modVersion: manifest.version,
-                        platform: 'universalpc',
-                        dependencies: dependencies,
-                        supportedGameVersionIds: supportedGameVersionIds
+                        file: mod.data,
+                        channel: 'Release',
+                        gameVersions: supportedGameVersions
                     };
                     coreExports.debug(`Uploading "${fileName}"...`);
                     await uploadMod(mod.id.toString(), json);
                     coreExports.info(`Uploaded ${manifest.id}@${manifest.version}`);
                 }));
                 // Clear cache so we can re-fetch new depends
-                beatmodsModsById = {};
+                lunarRepoModsById = {};
             }
         }
     }
