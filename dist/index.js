@@ -27279,10 +27279,10 @@ const getMod = async (id) => {
 };
 const uploadMod = async (id, request) => {
     const formData = new FormData();
-    formData.append('file', new File([request.file], request.fileName, { type: 'application/zip' }));
     formData.append('channel', request.channel);
     formData.append('gameVersions', request.gameVersions);
-    const url = 'https://repo.lunarrepo.com/api/v1/mods/' + id + '/upload';
+    formData.append('file', new File([request.file], request.fileName, { type: 'application/zip' }));
+    const url = 'https://repo.totalbs.dev/api/v1/mods/' + id + '/upload';
     const response = await fetch(url, {
         method: 'POST',
         headers: { 'User-Agent': userAgent, Authorization: 'Bearer ' + token },
