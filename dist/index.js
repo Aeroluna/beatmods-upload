@@ -27254,17 +27254,21 @@ var coreExports = requireCore();
 const userAgent = 'lunarrepo-upload/0.1';
 const token = coreExports.getInput('token');
 const getVersions = async () => {
-    const response = await fetch('https://repo.totalbs.dev/api/v1/game', {
+    const url = 'https://repo.totalbs.dev/api/v1/game';
+    coreExports.debug(`Fetching game from "${url}"...`);
+    const response = await fetch(url, {
         headers: { 'User-Agent': userAgent }
     });
     if (!response.ok) {
-        throw new Error(`Beatmods did not return ok response [${response.status}]`);
+        throw new Error(`LunarRepo did not return ok response [${response.status}]`);
     }
     const json = (await response.json());
     return json.versions;
 };
 const getMod = async (id) => {
-    const response = await fetch('https://repo.totalbs.dev/api/v1/mods/' + id, {
+    const url = 'https://repo.totalbs.dev/api/v1/mods/' + id;
+    coreExports.debug(`Fetching mod from "${url}"...`);
+    const response = await fetch(url, {
         headers: { 'User-Agent': userAgent, Authorization: 'Bearer ' + token }
     });
     if (!response.ok) {
@@ -47218,7 +47222,7 @@ const run = async () => {
                 remoteMod = await lunarRepoModsById[id];
             }
             else {
-                const modPromise = getMod(id.toString());
+                const modPromise = getMod(id);
                 lunarRepoModsById[id] = modPromise;
                 remoteMod = await modPromise;
                 coreExports.debug(`Found "${manifest.id}" on LunarRepo`);

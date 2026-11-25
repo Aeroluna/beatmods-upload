@@ -103,7 +103,7 @@ export const run = async () => {
         if (id in lunarRepoModsById) {
           remoteMod = await lunarRepoModsById[id];
         } else {
-          const modPromise = getMod(id.toString());
+          const modPromise = getMod(id);
           lunarRepoModsById[id] = modPromise;
           remoteMod = await modPromise;
           core.debug(`Found "${manifest.id}" on LunarRepo`);
